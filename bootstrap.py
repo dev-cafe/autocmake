@@ -9,7 +9,7 @@ from collections import OrderedDict
 from ConfigParser import ConfigParser
 
 
-CFRAME_GITHUB_URL = 'https://github.com/scisoft/autocmake'
+AUTOCMAKE_GITHUB_URL = 'https://github.com/scisoft/autocmake'
 
 
 class URLopener(urllib.FancyURLopener):
@@ -143,7 +143,7 @@ def gen_cmakelists(config, relative_path, list_of_modules):
     """
     if not config.has_option('project', 'name'):
         sys.stderr.write("ERROR: you have to specify the project name\n")
-        sys.stderr.write("       in cframe.cfg under [project]\n")
+        sys.stderr.write("       in autocmake.cfg under [project]\n")
         sys.exit(-1)
     project_name = config.get('project', 'name')
 
@@ -251,7 +251,7 @@ def main(argv):
         sys.stderr.write("First step is typically done only once.\n")
         sys.stderr.write("Second step can be repeated many time without re-running the first step.\n\n")
         sys.stderr.write("Step 1:\n")
-        sys.stderr.write("Create an example cframe.cfg and other infrastructure files\n")
+        sys.stderr.write("Create an example autocmake.cfg and other infrastructure files\n")
         sys.stderr.write("which will be needed to configure and build the project:\n")
         sys.stderr.write("$ %s --init\n\n" % argv[0])
         sys.stderr.write("Step 2:\n")
@@ -263,15 +263,15 @@ def main(argv):
 
     if argv[1] == '--init':
         # empty project, create infrastructure files
-        print('- fetching example cframe.cfg')
+        print('- fetching example autocmake.cfg')
         fetch_url(
-            src='%s/raw/master/example/cframe.cfg' % CFRAME_GITHUB_URL,
-            dst='cframe.cfg',
+            src='%s/raw/master/example/autocmake.cfg' % AUTOCMAKE_GITHUB_URL,
+            dst='autocmake.cfg',
             fail_if_dst_exists=True
         )
         print('- fetching lib/config.py')
         fetch_url(
-            src='%s/raw/master/lib/config.py' % CFRAME_GITHUB_URL,
+            src='%s/raw/master/lib/config.py' % AUTOCMAKE_GITHUB_URL,
             dst='lib/config.py'
         )
         print('- fetching lib/docopt.py')
@@ -287,9 +287,9 @@ def main(argv):
         sys.exit(-1)
 
     # read config file
-    print('- parsing cframe.cfg')
+    print('- parsing autocmake.cfg')
     config = ConfigParser(dict_type=OrderedDict)
-    config.read('cframe.cfg')
+    config.read('autocmake.cfg')
 
     # fetch modules from the web or from relative paths
     list_of_modules = fetch_modules(config, module_directory='modules')
