@@ -2,6 +2,10 @@
 
 A CMake plugin composer.
 
+## Projects using Autocmake
+
+- [Numgrid](https://github.com/rbast/numgrid)
+
 ## Bootstrapping a new project
 
 Bootstrap a Autocmake infrastructure out of "nothing":
