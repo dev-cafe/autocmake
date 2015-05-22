@@ -4,7 +4,7 @@ A CMake plugin composer.
 
 ## Bootstrapping a new project
 
-Bootstrap a CFrame infrastructure out of "nothing":
+Bootstrap a Autocmake infrastructure out of "nothing":
 
     mkdir cmake  # does not have to be called "cmake" - take the name you prefer
     cd cmake
@@ -15,7 +15,7 @@ This downloads and creates the following files:
 
     cmake/
     ├── bootstrap.py   # no need to edit
-    ├── cframe.cfg     # edit this file
+    ├── autocmake.cfg  # edit this file
     └── lib/
         ├── config.py  # no need to edit
         └── docopt.py  # no need to edit
@@ -25,17 +25,17 @@ the newly created files.
 
 ## Creating the CMake infrastructure
 
-Then edit ``cframe.cfg`` and run the ``bootstrap.py`` script which
+Then edit ``autocmake.cfg`` and run the ``bootstrap.py`` script which
 creates ``CMakeLists.txt`` and ``setup.py`` in the path specified (here ".."):
 
     python bootstrap.py ..
 
-The script also copies or downloads CMake modules specified in ``cframe.cfg`` to a directory
+The script also copies or downloads CMake modules specified in ``autocmake.cfg`` to a directory
 called ``modules/``:
 
     cmake/
     ├── bootstrap.py
-    ├── cframe.cfg
+    ├── autocmake.cfg
     └── lib/
         ├── config.py
         └── docopt.py
@@ -57,4 +57,4 @@ not very convenient as the customizations may be overwritten by the
 
 A better solution is to download the CMake modules that you wish you customize
 to a separate directory and source the customized CMake modules in
-``cframe.cfg``.
+``autocmake.cfg``.
