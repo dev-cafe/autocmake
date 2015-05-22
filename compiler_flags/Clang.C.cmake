@@ -1,0 +1,5 @@
+if(CMAKE_C_COMPILER_ID MATCHES Clang)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+    set(CMAKE_C_FLAGS_RELEASE "-O2 -Wno-unused")
+    set(CMAKE_C_FLAGS_DEBUG "-O0")
+endif()
