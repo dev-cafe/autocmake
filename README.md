@@ -1,0 +1,2 @@
+# autocmake
+CMake plugin composer.
