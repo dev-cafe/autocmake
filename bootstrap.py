@@ -4,7 +4,6 @@ import os
 import sys
 import urllib
 import shutil
-import tempfile
 from collections import OrderedDict
 from ConfigParser import ConfigParser
 
@@ -244,22 +243,18 @@ def main(argv):
     Main function.
     """
     if len(argv) != 2:
-        sys.stderr.write("\nYou can bootstrap a project in two steps.\n")
-        sys.stderr.write("First step is typically done only once.\n")
-        sys.stderr.write("Second step can be repeated many time without re-running the first step.\n\n")
-        sys.stderr.write("Step 1:\n")
-        sys.stderr.write("Create an example autocmake.cfg and other infrastructure files\n")
-        sys.stderr.write("which will be needed to configure and build the project:\n")
-        sys.stderr.write("$ %s --init\n\n" % argv[0])
-        sys.stderr.write("Step 2:\n")
-        sys.stderr.write("Create CMakeLists.txt and setup.py in PROJECT_ROOT:\n")
-        sys.stderr.write("$ %s PROJECT_ROOT\n" % argv[0])
-        sys.stderr.write("example:\n")
-        sys.stderr.write("$ %s ..\n" % argv[0])
+        sys.stderr.write("\nYou can bootstrap a project in two steps.\n\n")
+        sys.stderr.write("Step 1: Update or create infrastructure files\n")
+        sys.stderr.write("        which will be needed to configure and build the project:\n")
+        sys.stderr.write("        $ %s --update\n\n" % argv[0])
+        sys.stderr.write("Step 2: Create CMakeLists.txt and setup.py in PROJECT_ROOT:\n")
+        sys.stderr.write("        $ %s <PROJECT_ROOT>\n" % argv[0])
+        sys.stderr.write("        example:\n")
+        sys.stderr.write("        $ %s ..\n" % argv[0])
         sys.exit(-1)
 
-    if argv[1] == '--init':
-        # empty project, create infrastructure files
+    if argv[1] == '--update':
+        # update infrastructure files
         if not os.path.isfile('autocmake.cfg'):
             print('- fetching example autocmake.cfg')
             fetch_url(
@@ -275,6 +270,11 @@ def main(argv):
         fetch_url(
             src='https://github.com/docopt/docopt/raw/master/docopt.py',
             dst='lib/docopt.py'
+        )
+        print('- fetching bootstrap.py')
+        fetch_url(
+            src='%s/raw/master/bootstrap.py' % AUTOCMAKE_GITHUB_URL,
+            dst='bootstrap.py'
         )
         sys.exit(0)
 

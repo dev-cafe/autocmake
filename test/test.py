@@ -16,7 +16,7 @@ def exe(command):
 def test_cxx():
     os.chdir(os.path.join(HERE, 'cxx', 'cmake'))
     stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/bootstrap.py')
-    stdout, stderr = exe('python bootstrap.py --init')
+    stdout, stderr = exe('python bootstrap.py --update')
     stdout, stderr = exe('python bootstrap.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
     stdout, stderr = exe('python setup.py --cxx=g++')
