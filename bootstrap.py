@@ -176,8 +176,10 @@ def gen_cmakelists(config, relative_path, list_of_modules):
     s.append('# in a file and not as cmake variable')
     s.append('# is that cmake-unaware programs can')
     s.append('# parse and use it (e.g. Sphinx)')
-    s.append('file(READ "${PROJECT_SOURCE_DIR}/VERSION" PROGRAM_VERSION)')
-    s.append('string(STRIP "${PROGRAM_VERSION}" PROGRAM_VERSION)')
+    s.append('if(EXISTS "${PROJECT_SOURCE_DIR}/VERSION")')
+    s.append('    file(READ "${PROJECT_SOURCE_DIR}/VERSION" PROGRAM_VERSION)')
+    s.append('    string(STRIP "${PROGRAM_VERSION}" PROGRAM_VERSION)')
+    s.append('endif()')
 
     s.append('\n')
     s.append('# generated cmake files will be written to this path')
