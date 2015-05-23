@@ -2,19 +2,29 @@
 
 import os
 import sys
-import urllib
 import shutil
 from collections import OrderedDict
-from ConfigParser import ConfigParser
+
+if sys.version_info.major > 2:
+    from configparser import RawConfigParser
+else:
+    from ConfigParser import RawConfigParser
+
+if sys.version_info.major > 2:
+    import urllib.request
+    class URLopener(urllib.request.FancyURLopener):
+        def http_error_default(self, url, fp, errcode, errmsg, headers):
+            sys.stderr.write("ERROR: could not fetch %s\n" % url)
+            sys.exit(-1)
+else:
+    import urllib
+    class URLopener(urllib.FancyURLopener):
+        def http_error_default(self, url, fp, errcode, errmsg, headers):
+            sys.stderr.write("ERROR: could not fetch %s\n" % url)
+            sys.exit(-1)
 
 
 AUTOCMAKE_GITHUB_URL = 'https://github.com/scisoft/autocmake'
-
-
-class URLopener(urllib.FancyURLopener):
-    def http_error_default(self, url, fp, errcode, errmsg, headers):
-        sys.stderr.write("ERROR: could not fetch %s\n" % url)
-        sys.exit(-1)
 
 
 def fetch_url(src, dst):
@@ -207,8 +217,9 @@ def fetch_modules(config, module_directory):
     if not os.path.exists(module_directory):
         os.makedirs(module_directory)
 
-    n = len(filter(lambda x: config.has_option(x, 'source'),
-                   config.sections()))
+    l = list(filter(lambda x: config.has_option(x, 'source'),
+                    config.sections()))
+    n = len(l)
 
     i = 0
     print_progress_bar(text='- fetching modules:', done=0, total=n, width=30)
@@ -285,7 +296,7 @@ def main(argv):
 
     # read config file
     print('- parsing autocmake.cfg')
-    config = ConfigParser(dict_type=OrderedDict)
+    config = RawConfigParser(dict_type=OrderedDict)
     config.read('autocmake.cfg')
 
     # fetch modules from the web or from relative paths
