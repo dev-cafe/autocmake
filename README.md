@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/scisoft/autocmake.svg?branch=master)](https://travis-ci.org/scisoft/autocmake/builds)
+
 # Autocmake
 
 A CMake plugin composer.
