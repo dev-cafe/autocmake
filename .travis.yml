@@ -1,0 +1,6 @@
+language: cpp
+install:
+  - sudo apt-get install g++ cmake
+  - sudo pip install pytest
+script:
+  - py.test -vv test/test.py
