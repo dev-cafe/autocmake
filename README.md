@@ -4,6 +4,7 @@
 # Autocmake
 
 A CMake plugin composer.
+Licensed under [BSD-3](../master/LICENSE).
 
 
 ## Projects using Autocmake
