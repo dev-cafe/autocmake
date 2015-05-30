@@ -22,5 +22,5 @@ def test_cxx():
     stdout, stderr = exe('python setup.py --cxx=g++')
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
     stdout, stderr = exe('make')
-    stdout, stderr = exe('./example')
+    stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
