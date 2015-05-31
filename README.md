@@ -9,7 +9,8 @@ Licensed under [BSD-3](../master/LICENSE).
 
 ## Projects using Autocmake
 
-- [Numgrid](https://github.com/rbast/numgrid)
+- [Numgrid](https://github.com/bast/numgrid/)
+- [DIRAC](http://diracprogram.org)
 
 
 ## Bootstrapping a new project
