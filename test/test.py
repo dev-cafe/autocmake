@@ -24,3 +24,17 @@ def test_cxx():
     stdout, stderr = exe('make')
     stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
+
+#-------------------------------------------------------------------------------
+
+def test_fortran():
+    os.chdir(os.path.join(HERE, 'fortran', 'cmake'))
+    stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/bootstrap.py')
+    stdout, stderr = exe('python bootstrap.py --update')
+    stdout, stderr = exe('python bootstrap.py ..')
+    os.chdir(os.path.join(HERE, 'fortran'))
+    stdout, stderr = exe('python setup.py --fc=gfortran')
+    os.chdir(os.path.join(HERE, 'fortran', 'build'))
+    stdout, stderr = exe('make')
+    stdout, stderr = exe('./bin/example')
+    assert 'Hello World!' in stdout
