@@ -21,5 +21,4 @@ not overwritten by the script)::
       ├── config.py  # no need to edit
       └── docopt.py  # no need to edit
 
-If you use version control, then now is a good moment to status/diff/add
-the newly created files.
+Note that all other listed files are overwritten (use version control!).
