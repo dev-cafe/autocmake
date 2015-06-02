@@ -3,7 +3,7 @@
 About Autocmake
 ===============
 
-You typically want to use CMake when you are tired of manually editing
+You typically want to use CMake when you get tired of manually editing
 Makefiles. Autocmake is for people who are tired of editing CMake files.
 Autocmake assembles CMake modules, generates ``CMakeLists.txt`` as well as
 ``setup.py``, which serves as a front-end to ``CMakeLists.txt``. All this is
@@ -30,8 +30,9 @@ Why Autocmake
 The main motivation for us to create Autocmake as a CMake framework library was
 to simplify CMake code transfer between codes. We got tired of manually diffing
 and and copy-pasting boiler-plate CMake code and watching it diverge while
-maintaining the CMake infrastructure in many scientific projects which
-typically have very similar requirements:
+maintaining the CMake infrastructure in a growing number of scientific projects
+which typically have very similar requirements:
+
 - Fortran and/or C and/or C++ support
 - Compiler flags
 - Front-end script (setup.py)
@@ -47,5 +48,6 @@ opportunity to introduce the occasional tweak without the need to read lengthy
 manuals.
 
 We try to follow two design principles:
+
 - Explicit is better than implicit
 - Convention over configuration
