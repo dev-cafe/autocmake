@@ -6,7 +6,21 @@ About Autocmake
 CMake typically generates Makefiles based on CMakeLists.txt files.  Autocmake
 assembles CMake modules, generates ``CMakeLists.txt`` as well as ``setup.py``,
 which serves as a front-end to ``CMakeLists.txt``. All this is done based on a
-lightweight ``autocmake.cfg`` file.
+lightweight ``autocmake.cfg`` file::
+
+  autocmake.cfg
+       |
+       | Autocmake
+       v
+  CMakeLists.txt (and setup.py front-end)
+       |
+       | setup.py (which invokes CMake)
+       v
+  Makefile (or something else)
+       |
+       | make
+       v
+  Build/install/test targets
 
 
 CMake cons
