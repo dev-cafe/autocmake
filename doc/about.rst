@@ -3,10 +3,11 @@
 About Autocmake
 ===============
 
-CMake typically generates Makefiles based on CMakeLists.txt files.  Autocmake
-assembles CMake modules, generates ``CMakeLists.txt`` as well as ``setup.py``,
-which serves as a front-end to ``CMakeLists.txt``. All this is done based on a
-lightweight ``autocmake.cfg`` file::
+You typically want to use CMake when you are tired of manually editing
+Makefiles. Autocmake is for people who are tired of editing CMake files.
+Autocmake assembles CMake modules, generates ``CMakeLists.txt`` as well as
+``setup.py``, which serves as a front-end to ``CMakeLists.txt``. All this is
+done based on a lightweight ``autocmake.cfg`` file::
 
   autocmake.cfg
        |
@@ -23,35 +24,28 @@ lightweight ``autocmake.cfg`` file::
   Build/install/test targets
 
 
-CMake cons
-----------
+Why Autocmake
+-------------
 
-- More complexity (not because CMake is complex but because of another layer)
-- Yet another thing to learn: requires learning and training
-- Typically many files instead of one file
-- Documentation ("Which file do I need to edit to achieve X?")
+The main motivation for us to create Autocmake as a CMake framework library was
+to simplify CMake code transfer between codes. We got tired of manually diffing
+and and copy-pasting boiler-plate CMake code and watching it diverge while
+maintaining the CMake infrastructure in many scientific projects which
+typically have very similar requirements:
+- Fortran and/or C and/or C++ support
+- Compiler flags
+- Front-end script (setup.py)
+- Support for parallelization: MPI, OMP, CUDA
+- Math libraries (BLAS, LAPACK)
 
+Our other motivation for Autocmake was to make it easier for developers who do
+not know CMake to generate a CMake infrastructure within minutes.
 
-CMake pros
-----------
+Autocmake is a chance to provide well documented and tested set of CMake
+plug-ins. With this we want to give also users of codes which use Autocmake the
+opportunity to introduce the occasional tweak without the need to read lengthy
+manuals.
 
-- Makes it possible and relatively easy to download, configure, build, install, and link external modules
-- Cross-platform system- and library-discovery
-- CTest uses a Makefile (possible to run tests with -jN)
-
-
-Motivation to create a CMake framework library
-----------------------------------------------
-
-- Simplify CMake code transfer (scientific projects typically have very similar requirements)
-    - FC, CC, CXX
-    - Compiler flags
-    - Front-end script (setup.py)
-    - MPI, OMP, CUDA
-    - Math libraries
-- Make it easy for people who know CMake well to create well defined configurations
-- Make it easy for people who do not know CMake to generate a CMake infrastructure within minutes
-- Philosophy
-    - Explicit is better than implicit
-    - Convention over configuration
-- Well documented set of plug-ins
+We try to follow two design principles:
+- Explicit is better than implicit
+- Convention over configuration
