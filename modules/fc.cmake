@@ -5,9 +5,21 @@
 # If environment variable FCFLAGS is set, then the FCFLAGS are used
 # and no other flags are used or appended.
 #
-# Defines::
+# Environment variables used::
+#
+#   FCFLAGS
+#
+# CMake variables used::
+#
+#   EXTRA_FCFLAGS
+#
+# CMake variables defined::
 #
 #   CMAKE_Fortran_MODULE_DIRECTORY (${PROJECT_BINARY_DIR}/include/fortran)
+#
+# CMake variables modified::
+#
+#   CMAKE_Fortran_FLAGS
 #
 # Example autocmake.cfg entry::
 #
