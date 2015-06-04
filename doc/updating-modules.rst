@@ -21,10 +21,10 @@ rather fetch an older version with the hash ``abcd123``. To achieve this, instea
 of::
 
   [coverage]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/UseCodeCoverage.cmake
+  source: https://github.com/scisoft/autocmake/raw/master/modules/code_coverage.cmake
 
 pin the version to ``abcd123`` (you do not need to specify the full Git hash, a unique
 beginning will do)::
 
   [coverage]
-  source: https://github.com/scisoft/autocmake/raw/abcd123/modules/UseCodeCoverage.cmake
+  source: https://github.com/scisoft/autocmake/raw/abcd123/modules/code_coverage.cmake
