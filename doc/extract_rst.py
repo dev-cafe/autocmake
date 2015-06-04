@@ -60,6 +60,7 @@ def main():
         file_name = ntpath.basename(f)
         output.append('\n\n%s' % file_name)
         output.append('-'*len(file_name))
+        output.append('`[Source code] <https://github.com/scisoft/autocmake/blob/master/modules/%s>`_' % file_name)
         with open(f, 'r') as s:
             s_out = extract_rst_blobs(s.read())
             if s_out == '':
