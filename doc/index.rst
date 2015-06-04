@@ -9,4 +9,5 @@ Autocmake
    about.rst
    bootstrap.rst
    cmakelists.rst
-   customization.rst
+   customizing-modules.rst
+   updating-modules.rst

@@ -1,9 +1,11 @@
 
 
-Customizing the CMake modules
-=============================
+Customizing CMake modules
+=========================
 
-You have at least four options to customize CMake modules:
+The ``boostrap.py`` script assembles modules listed in ``autocmake.cfg`` and
+places them inside ``modules/``.  You have at least four options to customize
+CMake modules:
 
 
 Directly inside the generated modules directory
