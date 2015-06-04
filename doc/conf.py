@@ -16,6 +16,9 @@ import sys
 import os
 import shlex
 
+sys.path.append(os.path.relpath(os.path.abspath('.')))
+import extract_rst
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.

@@ -10,3 +10,4 @@ Autocmake
    new-project.rst
    customizing-modules.rst
    updating-modules.rst
+   module-reference.rst
