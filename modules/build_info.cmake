@@ -1,6 +1,15 @@
 # Copyright (c) 2015 by Radovan Bast and Jonas Juselius
 # see https://github.com/scisoft/autocmake/blob/master/LICENSE
 
+# generated cmake files will be written to this path
+# only build info is generated
+# everything else is static for the user
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/generated_by_cmake)
+set(CMAKE_MODULE_PATH
+    ${CMAKE_MODULE_PATH}
+    ${PROJECT_BINARY_DIR}/generated_by_cmake
+    )
+
 #-------------------------------------------------------------------------------
 
 function(get_git_info
