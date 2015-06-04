@@ -7,7 +7,7 @@ Autocmake
    :maxdepth: 2
 
    about.rst
-   bootstrap.rst
+   update.rst
    cmakelists.rst
    customizing-modules.rst
    updating-modules.rst

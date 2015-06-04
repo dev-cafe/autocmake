@@ -3,13 +3,13 @@
 Updating CMake modules
 ======================
 
-To update CMake modules you need to run the ``boostrap.py`` script::
+To update CMake modules you need to run the ``update.py`` script::
 
   cd cmake
-  python bootstrap.py ..
+  python update.py ..
 
 The CMake modules are not fetched or updated at configure time or build time.
-In other words, if you never re-run ``boostrap.py`` script and never modify the
+In other words, if you never re-run ``update.py`` script and never modify the
 CMake module files, then the CMake modules will remain forever frozen.
 
 

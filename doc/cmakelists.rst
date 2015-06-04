@@ -3,16 +3,16 @@
 Generating the CMake infrastructure
 ===================================
 
-Edit ``autocmake.cfg`` and run the ``bootstrap.py`` script which
+Edit ``autocmake.cfg`` and run the ``update.py`` script which
 creates ``CMakeLists.txt`` and ``setup.py`` in the build path::
 
-  python bootstrap.py ..
+  python update.py ..
 
 The script also copies or downloads CMake modules specified in ``autocmake.cfg`` to a directory
 called ``modules/``::
 
   cmake/
-      bootstrap.py
+      update.py
       autocmake.cfg
       lib/
           config.py

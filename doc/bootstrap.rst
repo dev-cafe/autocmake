@@ -3,19 +3,19 @@
 Bootstrapping a new project
 ===========================
 
-Download the ``bootstrap.py`` and execute it to fetch other infrastructure files
+Download the ``update.py`` and execute it to fetch other infrastructure files
 which will be needed to build the project::
 
   mkdir cmake  # does not have to be called "cmake" - take the name you prefer
   cd cmake
-  wget https://github.com/scisoft/autocmake/raw/master/bootstrap.py
-  python bootstrap.py --update
+  wget https://github.com/scisoft/autocmake/raw/master/update.py
+  python update.py --self
 
 This creates (or updates) the following files (an existing ``autocmake.cfg`` is
 not overwritten by the script)::
 
   cmake/
-      bootstrap.py   # no need to edit
+      update.py   # no need to edit
       autocmake.cfg  # edit this file
       lib/
           config.py  # no need to edit

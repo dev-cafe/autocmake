@@ -15,9 +15,9 @@ def exe(command):
 
 def test_cxx():
     os.chdir(os.path.join(HERE, 'cxx', 'cmake'))
-    stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/bootstrap.py')
-    stdout, stderr = exe('python bootstrap.py --update')
-    stdout, stderr = exe('python bootstrap.py ..')
+    stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/update.py')
+    stdout, stderr = exe('python update.py --self')
+    stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
     stdout, stderr = exe('python setup.py --cxx=g++')
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
@@ -29,9 +29,9 @@ def test_cxx():
 
 def test_fortran():
     os.chdir(os.path.join(HERE, 'fortran', 'cmake'))
-    stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/bootstrap.py')
-    stdout, stderr = exe('python bootstrap.py --update')
-    stdout, stderr = exe('python bootstrap.py ..')
+    stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/update.py')
+    stdout, stderr = exe('python update.py --self')
+    stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'fortran'))
     stdout, stderr = exe('python setup.py --fc=gfortran')
     os.chdir(os.path.join(HERE, 'fortran', 'build'))

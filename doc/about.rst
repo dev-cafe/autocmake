@@ -9,13 +9,13 @@ Autocmake assembles CMake modules, generates ``CMakeLists.txt`` as well as
 ``setup.py``, which serves as a front-end to ``CMakeLists.txt``. All this is
 done based on a lightweight ``autocmake.cfg`` file::
 
-  bootstrap.py --update
+  update.py --self
        |
        | fetches Autocmake infrastructure
        v
   autocmake.cfg
        |
-       | bootstrap.py
+       | update.py
        v
   CMakeLists.txt (and setup.py front-end)
        |
