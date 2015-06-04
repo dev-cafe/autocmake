@@ -27,14 +27,14 @@ def test_cxx():
 
 #-------------------------------------------------------------------------------
 
-def test_fortran():
-    os.chdir(os.path.join(HERE, 'fortran', 'cmake'))
+def test_fc():
+    os.chdir(os.path.join(HERE, 'fc', 'cmake'))
     stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/update.py')
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
-    os.chdir(os.path.join(HERE, 'fortran'))
+    os.chdir(os.path.join(HERE, 'fc'))
     stdout, stderr = exe('python setup.py --fc=gfortran')
-    os.chdir(os.path.join(HERE, 'fortran', 'build'))
+    os.chdir(os.path.join(HERE, 'fc', 'build'))
     stdout, stderr = exe('make')
     stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
