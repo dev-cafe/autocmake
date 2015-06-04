@@ -56,7 +56,7 @@ def main():
 
     files = glob.glob('%s/*.cmake' % os.path.join(THIS_DIR, '..', 'modules'))
 
-    for f in files:
+    for f in sorted(files):
         file_name = ntpath.basename(f)
         output.append('\n\n%s' % file_name)
         output.append('-'*len(file_name))
