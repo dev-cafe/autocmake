@@ -6,7 +6,7 @@
 # and use it (e.g. Sphinx). Also web-based hosting frontends such as GitLab
 # automatically use a file "VERSION".
 #
-# Defines::
+# Variables defined::
 #
 #   PROGRAM_VERSION
 

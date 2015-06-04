@@ -9,15 +9,15 @@
 #
 #   FCFLAGS
 #
-# CMake variables used::
+# Variables used::
 #
 #   EXTRA_FCFLAGS
 #
-# CMake variables defined::
+# Variables defined::
 #
 #   CMAKE_Fortran_MODULE_DIRECTORY (${PROJECT_BINARY_DIR}/include/fortran)
 #
-# CMake variables modified::
+# Variables modified::
 #
 #   CMAKE_Fortran_FLAGS
 #
