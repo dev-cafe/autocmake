@@ -9,13 +9,13 @@
 #
 #   CMAKE_Fortran_MODULE_DIRECTORY (${PROJECT_BINARY_DIR}/include/fortran)
 #
-# Example autocmake.cfg entry::
+# Example ``autocmake.cfg`` entry::
 #
 #   [fc]
 #   source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
 #   docopt: --fc=<FC> Fortran compiler [default: gfortran].
 #           --extra-fc-flags=<EXTRA_FCFLAGS> Extra Fortran compiler flags [default: ''].
-#   export: 'FC=%s' % arguments['--fc']``
+#   export: 'FC=%s' % arguments['--fc']
 #   define: '-DEXTRA_FCFLAGS=%s' % arguments['--extra-fc-flags']
 
 enable_language(Fortran)
@@ -35,5 +35,6 @@ if(DEFINED EXTRA_FCFLAGS)
 endif()
 
 if(DEFINED ENV{FCFLAGS})
+    message(STATUS "FCFLAGS is set to '$ENV{FCFLAGS}'.")
     set(CMAKE_Fortran_FLAGS "$ENV{FCFLAGS}")
 endif()
