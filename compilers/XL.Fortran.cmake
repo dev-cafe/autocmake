@@ -1,6 +1,6 @@
 if(NOT DEFINED ENV{FCFLAGS})
     if(CMAKE_Fortran_COMPILER_ID MATCHES XL)
-        set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -qzerosize -qextname -qsuppress=cmpmsg")
+        set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}")
         set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
         set(CMAKE_Fortran_FLAGS_DEBUG "-g")
     endif()

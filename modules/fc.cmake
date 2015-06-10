@@ -5,10 +5,6 @@
 # If environment variable FCFLAGS is set, then the FCFLAGS are used
 # and no other flags are used or appended.
 #
-# Environment variables used::
-#
-#   FCFLAGS
-#
 # Variables used::
 #
 #   EXTRA_FCFLAGS
@@ -20,6 +16,10 @@
 # Variables modified::
 #
 #   CMAKE_Fortran_FLAGS
+#
+# Environment variables used::
+#
+#   FCFLAGS
 #
 # Example autocmake.cfg entry::
 #
