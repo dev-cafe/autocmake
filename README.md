@@ -15,4 +15,5 @@ Licensed under [BSD-3](../master/LICENSE).
 ## Projects using Autocmake
 
 - [Numgrid](https://github.com/bast/numgrid/)
+- [XCint](https://github.com/bast/xcint/)
 - [DIRAC](http://diracprogram.org)
