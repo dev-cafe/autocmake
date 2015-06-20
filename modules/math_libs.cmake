@@ -18,7 +18,7 @@
 #   BLACS_IMPLEMENTATION
 #   MKL_FLAG
 #
-# Variables set::
+# Variables defined::
 #
 #   MATH_LIBS
 #   BLAS_FOUND
