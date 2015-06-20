@@ -1,33 +1,50 @@
-
-# Copyright (c) 2015 by Radovan Bast and Jonas Juselius
-# see https://github.com/scisoft/autocmake/blob/master/LICENSE
-
-# CMake variables used:
-#     - MATH_LIB_SEARCH_ORDER, example: set(MATH_LIB_SEARCH_ORDER MKL ESSL ATLAS ACML SYSTEM_NATIVE)
-#     - ENABLE_BLAS
-#     - ENABLE_LAPACK
-#     - BLAS_FOUND
-#     - LAPACK_FOUND
-#     - BLAS_LANG
-#     - LAPACK_LANG
-#     - BLAS_TYPE
-#     - LAPACK_TYPE
-#     - ENABLE_64BIT_INTEGERS
-#     - CMAKE_HOST_SYSTEM_PROCESSOR
-#     - BLACS_IMPLEMENTATION
-#     - MKL_FLAG
-
-# Environment variables used:
-#     - MATH_ROOT
-#     - BLAS_ROOT
-#     - LAPACK_ROOT
-#     - MKL_ROOT
-#     - MKLROOT
-
-# CMake variables set:
-#     - MATH_LIBS
-#     - BLAS_FOUND
-#     - LAPACK_FOUND
+#.rst:
+#
+# Detects and links to BLAS and LAPACK libraries.
+#
+# Variables used::
+#
+#   MATH_LIB_SEARCH_ORDER, example: set(MATH_LIB_SEARCH_ORDER MKL ESSL ATLAS ACML SYSTEM_NATIVE)
+#   ENABLE_BLAS
+#   ENABLE_LAPACK
+#   BLAS_FOUND
+#   LAPACK_FOUND
+#   BLAS_LANG
+#   LAPACK_LANG
+#   BLAS_TYPE
+#   LAPACK_TYPE
+#   ENABLE_64BIT_INTEGERS
+#   CMAKE_HOST_SYSTEM_PROCESSOR
+#   BLACS_IMPLEMENTATION
+#   MKL_FLAG
+#
+# Variables set::
+#
+#   MATH_LIBS
+#   BLAS_FOUND
+#   LAPACK_FOUND
+#
+# Environment variables used::
+#
+#   MATH_ROOT
+#   BLAS_ROOT
+#   LAPACK_ROOT
+#   MKL_ROOT
+#   MKLROOT
+#
+# Example autocmake.cfg entry::
+#
+#   [math_libs]
+#   source: https://github.com/scisoft/autocmake/raw/master/modules/math_libs.cmake
+#   docopt: --blas=<BLAS> Detect and link BLAS library (auto or off) [default: auto].
+#           --lapack=<LAPACK> Detect and link LAPACK library (auto or off) [default: auto].
+#           --mkl=<MKL> Pass MKL flag to the Intel compiler and linker and skip BLAS/LAPACK detection (sequential, parallel, cluster, or off) [default: off].
+#   define: '-DENABLE_BLAS=%s' % arguments['--blas']
+#           '-DENABLE_LAPACK=%s' % arguments['--lapack']
+#           '-DMKL_FLAG=%s' % arguments['--mkl']
+#           '-DMATH_LIB_SEARCH_ORDER="MKL;ESSL;ATLAS;ACML;SYSTEM_NATIVE"'
+#           '-DBLAS_LANG=Fortran'
+#           '-DLAPACK_LANG=Fortran'
 
 #-------------------------------------------------------------------------------
 # SYSTEM_NATIVE

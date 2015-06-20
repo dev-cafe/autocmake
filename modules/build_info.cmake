@@ -1,5 +1,7 @@
-# Copyright (c) 2015 by Radovan Bast and Jonas Juselius
-# see https://github.com/scisoft/autocmake/blob/master/LICENSE
+#.rst:
+#
+# Generates source code that echoes configuration and build
+# information to the program output.
 
 # generated cmake files will be written to this path
 # only build info is generated

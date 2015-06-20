@@ -1,3 +1,18 @@
+#.rst:
+#
+# Enables 64-bit integer support for Fortran projects.
+#
+# Variables modified (provided the corresponding language is enabled)::
+#
+#   CMAKE_Fortran_FLAGS
+#
+# Example autocmake.cfg entry::
+#
+#   [int64]
+#   source: https://github.com/scisoft/autocmake/raw/master/modules/int64.cmake
+#   docopt: --int64 Enable 64bit integers [default: False].
+#   define: '-DENABLE_64BIT_INTEGERS=%s' % arguments['--int64']
+
 option(ENABLE_64BIT_INTEGERS "Enable 64-bit integers" OFF)
 
 if(ENABLE_64BIT_INTEGERS)
