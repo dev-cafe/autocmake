@@ -3,6 +3,8 @@
 # Generates source code that echoes configuration and build
 # information to the program output.
 
+find_package(PythonInterp REQUIRED)
+
 # generated cmake files will be written to this path
 # only build info is generated
 # everything else is static for the user
