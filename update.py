@@ -159,12 +159,14 @@ def gen_cmakelists(config, relative_path, list_of_modules):
     s.append('# set minimum cmake version')
     s.append('cmake_minimum_required(VERSION 2.8 FATAL_ERROR)')
 
-    s.append('\nproject(%s)' % project_name)
+    s.append('\n# project name')
+    s.append('project(%s)' % project_name)
 
     s.append('\n# do not rebuild if rules (compiler flags) change')
     s.append('set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)')
 
-    s.append('\nif(NOT CMAKE_BUILD_TYPE)')
+    s.append('\n# if CMAKE_BUILD_TYPE undefined, we set it to Debug')
+    s.append('if(NOT CMAKE_BUILD_TYPE)')
     s.append('    set(CMAKE_BUILD_TYPE "Debug")')
     s.append('endif()')
 
