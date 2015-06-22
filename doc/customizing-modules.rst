@@ -37,4 +37,4 @@ Contribute customizations to the "standard library"
 If you think that your customization will be useful for other users as well,
 you may consider contributing the changes directly to
 https://github.com/scisoft/autocmake/. We very much encourage such
-contributions. But we also very much strive for generality and portability.
+contributions. But we also strive for generality and portability.
