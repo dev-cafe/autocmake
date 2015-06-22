@@ -5,12 +5,14 @@ import sys
 import shutil
 from collections import OrderedDict
 
-if sys.version_info.major > 2:
+# we do not use the nicer sys.version_info.major
+# for compatibility with Python < 2.7
+if sys.version_info[0] > 2:
     from configparser import RawConfigParser
 else:
     from ConfigParser import RawConfigParser
 
-if sys.version_info.major > 2:
+if sys.version_info[0] > 2:
     import urllib.request
     class URLopener(urllib.request.FancyURLopener):
         def http_error_default(self, url, fp, errcode, errmsg, headers):
