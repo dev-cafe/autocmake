@@ -13,7 +13,7 @@ General
    about.rst
 
 
-For Developers who use Autocmake
+For developers who use Autocmake
 --------------------------------
 
 .. toctree::
@@ -24,17 +24,18 @@ For Developers who use Autocmake
    updating-modules.rst
 
 
-For Users of projects that use Autocmake
-----------------------------------------
+For users of projects which use Autocmake
+-----------------------------------------
 
 
-For Developers/contributors to Autocmake
+For developers/contributors to Autocmake
 ----------------------------------------
 
 .. toctree::
    :maxdepth: 2
 
    testing.rst
+   documentation.rst
 
 
 Reference
