@@ -12,3 +12,34 @@ in principle could be generated at configure- or build-time.  However, you
 probably do not want the users of your code to run any Autocmake scripts like
 ``update.py`` to generate the files they need to build the project. They will
 run ``setup.py`` directly and expect everything to just work (TM).
+
+
+The update.py script is overwriting my CMakeLists.txt and setup.py, isn't this bad?
+-----------------------------------------------------------------------------------
+
+It's not so bad as it first looks. It's a feature. Normally ``CMakeLists.txt``
+and ``setup.py`` should not contain any explicit customization and therefore should not
+contain anything that could not be regenerated. In any case you should use
+version control so that you can inspect and compare changes introduced to
+``CMakeLists.txt`` and ``setup.py`` and possibly revert them. See also the next
+remark.
+
+
+But I need to manually edit and customize CMakeLists.txt and setup.py every time I run update.py
+------------------------------------------------------------------------------------------------
+
+You typically never need to manually edit and customize ``CMakeLists.txt`` and
+``setup.py`` directly. You can introduce customizations in ``autocmake.cfg``
+which get assembled into the front-end scripts.
+
+
+Where is a good place to list my sources and targets?
+-----------------------------------------------------
+
+As mentioned above ``CMakeLists.txt`` is not a good place because this file is generated
+from ``autocmake.cfg`` and your modifications would become overwritten at some point.
+A good solution for this is to list your sources and targets in ``src/CMakeLists.txt``
+and include the latter in ``autocmake.cfg`` using::
+
+  [src]
+  source: https://github.com/scisoft/autocmake/raw/master/modules/src.cmake
