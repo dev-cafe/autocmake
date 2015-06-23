@@ -19,6 +19,7 @@ For developers who use Autocmake
 .. toctree::
    :maxdepth: 2
 
+   autocmake-users-faq.rst
    new-project.rst
    customizing-modules.rst
    updating-modules.rst
