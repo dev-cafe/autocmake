@@ -270,6 +270,8 @@ macro(find_math_libs _service)
     unset(l)
 endmacro()
 
+include(FindPackageHandleStandardArgs)
+
 macro(cache_math_result _service MATH_TYPE)
     string(TOUPPER ${_service} _SERVICE)
     set(${_SERVICE}_FIND_QUIETLY TRUE)
