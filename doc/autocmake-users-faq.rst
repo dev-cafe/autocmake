@@ -17,7 +17,7 @@ run ``setup.py`` directly and expect everything to just work (TM).
 The update.py script is overwriting my CMakeLists.txt and setup.py, isn't this bad?
 -----------------------------------------------------------------------------------
 
-It's not so bad as it first looks. It's a feature. Normally ``CMakeLists.txt``
+It's not as bad as it first looks. It's a feature. Normally ``CMakeLists.txt``
 and ``setup.py`` should not contain any explicit customization and therefore should not
 contain anything that could not be regenerated. In any case you should use
 version control so that you can inspect and compare changes introduced to
@@ -25,8 +25,8 @@ version control so that you can inspect and compare changes introduced to
 remark.
 
 
-But I need to manually edit and customize CMakeLists.txt and setup.py every time I run update.py
-------------------------------------------------------------------------------------------------
+But I need to manually edit and customize CMakeLists.txt and setup.py every time I run update.py!?
+--------------------------------------------------------------------------------------------------
 
 You typically never need to manually edit and customize ``CMakeLists.txt`` and
 ``setup.py`` directly. You can introduce customizations in ``autocmake.cfg``
@@ -43,3 +43,9 @@ and include the latter in ``autocmake.cfg`` using::
 
   [src]
   source: https://github.com/scisoft/autocmake/raw/master/modules/src.cmake
+
+If you really don't like to do it this way, you can describe your sources and
+targets in a custom module in a local file and include it like this::
+
+  [my_sources]
+  source: custom/my_sources.cmake
