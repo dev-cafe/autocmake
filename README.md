@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/miroi/autocmake.svg?branch=master)](https://travis-ci.org/miroi/autocmake)
+Travis-CI: [![Build Status](https://travis-ci.org/miroi/autocmake.svg?branch=master)](https://travis-ci.org/miroi/autocmake)
 
-https://ci.appveyor.com/api/projects/status/github/miroi/autocmake?branch=master&svg=true
+Appveyor:   [![Build Status](https://ci.appveyor.com/api/projects/status/github/miroi/autocmake?branch=master&svg=true)]((https://ci.appveyor.com/api/projects/status/github/miroi/autocmake)
 
 # Autocmake
 
