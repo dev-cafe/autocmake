@@ -26,7 +26,8 @@ else:
             sys.exit(-1)
 
 
-AUTOCMAKE_GITHUB_URL = 'https://github.com/scisoft/autocmake'
+#AUTOCMAKE_GITHUB_URL = 'https://github.com/scisoft/autocmake'
+AUTOCMAKE_GITHUB_URL = 'https://github.com/miroi/autocmake'
 
 
 def fetch_url(src, dst):
@@ -93,6 +94,7 @@ def gen_cmake_command(config):
                 s.append('    command.append(%s)' % definition)
 
     s.append("    command.append('-DCMAKE_BUILD_TYPE=%s' % arguments['--type'])")
+    s.append("    command.append('-G \"%s\"' % arguments['--generator'])")
 
     s.append("\n    return ' '.join(command)")
 
@@ -130,6 +132,7 @@ def gen_setup(config, relative_path):
                 options.append([first, rest])
 
     options.append(['--type=<TYPE>', 'Set the CMake build type (debug, release, or relwithdeb) [default: release].'])
+    options.append(['--generator=<STRING>', 'Set the CMake build system generator. See cmake --help [default: makefile].'])
     options.append(['--show', 'Show CMake command and exit.'])
     options.append(['<builddir>', 'Build directory.'])
     options.append(['-h --help', 'Show this screen.'])
