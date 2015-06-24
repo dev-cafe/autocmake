@@ -1,9 +1,9 @@
 version: 1.0.{build}
 init:
 - ps: >-
-    mkdir C:\Tools
+    mkdir C:\software
     
-    cd C:\Tools
+    cd C:\software
     
     wget https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
     
