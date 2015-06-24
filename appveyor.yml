@@ -5,18 +5,18 @@ init:
 
     cd C:\software
 
-
     echo "installing MinGW64 compilers"
-
 
     wget http://netcologne.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v4-rev2.7z -OutFile MinGW.7z
 
-
     7z x MinGW.7z > log_mingw.txt
 
+    echo "installing pytest"
+    wget https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
+    python get-pip.py
+    pip install pytest
 
     echo "back to project source"
-
 
     cd C:\projects\autocmake
 environment:
