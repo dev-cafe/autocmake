@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -19,9 +20,15 @@ def test_cxx():
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
-    stdout, stderr = exe('python setup.py --cxx=g++')
+    if  sys.platform == 'win32':
+        stdout, stderr = exe('python setup.py --cxx=g++ --generator="MinGW Makefiles"')
+    else:
+        stdout, stderr = exe('python setup.py --cxx=g++')
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
-    stdout, stderr = exe('make')
+    if  sys.platform == 'win32':
+        stdout, stderr = exe('mingw32-make')
+    else:
+        stdout, stderr = exe('make')
     stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
 
@@ -33,8 +40,14 @@ def test_fc():
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'fc'))
-    stdout, stderr = exe('python setup.py --fc=gfortran')
+    if  sys.platform == 'win32':
+        stdout, stderr = exe('python setup.py --fc=gfortran --generator="MinGW Makefiles"')
+    else:
+        stdout, stderr = exe('python setup.py --fc=gfortran')
     os.chdir(os.path.join(HERE, 'fc', 'build'))
-    stdout, stderr = exe('make')
+    if  sys.platform == 'win32':
+        stdout, stderr = exe('mingw32-make')
+    else:
+        stdout, stderr = exe('make')
     stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
