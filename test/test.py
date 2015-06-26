@@ -20,12 +20,12 @@ def test_cxx():
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
-    if  sys.platform == 'win32':
+    if sys.platform == 'win32':
         stdout, stderr = exe('python setup.py --cxx=g++ --generator="MinGW Makefiles" ')
     else:
         stdout, stderr = exe('python setup.py --cxx=g++')
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
-    if  sys.platform == 'win32':
+    if sys.platform == 'win32':
         stdout, stderr = exe('mingw32-make')
         stdout, stderr = exe('bin\\\example.exe')
     else:
@@ -40,12 +40,12 @@ def test_fc():
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'fc'))
-    if  sys.platform == 'win32':
+    if sys.platform == 'win32':
         stdout, stderr = exe('python setup.py --fc=gfortran --generator="MinGW Makefiles"')
     else:
         stdout, stderr = exe('python setup.py --fc=gfortran')
     os.chdir(os.path.join(HERE, 'fc', 'build'))
-    if  sys.platform == 'win32':
+    if sys.platform == 'win32':
         stdout, stderr = exe("mingw32-make")
         stdout, stderr = exe('bin\\\example.exe')
     else:
