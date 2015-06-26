@@ -16,7 +16,6 @@ def exe(command):
 
 def test_cxx():
     os.chdir(os.path.join(HERE, 'cxx', 'cmake'))
-    #stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/update.py')
     if  sys.platform == 'win32':
 	    stdout, stderr = exe('python -m wget https://github.com/miroi/autocmake/raw/master/update.py')
     else:
@@ -41,7 +40,6 @@ def test_cxx():
 
 def test_fc():
     os.chdir(os.path.join(HERE, 'fc', 'cmake'))
-    #stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/update.py')
     if  sys.platform == 'win32':
 	    stdout, stderr = exe('python -m wget https://github.com/miroi/autocmake/raw/master/update.py')
     else:
@@ -56,7 +54,7 @@ def test_fc():
     os.chdir(os.path.join(HERE, 'fc', 'build'))
     if  sys.platform == 'win32':
         stdout, stderr = exe('mingw32-make')
-        stdout, stderr = exe('.\bin\example.exe')
+        stdout, stderr = exe('bin\example.exe')
     else:
         stdout, stderr = exe('make')
         stdout, stderr = exe('./bin/example')
