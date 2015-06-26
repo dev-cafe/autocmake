@@ -2,8 +2,7 @@
 
 MiroI build statuses:
 [![Build Status](https://travis-ci.org/miroi/autocmake.svg?branch=master)](https://travis-ci.org/miroi/autocmake/builds)
-
-https://ci.appveyor.com/api/projects/status/github/miroi/autocmake?branch=master&svg=true
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/miroi/autocmake?branch=master&svg=true)](https://ci.appveyor.com/project/miroi/autocmake)
 
 
 # Autocmake
