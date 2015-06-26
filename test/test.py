@@ -3,7 +3,6 @@ import subprocess
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-#-------------------------------------------------------------------------------
 
 def exe(command):
     stdout, stderr = subprocess.Popen(command.split(),
@@ -11,7 +10,6 @@ def exe(command):
                                       stderr=subprocess.PIPE).communicate()
     return stdout, stderr
 
-#-------------------------------------------------------------------------------
 
 def test_cxx():
     os.chdir(os.path.join(HERE, 'cxx', 'cmake'))
@@ -25,7 +23,6 @@ def test_cxx():
     stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
 
-#-------------------------------------------------------------------------------
 
 def test_fc():
     os.chdir(os.path.join(HERE, 'fc', 'cmake'))

@@ -4,4 +4,5 @@ install:
   - sudo pip install pytest pep8
 script:
   - pep8 --ignore=E501 update.py
+  - pep8 --ignore=E501 test/test.py
   - py.test -vv test/test.py

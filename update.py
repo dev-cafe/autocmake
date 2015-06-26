@@ -61,7 +61,7 @@ def align_options(options):
             l = len(opt[0])
     s = []
     for opt in options:
-        s.append('  %s%s  %s' % (opt[0], ' '*(l - len(opt[0])), opt[1]))
+        s.append('  %s%s  %s' % (opt[0], ' ' * (l - len(opt[0])), opt[1]))
     return '\n'.join(s)
 
 
