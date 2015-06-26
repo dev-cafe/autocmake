@@ -21,7 +21,7 @@ def test_cxx():
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
     if  sys.platform == 'win32':
-        stdout, stderr = exe('python setup.py --cxx=g++ --generator="MinGW Makefiles" ')
+        stdout, stderr = exe('python setup.py --cxx=g++ --generator=\"MinGW Makefiles\" ')
     else:
         stdout, stderr = exe('python setup.py --cxx=g++')
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
