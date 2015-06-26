@@ -91,6 +91,7 @@ def gen_cmake_command(config):
     for section in config.sections():
         if config.has_option(section, 'define'):
             for definition in config.get(section, 'define').split('\n'):
+                print 'definition=', definition
                 s.append('    command.append(%s)' % definition)
 
     s.append("    command.append('-DCMAKE_BUILD_TYPE=%s' % arguments['--type'])")
