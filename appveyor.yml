@@ -14,7 +14,6 @@ init:
     python get-pip.py
     
     pip install pytest
-    pip install wget
     
     cd C:\projects\autocmake
 environment:
