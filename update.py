@@ -132,7 +132,7 @@ def gen_setup(config, relative_path):
                 options.append([first, rest])
 
     options.append(['--type=<TYPE>', 'Set the CMake build type (debug, release, or relwithdeb) [default: release].'])
-    options.append(['--generator=<STRING>', 'Set the CMake build system generator. See cmake --help [default: makefile].'])
+    options.append(['--generator=<STRING>', 'Set the CMake build system generator. See cmake --help [default:"Unix Makefiles"].'])
     options.append(['--show', 'Show CMake command and exit.'])
     options.append(['<builddir>', 'Build directory.'])
     options.append(['-h --help', 'Show this screen.'])
