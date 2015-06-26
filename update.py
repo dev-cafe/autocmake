@@ -185,8 +185,10 @@ def gen_cmakelists(config, relative_path, list_of_modules):
 
     s.append('\n# directory which holds enabled cmake modules')
     s.append('set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}')
-    s.append('    ${PROJECT_SOURCE_DIR}/%s)' % os.path.join(relative_path, 'modules'))
-
+    if  sys.platform == 'win32':
+        s.append('    ${PROJECT_SOURCE_DIR}\%s)' % os.path.join(relative_path, 'modules'))
+    else:
+        s.append('    ${PROJECT_SOURCE_DIR}/%s)' % os.path.join(relative_path, 'modules'))
     s.append('\n# included cmake modules')
     for m in list_of_modules:
         s.append('include(autocmake_%s)' % os.path.splitext(m)[0])
