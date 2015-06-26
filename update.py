@@ -9,17 +9,16 @@ from collections import OrderedDict
 # for compatibility with Python < 2.7
 if sys.version_info[0] > 2:
     from configparser import RawConfigParser
-else:
-    from ConfigParser import RawConfigParser
-
-if sys.version_info[0] > 2:
     import urllib.request
+
     class URLopener(urllib.request.FancyURLopener):
         def http_error_default(self, url, fp, errcode, errmsg, headers):
             sys.stderr.write("ERROR: could not fetch %s\n" % url)
             sys.exit(-1)
 else:
+    from ConfigParser import RawConfigParser
     import urllib
+
     class URLopener(urllib.FancyURLopener):
         def http_error_default(self, url, fp, errcode, errmsg, headers):
             sys.stderr.write("ERROR: could not fetch %s\n" % url)
@@ -46,9 +45,9 @@ def print_progress_bar(text, done, total, width):
     """
     Print progress bar.
     """
-    n = int(float(width)*float(done)/float(total))
-    sys.stdout.write("\r%s [%s%s] (%i/%i)" % (text, '#'*n,
-                                              ' '*(width-n), done, total))
+    n = int(float(width) * float(done) / float(total))
+    sys.stdout.write("\r%s [%s%s] (%i/%i)" % (text, '#' * n,
+                                              ' ' * (width - n), done, total))
     sys.stdout.flush()
 
 
