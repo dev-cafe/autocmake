@@ -1,5 +1,6 @@
 import os
 import subprocess
+import update
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -13,7 +14,7 @@ def exe(command):
 
 def test_cxx():
     os.chdir(os.path.join(HERE, 'cxx', 'cmake'))
-    stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/update.py')
+    update.fetch_url('https://github.com/scisoft/autocmake/raw/master/update.py', 'update.py')
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
@@ -26,7 +27,7 @@ def test_cxx():
 
 def test_fc():
     os.chdir(os.path.join(HERE, 'fc', 'cmake'))
-    stdout, stderr = exe('wget https://github.com/scisoft/autocmake/raw/master/update.py')
+    update.fetch_url('https://github.com/scisoft/autocmake/raw/master/update.py', 'update.py')
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'fc'))
