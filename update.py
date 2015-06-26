@@ -183,8 +183,8 @@ def gen_cmakelists(config, relative_path, list_of_modules):
 
     s.append('\n# directory which holds enabled cmake modules')
     s.append('set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}')
-    if  sys.platform == 'win32':
-        #miro: keep the same path separator on Windows
+    if sys.platform == 'win32':
+        # miro: keep the same path separator on Windows
         s.append('    ${PROJECT_SOURCE_DIR}/%s' % relative_path + "/modules)")
     else:
         s.append('    ${PROJECT_SOURCE_DIR}/%s)' % os.path.join(relative_path, 'modules'))
