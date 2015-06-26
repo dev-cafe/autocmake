@@ -31,7 +31,7 @@ def test_cxx():
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
     if  sys.platform == 'win32':
         stdout, stderr = exe("mingw32-make")
-        stdout, stderr = exe("bin\example.exe")
+        stdout, stderr = exe(".\bin\example.exe")
     else:
         stdout, stderr = exe('make')
         stdout, stderr = exe('./bin/example')
@@ -54,8 +54,8 @@ def test_fc():
         stdout, stderr = exe('python setup.py --fc=gfortran')
     os.chdir(os.path.join(HERE, 'fc', 'build'))
     if  sys.platform == 'win32':
-        stdout, stderr = exe('mingw32-make')
-        stdout, stderr = exe('bin\example.exe')
+        stdout, stderr = exe("mingw32-make")
+        stdout, stderr = exe(".\bin\example.exe")
     else:
         stdout, stderr = exe('make')
         stdout, stderr = exe('./bin/example')
