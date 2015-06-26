@@ -1,13 +1,14 @@
 import os
 import sys
 import subprocess
+import shlex
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 #-------------------------------------------------------------------------------
 
 def exe(command):
-    stdout, stderr = subprocess.Popen(command.split(),
+    stdout, stderr = subprocess.Popen(shlex.split(command),
                                       stdout=subprocess.PIPE,
                                       stderr=subprocess.PIPE).communicate()
     return stdout, stderr
@@ -24,13 +25,13 @@ def test_cxx():
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
     if  sys.platform == 'win32':
-        stdout, stderr = exe('python setup.py --cxx=g++ --generator="MinGW Makefiles"')
+        stdout, stderr = exe("python setup.py --cxx=g++ --generator=\"MinGW Makefiles\" ")
     else:
         stdout, stderr = exe('python setup.py --cxx=g++')
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
     if  sys.platform == 'win32':
-        stdout, stderr = exe('mingw32-make')
-        stdout, stderr = exe('bin\example.exe')
+        stdout, stderr = exe("mingw32-make")
+        stdout, stderr = exe("bin\example.exe")
     else:
         stdout, stderr = exe('make')
         stdout, stderr = exe('./bin/example')
