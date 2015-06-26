@@ -1,6 +1,10 @@
 language: cpp
 install:
   - sudo apt-get install g++ cmake gfortran
-  - sudo pip install pytest
+  - sudo pip install pytest pep8
+before_script:
+  - export PYTHONPATH=$PYTHONPATH:$(pwd)
 script:
+  - pep8 --ignore=E501 update.py
+  - pep8 --ignore=E501 test/test.py
   - py.test -vv test/test.py

@@ -8,7 +8,8 @@ Bootstrapping Autocmake
 -----------------------
 
 Download the ``update.py`` and execute it to fetch other infrastructure files
-which will be needed to build the project::
+which will be needed to build the project (on Windows ``wget`` is probably
+not available - in this case use an alternative)::
 
   mkdir cmake  # does not have to be called "cmake" - take the name you prefer
   cd cmake

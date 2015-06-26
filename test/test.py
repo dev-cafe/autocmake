@@ -2,10 +2,10 @@ import os
 import sys
 import subprocess
 import shlex
+import update
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-#-------------------------------------------------------------------------------
 
 def exe(command):
     stdout, stderr = subprocess.Popen(shlex.split(command),
@@ -13,14 +13,10 @@ def exe(command):
                                       stderr=subprocess.PIPE).communicate()
     return stdout, stderr
 
-#-------------------------------------------------------------------------------
 
 def test_cxx():
     os.chdir(os.path.join(HERE, 'cxx', 'cmake'))
-    if  sys.platform == 'win32':
-	    stdout, stderr = exe('python -m wget https://github.com/miroi/autocmake/raw/master/update.py')
-    else:
-        stdout, stderr = exe('wget https://github.com/miroi/autocmake/raw/master/update.py')
+    update.fetch_url('https://github.com/scisoft/autocmake/raw/master/update.py', 'update.py')
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
@@ -37,14 +33,10 @@ def test_cxx():
         stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
 
-#-------------------------------------------------------------------------------
 
 def test_fc():
     os.chdir(os.path.join(HERE, 'fc', 'cmake'))
-    if  sys.platform == 'win32':
-	    stdout, stderr = exe('python -m wget https://github.com/miroi/autocmake/raw/master/update.py')
-    else:
-        stdout, stderr = exe('wget https://github.com/miroi/autocmake/raw/master/update.py')
+    update.fetch_url('https://github.com/scisoft/autocmake/raw/master/update.py', 'update.py')
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'fc'))
