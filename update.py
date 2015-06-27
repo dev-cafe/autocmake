@@ -25,7 +25,7 @@ else:
             sys.exit(-1)
 
 
-AUTOCMAKE_GITHUB_URL = 'https://github.com/scisoft/autocmake'
+AUTOCMAKE_GITHUB_URL = 'https://github.com/miroi/autocmake'
 
 
 def fetch_url(src, dst):
