@@ -1,12 +1,14 @@
 import os
+import sys
 import subprocess
+import shlex
 import update
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 
 def exe(command):
-    stdout, stderr = subprocess.Popen(command.split(),
+    stdout, stderr = subprocess.Popen(shlex.split(command),
                                       stdout=subprocess.PIPE,
                                       stderr=subprocess.PIPE).communicate()
     return stdout, stderr
@@ -18,10 +20,17 @@ def test_cxx():
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'cxx'))
-    stdout, stderr = exe('python setup.py --cxx=g++')
+    if sys.platform == 'win32':
+        stdout, stderr = exe('python setup.py --cxx=g++ --generator="MinGW Makefiles" ')
+    else:
+        stdout, stderr = exe('python setup.py --cxx=g++')
     os.chdir(os.path.join(HERE, 'cxx', 'build'))
-    stdout, stderr = exe('make')
-    stdout, stderr = exe('./bin/example')
+    if sys.platform == 'win32':
+        stdout, stderr = exe('mingw32-make')
+        stdout, stderr = exe('bin\\\example.exe')
+    else:
+        stdout, stderr = exe('make')
+        stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout
 
 
@@ -31,8 +40,15 @@ def test_fc():
     stdout, stderr = exe('python update.py --self')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, 'fc'))
-    stdout, stderr = exe('python setup.py --fc=gfortran')
+    if sys.platform == 'win32':
+        stdout, stderr = exe('python setup.py --fc=gfortran --generator="MinGW Makefiles"')
+    else:
+        stdout, stderr = exe('python setup.py --fc=gfortran')
     os.chdir(os.path.join(HERE, 'fc', 'build'))
-    stdout, stderr = exe('make')
-    stdout, stderr = exe('./bin/example')
+    if sys.platform == 'win32':
+        stdout, stderr = exe("mingw32-make")
+        stdout, stderr = exe('bin\\\example.exe')
+    else:
+        stdout, stderr = exe('make')
+        stdout, stderr = exe('./bin/example')
     assert 'Hello World!' in stdout

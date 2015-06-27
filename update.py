@@ -92,6 +92,7 @@ def gen_cmake_command(config):
                 s.append('    command.append(%s)' % definition)
 
     s.append("    command.append('-DCMAKE_BUILD_TYPE=%s' % arguments['--type'])")
+    s.append("    command.append('-G \"%s\"' % arguments['--generator'])")
 
     s.append("\n    return ' '.join(command)")
 
@@ -129,6 +130,7 @@ def gen_setup(config, relative_path):
                 options.append([first, rest])
 
     options.append(['--type=<TYPE>', 'Set the CMake build type (debug, release, or relwithdeb) [default: release].'])
+    options.append(['--generator=<STRING>', 'Set the CMake build system generator [default: Unix Makefiles].'])
     options.append(['--show', 'Show CMake command and exit.'])
     options.append(['<builddir>', 'Build directory.'])
     options.append(['-h --help', 'Show this screen.'])
@@ -181,8 +183,11 @@ def gen_cmakelists(config, relative_path, list_of_modules):
 
     s.append('\n# directory which holds enabled cmake modules')
     s.append('set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}')
-    s.append('    ${PROJECT_SOURCE_DIR}/%s)' % os.path.join(relative_path, 'modules'))
-
+    if sys.platform == 'win32':
+        # miro: keep the same path separator on Windows
+        s.append('    ${PROJECT_SOURCE_DIR}/%s' % relative_path + "/modules)")
+    else:
+        s.append('    ${PROJECT_SOURCE_DIR}/%s)' % os.path.join(relative_path, 'modules'))
     s.append('\n# included cmake modules')
     for m in list_of_modules:
         s.append('include(autocmake_%s)' % os.path.splitext(m)[0])
