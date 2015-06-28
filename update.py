@@ -183,7 +183,10 @@ def gen_cmakelists(config, relative_path, list_of_modules):
 
     s.append('\n# directory which holds enabled cmake modules')
     s.append('set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}')
-    s.append('    ${PROJECT_SOURCE_DIR}/%s)' % os.path.join(relative_path, 'modules'))
+
+    # we need the same separator since CMake apparently corrects for it
+    # therefore we do not use os.path.join
+    s.append('    ${PROJECT_SOURCE_DIR}/%s/modules)' % relative_path)
 
     s.append('\n# included cmake modules')
     for m in list_of_modules:
