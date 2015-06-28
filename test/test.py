@@ -1,5 +1,7 @@
 import os
+import sys
 import subprocess
+import shlex
 import shutil
 import sys
 
@@ -44,7 +46,7 @@ def fetch_url(src, dst):
 
 
 def exe(command):
-    stdout, stderr = subprocess.Popen(command.split(),
+    stdout, stderr = subprocess.Popen(shlex.split(command),
                                       stdout=subprocess.PIPE,
                                       stderr=subprocess.PIPE).communicate()
     return stdout, stderr
@@ -63,10 +65,19 @@ def boilerplate(name, setup_command):
               dst='lib/docopt.py')
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, name))
+
+    if sys.platform == 'win32':
+        setup_command += ' --generator="MinGW Makefiles"'
     stdout, stderr = exe(setup_command)
+
     os.chdir(os.path.join(HERE, name, 'build'))
-    stdout, stderr = exe('make')
-    stdout, stderr = exe('./bin/example')
+
+    if sys.platform == 'win32':
+        stdout, stderr = exe('mingw32-make')
+        stdout, stderr = exe('bin\\\example.exe')
+    else:
+        stdout, stderr = exe('make')
+        stdout, stderr = exe('./bin/example')
 
     return stdout, stderr
 
