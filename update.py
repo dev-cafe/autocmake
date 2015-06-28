@@ -79,10 +79,20 @@ def gen_cmake_command(config):
 
     # take care of environment variables
     for section in config.sections():
-        # export on Linux - definitions placed BEFORE own cmake command
-        if config.has_option(section, 'export') and sys.platform != 'win32':
+        if config.has_option(section, 'export'):
             for env in config.get(section, 'export').split('\n'):
-                s.append('    command.append(%s)' % env)
+                if sys.platform == 'win32':
+                    # on windows we have to replace:
+                    #     CC=gcc CXX=g++ cmake [definitions] ..
+                    # by:
+                    #     set CC=gcc && set CXX=g++ && cmake [definitions] ..
+                    p1 = re.compile('\'(?=\w.*\=)')
+                    env1 = p1.sub('\'set ', env)
+                    p2 = re.compile('\'(?=\s)')
+                    env2 = p2.sub(' &&\'', env1)
+                else:
+                    env2 = env
+                s.append('    command.append(%s)' % env2)
 
     s.append("    command.append('cmake')")
 
