@@ -81,6 +81,8 @@ def gen_cmake_command(config):
     for section in config.sections():
         if config.has_option(section, 'export'):
             for env in config.get(section, 'export').split('\n'):
+                # FIXME there may be no win32 check in this file
+                # win32 platform dependency has to be dealt with in setup.py
                 if sys.platform == 'win32':
                     # on windows we have to replace:
                     #     CC=gcc CXX=g++ cmake [definitions] ..
