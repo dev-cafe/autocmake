@@ -86,10 +86,10 @@ def gen_cmake_command(config):
                     #     CC=gcc CXX=g++ cmake [definitions] ..
                     # by:
                     #     set CC=gcc && set CXX=g++ && cmake [definitions] ..
-                    p1 = re.compile('\'(?=\w.*\=)')
-                    env1 = p1.sub('\'set ', env)
-                    p2 = re.compile('\'(?=\s)')
-                    env2 = p2.sub(' &&\'', env1)
+                    p1 = re.compile('\'(?=\w.*\=)')  # match first "'" in 'FOO=BAR'
+                    env1 = p1.sub('\'set ', env)     # change to 'set FOO=BAR'
+                    p2 = re.compile('\'(?=\s)')      # match second "'" in 'FOO=BAR'
+                    env2 = p2.sub(' &&\'', env1)     # change to 'set FOO=BAR &&'
                 else:
                     env2 = env
                 s.append('    command.append(%s)' % env2)
