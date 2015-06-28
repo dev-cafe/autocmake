@@ -52,8 +52,9 @@ def exe(command):
 # ------------------------------------------------------------------------------
 
 
-def test_cxx():
-    os.chdir(os.path.join(HERE, 'cxx', 'cmake'))
+def boilerplate(name, setup_command):
+
+    os.chdir(os.path.join(HERE, name, 'cmake'))
     shutil.copy(os.path.join('..', '..', '..', 'update.py'), 'update.py')
     if not os.path.exists('lib'):
         os.makedirs('lib')
@@ -61,28 +62,24 @@ def test_cxx():
     fetch_url(src='https://github.com/docopt/docopt/raw/master/docopt.py',
               dst='lib/docopt.py')
     stdout, stderr = exe('python update.py ..')
-    os.chdir(os.path.join(HERE, 'cxx'))
-    stdout, stderr = exe('python setup.py --cxx=g++')
-    os.chdir(os.path.join(HERE, 'cxx', 'build'))
+    os.chdir(os.path.join(HERE, name))
+    stdout, stderr = exe(setup_command)
+    os.chdir(os.path.join(HERE, name, 'build'))
     stdout, stderr = exe('make')
     stdout, stderr = exe('./bin/example')
+
+    return stdout, stderr
+
+# ------------------------------------------------------------------------------
+
+
+def test_cxx():
+    stdout, stderr = boilerplate('cxx', 'python setup.py --cxx=g++')
     assert 'Hello World!' in stdout
 
 # ------------------------------------------------------------------------------
 
 
 def test_fc():
-    os.chdir(os.path.join(HERE, 'fc', 'cmake'))
-    shutil.copy(os.path.join('..', '..', '..', 'update.py'), 'update.py')
-    if not os.path.exists('lib'):
-        os.makedirs('lib')
-    shutil.copy(os.path.join('..', '..', '..', 'lib', 'config.py'), 'lib')
-    fetch_url(src='https://github.com/docopt/docopt/raw/master/docopt.py',
-              dst='lib/docopt.py')
-    stdout, stderr = exe('python update.py ..')
-    os.chdir(os.path.join(HERE, 'fc'))
-    stdout, stderr = exe('python setup.py --fc=gfortran')
-    os.chdir(os.path.join(HERE, 'fc', 'build'))
-    stdout, stderr = exe('make')
-    stdout, stderr = exe('./bin/example')
+    stdout, stderr = boilerplate('fc', 'python setup.py --cxx=gfortran')
     assert 'Hello World!' in stdout
