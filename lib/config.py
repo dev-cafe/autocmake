@@ -47,29 +47,20 @@ def adapt_cmake_command_to_arch(cmake_command):
     """
     Adapt CMake command for MS Windows architecture:
 
-      "FC=foo CC=bar cmake -DTHIS -DTHAT='this and that'" rewrites into
+ "FC=foo CC=bar cmake -DTHIS -DTHAT='this and that'" rewrites into
 
-      "set FC=foo && set CC=bar && cmake -DTHIS -DTHAT='this and that'"
+ "set FC=foo && set CC=bar && cmake -DTHIS -DTHAT='this and that'"
     """
 
     if sys.platform == 'win32':
         cmake_pos=cmake_command.find('cmake')
         cmake_export_vars=cmake_command[:cmake_pos]
         cmake_strings=cmake_command[cmake_pos:]
-        print "\n strings from cmake to right:",cmake_strings
-        print "strings from left up to cmake:",cmake_export_vars
-        print "strings from left up to cmake, split:",cmake_export_vars.split()
         all_modified_exported_vars=""
         for exported_var in cmake_export_vars.split():
-            print "exported_var=",exported_var
             modified_exported_var="set " + exported_var + " && "
             all_modified_exported_vars=all_modified_exported_vars+modified_exported_var
-        print "all_modified_exported_vars=",all_modified_exported_vars
-        cmake_command_win=all_modified_exported_vars+cmake_strings
-        print "cmake_command_win=",cmake_command_win
-        print "\n"
-        #sys.exit(-1)
-        cmake_command_arch = cmake_command_win
+        cmake_command_arch = all_modified_exported_vars + cmake_strings
     else:
         cmake_command_arch = cmake_command
 
