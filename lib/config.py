@@ -50,12 +50,10 @@ def run_cmake(command, build_path, default_build_path):
     """
     topdir = os.getcwd()
     os.chdir(build_path)
-    p = subprocess.Popen(
-            command,
-            shell=True,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE
-        )
+    p = subprocess.Popen(command,
+                         shell=True,
+                         stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE)
     s = p.communicate()[0].decode('UTF-8')
     # print cmake output to screen
     print(s)

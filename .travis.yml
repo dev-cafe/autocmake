@@ -5,4 +5,5 @@ install:
 script:
   - pep8 --ignore=E501 update.py
   - pep8 --ignore=E501 test/test.py
+  - pep8 --ignore=E501 lib/config.py
   - py.test -vv test/test.py
