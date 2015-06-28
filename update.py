@@ -88,10 +88,6 @@ def gen_cmake_command(config):
 
     # take care of cmake definitions
     for section in config.sections():
-        # export on Windows - definitions placed AFTER own cmake command
-        if config.has_option(section, 'export') and sys.platform == 'win32':
-            for env in config.get(section, 'export').split('\n'):
-                s.append('    command.append(%s)' % env)
         if config.has_option(section, 'define'):
             for definition in config.get(section, 'define').split('\n'):
                 s.append('    command.append(%s)' % definition)
