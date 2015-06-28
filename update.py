@@ -81,20 +81,7 @@ def gen_cmake_command(config):
     for section in config.sections():
         if config.has_option(section, 'export'):
             for env in config.get(section, 'export').split('\n'):
-                # FIXME there may be no win32 check in this file
-                # win32 platform dependency has to be dealt with in setup.py
-                if sys.platform == 'win32':
-                    # on windows we have to replace:
-                    #     CC=gcc CXX=g++ cmake [definitions] ..
-                    # by:
-                    #     set CC=gcc && set CXX=g++ && cmake [definitions] ..
-                    p1 = re.compile('\'(?=\w.*\=)')  # match first "'" in 'FOO=BAR'
-                    env1 = p1.sub('\'set ', env)     # change to 'set FOO=BAR'
-                    p2 = re.compile('\'(?=\s)')      # match second "'" in 'FOO=BAR'
-                    env2 = p2.sub(' &&\'', env1)     # change to 'set FOO=BAR &&'
-                else:
-                    env2 = env
-                s.append('    command.append(%s)' % env2)
+                s.append('    command.append(%s)' % env)
 
     s.append("    command.append('cmake')")
 
