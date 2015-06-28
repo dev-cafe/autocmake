@@ -81,5 +81,5 @@ def test_cxx():
 
 
 def test_fc():
-    stdout, stderr = boilerplate('fc', 'python setup.py --cxx=gfortran')
+    stdout, stderr = boilerplate('fc', 'python setup.py --fc=gfortran')
     assert 'Hello World!' in stdout
