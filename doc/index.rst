@@ -35,6 +35,7 @@ For developers/contributors to Autocmake
 .. toctree::
    :maxdepth: 2
 
+   contributing.rst
    testing.rst
    documentation.rst
 
