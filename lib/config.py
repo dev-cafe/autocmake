@@ -43,6 +43,29 @@ def setup_build_path(build_path):
     else:
         os.makedirs(build_path, 0o755)
 
+def adapt_cmake_command_to_arch(cmake_command):
+    """
+    Adapt CMake command for MS Windows architecture:
+
+ "FC=foo CC=bar cmake -DTHIS -DTHAT='this and that'" rewrites into
+
+ "set FC=foo && set CC=bar && cmake -DTHIS -DTHAT='this and that'"
+    """
+
+    if sys.platform == 'win32':
+        cmake_pos=cmake_command.find('cmake')
+        cmake_export_vars=cmake_command[:cmake_pos]
+        cmake_strings=cmake_command[cmake_pos:]
+        all_modified_exported_vars=""
+        for exported_var in cmake_export_vars.split():
+            modified_exported_var="set " + exported_var + " && "
+            all_modified_exported_vars=all_modified_exported_vars+modified_exported_var
+        cmake_command_arch = all_modified_exported_vars + cmake_strings
+    else:
+        cmake_command_arch = cmake_command
+
+    return cmake_command_arch
+
 
 def run_cmake(command, build_path, default_build_path):
     """
@@ -114,6 +137,8 @@ def configure(root_directory, build_path, cmake_command, only_show):
         build_path = default_build_path
     if not only_show:
         setup_build_path(build_path)
+
+    cmake_command=adapt_cmake_command_to_arch(cmake_command)
 
     print('%s\n' % cmake_command)
     if only_show:
