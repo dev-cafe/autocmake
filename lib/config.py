@@ -61,15 +61,12 @@ def test_adapt_cmake_command_to_platform():
 
 def adapt_cmake_command_to_platform(cmake_command, platform):
     """
-    Adapts CMake command to MS Windows platform.
+    Adapt CMake command to MS Windows platform.
     """
-
     if platform == 'win32':
         pos = cmake_command.find('cmake')
-        cmake_export_vars = cmake_command[:pos]
-        rest = cmake_command[pos:]
-        s = ['set %s &&' % e for e in cmake_export_vars.split()]
-        s.append(rest)
+        s = ['set %s &&' % e for e in cmake_command[:pos].split()]
+        s.append(cmake_command[pos:])
         return ' '.join(s)
     else:
         return cmake_command
