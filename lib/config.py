@@ -65,18 +65,14 @@ def adapt_cmake_command_to_platform(cmake_command, platform):
     """
 
     if platform == 'win32':
-        cmake_pos = cmake_command.find('cmake')
-        cmake_export_vars = cmake_command[:cmake_pos]
-        cmake_strings = cmake_command[cmake_pos:]
-        all_modified_exported_vars = ""
-        for exported_var in cmake_export_vars.split():
-            modified_exported_var = "set " + exported_var + " && "
-            all_modified_exported_vars = all_modified_exported_vars + modified_exported_var
-        cmake_command_platform = all_modified_exported_vars + cmake_strings
+        pos = cmake_command.find('cmake')
+        cmake_export_vars = cmake_command[:pos]
+        rest = cmake_command[pos:]
+        s = ['set %s &&' % e for e in cmake_export_vars.split()]
+        s.append(rest)
+        return ' '.join(s)
     else:
-        cmake_command_platform = cmake_command
-
-    return cmake_command_platform
+        return cmake_command
 
 
 def run_cmake(command, build_path, default_build_path):
