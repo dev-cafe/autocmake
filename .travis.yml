@@ -7,3 +7,4 @@ script:
   - pep8 --ignore=E501 test/test.py
   - pep8 --ignore=E501 lib/config.py
   - py.test -vv test/test.py
+  - py.test -vv lib/config.py

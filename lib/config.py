@@ -44,13 +44,24 @@ def setup_build_path(build_path):
         os.makedirs(build_path, 0o755)
 
 
-def adapt_cmake_command_to_arch(cmake_command, platform):
+def test_adapt_cmake_command_to_platform():
+
+    cmake_command = "FC=foo CC=bar CXX=RABOOF cmake -DTHIS -DTHAT='this and that cmake' .."
+    res = adapt_cmake_command_to_platform(cmake_command, 'linux')
+    assert res == cmake_command
+    res = adapt_cmake_command_to_platform(cmake_command, 'win32')
+    assert res == "set FC=foo && set CC=bar && set CXX=RABOOF && cmake -DTHIS -DTHAT='this and that cmake' .."
+
+    cmake_command = "cmake -DTHIS -DTHAT='this and that cmake' .."
+    res = adapt_cmake_command_to_platform(cmake_command, 'linux')
+    assert res == cmake_command
+    res = adapt_cmake_command_to_platform(cmake_command, 'win32')
+    assert res == cmake_command
+
+
+def adapt_cmake_command_to_platform(cmake_command, platform):
     """
-    Adapt CMake command for MS Windows architecture:
-
- "FC=foo CC=bar cmake -DTHIS -DTHAT='this and that'" rewrites into
-
- "set FC=foo && set CC=bar && cmake -DTHIS -DTHAT='this and that'"
+    Adapts CMake command to MS Windows platform.
     """
 
     if platform == 'win32':
@@ -61,11 +72,11 @@ def adapt_cmake_command_to_arch(cmake_command, platform):
         for exported_var in cmake_export_vars.split():
             modified_exported_var = "set " + exported_var + " && "
             all_modified_exported_vars = all_modified_exported_vars + modified_exported_var
-        cmake_command_arch = all_modified_exported_vars + cmake_strings
+        cmake_command_platform = all_modified_exported_vars + cmake_strings
     else:
-        cmake_command_arch = cmake_command
+        cmake_command_platform = cmake_command
 
-    return cmake_command_arch
+    return cmake_command_platform
 
 
 def run_cmake(command, build_path, default_build_path):
@@ -137,7 +148,7 @@ def configure(root_directory, build_path, cmake_command, only_show):
     if not only_show:
         setup_build_path(build_path)
 
-    cmake_command = adapt_cmake_command_to_arch(cmake_command, sys.platform)
+    cmake_command = adapt_cmake_command_to_platform(cmake_command, sys.platform)
 
     print('%s\n' % cmake_command)
     if only_show:
