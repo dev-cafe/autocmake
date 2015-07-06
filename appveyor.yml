@@ -1,6 +1,6 @@
 ##
 # The autocmake project test configuration for Windows OS at AppVeyor
-# 
+#
 # Current software used:
 # OS: 64-bit Windows Server 2012 R2
 # Compilers: 64-bit MinGw-w64 5.1.0 (downloaded during script execution)
