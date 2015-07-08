@@ -63,3 +63,4 @@ test_script:
 - py.test --version
 # run tests
 - py.test -v test/test.py
+- py.test -v lib/config.py

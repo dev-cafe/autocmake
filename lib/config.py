@@ -94,7 +94,7 @@ def run_cmake(command, build_path, default_build_path):
     if 'Configuring incomplete' in s:
         # configuration was not successful
         if (build_path == default_build_path):
-            # remove build_path iff not set by the user
+            # remove build_path if not set by the user
             # otherwise removal can be dangerous
             shutil.rmtree(default_build_path)
     else:
@@ -113,7 +113,10 @@ def print_build_help(build_path, default_build_path):
         print('   $ cd build')
     else:
         print('   $ cd ' + build_path)
-    print('   $ make')
+    if sys.platform == 'win32':
+        print('   $ mingw32-make')
+    else:
+        print('   $ make')
 
 
 def save_configure_command(argv, build_path):
