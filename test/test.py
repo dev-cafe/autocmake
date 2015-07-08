@@ -51,7 +51,6 @@ def exe(command):
     When universal_newlines=True stdout and stderr are opened in text mode.
     Otherwise, they are opened in binary mode. In that case captured stdout and stderr
     are not strings and Python 3 throws type error when compared against strings later in tests.
- 
     Note:
     This feature is only available if Python is built with universal newline support (the default).
     Also, the newlines attribute of the file objects stdout, stdin and stderr are not updated by the
