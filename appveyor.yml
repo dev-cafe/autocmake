@@ -55,7 +55,7 @@ build_script:
 - pip install pytest
 
 # go back to project source dir
-- cd C:\projects\autocmake
+- cd %APPVEYOR_BUILD_FOLDER%
 
 test_script:
 # show environment
