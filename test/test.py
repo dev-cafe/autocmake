@@ -4,6 +4,8 @@ import subprocess
 import shlex
 import shutil
 import sys
+import time
+import datetime
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -61,12 +63,18 @@ def exe(command):
                                       stdout=subprocess.PIPE,
                                       stderr=subprocess.PIPE,
                                       universal_newlines=True).communicate()
+
+    if stderr:
+        sys.stderr.write(stderr)
+
     return stdout, stderr
 
 # ------------------------------------------------------------------------------
 
 
 def boilerplate(name, setup_command):
+
+    stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
 
     os.chdir(os.path.join(HERE, name, 'cmake'))
     shutil.copy(os.path.join('..', '..', '..', 'update.py'), 'update.py')
@@ -80,9 +88,12 @@ def boilerplate(name, setup_command):
 
     if sys.platform == 'win32':
         setup_command += ' --generator="MinGW Makefiles"'
+
+    setup_command += ' build-%s' % stamp
+
     stdout, stderr = exe(setup_command)
 
-    os.chdir(os.path.join(HERE, name, 'build'))
+    os.chdir(os.path.join(HERE, name, 'build-%s' % stamp))
 
     if sys.platform == 'win32':
         stdout, stderr = exe('mingw32-make')
@@ -106,3 +117,11 @@ def test_cxx():
 def test_fc():
     stdout, stderr = boilerplate('fc', 'python setup.py --fc=gfortran')
     assert 'Hello World!' in stdout
+
+# ------------------------------------------------------------------------------
+
+
+def test_fc_openblas():
+    if sys.platform != 'win32':
+        stdout, stderr = boilerplate('fc_openblas', 'python setup.py --fc=gfortran --blas=auto')
+        assert 'dgemm_test done'
