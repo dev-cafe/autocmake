@@ -117,3 +117,11 @@ def test_cxx():
 def test_fc():
     stdout, stderr = boilerplate('fc', 'python setup.py --fc=gfortran')
     assert 'Hello World!' in stdout
+
+# ------------------------------------------------------------------------------
+
+
+def test_fc_openblas():
+    if sys.platform != 'win32':
+        stdout, stderr = boilerplate('fc_openblas', 'python setup.py --fc=gfortran --blas=auto')
+        assert 'dgemm_test done'
