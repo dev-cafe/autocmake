@@ -63,6 +63,10 @@ def exe(command):
                                       stdout=subprocess.PIPE,
                                       stderr=subprocess.PIPE,
                                       universal_newlines=True).communicate()
+
+    if stderr:
+        sys.stderr.write(stderr)
+
     return stdout, stderr
 
 # ------------------------------------------------------------------------------
