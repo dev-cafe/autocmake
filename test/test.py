@@ -4,6 +4,8 @@ import subprocess
 import shlex
 import shutil
 import sys
+import time
+import datetime
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -68,6 +70,8 @@ def exe(command):
 
 def boilerplate(name, setup_command):
 
+    stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
+
     os.chdir(os.path.join(HERE, name, 'cmake'))
     shutil.copy(os.path.join('..', '..', '..', 'update.py'), 'update.py')
     if not os.path.exists('lib'):
@@ -80,9 +84,12 @@ def boilerplate(name, setup_command):
 
     if sys.platform == 'win32':
         setup_command += ' --generator="MinGW Makefiles"'
+
+    setup_command += ' build-%s' % stamp
+
     stdout, stderr = exe(setup_command)
 
-    os.chdir(os.path.join(HERE, name, 'build'))
+    os.chdir(os.path.join(HERE, name, 'build-%s' % stamp))
 
     if sys.platform == 'win32':
         stdout, stderr = exe('mingw32-make')
