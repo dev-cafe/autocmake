@@ -1,0 +1,6 @@
+if (BLAS_FOUND)
+   add_executable(example example.f90)
+   target_link_libraries(example blas) 
+else()
+   message(FATAL_ERROR "OpenBLAS library not found for the test fc_openblas !")
+endif()

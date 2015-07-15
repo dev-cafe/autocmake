@@ -1,6 +1,6 @@
 language: cpp
 install:
-  - sudo apt-get install g++ cmake gfortran
+  - sudo apt-get install g++ cmake gfortran libopenblas-base libopenblas-dev
   - sudo pip install pytest pep8
 script:
   - pep8 --ignore=E501 update.py
