@@ -72,7 +72,7 @@ def exe(command):
 # ------------------------------------------------------------------------------
 
 
-def boilerplate(name, setup_command):
+def configure_build_and_exe(name, setup_command):
 
     stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
 
@@ -108,14 +108,14 @@ def boilerplate(name, setup_command):
 
 
 def test_cxx():
-    stdout, stderr = boilerplate('cxx', 'python setup.py --cxx=g++')
+    stdout, stderr = configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
     assert 'Hello World!' in stdout
 
 # ------------------------------------------------------------------------------
 
 
 def test_fc():
-    stdout, stderr = boilerplate('fc', 'python setup.py --fc=gfortran')
+    stdout, stderr = configure_build_and_exe('fc', 'python setup.py --fc=gfortran')
     assert 'Hello World!' in stdout
 
 # ------------------------------------------------------------------------------
@@ -123,5 +123,7 @@ def test_fc():
 
 def test_fc_openblas():
     if sys.platform != 'win32':
-        stdout, stderr = boilerplate('fc_openblas', 'python setup.py --fc=gfortran --blas=auto')
+        stdout, stderr = configure_build_and_exe('fc_openblas', 'python setup.py --fc=gfortran --blas=auto')
         assert 'dgemm_test done'
+    else:
+        pass
