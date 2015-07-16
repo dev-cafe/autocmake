@@ -22,7 +22,7 @@ program example
 
    do i = 1, n
       do j = 1, n
-         if ((c(i, j) - 20.0d0) > tiny(0.0d0)) return
+         if (dabs(c(i, j) - 20.0d0) > tiny(0.0d0)) return
       end do
    end do
 
