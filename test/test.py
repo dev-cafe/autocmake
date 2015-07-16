@@ -124,6 +124,6 @@ def test_fc():
 def test_fc_openblas():
     if sys.platform != 'win32':
         stdout, stderr = configure_build_and_exe('fc_openblas', 'python setup.py --fc=gfortran --blas=auto')
-        assert 'dgemm_test done'
+        assert 'dgemm_test done' in stdout
     else:
         pass
