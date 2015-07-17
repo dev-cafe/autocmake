@@ -37,8 +37,8 @@ creates ``CMakeLists.txt`` and ``setup.py`` in the build path::
 
   python update.py ..
 
-The script also copies or downloads CMake modules specified in ``autocmake.cfg`` to a directory
-called ``modules/``::
+The script also downloads remote CMake modules specified in ``autocmake.cfg`` to a directory
+called ``downloaded/``::
 
   cmake/
       update.py
@@ -46,7 +46,7 @@ called ``modules/``::
       lib/
           config.py
           docopt.py
-          modules/   # CMakeLists.txt includes CMake modules from this directory
+          downloaded/  # contains CMake modules fetched from the web
 
 
 Building the project

@@ -3,15 +3,16 @@
 Customizing CMake modules
 =========================
 
-The ``update.py`` script assembles modules listed in ``autocmake.cfg`` and
-places them inside ``modules/``.  You have at least four options to customize
-CMake modules:
+The ``update.py`` script assembles modules listed in ``autocmake.cfg`` into
+``CMakeLists.txt``. Those that are fetched from the web are placed inside
+``downloaded/``.  You have at least four options to customize downloaded CMake
+modules:
 
 
-Directly inside the generated modules directory
------------------------------------------------
+Directly inside the generated directory
+---------------------------------------
 
-The CMake modules can be customized directly inside ``modules/`` but this is
+The CMake modules can be customized directly inside ``downloaded/`` but this is
 the least elegant solution since the customizations may be overwritten by the
 ``update.py`` script (use version control).
 

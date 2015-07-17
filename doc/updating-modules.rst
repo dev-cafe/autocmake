@@ -3,7 +3,7 @@
 Updating CMake modules
 ======================
 
-To update CMake modules you need to run the ``update.py`` script::
+To update CMake modules fetched from the web you need to run the ``update.py`` script::
 
   cd cmake
   python update.py ..
