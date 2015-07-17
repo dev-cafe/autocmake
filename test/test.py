@@ -114,6 +114,13 @@ def test_cxx():
 # ------------------------------------------------------------------------------
 
 
+def test_cxx_auto():
+    stdout, stderr = configure_build_and_exe('cxx_auto', 'python setup.py --cxx=g++')
+    assert 'Hello World!' in stdout
+
+# ------------------------------------------------------------------------------
+
+
 def test_fc():
     stdout, stderr = configure_build_and_exe('fc', 'python setup.py --fc=gfortran')
     assert 'Hello World!' in stdout
