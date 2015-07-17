@@ -239,13 +239,27 @@ def fetch_modules(config, relative_path):
                         name = 'autocmake_%s' % module_name
                         dst = os.path.join(download_directory, 'autocmake_%s' % module_name)
                         fetch_url(src, dst)
+                        file_name = dst
                     else:
                         if os.path.exists(src):
                             path = os.path.dirname(src)
                             name = module_name
+                            file_name = src
                         else:
                             sys.stderr.write("ERROR: %s does not exist\n" % src)
                             sys.exit(-1)
+                    # if auto is true we infer configuration
+                    # from the module documentation
+                    if config.has_option(section, 'auto'):
+                        if config.get(section, 'auto') == 'true':
+                            with open(file_name, 'r') as f:
+                                config_docopt, config_define, config_export = parse_cmake_module(f.read())
+                                if config_docopt:
+                                    config.set(section, 'docopt', config_docopt)
+                                if config_define:
+                                    config.set(section, 'define', config_define)
+                                if config_export:
+                                    config.set(section, 'export', config_export)
                     modules.append(Module(path=path, name=name))
                 i += 1
                 print_progress_bar(
@@ -355,7 +369,18 @@ def parse_cmake_module(s_in):
     config = RawConfigParser(dict_type=OrderedDict)
     config.readfp(buf)
 
-    return config
+    config_docopt = None
+    config_define = None
+    config_export = None
+    for section in config.sections():
+        if config.has_option(section, 'docopt'):
+            config_docopt = config.get(section, 'docopt')
+        if config.has_option(section, 'define'):
+            config_define = config.get(section, 'define')
+        if config.has_option(section, 'export'):
+            config_export = config.get(section, 'export')
+
+    return config_docopt, config_define, config_export
 
 # ------------------------------------------------------------------------------
 
@@ -381,11 +406,9 @@ if(NOT DEFINED CMAKE_C_COMPILER_ID)
     message(FATAL_ERROR "CMAKE_C_COMPILER_ID variable is not defined!")
 endif()'''
 
-    config = parse_cmake_module(s)
+    config_docopt, config_define, config_export = parse_cmake_module(s)
 
-    assert config.sections() == ['cxx']
-    assert config.get('cxx', 'source') == 'https://github.com/scisoft/autocmake/raw/master/modules/cxx.cmake'
-    assert config.get('cxx', 'docopt').split('\n') == ["--cxx=<CXX> C++ compiler [default: g++].", "--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."]
+    assert config_docopt == "--cxx=<CXX> C++ compiler [default: g++].\n--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."
 
 # ------------------------------------------------------------------------------
 
