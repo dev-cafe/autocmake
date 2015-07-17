@@ -1,7 +1,12 @@
 #.rst:
 #
-# Generates source code that echoes configuration and build
+# Generates source code that echoes configuration, version, and build
 # information to the program output.
+#
+# Example autocmake.cfg entry::
+#
+#   [build_info]
+#   source: https://github.com/scisoft/autocmake/raw/master/modules/build_info.cmake
 
 find_package(PythonInterp REQUIRED)
 
