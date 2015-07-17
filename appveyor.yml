@@ -62,4 +62,6 @@ test_script:
 - echo %path%
 - py.test --version
 # run tests
-- py.test -v test/test.py
+- py.test -vv update.py
+- py.test -vv test/test.py
+- py.test -vv lib/config.py
