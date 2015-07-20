@@ -24,6 +24,10 @@
 #   BLAS_FOUND
 #   LAPACK_FOUND
 #
+# Variables modified::
+#
+#   CMAKE_EXE_LINKER_FLAGS
+#
 # Environment variables used::
 #
 #   MATH_ROOT
@@ -447,6 +451,7 @@ set(MATH_LIBS)
 
 if(NOT MKL_FLAG STREQUAL "off")
     set(EXTERNAL_LIBS ${EXTERNAL_LIBS} -mkl=${MKL_FLAG})
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mkl=${MKL_FLAG}")
     message(STATUS "User set explicit MKL flag which is passed to the compiler and linker: -mkl=${MKL_FLAG}")
     message(STATUS "This disables math detection and builtin math libraries")
     message(STATUS "Setting -DHAVE_MKL_BLAS and -DHAVE_MKL_LAPACK")
