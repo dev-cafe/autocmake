@@ -3,25 +3,27 @@
 About Autocmake
 ===============
 
-You typically want to use CMake when you get tired of manually editing
-Makefiles. Autocmake is for people who are tired of editing CMake files
-directly.  Autocmake assembles CMake modules, generates ``CMakeLists.txt`` as
-well as ``setup.py``, which serves as a front-end to ``CMakeLists.txt``. All
-this is done based on a lightweight ``autocmake.cfg`` file::
+Building libraries and executables from sources can be a complex task. Several
+solutions exist to this problem: GNU Makefiles is the traditional approach.
+Today, CMake is one of the trendier alternatives. Autocmake is a script which
+composes well tested CMake building blocks into a CMake project.  Autocmake
+assembles CMake modules, generates ``CMakeLists.txt`` as well as ``setup.py``,
+which serves as a front-end to ``CMakeLists.txt``. All this is done based on a
+lightweight ``autocmake.cfg`` file::
 
-  update.py --self
+  python update.py --self
        |                                   |
        | fetches Autocmake                 |
        | infrastructure                    |
        v                           Developer maintaining
   autocmake.cfg                        Autocmake
        |                                   |
-       | update.py                         |
+       | python update.py ..               |
        |                                   |
        v                                   v
   CMakeLists.txt (and setup.py front-end)
        |                                   |
-       | setup.py                          |
+       | python setup.py                   |
        | which invokes CMake               |
        v                             User of the code
   Makefile (or something else)             |
@@ -49,11 +51,12 @@ scientific projects which typically have very similar requirements:
 
 Our other motivation for Autocmake was to make it easier for developers who do
 not know CMake to generate a CMake infrastructure within minutes by providing
-a higher-level entry point.
+a higher-level entry point to CMake.
 
 Autocmake is a chance to provide a well documented and tested set of CMake
 plug-ins. With this we wish to give also users of codes the opportunity to
-introduce the occasional tweak without the need to read CMake documentation.
+introduce the occasional tweak without the need to dive deep into CMake
+documentation.
 
 
 Explicit is better than implicit
@@ -67,4 +70,6 @@ Convention over configuration
 -----------------------------
 
 Our guideline is to follow good established conventions in order to allow users
-and developers to recognize the configuration when moving to a new project.
+and developers to recognize the configuration when experimenting with
+an Autocmake-powered project.
+another.
