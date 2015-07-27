@@ -28,6 +28,11 @@ For developers who use Autocmake
 For users of projects which use Autocmake
 -----------------------------------------
 
+.. toctree::
+   :maxdepth: 2
+
+   users/faq.rst
+
 
 For developers/contributors to Autocmake
 ----------------------------------------
