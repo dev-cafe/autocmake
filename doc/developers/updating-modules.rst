@@ -17,8 +17,8 @@ How to pin CMake modules to a certain version
 ---------------------------------------------
 
 Sometimes you may want to avoid using the latest version of a CMake module and
-rather fetch an older version with the hash ``abcd123``. To achieve this, instead
-of::
+rather fetch an older version, for example with the hash ``abcd123``. To
+achieve this, instead of::
 
   [coverage]
   source: https://github.com/scisoft/autocmake/raw/master/modules/code_coverage.cmake
