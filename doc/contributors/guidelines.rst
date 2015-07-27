@@ -1,7 +1,7 @@
 
 
-Contributing to Autocmake
-=========================
+Contributing guidelines
+=======================
 
 Please follow the excellent guide: http://www.contribution-guide.org.
 

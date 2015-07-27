@@ -10,7 +10,7 @@ General
 .. toctree::
    :maxdepth: 2
 
-   about.rst
+   general/about.rst
 
 
 For developers who use Autocmake
@@ -19,10 +19,10 @@ For developers who use Autocmake
 .. toctree::
    :maxdepth: 2
 
-   autocmake-users-faq.rst
-   new-project.rst
-   customizing-modules.rst
-   updating-modules.rst
+   developers/faq.rst
+   developers/new-project.rst
+   developers/customizing-modules.rst
+   developers/updating-modules.rst
 
 
 For users of projects which use Autocmake
@@ -35,9 +35,9 @@ For developers/contributors to Autocmake
 .. toctree::
    :maxdepth: 2
 
-   contributing.rst
-   testing.rst
-   documentation.rst
+   contributors/guidelines.rst
+   contributors/testing.rst
+   contributors/documentation.rst
 
 
 Reference
