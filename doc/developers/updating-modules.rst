@@ -5,8 +5,8 @@ Updating CMake modules
 
 To update CMake modules fetched from the web you need to run the ``update.py`` script::
 
-  cd cmake
-  python update.py ..
+  $ cd cmake
+  $ python update.py ..
 
 The CMake modules are not fetched or updated at configure time or build time.
 In other words, if you never re-run ``update.py`` script and never modify the

@@ -21,6 +21,7 @@ For developers who use Autocmake
 
    developers/faq.rst
    developers/new-project.rst
+   developers/configuration.rst
    developers/customizing-modules.rst
    developers/updating-modules.rst
 

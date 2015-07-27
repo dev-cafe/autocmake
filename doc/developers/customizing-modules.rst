@@ -21,9 +21,9 @@ Adapt local copies of CMake modules
 -----------------------------------
 
 A better solution is to download the CMake modules that you wish you customize
-to a separate directory and source the customized CMake modules in
-``autocmake.cfg``. Alternatively you can serve your custom
-modules from your own http server.
+to a separate directory (e.g. ``custom/``) and source the customized CMake
+modules in ``autocmake.cfg``. Alternatively you can serve your custom modules
+from your own http server.
 
 
 Create own CMake modules

@@ -1,7 +1,17 @@
 
 
-FAQ
-===
+FAQ for users
+=============
+
+
+TLDR How do I compile the code?
+-------------------------------
+
+::
+
+  $ python setup.py [-h]
+  $ cd build
+  $ make
 
 
 How can I specify the compiler?

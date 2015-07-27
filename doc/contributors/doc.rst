@@ -3,6 +3,8 @@
 Contributing to the documentation
 =================================
 
+Contributions and patches to the documentation are most welcome.
+
 This documentation is refreshed upon each push to the central repository.
 
 The module reference documentation is generated from the module sources using
