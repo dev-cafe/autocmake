@@ -37,7 +37,7 @@ For developers/contributors to Autocmake
 
    contributors/guidelines.rst
    contributors/testing.rst
-   contributors/documentation.rst
+   contributors/doc.rst
 
 
 Reference
