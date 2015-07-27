@@ -332,34 +332,6 @@ macro(cache_math_result _service MATH_TYPE)
 endmacro()
 
 macro(config_math_service _SERVICE)
-    if(EXISTS $ENV{MATH_ROOT})
-        if("${${_SERVICE}_ROOT}" STREQUAL "")
-            set(${_SERVICE}_ROOT $ENV{MATH_ROOT})
-            message("-- ${_SERVICE} will be searched for based on MATH_ROOT=${${_SERVICE}_ROOT} ")
-        endif()
-    endif()
-
-    if(EXISTS $ENV{${_SERVICE}_ROOT})
-        if("${${_SERVICE}_ROOT}" STREQUAL "")
-            set(${_SERVICE}_ROOT $ENV{${_SERVICE}_ROOT})
-            message("-- ${_SERVICE} will be searched for based on ${_SERVICE}_ROOT=${${_SERVICE}_ROOT}")
-        endif()
-    endif()
-
-    if(EXISTS $ENV{MKL_ROOT})
-        if("${${_SERVICE}_ROOT}" STREQUAL "")
-            set(${_SERVICE}_ROOT $ENV{MKL_ROOT})
-            message("-- ${_SERVICE} will be searched for based on MKL_ROOT=${${_SERVICE}_ROOT}")
-        endif()
-    endif()
-
-    if(EXISTS $ENV{MKLROOT})
-        if("${${_SERVICE}_ROOT}" STREQUAL "")
-            set(${_SERVICE}_ROOT $ENV{MKLROOT})
-            message("-- ${_SERVICE} will be searched for based on MKLROOT=${${_SERVICE}_ROOT}")
-        endif()
-    endif()
-
     if(${_SERVICE}_INCLUDE_DIRS AND ${_SERVICE}_LIBRARIES)
         set(${_SERVICE}_FIND_QUIETLY TRUE)
     endif()
@@ -397,11 +369,6 @@ macro(config_math_service _SERVICE)
         find_package_message(${_SERVICE}
             "Found ${_SERVICE}: ${${_SERVICE}_TYPE} (${${_SERVICE}_LIBRARIES})"
             "[${${_SERVICE}_LIBRARIES}]"
-            )
-
-        set(MATH_LIBS
-            ${MATH_LIBS}
-            ${${_SERVICE}_LIBRARIES}
             )
     else()
         add_definitions(-DUSE_BUILTIN_${_SERVICE})
@@ -447,8 +414,6 @@ foreach(_service BLAS LAPACK)
     endif()
 endforeach()
 
-set(MATH_LIBS)
-
 if(NOT MKL_FLAG STREQUAL "off")
     set(EXTERNAL_LIBS ${EXTERNAL_LIBS} -mkl=${MKL_FLAG})
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mkl=${MKL_FLAG}")
@@ -459,17 +424,57 @@ if(NOT MKL_FLAG STREQUAL "off")
     add_definitions(-DHAVE_MKL_LAPACK)
     set(BLAS_FOUND TRUE)
     set(LAPACK_FOUND TRUE)
+
+    # workaround to avoid warning for unused vars
+    set(_unused ${ENABLE_BLAS})
+    set(_unused ${ENABLE_LAPACK})
+    set(_unused ${MATH_LIB_SEARCH_ORDER})
+    unset(_unused)
 endif()
 
-if(ENABLE_BLAS STREQUAL "auto" OR ENABLE_LAPACK STREQUAL "auto" AND NOT ${_service}_FOUND)
-    message(STATUS "Math lib search order is ${MATH_LIB_SEARCH_ORDER}")
-endif()
+if("${MATH_LIBS}" STREQUAL "" AND "${MKL_FLAG}" STREQUAL "off")
+    foreach(_service BLAS LAPACK)
+        if(ENABLE_${_service} STREQUAL "auto")
+            if(EXISTS $ENV{MATH_ROOT})
+                if("${${_service}_ROOT}" STREQUAL "")
+                    set(${_service}_ROOT $ENV{MATH_ROOT})
+                    message(STATUS "${_service} will be searched for based on MATH_ROOT=${${_service}_ROOT} ")
+                endif()
+            endif()
 
-foreach(_service BLAS LAPACK)
-    if(ENABLE_${_service} STREQUAL "auto" AND NOT ${_service}_FOUND)
-        config_math_service(${_service})
-        if(${_service}_FOUND)
-            include_directories(${${_service}_INCLUDE_DIRS})
+            if(EXISTS $ENV{${_service}_ROOT})
+                if("${${_service}_ROOT}" STREQUAL "")
+                    set(${_service}_ROOT $ENV{${_service}_ROOT})
+                    message(STATUS "${_service} will be searched for based on ${_service}_ROOT=${${_service}_ROOT}")
+                endif()
+            endif()
+
+            if(EXISTS $ENV{MKL_ROOT})
+                if("${${_service}_ROOT}" STREQUAL "")
+                    set(${_service}_ROOT $ENV{MKL_ROOT})
+                    message(STATUS "${_service} will be searched for based on MKL_ROOT=${${_service}_ROOT}")
+                endif()
+            endif()
+
+            if(EXISTS $ENV{MKLROOT})
+                if("${${_service}_ROOT}" STREQUAL "")
+                    set(${_service}_ROOT $ENV{MKLROOT})
+                    message(STATUS "${_service} will be searched for based on MKLROOT=${${_service}_ROOT}")
+                endif()
+            endif()
+
+            message(STATUS "Searching for ${_service} using search order ${MATH_LIB_SEARCH_ORDER}")
+            config_math_service(${_service})
+            if(${_service}_FOUND)
+                include_directories(${${_service}_INCLUDE_DIRS})
+            endif()
         endif()
-    endif()
-endforeach()
+    endforeach()
+endif()
+
+set(MATH_LIBS
+    ${MATH_LIBS}
+    ${BLAS_LIBRARIES}
+    ${LAPACK_LIBRARIES}
+    CACHE STRING "Math libraries"
+    )
