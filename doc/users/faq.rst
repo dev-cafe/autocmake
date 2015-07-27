@@ -27,4 +27,6 @@ How can I redefine compiler flags?
 
 If you export compiler flags using the environment variables ``FCFLAGS``,
 ``CFLAGS``, or ``CXXFLAGS``, respectively, then the configuration will use
-those flags and neither augment them, nor redefine them.
+those flags and neither augment them, nor redefine them. Setting
+these environment variables you have full control over the flags
+without editing CMake files.
