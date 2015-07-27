@@ -18,7 +18,7 @@
 #
 #   CMAKE_Fortran_FLAGS
 #
-# Variables set::
+# Variables defined::
 #
 #   ENABLE_FC_SUPPORT
 #

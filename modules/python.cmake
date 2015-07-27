@@ -2,7 +2,7 @@
 #
 # Detects Python interpreter.
 #
-# Variables set::
+# Variables defined::
 #
 #   PYTHON_EXECUTABLE
 #
