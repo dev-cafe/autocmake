@@ -6,10 +6,8 @@
 #
 #   CMAKE_Fortran_FLAGS
 #
-# Example autocmake.cfg entry::
+# autocmake.cfg configuration::
 #
-#   [int64]
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/int64.cmake
 #   docopt: --int64 Enable 64bit integers [default: False].
 #   define: '-DENABLE_64BIT_INTEGERS=%s' % arguments['--int64']
 

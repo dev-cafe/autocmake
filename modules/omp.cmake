@@ -13,10 +13,8 @@
 #   CMAKE_C_FLAGS
 #   CMAKE_CXX_FLAGS
 #
-# Example autocmake.cfg entry::
+# autocmake.cfg configuration::
 #
-#   [omp]
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/omp.cmake
 #   docopt: --omp Enable OpenMP parallelization [default: False].
 #   define: '-DENABLE_OPENMP=%s' % arguments['--omp']
 

@@ -21,10 +21,8 @@
 #
 #   FCFLAGS
 #
-# Example autocmake.cfg entry::
+# autocmake.cfg configuration::
 #
-#   [fc]
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
 #   docopt: --fc=<FC> Fortran compiler [default: gfortran].
 #           --extra-fc-flags=<EXTRA_FCFLAGS> Extra Fortran compiler flags [default: ''].
 #   export: 'FC=%s' % arguments['--fc']

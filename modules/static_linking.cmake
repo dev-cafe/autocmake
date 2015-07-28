@@ -8,10 +8,8 @@
 #   CMAKE_C_FLAGS
 #   CMAKE_CXX_FLAGS
 #
-# Example autocmake.cfg entry::
+# autocmake.cfg configuration::
 #
-#   [static_linking]
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/static_linking.cmake
 #   docopt: --static Enable static linking [default: False].
 #   define: '-DENABLE_STATIC_LINKING=%s' % arguments['--static']
 

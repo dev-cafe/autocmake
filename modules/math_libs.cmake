@@ -36,10 +36,8 @@
 #   MKL_ROOT
 #   MKLROOT
 #
-# Example autocmake.cfg entry::
+# autocmake.cfg configuration::
 #
-#   [math_libs]
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/math_libs.cmake
 #   docopt: --blas=<BLAS> Detect and link BLAS library (auto or off) [default: auto].
 #           --lapack=<LAPACK> Detect and link LAPACK library (auto or off) [default: auto].
 #           --mkl=<MKL> Pass MKL flag to the Intel compiler and linker and skip BLAS/LAPACK detection (sequential, parallel, cluster, or off) [default: off].

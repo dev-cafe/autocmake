@@ -11,10 +11,8 @@
 #
 #   CMAKE_Fortran_FLAGS
 #
-# Example autocmake.cfg entry::
+# autocmake.cfg configuration::
 #
-#   [mpi]
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/mpi.cmake
 #   docopt: --mpi Enable MPI parallelization [default: False].
 #   define: '-DENABLE_MPI=%s' % arguments['--mpi']
 

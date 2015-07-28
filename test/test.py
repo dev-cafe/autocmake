@@ -107,15 +107,15 @@ def configure_build_and_exe(name, setup_command):
 # ------------------------------------------------------------------------------
 
 
-def test_cxx():
-    stdout, stderr = configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
+def test_cxx_custom():
+    stdout, stderr = configure_build_and_exe('cxx_custom', 'python setup.py --cxx=g++')
     assert 'Hello World!' in stdout
 
 # ------------------------------------------------------------------------------
 
 
-def test_cxx_auto():
-    stdout, stderr = configure_build_and_exe('cxx_auto', 'python setup.py --cxx=g++')
+def test_cxx():
+    stdout, stderr = configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
     assert 'Hello World!' in stdout
 
 # ------------------------------------------------------------------------------

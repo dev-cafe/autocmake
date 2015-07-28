@@ -9,11 +9,6 @@
 # Variables defined::
 #
 #   PROGRAM_VERSION
-#
-# Example autocmake.cfg entry::
-#
-#   [version]
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/version.cmake
 
 if(EXISTS "${PROJECT_SOURCE_DIR}/VERSION")
     file(READ "${PROJECT_SOURCE_DIR}/VERSION" PROGRAM_VERSION)
