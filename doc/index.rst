@@ -11,6 +11,7 @@ General
    :maxdepth: 2
 
    general/about.rst
+   general/requirements.rst
 
 
 For developers who use Autocmake
