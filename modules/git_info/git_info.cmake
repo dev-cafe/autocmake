@@ -4,6 +4,11 @@
 # This file can be included in sources to print
 # Git repository version and status information
 # to the program output.
+#
+# autocmake.cfg configuration::
+#
+#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/git_info/git_info_sub.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/git_info/git_info.h.in
 
 add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/git_info.h
