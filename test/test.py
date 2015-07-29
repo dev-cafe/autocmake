@@ -114,6 +114,13 @@ def test_cxx_custom():
 # ------------------------------------------------------------------------------
 
 
+def test_extra_cmake_options():
+    stdout, stderr = configure_build_and_exe('extra_cmake_options', 'python setup.py --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
+    assert 'Hello World!' in stdout
+
+# ------------------------------------------------------------------------------
+
+
 def test_cxx():
     stdout, stderr = configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
     assert 'Hello World!' in stdout
