@@ -102,8 +102,8 @@ def gen_cmake_command(config):
 
     s.append("    command.append('-DCMAKE_BUILD_TYPE=%s' % arguments['--type'])")
     s.append("    command.append('-G \"%s\"' % arguments['--generator'])")
-    s.append("    for word in arguments['--cmake-options'].split():")
-    s.append("        command.append('%s' % word)")
+    s.append("    if(arguments['--cmake-options']):")
+    s.append("        command.append('%s' % arguments['--cmake-options'])")
 
     s.append("\n    return ' '.join(command)")
 
