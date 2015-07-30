@@ -74,3 +74,39 @@ But it is much better to choose names that are meaningful to you.
 
 The order of the sections does matter and the sections will be processed in the
 exact order as you specify them in ``autocmake.cfg``.
+
+
+Assembling CMake plugins
+------------------------
+
+Write me ...
+
+
+Fetching files without including them in CMakeLists.txt
+-------------------------------------------------------
+
+Write me ...
+
+
+Generating setup.py options
+---------------------------
+
+Write me ...
+
+
+Setting environment variables
+-----------------------------
+
+Write me ...
+
+
+Auto-generating configurations from the documentation
+-----------------------------------------------------
+
+Write me ...
+
+
+Overriding documented configurations
+------------------------------------
+
+Write me ...
