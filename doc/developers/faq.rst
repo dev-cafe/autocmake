@@ -53,14 +53,11 @@ targets in a custom module in a local file and include it like this::
   source: custom/my_sources.cmake
 
 
-How do I know whether I need to rerun updata.py?
+How do I know whether I need to rerun update.py?
 ------------------------------------------------
 
 You need to rerun the ``update.py`` script in the following situations:
 
 - To fetch updates to CMake modules which you include from the web.
-- If you have added, removed, moved, or renamed CMake module files in
-  ``autocmake.cfg`` and wish to propagate the change to ``CMakeLists.txt`` and
-  the ``setup.py`` script.
-- If you automatically infer configuration from the CMake module documentation and
-  this documentation changes.
+- To regenerate ``CMakeLists.txt`` and the ``setup.py`` script.
+- Every time you change ``autocmake.cfg``.
