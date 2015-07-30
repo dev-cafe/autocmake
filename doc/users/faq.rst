@@ -40,3 +40,11 @@ If you export compiler flags using the environment variables ``FCFLAGS``,
 those flags and neither augment them, nor redefine them. Setting
 these environment variables you have full control over the flags
 without editing CMake files.
+
+
+How can I select CMake options via the setup.py script?
+-------------------------------------------------------
+
+Like this::
+
+  $ python setup.py --cmake-options="-DTHIS_OPTION=ON -DTHAT_OPTION=OFF"
