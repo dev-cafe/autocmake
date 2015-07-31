@@ -21,8 +21,9 @@ For developers who use Autocmake
    :maxdepth: 2
 
    developers/faq.rst
-   developers/new-project.rst
+   developers/bootstrap.rst
    developers/configuration.rst
+   developers/example.rst
    developers/customizing-modules.rst
    developers/updating-modules.rst
 

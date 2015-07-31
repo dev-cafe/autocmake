@@ -1,7 +1,7 @@
 
 
-Creating the configuration for a new project
-============================================
+Bootstrapping a new project
+===========================
 
 
 Bootstrapping Autocmake
