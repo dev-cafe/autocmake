@@ -82,7 +82,7 @@ And this is what we got::
   |   |-- autocmake.cfg
   |   |-- downloaded
   |   |   |-- autocmake_cc.cmake
-  |   |   |-- autocmake_fc_optional.cmake
+  |   |   |-- autocmake_fc.cmake
   |   |   `-- autocmake_src.cmake
   |   |-- lib
   |   |   |-- config.py

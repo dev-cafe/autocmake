@@ -12,7 +12,7 @@ below::
   name: numgrid
 
   [fc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc_optional.cmake
+  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
 
   [cc]
   source: https://github.com/scisoft/autocmake/raw/master/modules/cc.cmake
@@ -62,7 +62,7 @@ The names of the other sections do not matter to Autocmake. You could name them 
   name: numgrid
 
   [one]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc_optional.cmake
+  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
 
   [two]
   source: https://github.com/scisoft/autocmake/raw/master/modules/cc.cmake
