@@ -90,11 +90,19 @@ to all libraries it needs::
 
   $ python update.py --self
 
+  - fetching lib/config.py
+  - fetching lib/docopt.py
+  - fetching update.py
+
 Good. Now we can generate ``CMakeLists.txt`` and ``setup.py``::
 
   $ python update ..
 
-Here is the generated ``CMakeLists.txt``::
+  - parsing autocmake.cfg
+  - generating CMakeLists.txt
+  - generating setup.py
+
+Excellent. Here is the generated ``CMakeLists.txt``::
 
   # set minimum cmake version
   cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
@@ -110,9 +118,11 @@ Here is the generated ``CMakeLists.txt``::
       set(CMAKE_BUILD_TYPE "Debug")
   endif()
 
-This is the very minimum. Every project will have at least these settings.
+This is the very bare minimum. Every Autocmake project will have at least these
+settings.
 
-And we also got a ``setup.py`` script with the following default options::
+And we also got a ``setup.py`` script (front-end to ``CMakeLists.txt``) with
+the following default options::
 
   $ python setup.py -h
 
@@ -129,7 +139,7 @@ And we also got a ``setup.py`` script with the following default options::
     -h --help                  Show this screen.
 
 That's not too bad although currently we cannot do much with this since there
-are no sources listed, no targets, no nothing. We need to flesh out
+are no sources listed, no targets, hence nothing to build. We need to flesh out
 ``CMakeLists.txt`` and this is what we will do in the next section.
 
 
