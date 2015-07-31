@@ -3,14 +3,13 @@
 Requirements and dependencies
 =============================
 
-The ``update.py`` script requires Python >= 2.7. We try to also
-support Python 3. If the script fails with Python 3, consider this
-a bug and please file an issue.
+The ``update.py`` script requires Python 2.7 or higher. We try to also support
+Python 3 (tested with Python 3.4). If the script fails with Python 3, consider
+this a bug and please file an issue.
 
-The generated CMake infrastructure requires CMake >= 2.8.
-The generated ``setup.py`` runs with Python >= 2.7 (also Python 3).
+The generated CMake infrastructure requires CMake >= 2.8.  The generated
+``setup.py`` runs with Python 2.7 or higher (also tested with Python 3.4).
 
 .. todo::
 
    Figure out lower Python version bound for setup.py.
-   Figure out upper Python version bounds.
