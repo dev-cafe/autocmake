@@ -365,8 +365,20 @@ def main(argv):
     # create setup.py
     print('- generating setup.py')
     s = gen_setup(config, relative_path)
-    with open(os.path.join(project_root, 'setup.py'), 'w') as f:
+    file_path = os.path.join(project_root, 'setup.py')
+    with open(file_path, 'w') as f:
         f.write('%s\n' % '\n'.join(s))
+    if sys.platform != 'win32':
+        make_executable(file_path)
+
+# ------------------------------------------------------------------------------
+
+
+# http://stackoverflow.com/a/30463972
+def make_executable(path):
+    mode = os.stat(path).st_mode
+    mode |= (mode & 0o444) >> 2    # copy R bits to X
+    os.chmod(path, mode)
 
 # ------------------------------------------------------------------------------
 
