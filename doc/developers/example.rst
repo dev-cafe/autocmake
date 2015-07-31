@@ -141,4 +141,7 @@ Now we are ready to build::
   [100%] Linking Fortran executable hello.x
   [100%] Built target hello.x
 
-Excellent!
+Excellent! All that could have been done with few command lines directly but
+now we have a cross-platform project and can extend it and customize it and we
+got a front-end script and command-line parser for free.  Now go out and
+explore more Autocmake modules and features.
