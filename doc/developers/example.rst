@@ -1,6 +1,6 @@
 
 
-Example hello world project
+Example Hello World project
 ===========================
 
 Write me ...
