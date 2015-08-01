@@ -1,4 +1,5 @@
 program example
+   use foo, only: hello
    implicit none
-   print *, 'Hello World!'
+   call hello()
 end program
