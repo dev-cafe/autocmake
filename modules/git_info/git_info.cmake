@@ -17,6 +17,6 @@ add_custom_command(
     )
 
 add_custom_target(
-    check
+    git_info
     ALL DEPENDS ${PROJECT_BINARY_DIR}/git_info.h
     )
