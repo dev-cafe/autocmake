@@ -22,7 +22,7 @@ program example
 
    do i = 1, n
       do j = 1, n
-         if (dabs(c(i, j) - 20.0d0) > tiny(0.0d0)) return
+         if (dabs(c(i, j) - 20.0d0) > tiny(0.0d0)) goto 5
       end do
    end do
 
@@ -31,5 +31,5 @@ program example
    deallocate(c)
 
    print *, 'dgemm test ok'
-
+ 5 continue
 end program
