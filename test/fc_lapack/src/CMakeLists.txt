@@ -1,0 +1,6 @@
+if(LAPACK_FOUND)
+    add_executable(example example.f90)
+    target_link_libraries(example ${MATH_LIBS})
+else()
+    message(FATAL_ERROR "LAPACK/BLAS libraries not found for the test fc_lapack!")
+endif()
