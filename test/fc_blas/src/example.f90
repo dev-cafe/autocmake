@@ -5,6 +5,7 @@ program example
    integer, parameter :: n = 10
 
    integer :: i, j
+   logical :: test_ok
 
    real(8), allocatable :: a(:, :)
    real(8), allocatable :: b(:, :)
@@ -20,9 +21,14 @@ program example
 
    call dgemm('n', 'n', n, n, n, 1.0d0, a, n, b, n, 0.0d0, c, n)
 
+   test_ok = .true.
+
    do i = 1, n
       do j = 1, n
-         if (dabs(c(i, j) - 20.0d0) > tiny(0.0d0)) return
+         if (dabs(c(i, j) - 20.0d0) > tiny(0.0d0)) then
+            print *, 'ERROR: element', i, j, 'is', c(i, j)
+            test_ok = .false.
+         end if
       end do
    end do
 
@@ -30,6 +36,10 @@ program example
    deallocate(b)
    deallocate(c)
 
-   print *, 'dgemm test ok'
+   if (test_ok) then
+      print *, 'dgemm test ok'
+   else
+      print *, 'dgemm test failed'
+   end if
 
 end program
