@@ -6,8 +6,8 @@ program example
    real(8), allocatable :: a(:, :),as(:,:)
    real(8), allocatable :: b(:),bs(:)
    integer, allocatable :: ipiv(:)
-   real(8), external :: dnrm2
-#if defined VAR_PGI
+   real(8), external :: dnrm2, rand
+#if defined (VAR_PGI)
    real(8), external :: rand
 #endif
    real(8) :: zeronorm
