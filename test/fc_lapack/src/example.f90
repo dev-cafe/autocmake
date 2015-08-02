@@ -6,7 +6,7 @@ program example
    real(8), allocatable :: a(:, :),as(:,:)
    real(8), allocatable :: b(:),bs(:)
    integer, allocatable :: ipiv(:)
-   real(8), external :: dnrm2
+   real(8), external :: dnrm2, rand
    real(8) :: zeronorm
 
    allocate(a(n, n),as(n,n))
