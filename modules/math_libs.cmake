@@ -5,6 +5,7 @@
 # Variables used::
 #
 #   MATH_LIB_SEARCH_ORDER, example: set(MATH_LIB_SEARCH_ORDER MKL ESSL ATLAS ACML SYSTEM_NATIVE)
+#   ENABLE_STATIC_LINKING
 #   ENABLE_BLAS
 #   ENABLE_LAPACK
 #   BLAS_FOUND
@@ -47,6 +48,13 @@
 #           '-DMATH_LIB_SEARCH_ORDER="MKL;ESSL;ATLAS;ACML;SYSTEM_NATIVE"'
 #           '-DBLAS_LANG=Fortran'
 #           '-DLAPACK_LANG=Fortran'
+
+#-------------------------------------------------------------------------------
+# ENABLE_STATIC_LINKING
+
+if(ENABLE_STATIC_LINKING)
+   set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+endif() 
 
 #-------------------------------------------------------------------------------
 # SYSTEM_NATIVE
@@ -355,7 +363,8 @@ macro(config_math_service _SERVICE)
             if(MKL_COMPILER_BINDINGS MATCHES GNU)
                 set(_omp_flag -fopenmp)
             endif()
-            if(MKL_COMPILER_BINDINGS MATCHES PGI)
+            # do not add -mp flag for PGI+MKL+STATIC_LINKING
+            if(MKL_COMPILER_BINDINGS MATCHES PGI AND NOT ENABLE_STATIC_LINKING)
                 set(_omp_flag -mp)
             endif()
         endif()
@@ -470,9 +479,24 @@ if("${MATH_LIBS}" STREQUAL "" AND "${MKL_FLAG}" STREQUAL "off")
     endforeach()
 endif()
 
+#miro: first lapack, then blas as lapack might need blas routine
 set(MATH_LIBS
     ${MATH_LIBS}
-    ${BLAS_LIBRARIES}
     ${LAPACK_LIBRARIES}
+    ${BLAS_LIBRARIES}
     CACHE STRING "Math libraries"
     )
+
+#miro: further adaptation for the static linking
+if (ENABLE_STATIC_LINKING)
+    if (LAPACK_TYPE MATCHES ATLAS OR LAPACK_TYPE MATCHES SYSTEM_NATIVE OR BLAS_TYPE MATCHES ATLAS OR BLAS_TYPE MATCHES SYSTEM_NATIVE)
+        #miro: TODO: some compilers might need -lgfortran
+        set (MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread  -Wl,--no-whole-archive)
+    endif()
+    if (LAPACK_TYPE MATCHES MKL OR BLAS_TYPE MATCHES MKL)
+        # miro: fix for MKL static linking (-lc not needed for PGI )
+        set (MATH_LIBS ${MATH_LIBS} -ldl -lc)
+    endif()
+endif()
+
+

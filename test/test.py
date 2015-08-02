@@ -132,6 +132,10 @@ def test_extra_cmake_options():
 def test_cxx():
     configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
 
+
+def test_cxx_static():
+    configure_build_and_exe('cxx', 'python setup.py --cxx=g++ --static')
+
 # ------------------------------------------------------------------------------
 
 
@@ -165,6 +169,10 @@ def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
 
+
+def test_fc_static():
+    configure_build_and_exe('fc', 'python setup.py --fc=gfortran --static')
+
 # ------------------------------------------------------------------------------
 
 
@@ -172,9 +180,19 @@ def test_fc_omp():
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
 
+
+@no_windows
+def test_fc_blas_static():
+    configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --static')
+
 # ------------------------------------------------------------------------------
 
 
 @no_windows
 def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
+
+
+@no_windows
+def test_fc_lapack_static():
+    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=ATLAS"')

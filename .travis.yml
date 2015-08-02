@@ -1,9 +1,15 @@
 language: cpp
 install:
+    # update, clean
+  - sudo apt-get update
+  - sudo apt-get clean
+  - sudo apt-get autoclean
     # compilers
   - sudo apt-get install g++ cmake gfortran
+    # libraries for static linking
+  - sudo apt-get install binutils-gold libc6-dev libpthread-stubs0-dev
     # math libraries
-  - sudo apt-get install libblas-dev liblapack-dev
+  - sudo apt-get install libblas-dev liblapack-dev  libatlas-base-dev
     # MPI
   - sudo apt-get install openmpi-bin libopenmpi-dev
     # PEP8 and py.test
