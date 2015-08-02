@@ -68,7 +68,7 @@ Autocmake does not do feature X - I really need feature X and a setup.py flag --
 
 The Autocmake developers have to be very conservative and only a very limited
 set of portable features of absolutely general interest become part of the
-Autocmake core or an Autocmake module.
+Autocmake core or an Autocmake module. Autocmake developers are also busy.
 
 Our recommendation is to not wait for the feature to be implemented: Implement
 it yourself. Here we show you how. Code your feature in a module (i.e.
@@ -91,6 +91,6 @@ want a ``setup.py`` flag to toggle the feature::
   docopt: --my-feature Enable my feature [default: False].
   define: '-DENABLE_MY_FEATURE=%s' % arguments['--my-feature']
 
-Implement your ideas, test them, and share them.  If your module is portable
-and of general interest, you can suggest it to be part of the standard set of
-modules or even a core feature.
+Implement your ideas, test them, and share them.  If your module is portable,
+good code quality, and of general interest, you can suggest it to be part of
+the standard set of modules or even a core feature.
