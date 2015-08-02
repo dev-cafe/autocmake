@@ -61,3 +61,36 @@ You need to rerun the ``update.py`` script in the following situations:
 - To fetch updates to CMake modules which you include from the web.
 - To regenerate ``CMakeLists.txt`` and the ``setup.py`` script.
 - Every time you change ``autocmake.cfg``.
+
+
+Autocmake does not do feature X - I really need feature X and a setup.py flag --X
+---------------------------------------------------------------------------------
+
+The Autocmake developers have to be very conservative and only a very limited
+set of portable features of absolutely general interest become part of the
+Autocmake core or an Autocmake module.
+
+Our recommendation is to not wait for the feature to be implemented: Implement
+it yourself. Here we show you how. Code your feature in a module (i.e.
+``my_feature.cmake``) and place the module under ``cmake/custom/`` (the
+directory name is just a suggestion, Autocmake does not enforce a directory
+naming)::
+
+  cmake/custom/my_feature.cmake
+
+And include this feature to the main ``CMakeLists.txt`` in ``autocmake.cfg``::
+
+  [my_feature]
+  source: custom/my_feature.cmake
+
+Now your code is included in the main ``CMakeLists.txt``. Perhaps you also
+want a ``setup.py`` flag to toggle the feature::
+
+  [my_feature]
+  source: custom/my_feature.cmake
+  docopt: --my-feature Enable my feature [default: False].
+  define: '-DENABLE_MY_FEATURE=%s' % arguments['--my-feature']
+
+Implement your ideas, test them, and share them.  If your module is portable
+and of general interest, you can suggest it to be part of the standard set of
+modules or even a core feature.
