@@ -133,8 +133,8 @@ def test_fc():
     assert 'Hello World!' in stdout
 
 
-def test_fc_gitinfo():
-    stdout, stderr = configure_build_and_exe('fc_gitinfo', 'python setup.py --fc=gfortran')
+def test_fc_git_info():
+    stdout, stderr = configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
     assert 'Test OK!' in stdout
 
 # ------------------------------------------------------------------------------
