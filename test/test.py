@@ -137,7 +137,17 @@ def test_fc():
 
 def test_fc_blas():
     if sys.platform != 'win32':
-        stdout, stderr = configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --blas=auto')
+        stdout, stderr = configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
         assert 'dgemm test ok' in stdout
+    else:
+        pass
+
+# ------------------------------------------------------------------------------
+
+
+def test_fc_lapack():
+    if sys.platform != 'win32':
+        stdout, stderr = configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
+        assert 'dgesv test ok' in stdout
     else:
         pass
