@@ -161,6 +161,14 @@ def test_fc_mpi():
 
 
 @no_windows
+def test_fc_omp():
+    os.environ['OMP_NUM_THREADS'] = '2'
+    configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
+
+# ------------------------------------------------------------------------------
+
+
+@no_windows
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
 
