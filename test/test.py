@@ -6,8 +6,12 @@ import shutil
 import sys
 import time
 import datetime
+import pytest
 
 HERE = os.path.abspath(os.path.dirname(__file__))
+
+no_windows = pytest.mark.skipif(sys.platform == 'win32',
+                                reason="windows not supported")
 
 # ------------------------------------------------------------------------------
 
@@ -155,29 +159,23 @@ def test_fc_int64():
 # ------------------------------------------------------------------------------
 
 
+@no_windows
 def test_fc_mpi():
-    if sys.platform != 'win32':
-        stdout, stderr = configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
-        assert 'PASSED' in stdout
-    else:
-        pass
+    stdout, stderr = configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
+    assert 'PASSED' in stdout
 
 # ------------------------------------------------------------------------------
 
 
+@no_windows
 def test_fc_blas():
-    if sys.platform != 'win32':
-        stdout, stderr = configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
-        assert 'PASSED' in stdout
-    else:
-        pass
+    stdout, stderr = configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
+    assert 'PASSED' in stdout
 
 # ------------------------------------------------------------------------------
 
 
+@no_windows
 def test_fc_lapack():
-    if sys.platform != 'win32':
-        stdout, stderr = configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
-        assert 'PASSED' in stdout
-    else:
-        pass
+    stdout, stderr = configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
+    assert 'PASSED' in stdout
