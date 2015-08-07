@@ -90,8 +90,15 @@ def configure_build_and_exe(name, setup_command, launcher=None):
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, name))
 
+    make_command = 'make'
+    binary = './bin/example'
     if sys.platform == 'win32':
         setup_command += ' --generator="MinGW Makefiles"'
+        make_command = 'mingw32-make'
+        binary = 'bin\\\example.exe'
+
+    if launcher:
+        binary = '%s %s' % (launcher, binary)
 
     setup_command += ' build-%s' % stamp
 
@@ -99,83 +106,65 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 
     os.chdir(os.path.join(HERE, name, 'build-%s' % stamp))
 
-    if sys.platform == 'win32':
-        stdout, stderr = exe('mingw32-make')
-        if (launcher):
-            stdout, stderr = exe(launcher + ' bin\\\example.exe')
-        else:
-            stdout, stderr = exe('bin\\\example.exe')
-    else:
-        stdout, stderr = exe('make')
-        if (launcher):
-            stdout, stderr = exe(launcher + ' ./bin/example')
-        else:
-            stdout, stderr = exe('./bin/example')
+    stdout, stderr = exe(make_command)
 
-    return stdout, stderr
+    stdout, stderr = exe(binary)
+
+    assert 'PASSED' in stdout
 
 # ------------------------------------------------------------------------------
 
 
 def test_cxx_custom():
-    stdout, stderr = configure_build_and_exe('cxx_custom', 'python setup.py --cxx=g++')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('cxx_custom', 'python setup.py --cxx=g++')
 
 # ------------------------------------------------------------------------------
 
 
 def test_extra_cmake_options():
-    stdout, stderr = configure_build_and_exe('extra_cmake_options', 'python setup.py --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('extra_cmake_options', 'python setup.py --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
 
 # ------------------------------------------------------------------------------
 
 
 def test_cxx():
-    stdout, stderr = configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
 
 # ------------------------------------------------------------------------------
 
 
 def test_fc():
-    stdout, stderr = configure_build_and_exe('fc', 'python setup.py --fc=gfortran')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('fc', 'python setup.py --fc=gfortran')
 
 # ------------------------------------------------------------------------------
 
 
 def test_fc_git_info():
-    stdout, stderr = configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
 
 # ------------------------------------------------------------------------------
 
 
 def test_fc_int64():
-    stdout, stderr = configure_build_and_exe('fc_int64', 'python setup.py --fc=gfortran --int64')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('fc_int64', 'python setup.py --fc=gfortran --int64')
 
 # ------------------------------------------------------------------------------
 
 
 @no_windows
 def test_fc_mpi():
-    stdout, stderr = configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
 
 # ------------------------------------------------------------------------------
 
 
 @no_windows
 def test_fc_blas():
-    stdout, stderr = configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
 
 # ------------------------------------------------------------------------------
 
 
 @no_windows
 def test_fc_lapack():
-    stdout, stderr = configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
-    assert 'PASSED' in stdout
+    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
