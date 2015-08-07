@@ -72,7 +72,7 @@ def exe(command):
 # ------------------------------------------------------------------------------
 
 
-def configure_build_and_exe(name, setup_command):
+def configure_build_and_exe(name, setup_command, launcher=None):
 
     stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
 
@@ -97,10 +97,16 @@ def configure_build_and_exe(name, setup_command):
 
     if sys.platform == 'win32':
         stdout, stderr = exe('mingw32-make')
-        stdout, stderr = exe('bin\\\example.exe')
+        if (launcher):
+            stdout, stderr = exe(launcher + ' bin\\\example.exe')
+        else:
+            stdout, stderr = exe('bin\\\example.exe')
     else:
         stdout, stderr = exe('make')
-        stdout, stderr = exe('./bin/example')
+        if (launcher):
+            stdout, stderr = exe(launcher + ' ./bin/example')
+        else:
+            stdout, stderr = exe('./bin/example')
 
     return stdout, stderr
 
@@ -141,6 +147,14 @@ def test_fc_git_info():
 def test_fc_int64():
     stdout, stderr = configure_build_and_exe('fc_int64', 'python setup.py --fc=gfortran --int64')
     assert 'test_int64 ok' in stdout
+
+
+def test_fc_mpi():
+    if sys.platform != 'win32':
+        stdout, stderr = configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
+        assert 'Test OK!' in stdout
+    else:
+        pass
 
 # ------------------------------------------------------------------------------
 
