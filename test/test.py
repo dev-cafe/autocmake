@@ -137,6 +137,11 @@ def test_fc_git_info():
     stdout, stderr = configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
     assert 'Test OK!' in stdout
 
+
+def test_fc_int64():
+    stdout, stderr = configure_build_and_exe('fc_int64', 'python setup.py --fc=gfortran --int64')
+    assert 'test_int64 ok' in stdout
+
 # ------------------------------------------------------------------------------
 
 
