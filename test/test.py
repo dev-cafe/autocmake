@@ -107,8 +107,10 @@ def configure_build_and_exe(name, setup_command, launcher=None):
     os.chdir(os.path.join(HERE, name, 'build-%s' % stamp))
 
     stdout, stderr = exe(make_command)
+    assert stderr == ''
 
     stdout, stderr = exe(binary)
+    assert stderr == ''
 
     assert 'PASSED' in stdout
 
