@@ -1,0 +1,6 @@
+if (MPI_FOUND)
+    add_executable(example example.f90)
+else()
+    message(FATAL "MPI not found!")
+endif()
+
