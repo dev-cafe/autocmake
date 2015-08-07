@@ -115,44 +115,50 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 
 def test_cxx_custom():
     stdout, stderr = configure_build_and_exe('cxx_custom', 'python setup.py --cxx=g++')
-    assert 'Hello World!' in stdout
+    assert 'PASSED' in stdout
 
 # ------------------------------------------------------------------------------
 
 
 def test_extra_cmake_options():
     stdout, stderr = configure_build_and_exe('extra_cmake_options', 'python setup.py --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
-    assert 'Hello World!' in stdout
+    assert 'PASSED' in stdout
 
 # ------------------------------------------------------------------------------
 
 
 def test_cxx():
     stdout, stderr = configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
-    assert 'Hello World!' in stdout
+    assert 'PASSED' in stdout
 
 # ------------------------------------------------------------------------------
 
 
 def test_fc():
     stdout, stderr = configure_build_and_exe('fc', 'python setup.py --fc=gfortran')
-    assert 'Hello World!' in stdout
+    assert 'PASSED' in stdout
+
+# ------------------------------------------------------------------------------
 
 
 def test_fc_git_info():
     stdout, stderr = configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
-    assert 'Test OK!' in stdout
+    assert 'PASSED' in stdout
+
+# ------------------------------------------------------------------------------
 
 
 def test_fc_int64():
     stdout, stderr = configure_build_and_exe('fc_int64', 'python setup.py --fc=gfortran --int64')
-    assert 'test_int64 ok' in stdout
+    assert 'PASSED' in stdout
+
+# ------------------------------------------------------------------------------
 
 
 def test_fc_mpi():
     if sys.platform != 'win32':
         stdout, stderr = configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
-        assert 'Test OK!' in stdout
+        assert 'PASSED' in stdout
     else:
         pass
 
@@ -162,7 +168,7 @@ def test_fc_mpi():
 def test_fc_blas():
     if sys.platform != 'win32':
         stdout, stderr = configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
-        assert 'dgemm test ok' in stdout
+        assert 'PASSED' in stdout
     else:
         pass
 
@@ -172,6 +178,6 @@ def test_fc_blas():
 def test_fc_lapack():
     if sys.platform != 'win32':
         stdout, stderr = configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
-        assert 'dgesv test ok' in stdout
+        assert 'PASSED' in stdout
     else:
         pass

@@ -32,7 +32,7 @@ program example
               dabs(b(3) - 0.25d0) <= small
 
    if (roots_ok) then
-      print *, 'dgesv test ok'
+      print *, 'PASSED'
    else
       stop 'ERROR: dgesv test failed!'
    endif

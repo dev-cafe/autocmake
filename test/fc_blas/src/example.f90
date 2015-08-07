@@ -37,9 +37,9 @@ program example
    deallocate(c)
 
    if (test_ok) then
-      print *, 'dgemm test ok'
+      print *, 'PASSED'
    else
-      print *, 'dgemm test failed'
+      print *, 'FAILED'
    end if
 
 end program

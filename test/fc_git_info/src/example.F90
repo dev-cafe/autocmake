@@ -11,6 +11,6 @@ program example
              len(GIT_COMMIT_DATE)   > 0 .and. &
              len(GIT_BRANCH)        > 0
 
-   if (test_ok) print *, 'Test OK!'
+   if (test_ok) print *, 'PASSED'
 
 end program

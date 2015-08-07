@@ -2,6 +2,6 @@ module foo
    implicit none
 contains
    subroutine hello()
-      print *, 'Hello World!'
+      print *, 'PASSED'
    end subroutine
 end module

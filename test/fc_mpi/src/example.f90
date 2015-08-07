@@ -9,8 +9,8 @@ program example
    call MPI_FINALIZE(ierr)
    test_ok=(size==2.and.(rank==0.or.rank==1))
    if (test_ok) then
-      if (rank == 0) print *,'Test OK!'
+      if (rank == 0) print *, 'PASSED'
    else
-      stop "test fc_mpi failed!"
+      stop "FAILED"
    endif
 end program

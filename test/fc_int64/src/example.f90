@@ -7,8 +7,8 @@ program example
    i=i8ref
    test_ok = (sizeof(i) == 8 .and. i == 2147483648)
    if (test_ok) then
-      print *,"test_int64 ok"
+      print *, "PASSED"
    else
-      stop "test_int64 failed!"
+      stop "FAILED"
    endif
 end program
