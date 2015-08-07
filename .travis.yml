@@ -1,6 +1,12 @@
 language: cpp
 install:
-  - sudo apt-get install g++ cmake gfortran libblas-dev liblapack-dev openmpi-bin libopenmpi-dev
+    # compilers
+  - sudo apt-get install g++ cmake gfortran
+    # math libraries
+  - sudo apt-get install libblas-dev liblapack-dev
+    # MPI
+  - sudo apt-get install openmpi-bin libopenmpi-dev
+    # PEP8 and py.test
   - sudo pip install pytest pep8
 script:
   - pep8 --ignore=E501 update.py
