@@ -118,9 +118,9 @@ set(ATLAS_LAPACK_LIBS atlas lapack)
 
 set(OPENBLAS_BLAS_INCLUDE_PATH_SUFFIXES)
 
-set(OPENBLAS_BLAS_HEADERS cblas_openblas.h)
+set(OPENBLAS_BLAS_HEADERS cblas_openblas.h openblas_config.h cblas.h f77blas.h)
 
-set(OPENBLAS_BLAS_LIBRARY_PATH_SUFFIXES)
+set(OPENBLAS_BLAS_LIBRARY_PATH_SUFFIXES openblas openblas-base)
 
 set(OPENBLAS_BLAS_LIBS openblas)
 
