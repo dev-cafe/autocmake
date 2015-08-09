@@ -16,5 +16,6 @@ Documented on http://autocmake.readthedocs.org.
 - [XCint](https://github.com/bast/xcint/)
 - [DIRAC](http://diracprogram.org)
 - [mathlib-tester](https://github.com/miroi/mathlibs-tester)
+- [Fortran Input Reader](https://github.com/miroi/fortran_input_reader)
 
 If you use Autocmake, please a link to your project via a pull request.
