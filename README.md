@@ -15,5 +15,6 @@ Documented on http://autocmake.readthedocs.org.
 - [Numgrid](https://github.com/bast/numgrid/)
 - [XCint](https://github.com/bast/xcint/)
 - [DIRAC](http://diracprogram.org)
+- [mathlib-tester](https://github.com/miroi/mathlibs-tester)
 
 If you use Autocmake, please a link to your project via a pull request.
