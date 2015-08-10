@@ -325,7 +325,7 @@ def main(argv):
             )
         if not os.path.isfile('.gitignore'):
             print('- creating .gitignore')
-            with open('.gitignore'), 'w') as f:
+            with open('.gitignore', 'w') as f:
                 f.write('*.pyc\n')
         print('- fetching lib/config.py')
         fetch_url(
