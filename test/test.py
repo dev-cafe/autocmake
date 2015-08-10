@@ -195,4 +195,4 @@ def test_fc_lapack():
 
 @no_windows
 def test_fc_lapack_static():
-    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=ATLAS"')
+    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'ATLAS;MKL\'"')
