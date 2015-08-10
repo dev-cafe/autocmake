@@ -9,15 +9,17 @@ install:
     # libraries for static linking
   - sudo apt-get install binutils-gold libc6-dev libpthread-stubs0-dev
     # math libraries
-  - sudo apt-get install libblas-dev liblapack-dev  libatlas-base-dev
+  - sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev
     # MPI
   - sudo apt-get install openmpi-bin libopenmpi-dev
     # PEP8 and py.test
   - sudo pip install pytest pep8
 script:
+    # test PEP8 conformity
   - pep8 --ignore=E501 update.py
   - pep8 --ignore=E501 test/test.py
   - pep8 --ignore=E501 lib/config.py
+    # run unit tests
   - py.test -vv update.py
   - py.test -vv test/test.py
   - py.test -vv lib/config.py
