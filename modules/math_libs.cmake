@@ -479,6 +479,10 @@ if("${MATH_LIBS}" STREQUAL "" AND "${MKL_FLAG}" STREQUAL "off")
     endforeach()
 endif()
 
+foreach(_service BLAS LAPACK)
+    set(${_service}_FOUND ${${_service}_FOUND} CACHE BOOL "${_service} found")
+endforeach()
+
 #miro: first lapack, then blas as lapack might need blas routine
 set(MATH_LIBS
     ${MATH_LIBS}
