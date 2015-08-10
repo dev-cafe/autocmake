@@ -10,8 +10,8 @@ import pytest
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-no_windows = pytest.mark.skipif(sys.platform == 'win32',
-                                reason="windows not supported")
+skip_on_windows = pytest.mark.skipif(sys.platform == 'win32',
+                                     reason="windows not supported")
 
 # ------------------------------------------------------------------------------
 
@@ -157,14 +157,14 @@ def test_fc_int64():
 # ------------------------------------------------------------------------------
 
 
-@no_windows
+@skip_on_windows
 def test_fc_mpi():
     configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
 
 # ------------------------------------------------------------------------------
 
 
-@no_windows
+@skip_on_windows
 def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
@@ -176,23 +176,23 @@ def test_fc_static():
 # ------------------------------------------------------------------------------
 
 
-@no_windows
+@skip_on_windows
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
 
 
-@no_windows
+@skip_on_windows
 def test_fc_blas_static():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --static')
 
 # ------------------------------------------------------------------------------
 
 
-@no_windows
+@skip_on_windows
 def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
 
 
-@no_windows
+@skip_on_windows
 def test_fc_lapack_static():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=ATLAS"')
