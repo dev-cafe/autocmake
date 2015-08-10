@@ -499,4 +499,17 @@ if (ENABLE_STATIC_LINKING)
     endif()
 endif()
 
+#miro: fix of zeroed important output variables for BLAS/LAPACK detection after the "cmake .." command
+if (BLAS_LIBRARIES AND BLAS_TYPE AND NOT BLAS_FOUND)
+    set(BLAS_FOUND TRUE)
+endif()
+
+if (LAPACK_LIBRARIES AND LAPACK_TYPE AND NOT LAPACK_FOUND)
+    set(LAPACK_FOUND TRUE)
+endif()
+
+
+
+
+
 
