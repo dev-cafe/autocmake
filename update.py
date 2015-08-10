@@ -323,6 +323,10 @@ def main(argv):
                 src='%s/raw/master/example/autocmake.cfg' % AUTOCMAKE_GITHUB_URL,
                 dst='autocmake.cfg'
             )
+        if not os.path.isfile('.gitignore'):
+            print('- creating .gitignore')
+            with open('.gitignore'), 'w') as f:
+                f.write('*.pyc\n')
         print('- fetching lib/config.py')
         fetch_url(
             src='%s/raw/master/lib/config.py' % AUTOCMAKE_GITHUB_URL,
