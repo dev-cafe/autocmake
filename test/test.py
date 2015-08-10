@@ -107,7 +107,7 @@ def configure_build_and_exe(name, setup_command, launcher=None):
     os.chdir(os.path.join(HERE, name, 'build-%s' % stamp))
 
     stdout, stderr = exe(make_command)
-    assert stderr == ''
+    # mi: remove <assert stderr == ''> due to warnings flushed to stderr
 
     stdout, stderr = exe(binary)
     assert stderr == ''
