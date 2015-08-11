@@ -185,9 +185,11 @@ def test_fc_blas_static():
 # ------------------------------------------------------------------------------
 
 
+@skip_on_windows
 def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran')
 
 
+@skip_on_windows
 def test_fc_lapack_static():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL\'"')
