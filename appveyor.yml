@@ -48,7 +48,7 @@ build_script:
 - set path=%path%;C:\software\mingw64\bin
 
 # download and unzip the Windows OpenBLAS library package (18481949 bytes)
-- ps: Invoke-WebRequest http://downloads.sourceforge.net/project/openblas/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
+- ps: Invoke-WebRequest  http://web-docs.gsi.de/~milias/openblas-package/OpenBLAS-v0.2.14-Win64-int32.zip  -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
 - dir
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
 
