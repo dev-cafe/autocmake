@@ -53,7 +53,7 @@ build_script:
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
 
 # add OpenBLAS library dir to path
-- set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib
+- set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin
 
 # download and upgrade pip
 - ps: wget https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
