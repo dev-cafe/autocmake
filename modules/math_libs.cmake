@@ -56,6 +56,10 @@ if(ENABLE_STATIC_LINKING)
    set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
 endif() 
 
+if(WIN32)
+   set(CMAKE_FIND_LIBRARY_SUFFIXES .dll ${CMAKE_FIND_LIBRARY_SUFFIXES})
+endif()
+
 #-------------------------------------------------------------------------------
 # SYSTEM_NATIVE
 

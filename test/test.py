@@ -164,7 +164,6 @@ def test_fc_mpi():
 # ------------------------------------------------------------------------------
 
 
-@skip_on_windows
 def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
@@ -176,12 +175,10 @@ def test_fc_static():
 # ------------------------------------------------------------------------------
 
 
-@skip_on_windows
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran')
 
 
-@skip_on_windows
 def test_fc_blas_static():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --static')
 
@@ -195,4 +192,4 @@ def test_fc_lapack():
 
 @skip_on_windows
 def test_fc_lapack_static():
-    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'ATLAS;MKL\'"')
+    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL\'"')

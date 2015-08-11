@@ -47,6 +47,14 @@ build_script:
 # add compilers binary dir to path
 - set path=%path%;C:\software\mingw64\bin
 
+# download and unzip the Windows OpenBLAS library package (18481949 bytes)
+- ps: Invoke-WebRequest  http://web-docs.gsi.de/~milias/openblas-package/OpenBLAS-v0.2.14-Win64-int32.zip  -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
+- dir
+- 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
+
+# add OpenBLAS library dir to path
+- set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin
+
 # download and upgrade pip
 - ps: wget https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
 - python get-pip.py
