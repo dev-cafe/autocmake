@@ -48,9 +48,9 @@ build_script:
 # add compilers binary dir to path
 - set path=%path%;C:\software\mingw64\bin
 
-# download and unpack the OpenBLAS library
+# download and unzip the Windows OpenBLAS library
 - ps: wget $env:url1 -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
-- 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
+- unzip OpenBLAS-v0.2.14-Win64-int32.zip > NUL
 
 # add OpenBLAS library dir to path
 - set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib
