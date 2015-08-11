@@ -20,7 +20,7 @@ environment:
   path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Git\cmd;C:\Program Files\7-Zip;C:\Program Files (x86)\CMake\bin
 # set MinGw-w64 (64-bit) version 5.1.0 download URL
   url: http://kent.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-posix/seh/x86_64-5.1.0-release-posix-seh-rt_v4-rev0.7z
-  url1: http://downloads.sourceforge.net/project/openblas/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip?r=&ts=1439310546&use_mirror=netcologne
+  url1: http://downloads.sourceforge.net/project/openblas/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip
 # user can possibly use different Python versions, we try to test multiple cases
 # 64-bit version on 64-bit system allows easier installation of Python packages using .exe installers
 # and better CMake automatic detection of some Python tools
@@ -50,6 +50,7 @@ build_script:
 
 # download and unzip the Windows OpenBLAS library
 - ps: wget $env:url1 -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
+- dir
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
 
 # add OpenBLAS library dir to path
