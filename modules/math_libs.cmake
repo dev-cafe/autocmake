@@ -491,14 +491,14 @@ set(MATH_LIBS
     CACHE STRING "Math libraries"
     )
 
-#miro: further adaptation for the static linking
+#miro: further adaptation for the static linking by setting linking flags
 if (ENABLE_STATIC_LINKING)
     if (LAPACK_TYPE MATCHES ATLAS OR LAPACK_TYPE MATCHES SYSTEM_NATIVE OR BLAS_TYPE MATCHES ATLAS OR BLAS_TYPE MATCHES SYSTEM_NATIVE)
-        #miro: TODO: some compilers might need -lgfortran
-        set (MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread  -Wl,--no-whole-archive)
+        #miro: ifort/pgf90 with atlas/system_native math libraries need extra -lgfortran
+        set (MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread  -Wl,--no-whole-archive -lgfortran)
     endif()
     if (LAPACK_TYPE MATCHES MKL OR BLAS_TYPE MATCHES MKL)
-        # miro: fix for MKL static linking (-lc not needed for PGI )
+        # miro: fix for static linking with the MKL library
         set (MATH_LIBS ${MATH_LIBS} -ldl -lc)
     endif()
 endif()
