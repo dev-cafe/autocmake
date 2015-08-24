@@ -157,9 +157,11 @@ def test_fc_int64():
 # ------------------------------------------------------------------------------
 
 
-@skip_on_windows
 def test_fc_mpi():
-    configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
+    if sys.platform == 'win32':
+        configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=gfortran', 'mpiexec -n 2')
+    else:
+        configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
 
 # ------------------------------------------------------------------------------
 
