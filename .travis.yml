@@ -23,3 +23,6 @@ script:
   - py.test -vv update.py
   - py.test -vv test/test.py
   - py.test -vv lib/config.py
+
+notifications:
+  email: false
