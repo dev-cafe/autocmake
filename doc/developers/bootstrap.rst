@@ -8,13 +8,16 @@ Bootstrapping Autocmake
 -----------------------
 
 Download the ``update.py`` and execute it with ``--self`` to fetch other
-infrastructure files which will be needed to build the project (on Windows
-``wget`` is probably not available - in this case use an alternative)::
+infrastructure files which will be needed to build the project::
 
   $ mkdir cmake  # does not have to be called "cmake" - take the name you prefer
   $ cd cmake
   $ wget https://github.com/scisoft/autocmake/raw/master/update.py
   $ python update.py --self
+
+On the MS Windows system, use the PowerShell wget-replacement::
+
+  $ Invoke-WebRequest https://github.com/scisoft/autocmake/raw/master/update.py -OutFile update.py
 
 This creates (or updates) the following files (an existing ``autocmake.cfg`` is
 not overwritten by the script)::
