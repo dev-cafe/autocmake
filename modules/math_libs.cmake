@@ -122,15 +122,18 @@ set(ATLAS_BLAS_LIBS   f77blas cblas atlas)
 set(ATLAS_LAPACK_LIBS atlas lapack)
 
 #-------------------------------------------------------------------------------
-# OPENBLAS (no LAPACK in OPENBLAS)
+# OPENBLAS (contains also LAPACK)
 
 set(OPENBLAS_BLAS_INCLUDE_PATH_SUFFIXES)
+set(OPENBLAS_LAPACK_INCLUDE_PATH_SUFFIXES)
 
 set(OPENBLAS_BLAS_HEADERS cblas_openblas.h openblas_config.h cblas.h f77blas.h)
 
 set(OPENBLAS_BLAS_LIBRARY_PATH_SUFFIXES openblas openblas-base)
+set(OPENBLAS_LAPACK_LIBRARY_PATH_SUFFIXES openblas openblas-base)
 
 set(OPENBLAS_BLAS_LIBS openblas)
+set(OPENBLAS_LAPACK_LIBS openblas)
 
 #-------------------------------------------------------------------------------
 # MKL
