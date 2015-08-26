@@ -164,7 +164,6 @@ def test_fc_mpi():
 # ------------------------------------------------------------------------------
 
 
-@skip_on_windows
 def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
