@@ -10,8 +10,8 @@ import pytest
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-skip_on_windows = pytest.mark.skipif(sys.platform == 'win32',
-                                     reason="windows not supported")
+skip_on_windows = pytest.mark.skipif('sys.platform == "win32"', reason="ms windows not supported")
+
 
 # ------------------------------------------------------------------------------
 
