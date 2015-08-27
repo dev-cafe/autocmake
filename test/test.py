@@ -10,8 +10,8 @@ import pytest
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-skip_on_windows = pytest.mark.skipif(sys.platform == 'win32',
-                                     reason="windows not supported")
+skip_on_windows = pytest.mark.skipif('sys.platform == "win32"', reason="ms windows not supported")
+
 
 # ------------------------------------------------------------------------------
 
@@ -166,7 +166,6 @@ def test_fc_mpi():
 # ------------------------------------------------------------------------------
 
 
-@skip_on_windows
 def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
