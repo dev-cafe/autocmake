@@ -158,7 +158,12 @@ def test_fc_int64():
 
 
 @skip_on_windows
-def test_fc_mpi():
+def test_fc_mpi_module():
+    configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90  --extra-fc-flags="-D USE_MPI_MODULE"', 'mpirun -np 2')
+
+
+@skip_on_windows
+def test_fc_mpi_include():
     configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
 
 # ------------------------------------------------------------------------------
