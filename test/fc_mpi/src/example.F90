@@ -1,8 +1,12 @@
 program example
 
+#if defined USE_MPI_MODULE
    use mpi
-
    implicit none
+#else
+   implicit none
+#include "mpif.h"
+#endif
 
    integer :: ierr, rank, num_ranks
    logical :: test_ok
