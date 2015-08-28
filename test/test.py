@@ -193,3 +193,21 @@ def test_fc_lapack():
 @skip_on_windows
 def test_fc_lapack_static():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'ATLAS;MKL\'"')
+
+
+def test_python_interpreter():
+    configure_build_and_exe('python_interpreter', 'python setup.py --cxx=g++')
+
+
+def test_python_interpreter_custom():
+    python_executable = sys.executable
+    configure_build_and_exe('python_interpreter_custom', 'python setup.py --cxx=g++ --python={}'.format(python_executable))
+
+
+def test_python_libs():
+    configure_build_and_exe('python_libs', 'python setup.py --cxx=g++')
+
+
+def test_python_libs_custom():
+    python_executable = sys.executable
+    configure_build_and_exe('python_libs_custom', 'python setup.py --cxx=g++ --python={}'.format(python_executable))
