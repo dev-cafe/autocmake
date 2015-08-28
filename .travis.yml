@@ -1,19 +1,29 @@
+sudo: false
 language: cpp
-install:
-    # update, clean
-  - sudo apt-get update
-  - sudo apt-get clean
-  - sudo apt-get autoclean
-    # compilers
-  - sudo apt-get install g++ cmake gfortran
-    # libraries for static linking
-  - sudo apt-get install binutils-gold libc6-dev libpthread-stubs0-dev
-    # math libraries
-  - sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev
-    # MPI
-  - sudo apt-get install openmpi-bin libopenmpi-dev
+addons:
+  apt:
+    packages:
+       # Compilers
+      - g++
+      - gfortran
+      - cmake
+        # Libraries for static linking
+      - binutils-gold
+      - libc6-dev
+      - libpthread-stubs0-dev
+        # Math libraries
+      - libblas-dev
+      - liblapack-dev
+      - libatlas-base-dev
+        # MPI
+      - openmpi-bin
+      - libopenmpi-dev
+        # Python library, development version
+      - libpython2.7
+before_script:
+  - export PATH=$HOME/.local/bin:$PATH
     # PEP8 and py.test
-  - sudo pip install pytest pep8
+  - pip install pytest pep8 --user `whoami`
 script:
     # test PEP8 conformity
   - pep8 --ignore=E501 update.py
