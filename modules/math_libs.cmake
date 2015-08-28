@@ -54,7 +54,7 @@
 
 if(ENABLE_STATIC_LINKING)
    set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
-endif() 
+endif()
 
 #-------------------------------------------------------------------------------
 # SYSTEM_NATIVE
