@@ -1,0 +1,10 @@
+if(BLAS_FOUND)
+    if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    #windows does not find cblas.h of openblas by default
+        include_directories($ENV{PATH})
+    endif()	
+    add_executable(example example.c)
+    target_link_libraries(example ${MATH_LIBS})
+else()
+    message(FATAL_ERROR "BLAS library not found for the test cc_cblas!")
+endif()
