@@ -52,7 +52,7 @@ build_script:
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
 
 # add both OpenBLAS dynamic (libopenblas.dll) and static (libopenblas.a) library files dir to path
-- set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib
+- set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib;C:\software\OpenBLAS-v0.2.14-Win64-int32\include
 
 
 # download and upgrade pip
