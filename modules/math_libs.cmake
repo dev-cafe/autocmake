@@ -496,10 +496,16 @@ set(MATH_LIBS
 
 # further adaptation for the static linking
 if (ENABLE_STATIC_LINKING)
-    if (LAPACK_TYPE MATCHES ATLAS OR LAPACK_TYPE MATCHES SYSTEM_NATIVE OR LAPACK_TYPE MATCHES OPENBLAS OR BLAS_TYPE MATCHES ATLAS OR BLAS_TYPE MATCHES SYSTEM_NATIVE OR BLAS_TYPE MATCHES OPENBLAS)
+    if (LAPACK_TYPE MATCHES ATLAS OR
+        LAPACK_TYPE MATCHES SYSTEM_NATIVE OR
+        LAPACK_TYPE MATCHES OPENBLAS OR
+        BLAS_TYPE MATCHES ATLAS OR
+        BLAS_TYPE MATCHES SYSTEM_NATIVE OR
+        BLAS_TYPE MATCHES OPENBLAS)
         set(MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread -Wl,--no-whole-archive)
     endif()
-    if (LAPACK_TYPE MATCHES MKL OR BLAS_TYPE MATCHES MKL)
+    if (LAPACK_TYPE MATCHES MKL OR
+        BLAS_TYPE MATCHES MKL)
         # fix for MKL static linking (-lc not needed for PGI)
         # radovan: why is -lc added also for PGI? when exactly is it needed?
         set(MATH_LIBS ${MATH_LIBS} -ldl -lc)
