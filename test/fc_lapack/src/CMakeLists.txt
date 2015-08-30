@@ -8,6 +8,10 @@ if(CMAKE_Fortran_COMPILER_ID MATCHES Intel AND ENABLE_STATIC_LINKING)
     list(REMOVE_ITEM CMAKE_SHARED_LIBRARY_LINK_Fortran_FLAGS "-i_dynamic")
 endif()
 
+if(ENABLE_STATIC_LINKING AND LAPACK_TYPE MATCHES OPENBLAS)
+    set (MATH_LIBS ${MATH_LIBS} -lgfortran)
+endif()
+
 if(LAPACK_FOUND)
     add_executable(example example.F90)
     target_link_libraries(example ${MATH_LIBS})
