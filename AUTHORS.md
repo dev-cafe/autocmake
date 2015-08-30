@@ -1,9 +1,7 @@
-
 # Authors
 
 - Jonas Juselius
 - Radovan Bast
-
 
 # Contributors
 
