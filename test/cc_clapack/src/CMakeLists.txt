@@ -3,6 +3,7 @@ if(LAPACK_FOUND)
     #windows does not find lapacke.h of openblas 
         include_directories($ENV{PATH})
     else()
+    #fix for travis-ci 
         include_directories(/usr/include/atlas)
     endif()
     add_executable(example example.c)
