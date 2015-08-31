@@ -1,0 +1,13 @@
+if(LAPACK_FOUND)
+    if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    #windows does not find lapacke.h of openblas 
+        include_directories($ENV{PATH})
+    else()
+    #fix for travis-ci 
+        include_directories(/usr/include/atlas)
+    endif()
+    add_executable(example example.c)
+    target_link_libraries(example ${MATH_LIBS})
+else()
+    message(FATAL_ERROR "LAPACK library not found for the test cc_clapack!")
+endif()
