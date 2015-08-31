@@ -1,0 +1,6 @@
+if(BLAS_FOUND)
+    add_executable(example example.c)
+    target_link_libraries(example ${MATH_LIBS})
+else()
+    message(FATAL_ERROR "BLAS library not found for the test cc_cblas!")
+endif()

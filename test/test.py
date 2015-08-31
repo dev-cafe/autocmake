@@ -180,12 +180,22 @@ def test_fc_static():
 # ------------------------------------------------------------------------------
 
 
+@skip_on_windows
+def test_cc_cblas():
+    configure_build_and_exe('cc_cblas', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+
+
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
 def test_fc_blas_static():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+
+
+@skip_on_windows
+def test_cc_cblas_static():
+    configure_build_and_exe('cc_cblas', 'python setup.py --cc=gcc --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 # ------------------------------------------------------------------------------
 

@@ -128,6 +128,7 @@ set(OPENBLAS_BLAS_INCLUDE_PATH_SUFFIXES)
 set(OPENBLAS_LAPACK_INCLUDE_PATH_SUFFIXES)
 
 set(OPENBLAS_BLAS_HEADERS cblas_openblas.h openblas_config.h cblas.h f77blas.h)
+set(OPENBLAS_LAPACK_HEADERS lapacke.h lapacke_config.h lapacke_mangling.h lapacke_utils.h)
 
 set(OPENBLAS_BLAS_LIBRARY_PATH_SUFFIXES openblas openblas-base)
 set(OPENBLAS_LAPACK_LIBRARY_PATH_SUFFIXES openblas openblas-base)
@@ -309,6 +310,7 @@ macro(cache_math_result _service MATH_TYPE)
         mark_as_advanced(${_SERVICE}_TYPE)
 
         add_definitions(-DHAVE_${MATH_TYPE}_${_SERVICE})
+        message(STATUS "Setting -DHAVE_${MATH_TYPE}_${_SERVICE}")
         set(HAVE_${_SERVICE} ON CACHE INTERNAL
             "Defined if ${_SERVICE} is available"
             )
@@ -502,7 +504,8 @@ if (ENABLE_STATIC_LINKING)
         BLAS_TYPE MATCHES ATLAS OR
         BLAS_TYPE MATCHES SYSTEM_NATIVE OR
         BLAS_TYPE MATCHES OPENBLAS)
-        set(MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread -Wl,--no-whole-archive)
+        #cc_blas_static with ATLAS on travis-ci needs -lm
+        set(MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread -Wl,--no-whole-archive -lm)
     endif()
     if (LAPACK_TYPE MATCHES MKL OR
         BLAS_TYPE MATCHES MKL)
