@@ -13,8 +13,9 @@ addons:
       - libpthread-stubs0-dev
         # Math libraries
       - libblas-dev
-      - liblapack-dev
       - libatlas-base-dev
+      - libatlas-dev
+      - libatlas3gf-base
         # MPI
       - openmpi-bin
       - libopenmpi-dev
@@ -24,6 +25,8 @@ before_script:
   - export PATH=$HOME/.local/bin:$PATH
     # PEP8 and py.test
   - pip install pytest pep8 --user `whoami`
+  - dpkg -S clapack.h
+  - dpkg -S cblas.h
 script:
     # test PEP8 conformity
   - pep8 --ignore=E501 update.py
