@@ -11,7 +11,8 @@ addons:
       - binutils-gold
       - libc6-dev
       - libpthread-stubs0-dev
-        # Math libraries
+        # Math libraries : SYSTEM_NATIVE-static/dynamic and ATLAS-dynamic only
+        # do not install libatlas-dev due to conflicts of repeating xerbla in *.a lib files
       - libblas-dev
       - liblapack-dev
       - libatlas-base-dev
