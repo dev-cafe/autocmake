@@ -102,7 +102,7 @@ def gen_cmake_command(config):
 
     s.append("    command.append('-DCMAKE_BUILD_TYPE=%s' % arguments['--type'])")
     s.append("    command.append('-G \"%s\"' % arguments['--generator'])")
-    s.append("    if(arguments['--cmake-options']):")
+    s.append("    if arguments['--cmake-options'] != \"''\":")
     s.append("        command.append('%s' % arguments['--cmake-options'])")
 
     s.append("\n    return ' '.join(command)")
@@ -154,7 +154,7 @@ def gen_setup(config, relative_path):
     options.append(['--generator=<STRING>', 'Set the CMake build system generator [default: Unix Makefiles].'])
     options.append(['--show', 'Show CMake command and exit.'])
     options.append(['--cmake-executable=<CMAKE_EXECUTABLE>', 'Set the CMake executable [default: cmake].'])
-    options.append(['--cmake-options=<OPTIONS>', 'Define options to CMake [default: None].'])
+    options.append(['--cmake-options=<OPTIONS>', "Define options to CMake [default: '']."])
     options.append(['<builddir>', 'Build directory.'])
     options.append(['-h --help', 'Show this screen.'])
 
