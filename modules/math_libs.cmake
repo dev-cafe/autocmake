@@ -509,8 +509,7 @@ if (ENABLE_STATIC_LINKING)
     endif()
     if (LAPACK_TYPE MATCHES MKL OR
         BLAS_TYPE MATCHES MKL)
-        # fix for MKL static linking (-lc not needed for PGI)
-        # radovan: why is -lc added also for PGI? when exactly is it needed?
-        set(MATH_LIBS ${MATH_LIBS} -ldl -lc)
+        # fix for MKL static linking 
+        set(MATH_LIBS ${MATH_LIBS} -ldl)
     endif()
 endif()
