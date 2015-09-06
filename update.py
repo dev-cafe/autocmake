@@ -310,6 +310,13 @@ def main(argv):
         sys.stderr.write("        $ %s ..\n" % argv[0])
         sys.exit(-1)
 
+    if argv[1] in ['-h', '--help']:
+        print('Usage:')
+        print('  python update.py --self         Update this script and fetch or update infrastructure files under lib/.')
+        print('  python update.py <builddir>     (Re)generate CMakeLists.txt and setup.py and fetch or update CMake modules.')
+        print('  python update.py (-h | --help)  Show this help text.')
+        sys.exit(0)
+
     if argv[1] == '--self':
         # update self
         if not os.path.isfile('autocmake.cfg'):
