@@ -148,6 +148,10 @@ def test_fc():
 def test_fc_git_info():
     configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
 
+
+def test_fc_build_info():
+    configure_build_and_exe('fc_build_info', 'python setup.py --fc=gfortran')
+
 # ------------------------------------------------------------------------------
 
 

@@ -1,0 +1,28 @@
+#ifndef BUILD_INFO_H_INCLUDED
+#define BUILD_INFO_H_INCLUDED
+
+#define SYSTEM       "@_system@"
+#define SYSTEM_NAME  "@_system_name@"
+#define CMAKE_VERSION     "@_cmake_version@"
+#define CMAKE_GENERATOR   "@_cmake_generator@"
+
+#define CMAKE_BUILD_TYPE "@_cmake_build_type@"
+
+#define FORTRAN_COMPILER_ID "@_fortran_compiler_id@"
+#define FORTRAN_COMPILER "@_fortran_compiler@"
+#define FORTRAN_COMPILER_FLAGS "@_fortran_compiler_flags@"
+
+#define C_COMPILER_ID "@_c_compiler_id@"
+#define C_COMPILER "@_c_compiler@"
+#define C_COMPILER_FLAGS "@_c_compiler_flags@"
+
+#define CXX_COMPILER_ID "@_cxx_compiler_id@"
+#define CXX_COMPILER "@_cxx_compiler@"
+#define CXX_COMPILER_FLAGS "@_cxx_compiler_flags@"
+
+#define STATIC_LINKING   "@_static_linking@"
+
+#define WHO_COMPILED "@_who_compiled@"
+#define HOST         "@_host@"
+
+#endif /* BUILD_INFO_H_INCLUDED */

@@ -326,7 +326,7 @@ def main(argv):
         if not os.path.isfile('autocmake.cfg'):
             print('- fetching example autocmake.cfg')
             fetch_url(
-                src='%s/raw/master/example/autocmake.cfg' % AUTOCMAKE_GITHUB_URL,
+                src='%s/raw/build_info/example/autocmake.cfg' % AUTOCMAKE_GITHUB_URL,
                 dst='autocmake.cfg'
             )
         if not os.path.isfile('.gitignore'):
@@ -345,7 +345,7 @@ def main(argv):
         )
         print('- fetching update.py')
         fetch_url(
-            src='%s/raw/master/update.py' % AUTOCMAKE_GITHUB_URL,
+            src='%s/raw/build_info/update.py' % AUTOCMAKE_GITHUB_URL,
             dst='update.py'
         )
         sys.exit(0)
