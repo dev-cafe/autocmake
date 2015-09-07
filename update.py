@@ -204,7 +204,11 @@ def gen_cmakelists(project_name, minimum_cmake_version, relative_path, modules):
 
     if len(modules) > 0:
         s.append('\n# directories which hold included cmake modules')
-    for directory in set([module.path for module in modules]):
+
+    module_paths = set([module.path for module in modules])
+    module_paths = list(module_paths)
+    module_paths.sort()  # we do this to always get the same order and to minimize diffs
+    for directory in module_paths:
         rel_cmake_module_path = os.path.join(relative_path, directory)
         # on windows cmake corrects this so we have to make it wrong again
         rel_cmake_module_path = rel_cmake_module_path.replace('\\', '/')
