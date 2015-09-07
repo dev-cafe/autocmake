@@ -6,7 +6,7 @@
 #
 # autocmake.cfg configuration::
 #
-#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/build_info/build_info.h.in
+#   fetch: https://github.com/miroi/autocmake/raw/build_info/modules/build_info/build_info.h.in
 
 
 set(_c_compiler             "unknown")
