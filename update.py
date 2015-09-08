@@ -351,7 +351,7 @@ def main(argv):
         )
         print('- fetching lib/docopt.py')
         fetch_url(
-            src='https://github.com/docopt/docopt/raw/master/docopt.py',
+            src='%s/raw/master/lib/docopt/docopt.py' % AUTOCMAKE_GITHUB_URL,
             dst='lib/docopt.py'
         )
         print('- fetching update.py')
