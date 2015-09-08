@@ -157,14 +157,18 @@ def test_fc_int64():
 # ------------------------------------------------------------------------------
 
 
-@skip_on_windows
-def test_fc_mpi_module():
-    configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90  --extra-fc-flags="-D USE_MPI_MODULE"', 'mpirun -np 2')
+def test_fc_mpi():
+    if sys.platform == 'win32':
+        configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=gfortran --extra-fc-flags="-D_WIN64 -D INT_PTR_KIND()=8 -fno-range-check" --add-definitions="-D USE_MPI_MODULE"', 'mpiexec -n 2')
+    else:
+        configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90 --add-definitions="-D USE_MPI_MODULE"', 'mpirun -np 2')
 
 
-@skip_on_windows
 def test_fc_mpi_include():
-    configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
+    if sys.platform == 'win32':
+        configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=gfortran --extra-fc-flags="-D_WIN64 -D INT_PTR_KIND()=8 -fno-range-check"', 'mpiexec -np 2')
+    else:
+        configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
 
 # ------------------------------------------------------------------------------
 

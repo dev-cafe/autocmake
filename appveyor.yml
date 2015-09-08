@@ -50,10 +50,26 @@ build_script:
 # download and unpack the  OpenBLAS library, integer*4 (or i32lp64) version
 - ps: wget http://skylink.dl.sourceforge.net/project/openblas/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
-
+#
 # add both OpenBLAS dynamic (libopenblas.dll) and static (libopenblas.a) library files dir to path
 - set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib;C:\software\OpenBLAS-v0.2.14-Win64-int32\include
 
+# download and unpack MSMPI library (Windows version of OpenMPI)
+# follow http://www.symscape.com/configure-msmpi-for-mingw-w64#comment-1824
+- mkdir C:\software\msmpi && cd C:\software\msmpi
+- ps: wget http://download.microsoft.com/download/A/1/3/A1397A8C-4751-433C-8330-F738C3BE2187/mpi_x64.Msi -OutFile mpi_x64.Msi
+- 7z x mpi_x64.Msi
+- gendef msmpi64.dll
+- dlltool -d msmpi64.def -l libmsmpi64.a -D msmpi64.dll
+- del mpi.f90
+- ps: wget http://web-docs.gsi.de/~milias/msmpi/mpi.F90 -OutFile mpi.F90
+- gfortran  -c  -D_WIN64  -D INT_PTR_KIND()=8 -fno-range-check   mpi.F90
+- del mpif.h
+- ps: wget http://web-docs.gsi.de/~milias/msmpi/mpif.h -OutFile mpif.h
+- dir
+
+# add msmpi to path
+- set path=%path%;C:\software\msmpi
 
 # download and upgrade pip
 - ps: wget https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
