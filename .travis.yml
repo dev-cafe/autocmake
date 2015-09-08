@@ -1,5 +1,8 @@
 sudo: false
 language: cpp
+os:
+    - linux
+    - osx
 addons:
   apt:
     packages:
@@ -21,10 +24,17 @@ addons:
       - libopenmpi-dev
         # Python library, development version
       - libpython2.7
+before_install:
+  - if test ${TRAVIS_OS_NAME} = osx; then brew update; fi
+  - if test ${TRAVIS_OS_NAME} = osx; then brew outdated xctool || brew upgrade xctool; fi
+  - if test ${TRAVIS_OS_NAME} = osx; then brew install python open-mpi; fi
+  - if test ${TRAVIS_OS_NAME} = osx; then brew linkapps python; fi
 before_script:
   - export PATH=$HOME/.local/bin:$PATH
     # PEP8 and py.test
-  - pip install pytest pep8 --user `whoami`
+  - if test ${TRAVIS_OS_NAME} = linux;
+    then pip install --upgrade pip setuptools pytest pep8 --user `whoami`;
+    else sudo pip install --upgrade pip setuptools pytest pep8; fi
 script:
     # test PEP8 conformity
   - pep8 --ignore=E501 update.py

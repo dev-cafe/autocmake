@@ -10,6 +10,8 @@
 # Variables modified (provided the corresponding language is enabled)::
 #
 #   CMAKE_Fortran_FLAGS
+#   CMAKE_C_FLAGS
+#   CMAKE_CXX_FLAGS
 #
 # autocmake.cfg configuration::
 #
@@ -24,6 +26,12 @@ if(ENABLE_MPI AND NOT MPI_FOUND)
     if(MPI_FOUND)
         if(DEFINED CMAKE_Fortran_COMPILER_ID)
             set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${MPI_COMPILE_FLAGS}")
+        endif()
+        if(DEFINED CMAKE_C_COMPILER_ID)
+            set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MPI_COMPILE_FLAGS}")
+        endif()
+        if(DEFINED CMAKE_CXX_COMPILER_ID)
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MPI_COMPILE_FLAGS}")
         endif()
         include_directories(${MPI_INCLUDE_PATH})
     else()
