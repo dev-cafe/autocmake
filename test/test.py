@@ -16,41 +16,6 @@ skip_on_windows = pytest.mark.skipif('sys.platform == "win32"', reason="ms windo
 # ------------------------------------------------------------------------------
 
 
-# we do not use the nicer sys.version_info.major
-# for compatibility with Python < 2.7
-if sys.version_info[0] > 2:
-    import urllib.request
-
-    class URLopener(urllib.request.FancyURLopener):
-        def http_error_default(self, url, fp, errcode, errmsg, headers):
-            sys.stderr.write("ERROR: could not fetch %s\n" % url)
-            sys.exit(-1)
-else:
-    import urllib
-
-    class URLopener(urllib.FancyURLopener):
-        def http_error_default(self, url, fp, errcode, errmsg, headers):
-            sys.stderr.write("ERROR: could not fetch %s\n" % url)
-            sys.exit(-1)
-
-# ------------------------------------------------------------------------------
-
-
-def fetch_url(src, dst):
-    """
-    Fetch file from URL src and save it to dst.
-    """
-    dirname = os.path.dirname(dst)
-    if dirname != '':
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
-
-    opener = URLopener()
-    opener.retrieve(src, dst)
-
-# ------------------------------------------------------------------------------
-
-
 def exe(command):
     """
     Executes command and returns string representations of stdout and stderr captured from the console.
@@ -82,11 +47,17 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 
     os.chdir(os.path.join(HERE, name, 'cmake'))
     shutil.copy(os.path.join('..', '..', '..', 'update.py'), 'update.py')
-    if not os.path.exists('lib'):
-        os.makedirs('lib')
-    shutil.copy(os.path.join('..', '..', '..', 'lib', 'config.py'), 'lib')
-    fetch_url(src='https://github.com/docopt/docopt/raw/master/docopt.py',
-              dst='lib/docopt.py')
+
+    dst_dir = 'lib'
+    if not os.path.exists(dst_dir):
+        os.makedirs(dst_dir)
+    shutil.copy(os.path.join('..', '..', '..', dst_dir, 'config.py'), dst_dir)
+
+    dst_dir = os.path.join('lib', 'docopt')
+    if not os.path.exists(dst_dir):
+        os.makedirs(dst_dir)
+    shutil.copy(os.path.join('..', '..', '..', dst_dir, 'docopt.py'), dst_dir)
+
     stdout, stderr = exe('python update.py ..')
     os.chdir(os.path.join(HERE, name))
 
