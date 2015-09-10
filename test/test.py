@@ -10,7 +10,8 @@ import pytest
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-skip_on_windows = pytest.mark.skipif('sys.platform == "win32"', reason="ms windows not supported")
+skip_on_windows = pytest.mark.skipif('sys.platform == "win32"', reason="not working on windows")
+skip_on_osx = pytest.mark.skipif('sys.platform == "darwin"', reason="not working on osx")
 skip_always = pytest.mark.skipif('1 == 1', reason="tests are broken")
 
 
@@ -105,6 +106,7 @@ def test_cxx():
     configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
 
 
+@skip_on_osx
 def test_cxx_static():
     configure_build_and_exe('cxx', 'python setup.py --cxx=g++ --static')
 
@@ -150,6 +152,7 @@ def test_fc_omp():
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
 
 
+@skip_on_osx
 def test_fc_static():
     configure_build_and_exe('fc', 'python setup.py --fc=gfortran --static')
 
@@ -160,6 +163,7 @@ def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
+@skip_on_osx
 def test_fc_blas_static():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
@@ -168,6 +172,7 @@ def test_cc_cblas():
     configure_build_and_exe('cc_cblas', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
+@skip_on_osx
 def test_cc_cblas_static():
     configure_build_and_exe('cc_cblas', 'python setup.py --cc=gcc --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
@@ -178,6 +183,7 @@ def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
+@skip_on_osx
 def test_fc_lapack_static():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
@@ -186,6 +192,7 @@ def test_cc_clapack():
     configure_build_and_exe('cc_clapack', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
+@skip_on_osx
 def test_cc_clapack_static():
     configure_build_and_exe('cc_clapack', 'python setup.py --cc=gcc --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
