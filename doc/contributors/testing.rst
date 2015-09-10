@@ -6,8 +6,7 @@ Testing Autocmake
 You will need to install `pytest <http://pytest.org/>`__.
 
 Check also the `Travis  <https://github.com/scisoft/autocmake/blob/master/.travis.yml>`__
-and the `Appveyor <https://github.com/scisoft/autocmake/blob/master/appveyor.yml>`__
-build and test recipes for other requirements.
+build and test recipe for other requirements.
 
 Your contributions and changes should preserve the test set. You can run locally all tests with::
 
@@ -20,5 +19,8 @@ You can also select individual tests, for example those with ``fc_blas`` string 
 For more options, see the ``py.test`` flags.
 
 This test set is run upon each push to the central repository.
-See also the `Travis <https://travis-ci.org/scisoft/autocmake/builds>`__ and the
-`Appveyor <https://ci.appveyor.com/project/bast/autocmake/history>`__  build and test history.
+See also the `Travis <https://travis-ci.org/scisoft/autocmake/builds>`__
+build and test history.
+
+In addition we also test Autocmake on a Windows CI server: `Appveyor <https://ci.appveyor.com/project/bast/autocmake/history>`__.
+This is controlled by `Appveyor <https://github.com/scisoft/autocmake/blob/master/appveyor.yml>`__.
