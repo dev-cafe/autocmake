@@ -509,7 +509,7 @@ if (ENABLE_STATIC_LINKING)
     endif()
     if (LAPACK_TYPE MATCHES MKL OR
         BLAS_TYPE MATCHES MKL)
-        # fix for MKL static linking 
+        # fix for MKL static linking
         set(MATH_LIBS ${MATH_LIBS} -ldl)
     endif()
 endif()
