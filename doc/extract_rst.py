@@ -66,6 +66,8 @@ def main():
         file_name = ntpath.basename(f)
         if relative_path != '.':
             full_file_name = '%s/%s' % (relative_path, file_name)
+        else:
+            full_file_name = file_name
         with open(f, 'r') as s:
             s_out = extract_rst_blobs(s.read())
             if s_out != '':
