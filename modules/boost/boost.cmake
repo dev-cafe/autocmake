@@ -12,7 +12,7 @@
 #   source: custom/boost_version-components.cmake
 #
 #   [boost]
-#   source: https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost.cmake
+#   source: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost.cmake
 #   fetch: http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.zip
 #
 # The ``custom/boost_version-components.cmake`` should look like this::
@@ -46,13 +46,13 @@
 #
 # autocmake.cfg configuration::
 #
-#   fetch: https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost_unpack.cmake
-#          https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost_userconfig.cmake
-#          https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost_configure.cmake
-#          https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost_build.cmake
-#          https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost_install.cmake
-#          https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost_headers.cmake
-#          https://github.com/scisoft/autocmake/raw/booster/modules/boost/boost_cleanup.cmake
+#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_unpack.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_userconfig.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_configure.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_build.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_install.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_headers.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_cleanup.cmake
 #   docopt: --boost-headers=<BOOST_INCLUDEDIR> Include directories for Boost [default: ''].
 #           --boost-libraries=<BOOST_LIBRARYDIR> Library directories for Boost [default: ''].
 #           --build-boost=<FORCE_CUSTOM_BOOST> Deactivate Boost detection and build on-the-fly <ON/OFF> [default: OFF].
