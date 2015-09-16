@@ -20,10 +20,6 @@
 option(ENABLE_CBLAS "Detect and link to CBLAS" OFF)
 
 if(ENABLE_CBLAS)
-    if(ENABLE_STATIC_LINKING)
-        set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
-    endif()
-
     include(CheckIncludeFile)
 
     function(_find_include_dir _names _hints _result)
@@ -68,6 +64,10 @@ if(ENABLE_CBLAS)
     set(CBLAS_LIBRARIES "undefined")
     set(CBLAS_INCLUDE_DIR "undefined")
 
+    if(ENABLE_STATIC_LINKING)
+        set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+    endif()
+
     if(APPLE)
         _find_include_dir(Accelerate/Accelerate.h /usr CBLAS_INCLUDE_DIR)
         _find_library(Accelerate cblas_dgemm CBLAS_LIBRARIES)
@@ -76,7 +76,9 @@ if(ENABLE_CBLAS)
         _find_library(cblas cblas_dgemm CBLAS_LIBRARIES)
     endif()
 
-    if(NOT ${CBLAS_INCLUDE_DIR} STREQUAL "undefined" AND NOT ${CBLAS_LIBRARIES} STREQUAL "undefined")
-        set(CBLAS_FOUND TRUE)
+    if(NOT "${CBLAS_LIBRARIES}" STREQUAL "undefined")
+        if(NOT "${CBLAS_INCLUDE_DIR}" STREQUAL "undefined")
+            set(CBLAS_FOUND TRUE)
+        endif()
     endif()
 endif()
