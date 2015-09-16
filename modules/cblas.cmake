@@ -65,12 +65,16 @@ if(ENABLE_CBLAS)
     endfunction()
 
     set(CBLAS_FOUND FALSE)
-
-    set(CBLAS_INCLUDE_DIR "undefined")
-    _find_include_dir(cblas.h /usr CBLAS_INCLUDE_DIR)
-
     set(CBLAS_LIBRARIES "undefined")
-    _find_library(cblas cblas_dgemm CBLAS_LIBRARIES)
+    set(CBLAS_INCLUDE_DIR "undefined")
+
+    if(APPLE)
+        _find_include_dir(Accelerate/Accelerate.h /usr CBLAS_INCLUDE_DIR)
+        _find_library(Accelerate cblas_dgemm CBLAS_LIBRARIES)
+    else()
+        _find_include_dir(cblas.h /usr CBLAS_INCLUDE_DIR)
+        _find_library(cblas cblas_dgemm CBLAS_LIBRARIES)
+    endif()
 
     if(NOT ${CBLAS_INCLUDE_DIR} STREQUAL "undefined" AND NOT ${CBLAS_LIBRARIES} STREQUAL "undefined")
         set(CBLAS_FOUND TRUE)

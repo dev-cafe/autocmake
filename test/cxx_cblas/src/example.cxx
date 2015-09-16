@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef __APPLE__
+#include "Accelerate/Accelerate.h"
+#else
 #include "cblas.h"
+#endif
 
 int main()
 {

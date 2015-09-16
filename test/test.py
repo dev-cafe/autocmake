@@ -169,7 +169,6 @@ def test_fc_blas_static():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
-@skip_on_osx
 def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas')
 
