@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-/* cblas */
 
-#if defined HAVE_MKL_BLAS
-#include "mkl_cblas.h"
-#pragma message "Using Intel MKL <mkl_cblas.h> interface"
-#else
 #include "cblas.h"
-#pragma message "Using GNU <cblas.h> interface"
-#endif
 
 int main()
 {
