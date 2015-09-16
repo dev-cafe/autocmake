@@ -190,13 +190,13 @@ def test_fc_lapack_static():
 
 
 @skip_on_osx
-def test_cc_clapack():
-    configure_build_and_exe('cc_clapack', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+def test_cc_lapacke():
+    configure_build_and_exe('cc_lapacke', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
 @skip_on_osx
-def test_cc_clapack_static():
-    configure_build_and_exe('cc_clapack', 'python setup.py --cc=gcc --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+def test_cc_lapacke_static():
+    configure_build_and_exe('cc_lapacke', 'python setup.py --cc=gcc --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 # ------------------------------------------------------------------------------
 
