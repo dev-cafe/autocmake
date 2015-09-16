@@ -35,11 +35,11 @@ if(ENABLE_CBLAS)
     endif()
 
     if(APPLE)
-        _find_include_dir(Accelerate/Accelerate.h /usr CBLAS_INCLUDE_DIR)
         _find_library(Accelerate cblas_dgemm CBLAS_LIBRARIES)
+        _find_include_dir(Accelerate/Accelerate.h /usr CBLAS_INCLUDE_DIR)
     else()
-        _find_include_dir(cblas.h /usr CBLAS_INCLUDE_DIR)
         _find_library(cblas cblas_dgemm CBLAS_LIBRARIES)
+        _find_include_dir(cblas.h /usr CBLAS_INCLUDE_DIR)
     endif()
 
     if(NOT "${CBLAS_LIBRARIES}" STREQUAL "undefined")

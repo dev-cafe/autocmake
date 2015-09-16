@@ -213,6 +213,7 @@ def gen_cmakelists(project_name, min_cmake_version, relative_path, modules):
 
     module_paths = set([module.path for module in modules])
     module_paths = list(module_paths)
+    module_paths.append('downloaded')  # this is done to be able to find fetched modules when testing
     module_paths.sort()  # we do this to always get the same order and to minimize diffs
     for directory in module_paths:
         rel_cmake_module_path = os.path.join(relative_path, directory)
