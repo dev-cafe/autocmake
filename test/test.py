@@ -171,7 +171,7 @@ def test_fc_blas_static():
 
 @skip_on_osx
 def test_cc_cblas():
-    configure_build_and_exe('cc_cblas', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+    configure_build_and_exe('cc_cblas', 'python setup.py --cc=gcc --cblas')
 
 
 @skip_on_osx
