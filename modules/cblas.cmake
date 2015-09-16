@@ -16,49 +16,15 @@
 #
 #   docopt: --cblas Detect and link to CBLAS [default: False].
 #   define: '-DENABLE_CBLAS=%s' % arguments['--cblas']
+#   fetch: https://raw.githubusercontent.com/scisoft/autocmake/master/modules/detect/detect_libraries.cmake
+#          https://raw.githubusercontent.com/scisoft/autocmake/master/modules/detect/detect_include_files.cmake
 
 option(ENABLE_CBLAS "Detect and link to CBLAS" OFF)
 
 if(ENABLE_CBLAS)
-    include(CheckIncludeFile)
 
-    function(_find_include_dir _names _hints _result)
-        find_path(_include_dir
-            NAMES ${_names}
-            HINTS ${_hints}
-        )
-        set(_all_include_files_work TRUE)
-        foreach(_name ${_names})
-            check_include_file(${_include_dir}/${_name} _include_file_works)
-            set(_all_include_files_work (${_all_include_files_work} AND ${_include_file_works}))
-        endforeach()
-        if(${_all_include_files_work})
-            set(${_result} ${_include_dir} PARENT_SCOPE)
-        endif()
-    endfunction()
-
-    include(CheckFunctionExists)
-
-    function(_find_library _names _check_function _result)
-        if(APPLE)
-            find_library(_lib
-                NAMES ${_names}
-                PATHS /usr/local/lib /usr/lib /usr/local/lib64 /usr/lib64
-                ENV DYLD_LIBRARY_PATH
-                )
-        else()
-            find_library(_lib
-                NAMES ${_names}
-                PATHS /usr/local/lib /usr/lib /usr/local/lib64 /usr/lib64
-                ENV LD_LIBRARY_PATH
-                )
-        endif()
-        set(CMAKE_REQUIRED_LIBRARIES ${_lib})
-        check_function_exists(${_check_function} _library_works)
-        if(${_library_works})
-            set(${_result} ${_lib} PARENT_SCOPE)
-        endif()
-    endfunction()
+    include(detect_libraries)
+    include(detect_include_files)
 
     set(CBLAS_FOUND FALSE)
     set(CBLAS_LIBRARIES "undefined")
