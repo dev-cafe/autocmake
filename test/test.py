@@ -176,7 +176,7 @@ def test_cxx_cblas():
 
 @skip_on_osx
 def test_cxx_cblas_static():
-    configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+    configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas --static')
 
 # ------------------------------------------------------------------------------
 
