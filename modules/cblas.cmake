@@ -17,7 +17,7 @@
 #   docopt: --cblas Detect and link to CBLAS [default: False].
 #   define: '-DENABLE_CBLAS=%s' % arguments['--cblas']
 
-option(ENABLE_CBLAS "Enable CBLAS" OFF)
+option(ENABLE_CBLAS "Detect and link to CBLAS" OFF)
 
 if(ENABLE_CBLAS)
     if(ENABLE_STATIC_LINKING)
