@@ -10,10 +10,6 @@ addons:
       - g++
       - gfortran
       - cmake
-        # Libraries for static linking
-      - binutils-gold
-      - libc6-dev
-      - libpthread-stubs0-dev
         # Math libraries : SYSTEM_NATIVE-static/dynamic and ATLAS-dynamic only
         # do not install libatlas-dev due to conflicts of repeating xerbla in *.a lib files
       - libblas-dev
