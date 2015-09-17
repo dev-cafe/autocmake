@@ -2,10 +2,6 @@
 #
 # Find and link to CBLAS.
 #
-# Variables used::
-#
-#   ENABLE_STATIC_LINKING
-#
 # Variables defined::
 #
 #   CBLAS_FOUND - describe me, uncached
@@ -28,10 +24,6 @@ if(ENABLE_CBLAS)
     set(CBLAS_FOUND FALSE)
     set(CBLAS_LIBRARIES "undefined")
     set(CBLAS_INCLUDE_DIR "undefined")
-
-    if(ENABLE_STATIC_LINKING)
-        set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
-    endif()
 
     if(APPLE)
         _find_library(Accelerate cblas_dgemm CBLAS_LIBRARIES)
