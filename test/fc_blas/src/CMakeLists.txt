@@ -3,12 +3,6 @@ if(CMAKE_Fortran_COMPILER_ID MATCHES PGI)
     list(REMOVE_ITEM CMAKE_SHARED_LIBRARY_LINK_Fortran_FLAGS "-rdynamic")
 endif()
 
-if(CMAKE_Fortran_COMPILER_ID MATCHES Intel AND ENABLE_STATIC_LINKING)
-    # prevent "ifort: ... warning #10121: overriding '-static-intel' with
-    # '-i_dynamic'"
-    list(REMOVE_ITEM CMAKE_SHARED_LIBRARY_LINK_Fortran_FLAGS "-i_dynamic")
-endif()
-
 if(BLAS_FOUND)
     add_executable(example example.f90)
     target_link_libraries(example ${MATH_LIBS})

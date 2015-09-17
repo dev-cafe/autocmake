@@ -105,11 +105,6 @@ def test_extra_cmake_options():
 def test_cxx():
     configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
 
-
-@skip_on_osx
-def test_cxx_static():
-    configure_build_and_exe('cxx', 'python setup.py --cxx=g++ --static')
-
 # ------------------------------------------------------------------------------
 
 
@@ -152,21 +147,11 @@ def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
 
-
-@skip_on_osx
-def test_fc_static():
-    configure_build_and_exe('fc', 'python setup.py --fc=gfortran --static')
-
 # ------------------------------------------------------------------------------
 
 
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
-
-
-@skip_on_osx
-def test_fc_blas_static():
-    configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
 def test_cxx_cblas():
@@ -180,18 +165,8 @@ def test_fc_lapack():
 
 
 @skip_on_osx
-def test_fc_lapack_static():
-    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
-
-
-@skip_on_osx
 def test_cc_lapacke():
     configure_build_and_exe('cc_lapacke', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
-
-
-@skip_on_osx
-def test_cc_lapacke_static():
-    configure_build_and_exe('cc_lapacke', 'python setup.py --cc=gcc --static --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 # ------------------------------------------------------------------------------
 
