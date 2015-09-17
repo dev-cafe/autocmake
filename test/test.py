@@ -164,9 +164,8 @@ def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
-@skip_on_osx
 def test_cxx_lapacke():
-    configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+    configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --lapacke')
 
 # ------------------------------------------------------------------------------
 

@@ -1,19 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if defined HAVE_MKL_LAPACK
-#include <mkl_lapacke.h>
-#include <mkl_cblas.h>
-#pragma message "Using Intel MKL c-lapack interface, <mkl_lapacke.h>."
-#elif defined HAVE_OPENBLAS_LAPACK
-#include <lapacke.h>
-#include <cblas.h>
-#pragma message "Using OpenBLAS C-lapack interface, <lapacke.h>."
-#else
-#include <clapack.h>
-#include <cblas.h>
-#pragma message "Using ATLAS/SYSTEM_NATIVE C lapack interface, <clapack.h>."
-#endif
+#include "lapacke.h"
 
 int main()
 {
@@ -39,12 +27,7 @@ int main()
     int ierr;
     int ipiv[n];
 
-/* MKL, OpenBLAS   */
-#if defined HAVE_MKL_LAPACK  || defined HAVE_OPENBLAS_LAPACK
     ierr = LAPACKE_dgesv(CblasColMajor, n, 1, a,  n, ipiv, b, n);
-#else /* ATLAS, SYSTEM_NATIVE */
-    ierr = clapack_dgesv(CblasColMajor, n, 1, a,  n, ipiv, b, n);
-#endif
     if (ierr != 0)
     {
         fprintf(stderr, "\ndgesv failure with error %i\n", ierr);
