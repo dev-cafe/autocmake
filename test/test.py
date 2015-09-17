@@ -172,11 +172,6 @@ def test_fc_blas_static():
 def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas')
 
-
-@skip_on_osx
-def test_cxx_cblas_static():
-    configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas --static')
-
 # ------------------------------------------------------------------------------
 
 
