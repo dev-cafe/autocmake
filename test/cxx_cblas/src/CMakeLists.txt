@@ -1,6 +1,6 @@
 if(CBLAS_FOUND)
     include_directories(${CBLAS_INCLUDE_DIR})
-    add_executable(example example.cxx)
+    add_executable(example example.cpp)
     target_link_libraries(example ${CBLAS_LIBRARIES})
 else()
     message(FATAL_ERROR "CBLAS library not found")

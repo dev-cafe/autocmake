@@ -165,8 +165,8 @@ def test_fc_lapack():
 
 
 @skip_on_osx
-def test_cc_lapacke():
-    configure_build_and_exe('cc_lapacke', 'python setup.py --cc=gcc --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+def test_cxx_lapacke():
+    configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 # ------------------------------------------------------------------------------
 
