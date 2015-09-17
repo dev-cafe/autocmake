@@ -1,6 +1,6 @@
 #.rst:
 #
-# Detect and link to CBLAS.
+# Find and link to CBLAS.
 #
 # Variables used::
 #
@@ -14,16 +14,16 @@
 #
 # autocmake.cfg configuration::
 #
-#   docopt: --cblas Detect and link to CBLAS [default: False].
+#   docopt: --cblas Find and link to CBLAS [default: False].
 #   define: '-DENABLE_CBLAS=%s' % arguments['--cblas']
-#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/detect/detect_libraries.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/detect/detect_include_files.cmake
+#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/find/find_libraries.cmake
+#          https://github.com/scisoft/autocmake/raw/master/modules/find/find_include_files.cmake
 
-option(ENABLE_CBLAS "Detect and link to CBLAS" OFF)
+option(ENABLE_CBLAS "Find and link to CBLAS" OFF)
 
 if(ENABLE_CBLAS)
-    include(detect_libraries)
-    include(detect_include_files)
+    include(find_libraries)
+    include(find_include_files)
 
     set(CBLAS_FOUND FALSE)
     set(CBLAS_LIBRARIES "undefined")
