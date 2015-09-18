@@ -141,6 +141,7 @@ def test_fc_lapack():
 
 
 @skip_on_osx
+@skip_on_linux
 def test_cxx_lapacke():
     configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --lapacke --cblas')
 
