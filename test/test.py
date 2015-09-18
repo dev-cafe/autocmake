@@ -117,7 +117,7 @@ def test_fc_mpi():
     if sys.platform == 'win32':
         setup_line = 'python setup.py --mpi --fc=gfortran --extra-fc-flags="-D_WIN64 -D INT_PTR_KIND()=8 -fno-range-check"'
     else:
-        setup_line = 'python setup.py --mpi --fc=mpif90"'
+        setup_line = 'python setup.py --mpi --fc=mpif90'
     configure_build_and_exe('fc_mpi', setup_line, 'mpiexec -np 2')
 
 
