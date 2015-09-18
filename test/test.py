@@ -165,7 +165,7 @@ def test_fc_lapack():
 
 
 def test_cxx_lapacke():
-    configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --lapacke')
+    configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --lapacke --cblas')
 
 # ------------------------------------------------------------------------------
 
