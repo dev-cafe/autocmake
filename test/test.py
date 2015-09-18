@@ -93,10 +93,6 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 # ------------------------------------------------------------------------------
 
 
-def test_cxx_custom():
-    configure_build_and_exe('cxx_custom', 'python setup.py --cxx=g++')
-
-
 def test_extra_cmake_options():
     configure_build_and_exe('extra_cmake_options', 'python setup.py --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
 
