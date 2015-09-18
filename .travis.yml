@@ -10,7 +10,7 @@ addons:
       - g++
       - gfortran
       - cmake
-        # Math libraries : SYSTEM_NATIVE-static/dynamic and ATLAS-dynamic only
+        # Math libraries
         # do not install libatlas-dev due to conflicts of repeating xerbla in *.a lib files
       - libblas-dev
       - liblapack-dev
