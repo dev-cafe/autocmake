@@ -12,6 +12,7 @@ HERE = os.path.abspath(os.path.dirname(__file__))
 
 skip_on_windows = pytest.mark.skipif('sys.platform == "win32"', reason="not working on windows")
 skip_on_osx = pytest.mark.skipif('sys.platform == "darwin"', reason="not working on osx")
+skip_on_linux = pytest.mark.skipif('sys.platform == "linux2"', reason="not working on linux")
 skip_always = pytest.mark.skipif('1 == 1', reason="tests are broken")
 
 
@@ -93,37 +94,25 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 def test_cxx_custom():
     configure_build_and_exe('cxx_custom', 'python setup.py --cxx=g++')
 
-# ------------------------------------------------------------------------------
-
 
 def test_extra_cmake_options():
     configure_build_and_exe('extra_cmake_options', 'python setup.py --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
-
-# ------------------------------------------------------------------------------
 
 
 def test_cxx():
     configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
 
-# ------------------------------------------------------------------------------
-
 
 def test_fc():
     configure_build_and_exe('fc', 'python setup.py --fc=gfortran')
-
-# ------------------------------------------------------------------------------
 
 
 def test_fc_git_info():
     configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
 
-# ------------------------------------------------------------------------------
-
 
 def test_fc_int64():
     configure_build_and_exe('fc_int64', 'python setup.py --fc=gfortran --int64')
-
-# ------------------------------------------------------------------------------
 
 
 def test_fc_mpi():
@@ -139,15 +128,11 @@ def test_fc_mpi_include():
     else:
         configure_build_and_exe('fc_mpi', 'python setup.py --mpi --fc=mpif90', 'mpirun -np 2')
 
-# ------------------------------------------------------------------------------
-
 
 @skip_on_osx
 def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
-
-# ------------------------------------------------------------------------------
 
 
 def test_fc_blas():
@@ -157,8 +142,6 @@ def test_fc_blas():
 def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas')
 
-# ------------------------------------------------------------------------------
-
 
 def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
@@ -166,8 +149,6 @@ def test_fc_lapack():
 
 def test_cxx_lapacke():
     configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --lapacke --cblas')
-
-# ------------------------------------------------------------------------------
 
 
 def test_python_interpreter():
