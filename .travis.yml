@@ -14,7 +14,6 @@ addons:
         # do not install libatlas-dev due to conflicts of repeating xerbla in *.a lib files
       - libblas-dev
       - liblapack-dev
-      - liblapacke-dev
       - libatlas-base-dev
         # MPI
       - openmpi-bin
