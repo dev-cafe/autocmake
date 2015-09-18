@@ -37,6 +37,7 @@ def exe(command):
                                       universal_newlines=True).communicate()
 
     if stderr:
+        sys.stderr.write(stdout)
         sys.stderr.write(stderr)
 
     return stdout, stderr
@@ -77,11 +78,12 @@ def configure_build_and_exe(name, setup_command, launcher=None):
     setup_command += ' build-%s' % stamp
 
     stdout, stderr = exe(setup_command)
+    assert stderr == ''
 
     os.chdir(os.path.join(HERE, name, 'build-%s' % stamp))
 
     stdout, stderr = exe(make_command)
-    # mi: remove <assert stderr == ''> due to warnings flushed to stderr
+    # we do not check for empty stderr due to warnings flushed to stderr
 
     stdout, stderr = exe(binary)
     assert stderr == ''
