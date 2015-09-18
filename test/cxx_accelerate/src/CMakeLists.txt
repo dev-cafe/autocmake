@@ -1,0 +1,7 @@
+if(ACCELERATE_FOUND)
+    include_directories(${ACCELERATE_INCLUDE_DIR})
+    add_executable(example example.cpp)
+    target_link_libraries(example ${ACCELERATE_LIBRARIES})
+else()
+    message(FATAL_ERROR "ACCELERATE library not found")
+endif()

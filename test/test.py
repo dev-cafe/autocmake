@@ -139,6 +139,7 @@ def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
+@skip_on_osx
 def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas')
 
@@ -147,8 +148,14 @@ def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
+@skip_on_osx
 def test_cxx_lapacke():
     configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --lapacke --cblas')
+
+
+@skip_on_linux
+def test_cxx_accelerate():
+    configure_build_and_exe('cxx_accelerate', 'python setup.py --cxx=g++ --accelerate')
 
 
 def test_python_interpreter():
