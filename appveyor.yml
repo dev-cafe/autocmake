@@ -13,13 +13,9 @@ environment:
 # set MinGw-w64 (64-bit) version 5.1.0 download URL
   url: http://kent.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-posix/seh/x86_64-5.1.0-release-posix-seh-rt_v4-rev0.7z
   matrix:
-# Python 2.7; 32-bit version
 #   - python: C:\Python27;C:\Python27\Scripts
-# Python 2.7; 64-bit version
     - python: C:\Python27-x64;C:\Python27-x64\Scripts
-# Python 3.4; 32-bit version
 #   - python: C:\Python34;C:\Python34\Scripts
-# Python 3.4; 64-bit version
 #   - python: C:\Python34-x64;C:\Python34-x64\Scripts
 
 build_script:
@@ -32,14 +28,12 @@ build_script:
 # download and unpack MinGw-w64 compilers
 - ps: wget $env:url -OutFile MinGW.7z
 - 7z x MinGW.7z > NUL
-
 # add compilers binary dir to path
 - set path=%path%;C:\software\mingw64\bin
 
 # download and unpack the  OpenBLAS library, integer*4 (or i32lp64) version
 - ps: wget http://skylink.dl.sourceforge.net/project/openblas/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
-#
 # add both OpenBLAS dynamic (libopenblas.dll) and static (libopenblas.a) library files dir to path
 - set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib;C:\software\OpenBLAS-v0.2.14-Win64-int32\include
 
