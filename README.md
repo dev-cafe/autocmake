@@ -7,7 +7,7 @@
 
 A CMake plugin composer.
 Licensed under [BSD-3](../master/LICENSE).
-Documented on http://autocmake.readthedocs.org.
+See http://autocmake.org.
 
 
 ### Projects using Autocmake
@@ -18,4 +18,4 @@ Documented on http://autocmake.readthedocs.org.
 - [mathlib-tester](https://github.com/miroi/mathlibs-tester)
 - [Fortran Input Reader](https://github.com/miroi/fortran_input_reader)
 
-If you use Autocmake, please a link to your project via a pull request.
+If you use Autocmake, please link to your project via a pull request.
