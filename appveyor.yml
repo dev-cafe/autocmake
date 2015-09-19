@@ -1,15 +1,7 @@
-##
-# The autocmake project test configuration for Windows OS at AppVeyor
-#
-# Current software used:
 # OS: 64-bit Windows Server 2012 R2
 # Compilers: 64-bit MinGw-w64 5.1.0 (downloaded during script execution)
-# Python: 2.7, both 32-bit and 64-bit versions
-# Python: 3.4, both 32-bit and 64-bit versions
-#
-# Notes:
-# Where "ps:" is used commands are executed in PowerShell
-##
+# Python: 2.7, 64-bit
+# "ps:" commands are executed in PowerShell
 
 # build version format: 1.0.1, 1.0.2, ...
 version: 1.0.{build}
@@ -20,18 +12,15 @@ environment:
   path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Git\cmd;C:\Program Files\7-Zip;C:\Program Files (x86)\CMake\bin
 # set MinGw-w64 (64-bit) version 5.1.0 download URL
   url: http://kent.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-posix/seh/x86_64-5.1.0-release-posix-seh-rt_v4-rev0.7z
-# user can possibly use different Python versions, we try to test multiple cases
-# 64-bit version on 64-bit system allows easier installation of Python packages using .exe installers
-# and better CMake automatic detection of some Python tools
   matrix:
 # Python 2.7; 32-bit version
-    - python: C:\Python27;C:\Python27\Scripts
+#   - python: C:\Python27;C:\Python27\Scripts
 # Python 2.7; 64-bit version
     - python: C:\Python27-x64;C:\Python27-x64\Scripts
 # Python 3.4; 32-bit version
-    - python: C:\Python34;C:\Python34\Scripts
+#   - python: C:\Python34;C:\Python34\Scripts
 # Python 3.4; 64-bit version
-    - python: C:\Python34-x64;C:\Python34-x64\Scripts
+#   - python: C:\Python34-x64;C:\Python34-x64\Scripts
 
 build_script:
 # add location of used Python to path
