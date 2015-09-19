@@ -4,9 +4,9 @@
 #
 # Variables defined::
 #
-#   LAPACK_FOUND - describe me, uncached
-#   LAPACK_LIBRARIES - describe me, uncached
-#   LAPACK_INCLUDE_DIR - describe me, uncached
+#   LAPACK_FOUND
+#   LAPACK_LIBRARIES
+#   LAPACK_INCLUDE_DIR
 #
 # autocmake.cfg configuration::
 #

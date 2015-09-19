@@ -4,9 +4,9 @@
 #
 # Variables defined::
 #
-#   BLAS_FOUND - describe me, uncached
-#   BLAS_LIBRARIES - describe me, uncached
-#   BLAS_INCLUDE_DIR - describe me, uncached
+#   BLAS_FOUND
+#   BLAS_LIBRARIES
+#   BLAS_INCLUDE_DIR
 #
 # autocmake.cfg configuration::
 #
