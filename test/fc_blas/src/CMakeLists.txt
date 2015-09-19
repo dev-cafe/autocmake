@@ -1,6 +1,6 @@
 if(BLAS_FOUND)
     add_executable(example example.f90)
-    target_link_libraries(example ${MATH_LIBS})
+    target_link_libraries(example ${BLAS_LIBRARIES})
 else()
-    message(FATAL_ERROR "BLAS library not found for the test fc_blas!")
+    message(FATAL_ERROR "BLAS library not found")
 endif()

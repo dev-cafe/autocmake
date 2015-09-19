@@ -128,16 +128,16 @@ def test_fc_omp():
 
 
 def test_fc_blas():
-    configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
+    configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --blas')
+
+
+def test_fc_lapack():
+    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --lapack')
 
 
 @skip_on_osx
 def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas')
-
-
-def test_fc_lapack():
-    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --cmake-options="-DMATH_LIB_SEARCH_ORDER=\'OPENBLAS;ATLAS;MKL;SYSTEM_NATIVE\'"')
 
 
 @skip_on_osx
