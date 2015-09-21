@@ -34,6 +34,8 @@ if(ENABLE_MPI AND NOT MPI_FOUND)
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MPI_COMPILE_FLAGS}")
         endif()
         include_directories(${MPI_INCLUDE_PATH})
+
+        add_definitions(-DENABLE_MPI)
     else()
         message(FATAL_ERROR "-- You asked for MPI, but CMake could not find any MPI installation, check $PATH")
     endif()
