@@ -46,7 +46,7 @@ if(ENABLE_OPENMP)
     endif()
 
     if(OPENMP_FOUND)
-        add_definitions(-DENABLE_OPENMP)
+        add_definitions(-DHAVE_OPENMP)
         if(DEFINED CMAKE_C_COMPILER_ID)
             set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
         endif()
