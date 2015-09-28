@@ -78,6 +78,7 @@ set(Boost_DETAILED_FAILURE_MESSAGE OFF)
 set(BUILD_CUSTOM_BOOST FALSE)
 if(FORCE_CUSTOM_BOOST)
     set(BUILD_CUSTOM_BOOST TRUE)
+    message(STATUS "Force automatic build of Boost")
     # Just to avoid unused variable warning from CMake
     set(BOOST_INCLUDEDIR "")
     set(BOOST_LIBRARYDIR "")
