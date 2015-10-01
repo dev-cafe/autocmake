@@ -276,11 +276,13 @@ def fetch_modules(config, relative_path):
                         dst = os.path.join(download_directory, 'autocmake_%s' % module_name)
                         fetch_url(src, dst)
                         file_name = dst
+                        fetch_dst_directory = download_directory
                     else:
                         if os.path.exists(src):
                             path = os.path.dirname(src)
                             name = module_name
                             file_name = src
+                            fetch_dst_directory = path
                         else:
                             sys.stderr.write("ERROR: %s does not exist\n" % src)
                             sys.exit(-1)
@@ -291,7 +293,11 @@ def fetch_modules(config, relative_path):
                         config = prepend_or_set(config, section, 'docopt', config_docopt)
                         config = prepend_or_set(config, section, 'define', config_define)
                         config = prepend_or_set(config, section, 'export', config_export)
-                        config = prepend_or_set(config, section, 'fetch', config_fetch)
+                        if config_fetch:
+                            for src in config_fetch.split('\n'):
+                                dst = os.path.join(fetch_dst_directory, os.path.basename(src))
+                                fetch_url(src, dst)
+
                     modules.append(Module(path=path, name=name))
                 i += 1
                 print_progress_bar(
@@ -301,6 +307,8 @@ def fetch_modules(config, relative_path):
                     width=30
                 )
             if config.has_option(section, 'fetch'):
+                # when we fetch directly from autocmake.cfg
+                # we download into downloaded/
                 for src in config.get(section, 'fetch').split('\n'):
                     dst = os.path.join(download_directory, os.path.basename(src))
                     fetch_url(src, dst)
