@@ -1,32 +1,18 @@
 #.rst:
 #
-# Boost libraries detection and automatic build-up.
-# Minimum required version of Boost and required components have to
-# be specified separately in ``custom/boost_version-components.cmake``
-# By "required components" we here mean compiled Boost libraries.
-# This modules downloads the .zip archive from sourceforge at project
-# bootstrap.
+# Detect, build, and link Boost libraries.
+# This modules downloads the .zip archive from SourceForge
+# Autocmake update time.
+#
 # Your autocmake.cfg should look like this::
 #
-#   [custom]
-#   source: custom/boost_version-components.cmake
-#
 #   [boost]
+#   {'major': 1, 'minor': 59, 'patch': 0, 'components': 'chrono;timer;system'}
 #   source: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost.cmake
-#   fetch: http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.zip
 #
-# The ``custom/boost_version-components.cmake`` should look like this::
-#
-#   set(BOOST_MINIMUM_REQUIRED 1.58.0)
-#   list(APPEND BOOST_COMPONENTS_REQUIRED chrono timer system)
-#
-# Caveats:
-#
-# #. cross-dependencies between required components are not checked for.
-#    For example, Boost.Timer depends on Boost.Chrono and Boost.System thus you
-#    should ask explicitly for all three
-# #. the project admin has to make sure that ``BOOST_MINIMUM_REQUIRED`` and the
-#    ``fetch`` directive point to the same version of Boost
+# Cross-dependencies between required components are not checked for.
+# For example, Boost.Timer depends on Boost.Chrono and Boost.System thus you
+# should ask explicitly for all three.
 #
 # Dependencies::
 #
@@ -35,17 +21,19 @@
 #
 # Variables used::
 #
-#   BOOST_MINIMUM_REQUIRED     - Minimum required version of Boost, set in ``custom/boost_version-components.cmake``
+#   BOOST_MINIMUM_REQUIRED     - Minimum required version of Boost
 #   BOOST_COMPONENTS_REQUIRED  - Components (compiled Boost libraries) required
 #   PROJECT_SOURCE_DIR
 #   PROJECT_BINARY_DIR
 #   CMAKE_BUILD_TYPE
 #   MPI_FOUND
 #
-# Variables set::
-#
 # autocmake.cfg configuration::
 #
+#   major=1
+#   minor=48
+#   patch=0
+#   components=''
 #   fetch: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_unpack.cmake
 #          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_userconfig.cmake
 #          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_configure.cmake
@@ -53,17 +41,20 @@
 #          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_install.cmake
 #          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_headers.cmake
 #          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_cleanup.cmake
+#          http://sourceforge.net/projects/boost/files/boost/%(major)s.%(minor)s.%(patch)s/boost_%(major)s_%(minor)s_%(patch)s.zip
 #   docopt: --boost-headers=<BOOST_INCLUDEDIR> Include directories for Boost [default: ''].
 #           --boost-libraries=<BOOST_LIBRARYDIR> Library directories for Boost [default: ''].
 #           --build-boost=<FORCE_CUSTOM_BOOST> Deactivate Boost detection and build on-the-fly <ON/OFF> [default: OFF].
-#   define: '-DBOOST_INCLUDEDIR="%s"' % arguments['--boost-headers']
-#           '-DBOOST_LIBRARYDIR="%s"' % arguments['--boost-libraries']
-#           '-DFORCE_CUSTOM_BOOST="%s"' % arguments['--build-boost']
+#   define: '-DBOOST_INCLUDEDIR="{0}"'.format(arguments['--boost-headers'])
+#           '-DBOOST_LIBRARYDIR="{0}"'.format(arguments['--boost-libraries'])
+#           '-DFORCE_CUSTOM_BOOST="{0}"'.format(arguments['--build-boost'])
+#           '-DBOOST_MINIMUM_REQUIRED="%(major)s.%(minor)s.%(patch)s"'
+#           '-DBOOST_COMPONENTS_REQUIRED="%(components)s"'
 
 # FIXME Maintainer should be able to choose between fail (end-user has to satisfy dependency
 #       on its own) and soft-fail (self-build of Boost)
 # Underscore-separated version number
-string(REGEX REPLACE "\\." "_" BOOSTVER  ${BOOST_MINIMUM_REQUIRED})
+string(REGEX REPLACE "\\." "_" BOOSTVER ${BOOST_MINIMUM_REQUIRED})
 # Where the Boost .zip archive is located
 set(BOOST_ARCHIVE_LOCATION ${CMAKE_CURRENT_LIST_DIR})
 set(BOOST_ARCHIVE boost_${BOOSTVER}.zip)
@@ -82,12 +73,12 @@ if(FORCE_CUSTOM_BOOST)
     # Just to avoid unused variable warning from CMake
     set(BOOST_INCLUDEDIR "")
     set(BOOST_LIBRARYDIR "")
-else(FORCE_CUSTOM_BOOST)
+else()
     find_package(Boost ${BOOST_MINIMUM_REQUIRED} COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
     if(NOT Boost_FOUND)
         set(BUILD_CUSTOM_BOOST TRUE)
-    endif(NOT Boost_FOUND)
-endif(FORCE_CUSTOM_BOOST)
+    endif()
+endif()
 
 if(BUILD_CUSTOM_BOOST)
     ## Preliminary work
@@ -112,7 +103,8 @@ if(BUILD_CUSTOM_BOOST)
     string(TOLOWER ${CMAKE_BUILD_TYPE} type)
     include(${CMAKE_CURRENT_LIST_DIR}/boost_unpack.cmake)
     include(${CMAKE_CURRENT_LIST_DIR}/boost_userconfig.cmake)
-    if(BOOST_COMPONENTS_REQUIRED)
+
+    if(NOT BOOST_COMPONENTS_REQUIRED STREQUAL "")
         # Non-empty list. Compiled libraries needed
         # Transform the ;-separated list to a ,-separated list (digested by the Boost build toolchain!)
         string(REPLACE ";" "," b2_needed_components "${BOOST_COMPONENTS_REQUIRED}")
@@ -125,12 +117,13 @@ if(BUILD_CUSTOM_BOOST)
         include(${CMAKE_CURRENT_LIST_DIR}/boost_configure.cmake)
         include(${CMAKE_CURRENT_LIST_DIR}/boost_build.cmake)
         include(${CMAKE_CURRENT_LIST_DIR}/boost_install.cmake)
-    else(BOOST_COMPONENTS_REQUIRED)
+    else()
         # Empty list. Header-only libraries needed
         # Just unpack to known location
         message(STATUS "  No libraries required, installing headers")
         include(${CMAKE_CURRENT_LIST_DIR}/boost_headers.cmake)
-    endif(BOOST_COMPONENTS_REQUIRED)
+    endif()
+
     include(${CMAKE_CURRENT_LIST_DIR}/boost_cleanup.cmake)
     add_custom_target(custom_boost DEPENDS ${CUSTOM_BOOST_LOCATION}/boost.cleanedup)
     # 4. Set all variables related to Boost that find_package would have set
@@ -142,6 +135,7 @@ if(BUILD_CUSTOM_BOOST)
     set(Boost_LIB_VERSION ${Boost_MAJOR_VERSION}_${Boost_MINOR_VERSION})
     set(Boost_INCLUDE_DIR ${CUSTOM_BOOST_LOCATION}/include CACHE PATH "Boost include directory" FORCE)
     set(Boost_LIBRARY_DIR ${CUSTOM_BOOST_LOCATION}/lib CACHE PATH "Boost library directory" FORCE)
+
     foreach(_component ${BOOST_COMPONENTS_REQUIRED})
         string(TOUPPER ${_component} _COMP)
         set(Boost_${_COMP}_FOUND TRUE)
@@ -150,11 +144,14 @@ if(BUILD_CUSTOM_BOOST)
         set(Boost_${_COMP}_LIBRARY_RELEASE ${Boost_LIBRARY_DIR}/${Boost_${_COMP}_LIBRARY} CACHE FILEPATH "Boost ${_component} library (release)" FORCE)
         list(APPEND Boost_LIBRARIES ${Boost_${_COMP}_LIBRARY})
     endforeach()
+
     set(Boost_INCLUDE_DIRS ${Boost_INCLUDE_DIR})
     set(Boost_LIBRARY_DIRS ${Boost_LIBRARY_DIR})
     if(CMAKE_SYSTEM_NAME MATCHES "Linux")
         list(APPEND Boost_LIBRARIES rt)
     endif()
-endif(BUILD_CUSTOM_BOOST)
+endif()
+
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
+
 link_directories(${Boost_LIBRARY_DIRS})

@@ -3,13 +3,14 @@
 import os
 import sys
 import datetime
+import ast
 from collections import OrderedDict, namedtuple
 
 # we do not use the nicer sys.version_info.major
 # for compatibility with Python < 2.7
 if sys.version_info[0] > 2:
     from io import StringIO
-    from configparser import RawConfigParser
+    from configparser import ConfigParser
     import urllib.request
 
     class URLopener(urllib.request.FancyURLopener):
@@ -18,7 +19,7 @@ if sys.version_info[0] > 2:
             sys.exit(-1)
 else:
     from StringIO import StringIO
-    from ConfigParser import RawConfigParser
+    from ConfigParser import ConfigParser
     import urllib
 
     class URLopener(urllib.FancyURLopener):
@@ -231,7 +232,7 @@ def gen_cmakelists(project_name, min_cmake_version, relative_path, modules):
 # ------------------------------------------------------------------------------
 
 
-def prepend_or_set(config, section, option, value):
+def prepend_or_set(config, section, option, value, defaults):
     """
     If option is already set, then value is prepended.
     If option is not set, then it is created and set to value.
@@ -239,7 +240,7 @@ def prepend_or_set(config, section, option, value):
     """
     if value:
         if config.has_option(section, option):
-            value += '\n%s' % config.get(section, option)
+            value += '\n%s' % config.get(section, option, 0, defaults)
         config.set(section, option, value)
     return config
 
@@ -287,12 +288,17 @@ def fetch_modules(config, relative_path):
                             sys.stderr.write("ERROR: %s does not exist\n" % src)
                             sys.exit(-1)
 
+                    if config.has_option(section, 'defaults'):
+                        defaults = ast.literal_eval(config.get(section, 'defaults'))
+                    else:
+                        defaults = {}
+
                     # we infer config from the module documentation
                     with open(file_name, 'r') as f:
-                        config_docopt, config_define, config_export, config_fetch = parse_cmake_module(f.read())
-                        config = prepend_or_set(config, section, 'docopt', config_docopt)
-                        config = prepend_or_set(config, section, 'define', config_define)
-                        config = prepend_or_set(config, section, 'export', config_export)
+                        config_docopt, config_define, config_export, config_fetch = parse_cmake_module(f.read(), defaults)
+                        config = prepend_or_set(config, section, 'docopt', config_docopt, defaults)
+                        config = prepend_or_set(config, section, 'define', config_define, defaults)
+                        config = prepend_or_set(config, section, 'export', config_export, defaults)
                         if config_fetch:
                             for src in config_fetch.split('\n'):
                                 dst = os.path.join(fetch_dst_directory, os.path.basename(src))
@@ -377,7 +383,7 @@ def main(argv):
 
     # read config file
     print('- parsing autocmake.cfg')
-    config = RawConfigParser(dict_type=OrderedDict)
+    config = ConfigParser(dict_type=OrderedDict)
     config.read('autocmake.cfg')
 
     if not config.has_option('project', 'name'):
@@ -425,7 +431,7 @@ def make_executable(path):
 # ------------------------------------------------------------------------------
 
 
-def parse_cmake_module(s_in):
+def parse_cmake_module(s_in, defaults={}):
 
     config_docopt = None
     config_define = None
@@ -456,18 +462,18 @@ def parse_cmake_module(s_in):
     autocmake_entry = '[foo]\n' + autocmake_entry
 
     buf = StringIO(autocmake_entry)
-    config = RawConfigParser(dict_type=OrderedDict)
+    config = ConfigParser(dict_type=OrderedDict)
     config.readfp(buf)
 
     for section in config.sections():
         if config.has_option(section, 'docopt'):
-            config_docopt = config.get(section, 'docopt')
+            config_docopt = config.get(section, 'docopt', 0, defaults)
         if config.has_option(section, 'define'):
-            config_define = config.get(section, 'define')
+            config_define = config.get(section, 'define', 0, defaults)
         if config.has_option(section, 'export'):
-            config_export = config.get(section, 'export')
+            config_export = config.get(section, 'export', 0, defaults)
         if config.has_option(section, 'fetch'):
-            config_fetch = config.get(section, 'fetch')
+            config_fetch = config.get(section, 'fetch', 0, defaults)
 
     return config_docopt, config_define, config_export, config_fetch
 

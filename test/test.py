@@ -170,21 +170,17 @@ def test_python_libs_custom():
     configure_build_and_exe('python_libs_custom', 'python setup.py --cxx=g++ --python={}'.format(python_executable))
 
 
-@skip_always
 def test_boost_header_only():
     configure_build_and_exe('boost_header_only', 'python setup.py --cxx=g++')
 
 
-@skip_always
 def test_boost_libs():
     configure_build_and_exe('boost_libs', 'python setup.py --cxx=g++')
 
 
-@skip_always
 def test_boost_mpi_libs():
     configure_build_and_exe('boost_mpi_libs', 'python setup.py --cxx=g++ --mpi')
 
 
-@skip_always
 def test_boost_python_libs():
     configure_build_and_exe('boost_python_libs', 'python setup.py --cxx=g++')
