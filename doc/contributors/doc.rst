@@ -12,6 +12,9 @@ The module reference documentation is generated from the module sources using
 http://autocmake.readthedocs.org/en/latest/module-reference.html#cc-cmake with
 https://github.com/scisoft/autocmake/blob/master/modules/cc.cmake).
 
-.. todo::
-
-   Mention the possibility to infer autocmake.cfg code from the documentation.
+Please note that the lines following ``# autocmake.cfg configuration::`` are
+understood by the ``update.py`` script to infer autocmake.cfg code from the
+documentation.  As an example consider
+https://github.com/scisoft/autocmake/blob/master/modules/cc.cmake#L20-L25.
+Here, ``update.py`` will infer the configurations for ``docopt``, ``export``,
+and ``define``.
