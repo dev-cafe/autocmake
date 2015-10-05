@@ -59,6 +59,7 @@ The only section where the name matters is ``[project]``::
 
   [project]
   name: numgrid
+  min_cmake_version: 2.8
 
 This is where we define the project name (here "numgrid"). This section has to
 be there and it has to be called "project" (but it does not have to be on top).

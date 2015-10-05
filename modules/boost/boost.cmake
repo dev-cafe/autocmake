@@ -7,7 +7,7 @@
 # Your autocmake.cfg should look like this::
 #
 #   [boost]
-#   {'major': 1, 'minor': 59, 'patch': 0, 'components': 'chrono;timer;system'}
+#   override: {'major': 1, 'minor': 59, 'patch': 0, 'components': 'chrono;timer;system'}
 #   source: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost.cmake
 #
 # Cross-dependencies between required components are not checked for.
