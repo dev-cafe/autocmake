@@ -288,8 +288,8 @@ def fetch_modules(config, relative_path):
                             sys.stderr.write("ERROR: %s does not exist\n" % src)
                             sys.exit(-1)
 
-                    if config.has_option(section, 'defaults'):
-                        defaults = ast.literal_eval(config.get(section, 'defaults'))
+                    if config.has_option(section, 'override'):
+                        defaults = ast.literal_eval(config.get(section, 'override'))
                     else:
                         defaults = {}
 
