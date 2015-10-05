@@ -13,7 +13,7 @@ below::
   min_cmake_version: 2.8
 
   [fc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc_optional.cmake
+  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
 
   [cc]
   source: https://github.com/scisoft/autocmake/raw/master/modules/cc.cmake
@@ -162,9 +162,9 @@ The preferred way to extend ``CMakeLists.txt`` is by editing ``autocmake.cfg``
 and using the ``source`` option::
 
   [fc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc_optional.cmake
+  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
 
-This will download ``fc_optional.cmake`` and include it in ``CMakeLists.txt``.
+This will download ``fc.cmake`` and include it in ``CMakeLists.txt``.
 
 You can also include local CMake modules, e.g.::
 
