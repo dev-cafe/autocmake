@@ -35,7 +35,8 @@ Now from top-level our file tree looks like this::
   |   |-- autocmake.cfg
   |   |-- lib
   |   |   |-- config.py
-  |   |   `-- docopt.py
+  |   |   `-- docopt
+  |   |       `-- docopt.py
   |   `-- update.py
   `-- src
       |-- feature1.F90
@@ -46,6 +47,7 @@ Now we edit ``cmake/autocmake.cfg`` to look like this::
 
   [project]
   name: hello
+  min_cmake_version: 2.8
 
   [fc]
   source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
@@ -57,7 +59,7 @@ Now we edit ``cmake/autocmake.cfg`` to look like this::
   source: https://github.com/scisoft/autocmake/raw/master/modules/src.cmake
 
 What we have specified here is the project name and that we wish Fortran and C
-support. The ``[src]`` module tells CMake to include a ``src/CMakeLists.txt``.
+support. The ``src.cmake`` module tells CMake to include a ``src/CMakeLists.txt``.
 We need to create ``src/CMakeLists.txt`` which can look like this::
 
   add_executable(
@@ -86,7 +88,8 @@ And this is what we got::
   |   |   `-- autocmake_src.cmake
   |   |-- lib
   |   |   |-- config.py
-  |   |   `-- docopt.py
+  |   |   `-- docopt
+  |   |       `-- docopt.py
   |   `-- update.py
   |-- setup.py
   `-- src
@@ -144,5 +147,5 @@ Now we are ready to build::
 Excellent! But this was a lot of typing and file creating just to get a simple
 executable compiled!? Of course, all that could have been done with few command
 lines directly but now we have a cross-platform project and can extend it and
-customize it and we got a front-end script and command-line parser for free.
+customize it and we also got a front-end script and command-line parser for free.
 Now go out and explore more Autocmake modules and features.

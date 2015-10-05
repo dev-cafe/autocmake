@@ -5,7 +5,7 @@ Customizing CMake modules
 
 The ``update.py`` script assembles modules listed in ``autocmake.cfg`` into
 ``CMakeLists.txt``. Those that are fetched from the web are placed inside
-``downloaded/``.  You have at least four options to customize downloaded CMake
+``downloaded/``.  You have several options to customize downloaded CMake
 modules:
 
 
@@ -20,10 +20,27 @@ the least elegant solution since the customizations may be overwritten by the
 Adapt local copies of CMake modules
 -----------------------------------
 
-A better solution is to download the CMake modules that you wish you customize
+A slightly better solution is to download the CMake modules that you wish you customize
 to a separate directory (e.g. ``custom/``) and source the customized CMake
 modules in ``autocmake.cfg``. Alternatively you can serve your custom modules
 from your own http server.
+
+
+Fork and branch the CMake modules
+---------------------------------
+
+You can fork and branch the mainline Autocmake development and include
+the branched customized versions. This will make it easier for you
+to stay up-to-date with upstream development.
+
+
+Overriding defaults
+-------------------
+
+Some modules use interpolations to set defaults, see for instance
+https://github.com/scisoft/autocmake/blob/master/modules/boost/boost.cmake#L33-L36.
+These can be modified within ``autocmake.cfg``, e.g.:
+https://github.com/scisoft/autocmake/blob/master/test/boost_libs/cmake/autocmake.cfg#L9
 
 
 Create own CMake modules

@@ -20,11 +20,11 @@ Sometimes you may want to avoid using the latest version of a CMake module and
 rather fetch an older version, for example with the hash ``abcd123``. To
 achieve this, instead of::
 
-  [coverage]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/code_coverage.cmake
+  [foo]
+  source: https://github.com/scisoft/autocmake/raw/master/modules/foo.cmake
 
 pin the version to ``abcd123`` (you do not need to specify the full Git hash, a unique
 beginning will do)::
 
-  [coverage]
-  source: https://github.com/scisoft/autocmake/raw/abcd123/modules/code_coverage.cmake
+  [foo]
+  source: https://github.com/scisoft/autocmake/raw/abcd123/modules/foo.cmake
