@@ -30,11 +30,22 @@ want a ``setup.py`` flag to toggle the feature::
   [my_feature]
   source: custom/my_feature.cmake
   docopt: --my-feature Enable my feature [default: False].
-  define: '-DENABLE_MY_FEATURE=%s' % arguments['--my-feature']
+  define: '-DENABLE_MY_FEATURE={0}'.format(arguments['--my-feature'])
 
 Implement your ideas, test them, and share them.  If your module is portable,
 good code quality, and of general interest, you can suggest it to be part of
 the standard set of modules or even a core feature.
+
+
+How can I get a setup.py flag --X that toggles a CMake variable?
+----------------------------------------------------------------
+
+The following will add a ``--something`` flag which toggles the CMake variable
+``ENABLE_SOMETHING``::
+
+  [my_section]
+  docopt: --something Enable something [default: False].
+  define: '-DENABLE_SOMETHING={0}'.format(arguments['--something'])
 
 
 In CMake I can do feature X - can I do that also with Autocmake?
@@ -92,13 +103,3 @@ targets in a custom module in a local file and include it like this::
 
   [my_sources]
   source: custom/my_sources.cmake
-
-
-How do I know whether I need to rerun update.py?
-------------------------------------------------
-
-You need to rerun the ``update.py`` script in the following situations:
-
-- To fetch updates to CMake modules which you include from the web.
-- To regenerate ``CMakeLists.txt`` and the ``setup.py`` script.
-- Every time you change ``autocmake.cfg``.
