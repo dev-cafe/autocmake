@@ -6,9 +6,8 @@ About Autocmake
 Building libraries and executables from sources can be a complex task. Several
 solutions exist to this problem: GNU Makefiles is the traditional approach.
 Today, CMake is one of the trendier alternatives which can generate Makefiles
-starting from a file called ``CMakeLists.txt``. Consider Autocmake a
-``CMakeLists.txt``-generator.  Autocmake is a collection of scripts which
-compose well tested CMake building blocks into a CMake project and generates
+starting from a file called ``CMakeLists.txt``.
+Autocmake composes CMake building blocks into a CMake project and generates
 ``CMakeLists.txt`` as well as ``setup.py``, which serves as a front-end to
 ``CMakeLists.txt``. All this is done based on a lightweight ``autocmake.cfg``
 file::
@@ -17,6 +16,8 @@ file::
        |                                   |
        | fetches Autocmake                 |
        | infrastructure                    |
+       | and updates the update.py script  |
+       |                                   |
        v                           Developer maintaining
   autocmake.cfg                        Autocmake
        |                                   |
@@ -35,7 +36,6 @@ file::
        v                                   v
   Build/install/test targets
 
-
 Our main motivation to create Autocmake as a CMake framework library and
 CMake module composer was to simplify CMake code transfer between codes. We got
 tired of manually diffing and copy-pasting boiler-plate CMake code and watching
@@ -44,7 +44,7 @@ scientific projects which typically have very similar requirements:
 
 - Fortran and/or C and/or C++ support
 - Tuning of compiler flags
-- Front-end script for the CMake-unaware user (setup.py)
+- Front-end script with good defaults (setup.py)
 - Support for parallelization: MPI, OMP, CUDA
 - Math libraries: BLAS, LAPACK
 
