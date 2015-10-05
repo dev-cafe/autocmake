@@ -4,8 +4,8 @@ FAQ for users
 =============
 
 
-TLDR How do I compile the code?
--------------------------------
+TL;DR How do I compile the code?
+--------------------------------
 
 ::
 
@@ -27,7 +27,7 @@ How can I add compiler flags?
 -----------------------------
 
 You can do this with ``--extra-fc-flags``, ``--extra-cc-flags``, or
-``--extra-cxx-flags``::
+``--extra-cxx-flags`` (depending on the set of enabled languages)::
 
   $ python setup.py --fc=gfortran --extra-fc-flags='-some-exotic-flag'
 
