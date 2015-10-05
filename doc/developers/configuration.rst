@@ -158,10 +158,6 @@ and this is what we will do in the next section.
 Assembling CMake plugins
 ------------------------
 
-Write me ...
-source
-several
-
 The preferred way to extend ``CMakeLists.txt`` is by editing ``autocmake.cfg``
 and using the ``source`` option::
 
