@@ -12,6 +12,7 @@ General
 
    general/about.rst
    general/requirements.rst
+   general/help.rst
 
 
 For developers who use Autocmake
