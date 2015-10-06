@@ -17,5 +17,6 @@ See http://autocmake.org.
 - [DIRAC](http://diracprogram.org)
 - [mathlib-tester](https://github.com/miroi/mathlibs-tester)
 - [Fortran Input Reader](https://github.com/miroi/fortran_input_reader)
+- [PCMSolver](https://github.com/PCMSolver/pcmsolver)
 
 If you use Autocmake, please link to your project via a pull request.
