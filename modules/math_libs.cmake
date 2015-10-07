@@ -49,12 +49,6 @@
 #           '-DBLAS_LANG=Fortran'
 #           '-DLAPACK_LANG=Fortran'
 
-message(STATUS "********************************************************************************************")
-message(STATUS "*                                                                                          *")
-message(STATUS "* WARNING: math_libs.cmake is depracted and will be removed for the next Autocmake version *")
-message(STATUS "*                                                                                          *")
-message(STATUS "********************************************************************************************")
-
 #-------------------------------------------------------------------------------
 # ENABLE_STATIC_LINKING
 
