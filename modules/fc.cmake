@@ -25,8 +25,8 @@
 #
 #   docopt: --fc=<FC> Fortran compiler [default: gfortran].
 #           --extra-fc-flags=<EXTRA_FCFLAGS> Extra Fortran compiler flags [default: ''].
-#   export: 'FC=%s' % arguments['--fc']
-#   define: '-DEXTRA_FCFLAGS="%s"' % arguments['--extra-fc-flags']
+#   export: 'FC="{0}"'.format(arguments['--fc'])
+#   define: '-DEXTRA_FCFLAGS="{0}"'.format(arguments['--extra-fc-flags'])
 
 enable_language(Fortran)
 
