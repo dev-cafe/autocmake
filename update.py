@@ -138,9 +138,11 @@ def gen_setup(config, relative_path, setup_script_name):
     s.append('\nimport os')
     s.append('import sys')
 
-    s.append("\nsys.path.append('%s')" % os.path.join(relative_path, 'lib', 'docopt'))
-    s.append("\nsys.path.append('%s')" % os.path.join(relative_path, 'lib'))
-    s.append('from config import configure')
+    s.append("\nsys.path.append('%s')" % relative_path)
+    s.append("sys.path.append('%s')" % os.path.join(relative_path, 'lib'))
+    s.append("sys.path.append('%s')" % os.path.join(relative_path, 'lib', 'docopt'))
+
+    s.append('import config')
     s.append('import docopt')
 
     s.append('\n\noptions = """')
@@ -171,16 +173,29 @@ def gen_setup(config, relative_path, setup_script_name):
 
     s.append(gen_cmake_command(config))
 
-    s.append("\n\ntry:")
+    s.append("\n")
+    s.append("# parse command line args")
+    s.append("try:")
     s.append("    arguments = docopt.docopt(options, argv=None)")
     s.append("except docopt.DocoptExit:")
     s.append(r"    sys.stderr.write('ERROR: bad input to %s\n' % sys.argv[0])")
     s.append("    sys.stderr.write(options)")
     s.append("    sys.exit(-1)")
-    s.append("\nroot_directory = os.path.dirname(os.path.realpath(__file__))")
+    s.append("\n")
+    s.append("# we run the arguments through the validate function if it exists")
+    s.append("if config.module_exists('validate'):")
+    s.append("    import validate")
+    s.append("    arguments = validate.validate(sys.argv, arguments)")
+    s.append("\n")
+    s.append("root_directory = os.path.dirname(os.path.realpath(__file__))")
+    s.append("\n")
     s.append("build_path = arguments['<builddir>']")
+    s.append("\n")
+    s.append("# create cmake command")
     s.append("cmake_command = '%s %s' % (gen_cmake_command(options, arguments), root_directory)")
-    s.append("configure(root_directory, build_path, cmake_command, arguments['--show'])")
+    s.append("\n")
+    s.append("# run cmake")
+    s.append("config.configure(root_directory, build_path, cmake_command, arguments['--show'])")
 
     return s
 
