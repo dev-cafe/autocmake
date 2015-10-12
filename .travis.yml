@@ -20,6 +20,8 @@ addons:
       - libopenmpi-dev
         # Python library, development version
       - libpython2.7
+        # Boost
+      - libboost-all-dev
 before_install:
   - if test ${TRAVIS_OS_NAME} = osx; then brew update; fi
   - if test ${TRAVIS_OS_NAME} = osx; then brew outdated xctool || brew upgrade xctool; fi
