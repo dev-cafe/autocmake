@@ -1,5 +1,5 @@
 # here we test setting -DENABLE_SOMETHING=OFF -DFOO=ON
-# setup.py script
+# in the setup script
 option(ENABLE_SOMETHING "Enable something" ON)
 option(ENABLE_FOO "Enable FOO" OFF)
 

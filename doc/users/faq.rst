@@ -9,7 +9,7 @@ TL;DR How do I compile the code?
 
 ::
 
-  $ python setup.py [-h]
+  $ python setup [-h]
   $ cd build
   $ make
 
@@ -17,10 +17,10 @@ TL;DR How do I compile the code?
 How can I specify the compiler?
 -------------------------------
 
-By default ``setup.py`` will attempt GNU compilers.
+By default the setup script will attempt GNU compilers.
 You can specify compilers manually like this::
 
-  $ python setup.py --fc=ifort --cc=icc --cxx=icpc
+  $ python setup --fc=ifort --cc=icc --cxx=icpc
 
 
 How can I add compiler flags?
@@ -29,7 +29,7 @@ How can I add compiler flags?
 You can do this with ``--extra-fc-flags``, ``--extra-cc-flags``, or
 ``--extra-cxx-flags`` (depending on the set of enabled languages)::
 
-  $ python setup.py --fc=gfortran --extra-fc-flags='-some-exotic-flag'
+  $ python setup --fc=gfortran --extra-fc-flags='-some-exotic-flag'
 
 
 How can I redefine compiler flags?
@@ -42,9 +42,9 @@ these environment variables you have full control over the flags
 without editing CMake files.
 
 
-How can I select CMake options via the setup.py script?
--------------------------------------------------------
+How can I select CMake options via the setup script?
+----------------------------------------------------
 
 Like this::
 
-  $ python setup.py --cmake-options="-DTHIS_OPTION=ON -DTHAT_OPTION=OFF"
+  $ python setup --cmake-options="-DTHIS_OPTION=ON -DTHAT_OPTION=OFF"

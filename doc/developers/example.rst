@@ -71,7 +71,7 @@ We need to create ``src/CMakeLists.txt`` which can look like this::
 
 We wrote that we want to get an executable "hello.x" built from our sources.
 
-Now we have everything to generate ``CMakeLists.txt`` and ``setup.py``::
+Now we have everything to generate ``CMakeLists.txt`` and a setup script::
 
   $ cd cmake
   $ python update ..
@@ -91,7 +91,7 @@ And this is what we got::
   |   |   `-- docopt
   |   |       `-- docopt.py
   |   `-- update.py
-  |-- setup.py
+  |-- setup
   `-- src
       |-- CMakeLists.txt
       |-- feature1.F90
@@ -100,7 +100,7 @@ And this is what we got::
 
 Now we are ready to build::
 
-  $ python setup.py --fc=gfortran --cc=gcc
+  $ python setup --fc=gfortran --cc=gcc
 
   FC=gfortran CC=gcc cmake -DEXTRA_FCFLAGS="''" -DENABLE_FC_SUPPORT="ON" -DEXTRA_CFLAGS="''" -DCMAKE_BUILD_TYPE=release -G "Unix Makefiles" None /home/user/example
 

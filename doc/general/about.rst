@@ -8,7 +8,7 @@ solutions exist to this problem: GNU Makefiles is the traditional approach.
 Today, CMake is one of the trendier alternatives which can generate Makefiles
 starting from a file called ``CMakeLists.txt``.
 Autocmake composes CMake building blocks into a CMake project and generates
-``CMakeLists.txt`` as well as ``setup.py``, which serves as a front-end to
+``CMakeLists.txt`` as well as a setup script, which serves as a front-end to
 ``CMakeLists.txt``. All this is done based on a lightweight ``autocmake.cfg``
 file::
 
@@ -24,9 +24,9 @@ file::
        | python update.py ..               |
        |                                   |
        v                                   v
-  CMakeLists.txt (and setup.py front-end)
+  CMakeLists.txt (and setup front-end)
        |                                   |
-       | python setup.py                   |
+       | python setup                      |
        | which invokes CMake               |
        v                             User of the code
   Makefile (or something else)             |
@@ -44,7 +44,7 @@ scientific projects which typically have very similar requirements:
 
 - Fortran and/or C and/or C++ support
 - Tuning of compiler flags
-- Front-end script with good defaults (setup.py)
+- Front-end script with good defaults
 - Support for parallelization: MPI, OMP, CUDA
 - Math libraries: BLAS, LAPACK
 

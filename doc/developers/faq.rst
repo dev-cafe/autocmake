@@ -4,8 +4,8 @@ FAQ for developers
 ==================
 
 
-Autocmake does not do feature X - I really need feature X and a setup.py flag --X
----------------------------------------------------------------------------------
+Autocmake does not do feature X - I really need feature X and a setup flag --X
+------------------------------------------------------------------------------
 
 The Autocmake developers have to be very conservative and only a very limited
 set of portable features of absolutely general interest become part of the
@@ -25,7 +25,7 @@ And include this feature to the main ``CMakeLists.txt`` in ``autocmake.cfg``::
   source: custom/my_feature.cmake
 
 Now your code is included in the main ``CMakeLists.txt``. Perhaps you also
-want a ``setup.py`` flag to toggle the feature::
+want a setup script flag to toggle the feature::
 
   [my_feature]
   source: custom/my_feature.cmake
@@ -37,8 +37,8 @@ good code quality, and of general interest, you can suggest it to be part of
 the standard set of modules or even a core feature.
 
 
-How can I get a setup.py flag --X that toggles a CMake variable?
-----------------------------------------------------------------
+How can I get a setup flag --X that toggles a CMake variable?
+-------------------------------------------------------------
 
 The following will add a ``--something`` flag which toggles the CMake variable
 ``ENABLE_SOMETHING``::
@@ -46,6 +46,17 @@ The following will add a ``--something`` flag which toggles the CMake variable
   [my_section]
   docopt: --something Enable something [default: False].
   define: '-DENABLE_SOMETHING={0}'.format(arguments['--something'])
+
+
+Can I change the name of the setup script?
+------------------------------------------
+
+Yes you can do that in ``autocmake.cfg``. Here we for instance change the name to "configure"::
+
+  [project]
+  name: myproject
+  min_cmake_version: 2.8
+  setup_script: configure
 
 
 In CMake I can do feature X - can I do that also with Autocmake?
@@ -63,26 +74,26 @@ Yes, you probably want to do that. Autocmake generates a number of files which
 in principle could be generated at configure- or build-time.  However, you
 probably do not want the users of your code to run any Autocmake scripts like
 ``update.py`` to generate the files they need to build the project. The users
-of your code will run ``setup.py`` directly and expect everything to just work
+of your code will run ``setup`` directly and expect everything to just work
 (TM).
 
 
-The update.py script is overwriting my CMakeLists.txt and setup.py, isn't this bad?
------------------------------------------------------------------------------------
+The update.py script is overwriting my CMakeLists.txt and setup, isn't this bad?
+--------------------------------------------------------------------------------
 
 No, it is not as bad as it first looks. It is a feature. Normally
-``CMakeLists.txt`` and ``setup.py`` should not contain any explicit
+``CMakeLists.txt`` and ``setup`` should not contain any explicit
 customization and therefore should not contain anything that could not be
 regenerated. In any case you should use version control so that you can inspect
-and compare changes introduced to ``CMakeLists.txt`` and ``setup.py`` and
+and compare changes introduced to ``CMakeLists.txt`` and ``setup`` and
 possibly revert them. See also the next remark.
 
 
-But I need to manually edit and customize CMakeLists.txt and setup.py every time I run update.py!?
---------------------------------------------------------------------------------------------------
+But I need to manually edit and customize CMakeLists.txt and setup every time I run update.py!?
+-----------------------------------------------------------------------------------------------
 
 You typically never need to manually edit and customize ``CMakeLists.txt`` and
-``setup.py`` directly. You can introduce customizations in ``autocmake.cfg``
+``setup`` directly. You can introduce customizations in ``autocmake.cfg``
 which get assembled into the front-end scripts.
 
 

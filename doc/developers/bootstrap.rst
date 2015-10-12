@@ -39,7 +39,7 @@ Generating the CMake infrastructure
 Now customize ``autocmake.cfg`` to your needs
 (see :ref:`autocmake_cfg`)
 and then run the ``update.py`` script which
-creates ``CMakeLists.txt`` and ``setup.py`` in the target path::
+creates ``CMakeLists.txt`` and a setup script in the target path::
 
   $ python update.py ..
 
@@ -59,10 +59,10 @@ called ``downloaded/``::
 Building the project
 --------------------
 
-Now you have ``CMakeLists.txt`` and ``setup.py`` in the project root and the project
+Now you have ``CMakeLists.txt`` and setup script in the project root and the project
 can be built::
 
   $ cd ..
-  $ python setup.py [-h]
+  $ python setup [-h]
   $ cd build
   $ make

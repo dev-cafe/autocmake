@@ -105,13 +105,13 @@ to all libraries it needs::
   - fetching lib/docopt/docopt.py
   - fetching update.py
 
-Good. Now we can generate ``CMakeLists.txt`` and ``setup.py``::
+Good. Now we can generate ``CMakeLists.txt`` and the setup script::
 
   $ python update ..
 
   - parsing autocmake.cfg
   - generating CMakeLists.txt
-  - generating setup.py
+  - generating setup script
 
 Excellent. Here is the generated ``CMakeLists.txt``::
 
@@ -134,12 +134,12 @@ Excellent. Here is the generated ``CMakeLists.txt``::
 This is the very bare minimum. Every Autocmake project will have at least these
 settings.
 
-And we also got a ``setup.py`` script (front-end to ``CMakeLists.txt``) with
+And we also got a setup script (front-end to ``CMakeLists.txt``) with
 the following default options::
 
   Usage:
-    ./setup.py [options] [<builddir>]
-    ./setup.py (-h | --help)
+    ./setup [options] [<builddir>]
+    ./setup (-h | --help)
 
   Options:
     --type=<TYPE>                          Set the CMake build type (debug, release, or relwithdeb) [default: release].
@@ -195,10 +195,10 @@ documentation (see below), then the fetched file is placed into the same
 directory as the CMake module file which fetches it.
 
 
-Generating setup.py options
----------------------------
+Generating setup options
+------------------------
 
-Options for the ``setup.py`` script can be generated with the ``docopt``
+Options for the setup script can be generated with the ``docopt``
 option. As an example, the following ``autocmake.cfg`` snippet will add a
 ``--something`` flag::
 

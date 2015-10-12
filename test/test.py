@@ -94,93 +94,93 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 
 
 def test_extra_cmake_options():
-    configure_build_and_exe('extra_cmake_options', 'python setup.py --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
+    configure_build_and_exe('extra_cmake_options', 'python setup --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
 
 
 def test_cxx():
-    configure_build_and_exe('cxx', 'python setup.py --cxx=g++')
+    configure_build_and_exe('cxx', 'python setup --cxx=g++')
 
 
 def test_fc():
-    configure_build_and_exe('fc', 'python setup.py --fc=gfortran')
+    configure_build_and_exe('fc', 'python setup --fc=gfortran')
 
 
 def test_fc_git_info():
-    configure_build_and_exe('fc_git_info', 'python setup.py --fc=gfortran')
+    configure_build_and_exe('fc_git_info', 'python setup --fc=gfortran')
 
 
 def test_fc_int64():
-    configure_build_and_exe('fc_int64', 'python setup.py --fc=gfortran --int64')
+    configure_build_and_exe('fc_int64', 'python setup --fc=gfortran --int64')
 
 
 def test_fc_mpi():
     if sys.platform == 'win32':
-        setup_line = 'python setup.py --mpi --fc=gfortran --extra-fc-flags="-D_WIN64 -D INT_PTR_KIND()=8 -fno-range-check"'
+        setup_line = 'python setup --mpi --fc=gfortran --extra-fc-flags="-D_WIN64 -D INT_PTR_KIND()=8 -fno-range-check"'
     else:
-        setup_line = 'python setup.py --mpi --fc=mpif90'
+        setup_line = 'python setup --mpi --fc=mpif90'
     configure_build_and_exe('fc_mpi', setup_line, 'mpiexec -np 2')
 
 
 @skip_on_osx
 def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
-    configure_build_and_exe('fc_omp', 'python setup.py --omp --fc=gfortran')
+    configure_build_and_exe('fc_omp', 'python setup --omp --fc=gfortran')
 
 
 def test_fc_blas():
-    configure_build_and_exe('fc_blas', 'python setup.py --fc=gfortran --blas')
+    configure_build_and_exe('fc_blas', 'python setup --fc=gfortran --blas')
 
 
 def test_fc_lapack():
-    configure_build_and_exe('fc_lapack', 'python setup.py --fc=gfortran --lapack')
+    configure_build_and_exe('fc_lapack', 'python setup --fc=gfortran --lapack')
 
 
 @skip_on_osx
 def test_cxx_cblas():
-    configure_build_and_exe('cxx_cblas', 'python setup.py --cxx=g++ --cblas')
+    configure_build_and_exe('cxx_cblas', 'python setup --cxx=g++ --cblas')
 
 
 @skip_on_osx
 @skip_on_linux
 def test_cxx_lapacke():
-    configure_build_and_exe('cxx_lapacke', 'python setup.py --cxx=g++ --lapacke --cblas')
+    configure_build_and_exe('cxx_lapacke', 'python setup --cxx=g++ --lapacke --cblas')
 
 
 @skip_on_linux
 @skip_on_windows
 def test_cxx_accelerate():
-    configure_build_and_exe('cxx_accelerate', 'python setup.py --cxx=g++ --accelerate')
+    configure_build_and_exe('cxx_accelerate', 'python setup --cxx=g++ --accelerate')
 
 
 def test_python_interpreter():
-    configure_build_and_exe('python_interpreter', 'python setup.py --cxx=g++')
+    configure_build_and_exe('python_interpreter', 'python setup --cxx=g++')
 
 
 def test_python_interpreter_custom():
-    setup = 'python setup.py --cxx=g++ --python=%s' % sys.executable
+    setup = 'python setup --cxx=g++ --python=%s' % sys.executable
     configure_build_and_exe('python_interpreter_custom', setup)
 
 
 def test_python_libs():
-    configure_build_and_exe('python_libs', 'python setup.py --cxx=g++')
+    configure_build_and_exe('python_libs', 'python setup --cxx=g++')
 
 
 def test_python_libs_custom():
     python_executable = sys.executable
-    configure_build_and_exe('python_libs_custom', 'python setup.py --cxx=g++ --python={}'.format(python_executable))
+    configure_build_and_exe('python_libs_custom', 'python setup --cxx=g++ --python={}'.format(python_executable))
 
 
 def test_boost_header_only():
-    configure_build_and_exe('boost_header_only', 'python setup.py --cxx=g++')
+    configure_build_and_exe('boost_header_only', 'python setup --cxx=g++')
 
 
 def test_boost_libs():
-    configure_build_and_exe('boost_libs', 'python setup.py --cxx=g++')
+    configure_build_and_exe('boost_libs', 'python setup --cxx=g++')
 
 
 def test_boost_mpi_libs():
-    configure_build_and_exe('boost_mpi_libs', 'python setup.py --cxx=g++ --mpi')
+    configure_build_and_exe('boost_mpi_libs', 'python setup --cxx=g++ --mpi')
 
 
 def test_boost_python_libs():
-    configure_build_and_exe('boost_python_libs', 'python setup.py --cxx=g++')
+    configure_build_and_exe('boost_python_libs', 'python setup --cxx=g++')
