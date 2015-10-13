@@ -21,7 +21,7 @@
 #
 #   docopt: --cc=<CC> C compiler [default: gcc].
 #           --extra-cc-flags=<EXTRA_CFLAGS> Extra C compiler flags [default: ''].
-#   export: 'CC="{0}"'.format(arguments['--cc'])
+#   export: 'CC={0}'.format(arguments['--cc'])
 #   define: '-DEXTRA_CFLAGS="{0}"'.format(arguments['--extra-cc-flags'])
 
 enable_language(C)
