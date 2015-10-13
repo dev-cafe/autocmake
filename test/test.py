@@ -175,12 +175,4 @@ def test_boost_header_only():
 
 
 def test_boost_libs():
-    configure_build_and_exe('boost_libs', 'python setup --cxx=g++')
-
-
-def test_boost_mpi_libs():
-    configure_build_and_exe('boost_mpi_libs', 'python setup --cxx=g++ --mpi')
-
-
-def test_boost_python_libs():
-    configure_build_and_exe('boost_python_libs', 'python setup --cxx=g++')
+    configure_build_and_exe('boost_libs', 'python setup --cxx=g++ --mpi')

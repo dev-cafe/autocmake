@@ -1,7 +1,7 @@
 #.rst:
 #
 # Detect, build, and link Boost libraries.
-# This modules downloads the .zip archive from SourceForge
+# This modules downloads the .zip archive from SourceForge at
 # Autocmake update time.
 #
 # Your autocmake.cfg should look like this::
@@ -13,6 +13,19 @@
 # Cross-dependencies between required components are not checked for.
 # For example, Boost.Timer depends on Boost.Chrono and Boost.System thus you
 # should ask explicitly for all three.
+# If the self-build of Boost components is triggered the `BUILD_CUSTOM_BOOST` variable is set
+# to `TRUE`. The CMake target `custom_boost` is also added.
+# You should use these two to ensure the right dependencies between your targets
+# and the Boost headers/libraries, in case the self-build is triggered.
+# For example::
+#
+#   if(BUILD_CUSTOM_BOOST)
+#     add_dependencies(your_target custom_boost)
+#   endif()
+#
+# will ensure that `your_target` is built after `custom_boost` if and only if the self-build
+# of Boost took place. This is an important step to avoid race conditions when building
+# on multiple processes.
 #
 # Dependencies::
 #
@@ -27,6 +40,7 @@
 #   PROJECT_BINARY_DIR
 #   CMAKE_BUILD_TYPE
 #   MPI_FOUND
+#   BUILD_CUSTOM_BOOST
 #
 # autocmake.cfg configuration::
 #
