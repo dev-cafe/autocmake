@@ -279,6 +279,8 @@ def fetch_modules(config, relative_path):
     modules = []
     Module = namedtuple('Module', 'path name')
 
+    warnings = []
+
     if n > 0:  # otherwise division by zero in print_progress_bar
         i = 0
         print_progress_bar(text='- assembling modules:', done=0, total=n, width=30)
@@ -310,7 +312,9 @@ def fetch_modules(config, relative_path):
 
                     # we infer config from the module documentation
                     with open(file_name, 'r') as f:
-                        config_docopt, config_define, config_export, config_fetch = parse_cmake_module(f.read(), defaults)
+                        config_docopt, config_define, config_export, config_fetch, config_warning = parse_cmake_module(f.read(), defaults)
+                        if config_warning:
+                            warnings.append('WARNING from {0}: {1}'.format(module_name, config_warning))
                         config = prepend_or_set(config, section, 'docopt', config_docopt, defaults)
                         config = prepend_or_set(config, section, 'define', config_define, defaults)
                         config = prepend_or_set(config, section, 'export', config_export, defaults)
@@ -334,6 +338,9 @@ def fetch_modules(config, relative_path):
                     dst = os.path.join(download_directory, os.path.basename(src))
                     fetch_url(src, dst)
         print('')
+
+    if warnings != []:
+        print('- %s' % '\n- '.join(warnings))
 
     return modules
 
@@ -457,9 +464,10 @@ def parse_cmake_module(s_in, defaults={}):
     config_define = None
     config_export = None
     config_fetch = None
+    config_warning = None
 
     if 'autocmake.cfg configuration::' not in s_in:
-        return config_docopt, config_define, config_export, config_fetch
+        return config_docopt, config_define, config_export, config_fetch, config_warning
 
     s_out = []
     is_rst_line = False
@@ -494,8 +502,10 @@ def parse_cmake_module(s_in, defaults={}):
             config_export = config.get(section, 'export', 0, defaults)
         if config.has_option(section, 'fetch'):
             config_fetch = config.get(section, 'fetch', 0, defaults)
+        if config.has_option(section, 'warning'):
+            config_warning = config.get(section, 'warning', 0, defaults)
 
-    return config_docopt, config_define, config_export, config_fetch
+    return config_docopt, config_define, config_export, config_fetch, config_warning
 
 # ------------------------------------------------------------------------------
 
@@ -519,7 +529,7 @@ if(NOT DEFINED CMAKE_C_COMPILER_ID)
     message(FATAL_ERROR "CMAKE_C_COMPILER_ID variable is not defined!")
 endif()'''
 
-    config_docopt, config_define, config_export, config_fetch = parse_cmake_module(s)
+    config_docopt, config_define, config_export, config_fetch, config_warning = parse_cmake_module(s)
 
     assert config_docopt == "--cxx=<CXX> C++ compiler [default: g++].\n--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."
 
@@ -535,7 +545,7 @@ if(NOT DEFINED CMAKE_C_COMPILER_ID)
     message(FATAL_ERROR "CMAKE_C_COMPILER_ID variable is not defined!")
 endif()'''
 
-    config_docopt, config_define, config_export, config_fetch = parse_cmake_module(s)
+    config_docopt, config_define, config_export, config_fetch, config_warning = parse_cmake_module(s)
 
     assert config_docopt is None
 
