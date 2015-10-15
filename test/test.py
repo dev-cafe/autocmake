@@ -161,7 +161,6 @@ def test_python_interpreter():
     configure_build_and_exe('python_interpreter', 'python setup --cxx=g++')
 
 
-@skip_on_windows
 def test_python_interpreter_custom():
     setup = 'python setup --cxx=g++ --python=%s' % sys.executable
     configure_build_and_exe('python_interpreter_custom', setup)
