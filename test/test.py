@@ -175,8 +175,7 @@ def test_python_libs():
 
 @skip_on_windows
 def test_python_libs_custom():
-    python_executable = sys.executable
-    configure_build_and_exe('python_libs_custom', 'python setup --cxx=g++ --python={}'.format(python_executable))
+    configure_build_and_exe('python_libs_custom', 'python setup --cxx=g++ --python=' + sys.executable)
 
 
 @skip_on_windows
