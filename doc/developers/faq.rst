@@ -114,3 +114,26 @@ targets in a custom module in a local file and include it like this::
 
   [my_sources]
   source: custom/my_sources.cmake
+
+
+How can I do some more sophisticated validation of setup flags?
+---------------------------------------------------------------
+
+Sometimes you need to do more sophisticated validation and post-processing
+of setup flags. This can be done by placing a module called ``extensions.py``
+under ``cmake/`` (or wherever you have ``autocmake.cfg``).
+This file should implement a function with the following signature:
+
+.. code-block:: python
+
+  def postprocess_args(sys_argv, arguments):
+      # sys_argv is the sys.argv from the setup script
+      # arguments is the dictionary of arguments returned by docopt
+
+      # do something here ...
+
+      return arguments
+
+In this function you can do any validation and post-processing you like.
+This function is run after the flags are parsed and before the ``CMake`` command
+is run.
