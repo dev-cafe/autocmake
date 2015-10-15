@@ -157,7 +157,6 @@ def test_cxx_accelerate():
     configure_build_and_exe('cxx_accelerate', 'python setup --cxx=g++ --accelerate')
 
 
-@skip_on_windows
 def test_python_interpreter():
     configure_build_and_exe('python_interpreter', 'python setup --cxx=g++')
 
