@@ -4,7 +4,7 @@ import os
 import sys
 import datetime
 import ast
-from collections import OrderedDict, namedtuple
+from collections import OrderedDict, namedtuple, defaultdict
 
 # we do not use the nicer sys.version_info.major
 # for compatibility with Python < 2.7
@@ -312,14 +312,14 @@ def fetch_modules(config, relative_path):
 
                     # we infer config from the module documentation
                     with open(file_name, 'r') as f:
-                        config_docopt, config_define, config_export, config_fetch, config_warning = parse_cmake_module(f.read(), defaults)
-                        if config_warning:
-                            warnings.append('WARNING from {0}: {1}'.format(module_name, config_warning))
-                        config = prepend_or_set(config, section, 'docopt', config_docopt, defaults)
-                        config = prepend_or_set(config, section, 'define', config_define, defaults)
-                        config = prepend_or_set(config, section, 'export', config_export, defaults)
-                        if config_fetch:
-                            for src in config_fetch.split('\n'):
+                        parsed_config = parse_cmake_module(f.read(), defaults)
+                        if parsed_config['warning']:
+                            warnings.append('WARNING from {0}: {1}'.format(module_name, parsed_config['warning']))
+                        config = prepend_or_set(config, section, 'docopt', parsed_config['docopt'], defaults)
+                        config = prepend_or_set(config, section, 'define', parsed_config['define'], defaults)
+                        config = prepend_or_set(config, section, 'export', parsed_config['export'], defaults)
+                        if parsed_config['fetch']:
+                            for src in parsed_config['fetch'].split('\n'):
                                 dst = os.path.join(fetch_dst_directory, os.path.basename(src))
                                 fetch_url(src, dst)
 
@@ -463,14 +463,10 @@ def make_executable(path):
 
 def parse_cmake_module(s_in, defaults={}):
 
-    config_docopt = None
-    config_define = None
-    config_export = None
-    config_fetch = None
-    config_warning = None
+    parsed_config = defaultdict(lambda: None)
 
     if 'autocmake.cfg configuration::' not in s_in:
-        return config_docopt, config_define, config_export, config_fetch, config_warning
+        return parsed_config
 
     s_out = []
     is_rst_line = False
@@ -497,18 +493,11 @@ def parse_cmake_module(s_in, defaults={}):
     config.readfp(buf)
 
     for section in config.sections():
-        if config.has_option(section, 'docopt'):
-            config_docopt = config.get(section, 'docopt', 0, defaults)
-        if config.has_option(section, 'define'):
-            config_define = config.get(section, 'define', 0, defaults)
-        if config.has_option(section, 'export'):
-            config_export = config.get(section, 'export', 0, defaults)
-        if config.has_option(section, 'fetch'):
-            config_fetch = config.get(section, 'fetch', 0, defaults)
-        if config.has_option(section, 'warning'):
-            config_warning = config.get(section, 'warning', 0, defaults)
+        for s in ['docopt', 'define', 'export', 'fetch', 'warning']:
+            if config.has_option(section, s):
+                parsed_config[s] = config.get(section, s, 0, defaults)
 
-    return config_docopt, config_define, config_export, config_fetch, config_warning
+    return parsed_config
 
 # ------------------------------------------------------------------------------
 
@@ -532,9 +521,8 @@ if(NOT DEFINED CMAKE_C_COMPILER_ID)
     message(FATAL_ERROR "CMAKE_C_COMPILER_ID variable is not defined!")
 endif()'''
 
-    config_docopt, config_define, config_export, config_fetch, config_warning = parse_cmake_module(s)
-
-    assert config_docopt == "--cxx=<CXX> C++ compiler [default: g++].\n--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."
+    parsed_config = parse_cmake_module(s)
+    assert parsed_config['docopt'] == "--cxx=<CXX> C++ compiler [default: g++].\n--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."
 
     s = '''#.rst:
 #
@@ -548,9 +536,8 @@ if(NOT DEFINED CMAKE_C_COMPILER_ID)
     message(FATAL_ERROR "CMAKE_C_COMPILER_ID variable is not defined!")
 endif()'''
 
-    config_docopt, config_define, config_export, config_fetch, config_warning = parse_cmake_module(s)
-
-    assert config_docopt is None
+    parsed_config = parse_cmake_module(s)
+    assert parsed_config['docopt'] is None
 
 # ------------------------------------------------------------------------------
 
