@@ -413,6 +413,9 @@ def main(argv):
         sys.stderr.write("       in autocmake.cfg under [project]\n")
         sys.exit(-1)
     project_name = config.get('project', 'name')
+    if ' ' in project_name.rstrip():
+        sys.stderr.write("ERROR: project name contains a space\n")
+        sys.exit(-1)
 
     if not config.has_option('project', 'min_cmake_version'):
         sys.stderr.write("ERROR: you have to specify the min_cmake_version for CMake\n")
