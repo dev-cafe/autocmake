@@ -4,7 +4,7 @@ import os
 import sys
 import datetime
 import ast
-from collections import OrderedDict, namedtuple, defaultdict
+import collections
 
 # we do not use the nicer sys.version_info.major
 # for compatibility with Python < 2.7
@@ -277,7 +277,7 @@ def fetch_modules(config, relative_path):
     n = len(l)
 
     modules = []
-    Module = namedtuple('Module', 'path name')
+    Module = collections.namedtuple('Module', 'path name')
 
     warnings = []
 
@@ -405,7 +405,7 @@ def main(argv):
 
     # read config file
     print('- parsing autocmake.cfg')
-    config = ConfigParser(dict_type=OrderedDict)
+    config = ConfigParser(dict_type=collections.OrderedDict)
     config.read('autocmake.cfg')
 
     if not config.has_option('project', 'name'):
@@ -463,7 +463,7 @@ def make_executable(path):
 
 def parse_cmake_module(s_in, defaults={}):
 
-    parsed_config = defaultdict(lambda: None)
+    parsed_config = collections.defaultdict(lambda: None)
 
     if 'autocmake.cfg configuration::' not in s_in:
         return parsed_config
@@ -489,7 +489,7 @@ def parse_cmake_module(s_in, defaults={}):
     autocmake_entry = '[foo]\n' + autocmake_entry
 
     buf = StringIO(autocmake_entry)
-    config = ConfigParser(dict_type=OrderedDict)
+    config = ConfigParser(dict_type=collections.OrderedDict)
     config.readfp(buf)
 
     for section in config.sections():
