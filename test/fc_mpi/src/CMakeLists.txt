@@ -1,5 +1,6 @@
 if(MPI_FOUND)
     add_executable(example example.F90)
+    target_link_libraries(example ${MPI_LIBRARIES})
 else()
     message(FATAL_ERROR "MPI not found")
 endif()
