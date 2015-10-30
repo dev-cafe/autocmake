@@ -10,14 +10,13 @@
 #   fetch: https://github.com/scisoft/autocmake/raw/master/modules/git_info/git_info_sub.cmake
 #          https://github.com/scisoft/autocmake/raw/master/modules/git_info/git_info.h.in
 
-
-# note: cmake 2.8.2 has undefined variable CMAKE_CURRENT_LIST_DIR, 
+# CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
 # see https://public.kitware.com/Bug/print_bug_page.php?bug_id=11675
-# workaround from Google : create CMAKE_CURRENT_LIST_DIR if it doesn't exist 
+# workaround: create CMAKE_CURRENT_LIST_DIR if it doesn't exist
 if(NOT DEFINED CMAKE_CURRENT_LIST_DIR)
-    message(STATUS "The CMAKE_CURRENT_LIST_DIR variable defined in workaround")
     get_filename_component(CMAKE_CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
-endif(NOT DEFINED CMAKE_CURRENT_LIST_DIR)
+endif()
+
 add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/git_info.h
     COMMAND ${CMAKE_COMMAND} -D_target_dir=${PROJECT_BINARY_DIR} -P git_info_sub.cmake
