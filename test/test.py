@@ -144,12 +144,6 @@ def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup --cxx=g++ --cblas')
 
 
-@skip_on_osx
-@skip_on_windows
-def test_cxx_lapacke():
-    configure_build_and_exe('cxx_lapacke', 'python setup --cxx=g++ --lapacke --cblas')
-
-
 @skip_on_linux
 @skip_on_windows
 def test_cxx_accelerate():
