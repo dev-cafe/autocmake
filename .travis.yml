@@ -1,46 +1,59 @@
-sudo: false
 language: cpp
-os:
-    - linux
-    - osx
-addons:
-  apt:
-    packages:
-       # Compilers
-      - g++
-      - gfortran
-      - cmake
-        # Math libraries
-        # do not install libatlas-dev due to conflicts of repeating xerbla in *.a lib files
-      - libblas-dev
-      - liblapack-dev
-      - libatlas-base-dev
-        # MPI
-      - openmpi-bin
-      - libopenmpi-dev
-        # Python library, development version
-      - libpython2.7
-        # Boost
-      - libboost-all-dev
-before_install:
-  - if test ${TRAVIS_OS_NAME} = osx; then brew update; fi
-  - if test ${TRAVIS_OS_NAME} = osx; then brew outdated xctool || brew upgrade xctool; fi
-  - if test ${TRAVIS_OS_NAME} = osx; then brew install python open-mpi; fi
-  - if test ${TRAVIS_OS_NAME} = osx; then brew linkapps python; fi
-before_script:
-  - export PATH=$HOME/.local/bin:$PATH
-    # PEP8 and py.test
-  - if test ${TRAVIS_OS_NAME} = linux;
-    then pip install --upgrade pip setuptools pytest pep8 --user `whoami`;
-    else sudo pip install --upgrade pip setuptools pytest pep8; fi
+sudo: false
+
+matrix:
+  include:
+
+    - os: linux
+      compiler: gcc
+      env: SOURCES=ubuntu-toolchain-r-test
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+             # compilers
+            - g++
+            - gfortran
+            - cmake
+              # math libraries
+            - libblas-dev
+            - liblapack-dev
+            - libatlas-base-dev
+              # mpi
+            - openmpi-bin
+            - libopenmpi-dev
+              # python library, development version
+            - libpython2.7
+              # boost
+            - libboost-all-dev
+
+    - os: osx
+      osx_image: xcode6.4
+      compiler: gcc
+      env: SOURCES=homebrew
+
+install:
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+        brew install cmake boost python gcc
+        pip install virtualenv
+    elif [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+        pip install --user virtualenv
+    fi
+  - virtualenv venv
+  - source venv/bin/activate
+  - pip install pep8 pytest
+
 script:
-    # test PEP8 conformity
+    # pep8 tests
   - pep8 --ignore=E501 update.py
   - pep8 --ignore=E501 test/test.py
   - pep8 --ignore=E501 lib/config.py
-    # run unit tests
+    # unit tests
   - py.test -vv update.py
   - py.test -vv test/test.py
   - py.test -vv lib/config.py
+
 notifications:
   email: false
