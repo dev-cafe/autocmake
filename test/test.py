@@ -166,6 +166,7 @@ def test_boost_header_only():
     configure_build_and_exe('boost_header_only', 'python setup --cxx=g++')
 
 
+@skip_on_osx
 @skip_on_windows
 def test_boost_libs():
     configure_build_and_exe('boost_libs', 'python setup --cxx=g++ --mpi')
