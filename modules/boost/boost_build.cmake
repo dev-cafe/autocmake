@@ -1,4 +1,5 @@
 # Build Boost
+# This is not Windows-friendly!
 add_custom_command(
     OUTPUT ${CUSTOM_BOOST_LOCATION}/boost.built
     COMMAND ./b2 toolset=${toolset} variant=${type} link=static cxxflags=-fPIC

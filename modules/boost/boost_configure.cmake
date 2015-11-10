@@ -1,4 +1,5 @@
 # Run bootstrap.sh to configure the build. We will install in ${PROJECT_BINARY_DIR}/boost
+# This is not Windows-friendly!
 add_custom_command(
     OUTPUT ${CUSTOM_BOOST_LOCATION}/boost.configured
     COMMAND ./bootstrap.sh --with-toolset=${toolset}
