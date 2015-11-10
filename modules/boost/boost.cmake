@@ -3,6 +3,7 @@
 # Detect, build, and link Boost libraries.
 # This modules downloads the .zip archive from SourceForge at
 # Autocmake update time.
+# Note that the build-up commands are not Windows-compatible!
 #
 # Your autocmake.cfg should look like this::
 #
@@ -164,7 +165,7 @@ if(BUILD_CUSTOM_BOOST)
 
     set(Boost_INCLUDE_DIRS ${Boost_INCLUDE_DIR})
     set(Boost_LIBRARY_DIRS ${Boost_LIBRARY_DIR})
-    if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    if(CMAKE_SYSTEM_NAME MATCHES Linux)
         list(APPEND Boost_LIBRARIES rt)
     endif()
 endif()

@@ -9,7 +9,7 @@ file(WRITE ${CUSTOM_BOOST_LOCATION}/user-config.jam ${MPI_SENT})
 add_custom_command(
     OUTPUT ${CUSTOM_BOOST_LOCATION}/boost.user-config
     COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CUSTOM_BOOST_LOCATION}/user-config.jam ${BOOST_BUILD_DIR}/user-config.jam
-    COMMAND touch boost.user-config
+    COMMAND ${CMAKE_COMMAND} -E touch boost.user-config
     DEPENDS ${CUSTOM_BOOST_LOCATION}/boost.unpacked
     WORKING_DIRECTORY ${CUSTOM_BOOST_LOCATION}
     COMMENT "Generating user-config.jam")
