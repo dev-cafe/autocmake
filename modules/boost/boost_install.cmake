@@ -1,4 +1,5 @@
 # Install Boost
+# This is not Windows-friendly!
 add_custom_command(
     OUTPUT ${CUSTOM_BOOST_LOCATION}/boost.installed
     COMMAND ./b2 install toolset=${toolset} variant=${type} link=static
