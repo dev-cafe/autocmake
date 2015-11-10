@@ -71,6 +71,10 @@
 # Underscore-separated version number
 string(REGEX REPLACE "\\." "_" BOOSTVER ${BOOST_MINIMUM_REQUIRED})
 # Where the Boost .zip archive is located
+# CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
+# see https://public.kitware.com/Bug/print_bug_page.php?bug_id=11675
+# workaround: create CMAKE_CURRENT_LIST_DIR
+get_filename_component(CMAKE_CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
 set(BOOST_ARCHIVE_LOCATION ${CMAKE_CURRENT_LIST_DIR})
 set(BOOST_ARCHIVE boost_${BOOSTVER}.zip)
 
@@ -119,6 +123,11 @@ if(BUILD_CUSTOM_BOOST)
         endif()
     endif()
     string(TOLOWER ${CMAKE_BUILD_TYPE} type)
+
+   # CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
+   # see https://public.kitware.com/Bug/print_bug_page.php?bug_id=11675
+   # workaround: create CMAKE_CURRENT_LIST_DIR
+    get_filename_component(CMAKE_CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
     include(${CMAKE_CURRENT_LIST_DIR}/boost_unpack.cmake)
     include(${CMAKE_CURRENT_LIST_DIR}/boost_userconfig.cmake)
 
