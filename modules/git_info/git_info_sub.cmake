@@ -45,6 +45,10 @@ if(GIT_FOUND)
     string(STRIP ${_git_branch} _git_branch)
 endif()
 
+# CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
+# see https://public.kitware.com/Bug/print_bug_page.php?bug_id=11675
+# workaround: create CMAKE_CURRENT_LIST_DIR
+get_filename_component(CMAKE_CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
 configure_file(
     ${CMAKE_CURRENT_LIST_DIR}/git_info.h.in
     ${_target_dir}/git_info.h
