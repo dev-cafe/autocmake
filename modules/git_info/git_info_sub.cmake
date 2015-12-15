@@ -42,7 +42,10 @@ if(GIT_FOUND)
         OUTPUT_VARIABLE _git_branch
         ERROR_QUIET
         )
-    string(STRIP ${_git_branch} _git_branch)
+
+    if(_git_branch)
+        string(STRIP ${_git_branch} _git_branch)
+    endif()
 endif()
 
 # CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
