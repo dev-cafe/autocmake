@@ -88,8 +88,8 @@ if(ENABLE_64BIT_INTEGERS)
    set(ESSL_BLAS_LIBS   esslsmp6464)
    set(ESSL_LAPACK_LIBS esslsmp6464)
 else()
-   set(ESSL_BLAS_LIBS   essl)
-   set(ESSL_LAPACK_LIBS essl)
+   set(ESSL_BLAS_LIBS   esslsmp)
+   set(ESSL_LAPACK_LIBS esslsmp)
 endif()
 
 #-------------------------------------------------------------------------------
