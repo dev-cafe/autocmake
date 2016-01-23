@@ -4,7 +4,7 @@
 #
 # Variables used::
 #
-#   MATH_LIB_SEARCH_ORDER, example: set(MATH_LIB_SEARCH_ORDER MKL ESSL ATLAS ACML SYSTEM_NATIVE)
+#   MATH_LIB_SEARCH_ORDER, example: set(MATH_LIB_SEARCH_ORDER MKL ESSL OPENBLAS ATLAS ACML SYSTEM_NATIVE)
 #   ENABLE_STATIC_LINKING
 #   ENABLE_BLAS
 #   ENABLE_LAPACK
@@ -45,7 +45,7 @@
 #   define: '-DENABLE_BLAS=%s' % arguments['--blas']
 #           '-DENABLE_LAPACK=%s' % arguments['--lapack']
 #           '-DMKL_FLAG=%s' % arguments['--mkl']
-#           '-DMATH_LIB_SEARCH_ORDER="MKL;ESSL;ATLAS;ACML;SYSTEM_NATIVE"'
+#           '-DMATH_LIB_SEARCH_ORDER="MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE"'
 #           '-DBLAS_LANG=Fortran'
 #           '-DLAPACK_LANG=Fortran'
 #   warning: 'This module is deprecated and will be removed in future versions'
