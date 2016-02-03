@@ -30,10 +30,10 @@ if(GIT_FOUND)
         )
 
     if(_git_last_commit)
-        string(REGEX MATCH "Author:[ ]*(.+)<" temp "${_git_last_commit}")
+        string(REGEX MATCH "Author: +(.+) <.*@" temp "${_git_last_commit}")
         set(_git_last_commit_author ${CMAKE_MATCH_1})
         string(STRIP ${_git_last_commit_author} _git_last_commit_author)
-        string(REGEX MATCH "Date:[ ]*(.+(\\+|-)[0-9][0-9][0-9][0-9])" temp "${_git_last_commit}")
+        string(REGEX MATCH "Date: +(.+[0-9][0-9][0-9][0-9] [+-][0-9][0-9][0-9][0-9])" temp "${_git_last_commit}")
         set(_git_last_commit_date ${CMAKE_MATCH_1})
     endif()
 
