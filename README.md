@@ -13,8 +13,8 @@ See http://autocmake.org.
 
 ### Projects using Autocmake
 
-- [Numgrid](https://github.com/bast/numgrid/)
-- [XCint](https://github.com/bast/xcint/)
+- [Numgrid](https://github.com/dftlibs/numgrid/)
+- [XCint](https://github.com/dftlibs/xcint/)
 - [DIRAC](http://diracprogram.org)
 - [mathlib-tester](https://github.com/miroi/mathlibs-tester)
 - [Fortran Input Reader](https://github.com/miroi/fortran_input_reader)
