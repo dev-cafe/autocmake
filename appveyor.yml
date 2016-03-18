@@ -9,7 +9,7 @@ version: 1.0.{build}
 # prepare environment
 environment:
 # set custom path (will be more extended later in build_script section)
-  path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Git\cmd;C:\Program Files\7-Zip;C:\Program Files (x86)\CMake\bin
+  path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Git\cmd;C:\Program Files\7-Zip;C:\Program Files (x86)\CMake\bin;%path%
 # set MinGw-w64 (64-bit) version 5.1.0 download URL
   url: http://kent.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-posix/seh/x86_64-5.1.0-release-posix-seh-rt_v4-rev0.7z
   matrix:
