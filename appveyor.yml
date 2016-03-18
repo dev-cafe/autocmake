@@ -32,7 +32,7 @@ build_script:
 - set path=%path%;C:\software\mingw64\bin
 
 # download and unpack the  OpenBLAS library, integer*4 (or i32lp64) version
-- ps: wget http://skylink.dl.sourceforge.net/project/openblas/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
+- ps: wget http://web-docs.gsi.de/~milias/openblas-package/OpenBLAS-v0.2.14-Win64-int32.zip -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
 # add both OpenBLAS dynamic (libopenblas.dll) and static (libopenblas.a) library files dir to path
 - set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib;C:\software\OpenBLAS-v0.2.14-Win64-int32\include
