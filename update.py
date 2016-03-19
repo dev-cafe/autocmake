@@ -10,7 +10,6 @@ import collections
 # for compatibility with Python < 2.7
 if sys.version_info[0] > 2:
     from io import StringIO
-    from configparser import ConfigParser
     import urllib.request
 
     class URLopener(urllib.request.FancyURLopener):
@@ -19,7 +18,6 @@ if sys.version_info[0] > 2:
             sys.exit(-1)
 else:
     from StringIO import StringIO
-    from ConfigParser import ConfigParser
     import urllib
 
     class URLopener(urllib.FancyURLopener):
@@ -29,6 +27,47 @@ else:
 
 
 AUTOCMAKE_GITHUB_URL = 'https://github.com/scisoft/autocmake'
+
+# ------------------------------------------------------------------------------
+
+
+def replace(s, d):
+    from re import findall
+    if isinstance(s, str):
+        for var in findall(r"%\(([A-Za-z0-9_]*)\)", s):
+            s = s.replace("%({})".format(var), d[var])
+    return s
+
+
+def test_replace():
+    assert replace('hey %(foo) ho %(bar)',
+                   {'foo': 'hey', 'bar': 'ho'}) == 'hey hey ho ho'
+
+# ------------------------------------------------------------------------------
+
+
+def interpolate(d, d_map):
+    from collections import Mapping
+    for k, v in d.items():
+        if isinstance(v, Mapping):
+            d[k] = interpolate(d[k], d_map)
+        else:
+            d[k] = replace(d[k], d_map)
+    return d
+
+
+def test_interpolate():
+    d = {'foo': 'hey',
+         'bar': 'ho',
+         'one': 'hey %(foo) ho %(bar)',
+         'two': {'one': 'hey %(foo) ho %(bar)',
+                 'two': 'raboof'}}
+    d_interpolated = {'foo': 'hey',
+                      'bar': 'ho',
+                      'one': 'hey hey ho ho',
+                      'two': {'one': 'hey hey ho ho',
+                              'two': 'raboof'}}
+    assert interpolate(d, d) == d_interpolated
 
 # ------------------------------------------------------------------------------
 
@@ -44,6 +83,33 @@ def fetch_url(src, dst):
 
     opener = URLopener()
     opener.retrieve(src, dst)
+
+# ------------------------------------------------------------------------------
+
+
+def parse_yaml(file_name):
+    import yaml
+
+    def ordered_load(stream, Loader=yaml.Loader, object_pairs_hook=OrderedDict):
+        class OrderedLoader(Loader):
+            pass
+        def construct_mapping(loader, node):
+            loader.flatten_mapping(node)
+            return object_pairs_hook(loader.construct_pairs(node))
+        OrderedLoader.add_constructor(
+            yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+            construct_mapping)
+        return yaml.load(stream, OrderedLoader)
+
+    with open("autocmake.yml", 'r') as stream:
+        try:
+            config = ordered_load(stream, yaml.SafeLoader)
+        except yaml.YAMLError as exc:
+            print(exc)
+            sys.exit(-1)
+
+    config = interpolate(config, config)
+    return config
 
 # ------------------------------------------------------------------------------
 
@@ -335,7 +401,7 @@ def fetch_modules(config, relative_path):
                     width=30
                 )
             if config.has_option(section, 'fetch'):
-                # when we fetch directly from autocmake.cfg
+                # when we fetch directly from autocmake.yml
                 # we download into downloaded/
                 for src in config.get(section, 'fetch').split('\n'):
                     dst = os.path.join(download_directory, os.path.basename(src))
@@ -374,11 +440,11 @@ def main(argv):
 
     if argv[1] == '--self':
         # update self
-        if not os.path.isfile('autocmake.cfg'):
-            print('- fetching example autocmake.cfg')
+        if not os.path.isfile('autocmake.yml'):
+            print('- fetching example autocmake.yml')  # FIXME
             fetch_url(
-                src='%s/raw/master/example/autocmake.cfg' % AUTOCMAKE_GITHUB_URL,
-                dst='autocmake.cfg'
+                src='%s/raw/master/example/autocmake.yml' % AUTOCMAKE_GITHUB_URL,
+                dst='autocmake.yml'
             )
         if not os.path.isfile('.gitignore'):
             print('- creating .gitignore')
@@ -407,27 +473,26 @@ def main(argv):
         sys.exit(-1)
 
     # read config file
-    print('- parsing autocmake.cfg')
-    config = ConfigParser(dict_type=collections.OrderedDict)
-    config.read('autocmake.cfg')
+    print('- parsing autocmake.yml')
+    config = parse_yaml('autocmake.yml')
 
-    if not config.has_option('project', 'name'):
-        sys.stderr.write("ERROR: you have to specify the project name\n")
-        sys.stderr.write("       in autocmake.cfg under [project]\n")
+    if 'name' in config:
+        project_name = config['name']
+    else:
+        sys.stderr.write("ERROR: you have to specify the project name in autocmake.yml\n")
         sys.exit(-1)
-    project_name = config.get('project', 'name')
     if ' ' in project_name.rstrip():
         sys.stderr.write("ERROR: project name contains a space\n")
         sys.exit(-1)
 
-    if not config.has_option('project', 'min_cmake_version'):
-        sys.stderr.write("ERROR: you have to specify the min_cmake_version for CMake\n")
-        sys.stderr.write("       in autocmake.cfg under [project]\n")
+    if 'min_cmake_version' in config:
+        min_cmake_version = config['min_cmake_version']
+    else:
+        sys.stderr.write("ERROR: you have to specify min_cmake_version in autocmake.yml\n")
         sys.exit(-1)
-    min_cmake_version = config.get('project', 'min_cmake_version')
 
-    if config.has_option('project', 'setup_script'):
-        setup_script_name = config.get('project', 'setup_script')
+    if 'setup_script' in config:
+        setup_script_name = config['setup_script']
     else:
         setup_script_name = 'setup'
 
@@ -468,7 +533,7 @@ def parse_cmake_module(s_in, defaults={}):
 
     parsed_config = collections.defaultdict(lambda: None)
 
-    if 'autocmake.cfg configuration::' not in s_in:
+    if 'autocmake.yml configuration::' not in s_in:
         return parsed_config
 
     s_out = []
@@ -485,9 +550,10 @@ def parse_cmake_module(s_in, defaults={}):
         if '#.rst:' in line:
             is_rst_line = True
 
-    autocmake_entry = '\n'.join(s_out).split('autocmake.cfg configuration::')[1]
+    autocmake_entry = '\n'.join(s_out).split('autocmake.yml configuration::')[1]
     autocmake_entry = autocmake_entry.replace('\n  ', '\n')
 
+    # FIXME
     # we prepend a fake section heading so that we can parse it with configparser
     autocmake_entry = '[foo]\n' + autocmake_entry
 
@@ -511,7 +577,7 @@ def test_parse_cmake_module():
 #
 # Foo ...
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
 #   docopt: --cxx=<CXX> C++ compiler [default: g++].
 #           --extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: ''].
