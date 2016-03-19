@@ -101,7 +101,7 @@ def parse_yaml(file_name):
             construct_mapping)
         return yaml.load(stream, OrderedLoader)
 
-    with open("autocmake.yml", 'r') as stream:
+    with open(file_name, 'r') as stream:
         try:
             config = ordered_load(stream, yaml.SafeLoader)
         except yaml.YAMLError as exc:
