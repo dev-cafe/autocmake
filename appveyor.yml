@@ -9,8 +9,8 @@ version: 1.0.{build}
 # prepare environment
 environment:
 # set custom path (will be more extended later in build_script section)
-  path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Git\cmd;C:\Program Files\7-Zip;C:\Program Files (x86)\CMake\bin
-# set MinGw-w64 (64-bit) version 5.1.0 download URL
+  path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files\7-Zip;C:\Program Files (x86)\CMake\bin
+  # set MinGw-w64 (64-bit) version 5.1.0 download URL
   url: http://kent.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-posix/seh/x86_64-5.1.0-release-posix-seh-rt_v4-rev0.7z
   matrix:
 #   - python: C:\Python27;C:\Python27\Scripts
@@ -32,7 +32,7 @@ build_script:
 - set path=%path%;C:\software\mingw64\bin
 
 # download and unpack the  OpenBLAS library, integer*4 (or i32lp64) version
-- ps: wget http://skylink.dl.sourceforge.net/project/openblas/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
+- ps: wget http://web-docs.gsi.de/~milias/openblas-package/OpenBLAS-v0.2.14-Win64-int32.zip -OutFile OpenBLAS-v0.2.14-Win64-int32.zip
 - 7z x OpenBLAS-v0.2.14-Win64-int32.zip > NUL
 # add both OpenBLAS dynamic (libopenblas.dll) and static (libopenblas.a) library files dir to path
 - set path=%path%;C:\software\OpenBLAS-v0.2.14-Win64-int32\bin;C:\software\OpenBLAS-v0.2.14-Win64-int32\lib;C:\software\OpenBLAS-v0.2.14-Win64-int32\include
