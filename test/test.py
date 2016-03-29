@@ -10,7 +10,6 @@ import pytest
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-skip_on_windows = pytest.mark.skipif('sys.platform == "win32"', reason="not working on windows")
 skip_on_osx = pytest.mark.skipif('sys.platform == "darwin"', reason="not working on osx")
 skip_on_linux = pytest.mark.skipif('sys.platform == "linux2"', reason="not working on linux")
 skip_always = pytest.mark.skipif('1 == 1', reason="tests are broken")
@@ -119,24 +118,20 @@ def test_fc_omp():
     configure_build_and_exe('fc_omp', 'python setup --omp --fc=gfortran')
 
 
-@skip_on_windows
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup --fc=gfortran --blas')
 
 
-@skip_on_windows
 def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup --fc=gfortran --lapack')
 
 
 @skip_on_osx
-@skip_on_windows
 def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup --cxx=g++ --cblas')
 
 
 @skip_on_linux
-@skip_on_windows
 def test_cxx_accelerate():
     configure_build_and_exe('cxx_accelerate', 'python setup --cxx=g++ --accelerate')
 
@@ -150,23 +145,19 @@ def test_python_interpreter_custom():
     configure_build_and_exe('python_interpreter_custom', setup)
 
 
-@skip_on_windows
 def test_python_libs():
     configure_build_and_exe('python_libs', 'python setup --cxx=g++')
 
 
-@skip_on_windows
 def test_python_libs_custom():
     python_executable = sys.executable
     configure_build_and_exe('python_libs_custom', 'python setup --cxx=g++ --python={}'.format(python_executable))
 
 
-@skip_on_windows
 def test_boost_header_only():
     configure_build_and_exe('boost_header_only', 'python setup --cxx=g++')
 
 
 @skip_on_osx
-@skip_on_windows
 def test_boost_libs():
     configure_build_and_exe('boost_libs', 'python setup --cxx=g++ --mpi')
