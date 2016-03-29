@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/scisoft/autocmake.svg?branch=master)](https://travis-ci.org/scisoft/autocmake/builds)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/scisoft/autocmake?branch=master&svg=true)](https://ci.appveyor.com/project/bast/autocmake/history)
 [![Documentation Status](https://readthedocs.org/projects/autocmake/badge/?version=latest)](http://autocmake.readthedocs.org)
 [![License](https://img.shields.io/badge/license-%20BSD--3-blue.svg)](../master/LICENSE)
 
