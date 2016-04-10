@@ -3,10 +3,8 @@
 # See https://github.com/scisoft/autocmake/blob/master/LICENSE
 
 
-import subprocess
 import os
 import sys
-import shutil
 
 
 def module_exists(module_name):
@@ -23,10 +21,12 @@ def check_cmake_exists(cmake_command):
     Check whether CMake is installed. If not, print
     informative error message and quits.
     """
-    p = subprocess.Popen('%s --version' % cmake_command,
-                         shell=True,
-                         stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE)
+    from subprocess import Popen, PIPE
+
+    p = Popen('%s --version' % cmake_command,
+              shell=True,
+              stdin=PIPE,
+              stdout=PIPE)
     if not ('cmake version' in p.communicate()[0].decode('UTF-8')):
         sys.stderr.write('   This code is built using CMake\n\n')
         sys.stderr.write('   CMake is not found\n')
@@ -85,13 +85,16 @@ def run_cmake(command, build_path, default_build_path):
     """
     Execute CMake command.
     """
+    from subprocess import Popen, PIPE
+    from shutil import rmtree
+
     topdir = os.getcwd()
     os.chdir(build_path)
-    p = subprocess.Popen(command,
-                         shell=True,
-                         stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE)
+    p = Popen(command,
+              shell=True,
+              stdin=PIPE,
+              stdout=PIPE,
+              stderr=PIPE)
     stdout_coded, stderr_coded = p.communicate()
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
@@ -110,7 +113,7 @@ def run_cmake(command, build_path, default_build_path):
         if (build_path == default_build_path):
             # remove build_path iff not set by the user
             # otherwise removal can be dangerous
-            shutil.rmtree(default_build_path)
+            rmtree(default_build_path)
     else:
         # configuration was successful
         save_setup_command(sys.argv, build_path)
