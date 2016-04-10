@@ -23,7 +23,7 @@ def check_cmake_exists(cmake_command):
     """
     from subprocess import Popen, PIPE
 
-    p = Popen('%s --version' % cmake_command,
+    p = Popen('{} --version'.format(cmake_command),
               shell=True,
               stdin=PIPE,
               stdout=PIPE)
@@ -46,7 +46,7 @@ def setup_build_path(build_path):
         fname = os.path.join(build_path, 'CMakeCache.txt')
         if os.path.exists(fname):
             sys.stderr.write('aborting setup\n')
-            sys.stderr.write('build directory %s which contains CMakeCache.txt already exists\n' % build_path)
+            sys.stderr.write('build directory {} which contains CMakeCache.txt already exists\n'.format(build_path))
             sys.stderr.write('remove the build directory and then rerun setup\n')
             sys.exit(1)
     else:
@@ -74,7 +74,7 @@ def adapt_cmake_command_to_platform(cmake_command, platform):
     """
     if platform == 'win32':
         pos = cmake_command.find('cmake')
-        s = ['set %s &&' % e for e in cmake_command[:pos].split()]
+        s = ['set {} &&'.format(e) for e in cmake_command[:pos].split()]
         s.append(cmake_command[pos:])
         return ' '.join(s)
     else:
@@ -159,7 +159,7 @@ def configure(root_directory, build_path, cmake_command, only_show):
 
     cmake_command = adapt_cmake_command_to_platform(cmake_command, sys.platform)
 
-    print('%s\n' % cmake_command)
+    print('{}\n'.format(cmake_command))
     if only_show:
         sys.exit(0)
 
