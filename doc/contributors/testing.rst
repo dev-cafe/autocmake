@@ -21,6 +21,3 @@ For more options, see the ``py.test`` flags.
 This test set is run upon each push to the central repository.
 See also the `Travis <https://travis-ci.org/scisoft/autocmake/builds>`__
 build and test history.
-
-In addition we also test Autocmake on a Windows CI server: `Appveyor <https://ci.appveyor.com/project/bast/autocmake/history>`__.
-This is controlled by `Appveyor <https://github.com/scisoft/autocmake/blob/master/appveyor.yml>`__.
