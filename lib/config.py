@@ -101,9 +101,8 @@ def run_cmake(command, build_path, default_build_path):
     # print cmake output to screen
     print(stdout)
     # write cmake output to file
-    f = open('cmake_output', 'w')
-    f.write(stdout)
-    f.close()
+    with open('cmake_output', 'w') as f:
+        f.write(stdout)
     # change directory and return
     os.chdir(topdir)
     if 'Configuring incomplete' in stdout:
@@ -136,9 +135,8 @@ def save_setup_command(argv, build_path):
     Save setup command to a file.
     """
     file_name = os.path.join(build_path, 'setup_command')
-    f = open(file_name, 'w')
-    f.write(' '.join(argv[:]) + '\n')
-    f.close()
+    with open(file_name, 'w') as f:
+        f.write(' '.join(argv[:]) + '\n')
 
 
 def configure(root_directory, build_path, cmake_command, only_show):
