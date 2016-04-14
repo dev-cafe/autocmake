@@ -151,7 +151,7 @@ def test_python_libs():
 
 def test_python_libs_custom():
     python_executable = sys.executable
-    configure_build_and_exe('python_libs_custom', 'python setup --cxx=g++ --python={}'.format(python_executable))
+    configure_build_and_exe('python_libs_custom', 'python setup --cxx=g++ --python={0}'.format(python_executable))
 
 
 def test_boost_header_only():
