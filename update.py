@@ -65,7 +65,6 @@ def interpolate(d, d_map):
 
 
 def test_interpolate():
-    from collections import OrderedDict
     d = {'foo': 'hey',
          'bar': 'ho',
          'one': 'hey %(foo) ho %(bar)',
@@ -102,22 +101,10 @@ def fetch_url(src, dst):
 
 def parse_yaml(file_name):
     import yaml
-    from collections import OrderedDict
-
-    def ordered_load(stream, Loader=yaml.Loader, object_pairs_hook=OrderedDict):
-        class OrderedLoader(Loader):
-            pass
-        def construct_mapping(loader, node):
-            loader.flatten_mapping(node)
-            return object_pairs_hook(loader.construct_pairs(node))
-        OrderedLoader.add_constructor(
-            yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
-            construct_mapping)
-        return yaml.load(stream, OrderedLoader)
 
     with open(file_name, 'r') as stream:
         try:
-            config = ordered_load(stream, yaml.SafeLoader)
+            config = yaml.load(stream, yaml.SafeLoader)
         except yaml.YAMLError as exc:
             print(exc)
             sys.exit(-1)
