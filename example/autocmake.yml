@@ -1,7 +1,5 @@
 # CMakeLists.txt and setup script will be generated from this file
 # see: http://autocmake.readthedocs.org/en/latest/developers/configuration.html
-
-# uncomment the following three lines and set the project name
-# [project]
-# name: myproject
-# min_cmake_version: 2.8
+# adapt the following lines and expand
+name: myproject
+min_cmake_version: 2.8
