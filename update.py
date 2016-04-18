@@ -37,7 +37,7 @@ def replace(s, d):
     from re import findall
     if isinstance(s, str):
         for var in findall(r"%\(([A-Za-z0-9_]*)\)", s):
-            s = s.replace("%({})".format(var), d[var])
+            s = s.replace("%({})".format(var), str(d[var]))
     return s
 
 
@@ -101,7 +101,7 @@ def fetch_url(src, dst):
 # ------------------------------------------------------------------------------
 
 
-def parse_yaml(stream):
+def parse_yaml(stream, override={}):
     import yaml
 
     try:
@@ -109,6 +109,10 @@ def parse_yaml(stream):
     except yaml.YAMLError as exc:
         print(exc)
         sys.exit(-1)
+
+    for k in config:
+        if k in override:
+            config[k] = override[k]
 
     config = interpolate(config, config)
     return config
@@ -538,7 +542,7 @@ def make_executable(path):
 # ------------------------------------------------------------------------------
 
 
-def parse_cmake_module(s_in):
+def parse_cmake_module(s_in, override={}):
     from collections import Mapping, Iterable
 
     parsed_config = collections.defaultdict(lambda: None)
@@ -564,14 +568,13 @@ def parse_cmake_module(s_in):
     autocmake_entry = autocmake_entry.replace('\n  ', '\n')
 
     buf = StringIO(autocmake_entry)
-    config = parse_yaml(buf)
+    config = parse_yaml(buf, override)
 
-    for s in ['docopt', 'define', 'export', 'fetch', 'warning']:
-        if s in config:
-            if isinstance(config[s], Iterable) and not isinstance(config[s], str):
-                parsed_config[s] = [x for x in config[s]]
-            else:
-                parsed_config[s] = [config[s]]
+    for k, v in config.items():
+        if isinstance(v, Iterable) and not isinstance(v, str):
+            parsed_config[k] = [x for x in config[k]]
+        else:
+            parsed_config[k] = [config[k]]
 
     return parsed_config
 
@@ -601,6 +604,9 @@ endif()'''
     parsed_config = parse_cmake_module(s)
     assert parsed_config['docopt'] == ["--cxx=<CXX> C++ compiler [default: g++].", "--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."]
 
+
+def test_parse_cmake_module_no_key():
+
     s = '''#.rst:
 #
 # Foo ...
@@ -615,6 +621,53 @@ endif()'''
 
     parsed_config = parse_cmake_module(s)
     assert parsed_config['docopt'] is None
+
+
+def test_parse_cmake_module_interpolate():
+
+    s = r'''#.rst:
+#
+# Foo ...
+#
+# autocmake.yml configuration::
+#
+#   major: 1
+#   minor: 2
+#   patch: 3
+#   a: v%(major)
+#   b: v%(minor)
+#   c: v%(patch)
+
+enable_language(CXX)'''
+
+    parsed_config = parse_cmake_module(s)
+    assert parsed_config['a'] == ['v1']
+    assert parsed_config['b'] == ['v2']
+    assert parsed_config['c'] == ['v3']
+
+
+def test_parse_cmake_module_override():
+
+    s = r'''#.rst:
+#
+# Foo ...
+#
+# autocmake.yml configuration::
+#
+#   major: 1
+#   minor: 2
+#   patch: 3
+#   a: v%(major)
+#   b: v%(minor)
+#   c: v%(patch)
+
+enable_language(CXX)'''
+
+    d = {'minor': 4}
+    parsed_config = parse_cmake_module(s, d)
+    assert parsed_config['a'] == ['v1']
+    assert parsed_config['b'] == ['v4']
+    assert parsed_config['c'] == ['v3']
 
 # ------------------------------------------------------------------------------
 
