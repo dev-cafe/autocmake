@@ -52,8 +52,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Autocmake'
-copyright = u'2015, Radovan Bast and Jonas Juselius'
-author = u'Radovan Bast and Jonas Juselius'
+copyright = u'2015-2016, Radovan Bast, Jonas Juselius, and contributors'
+author = u'Radovan Bast, Jonas Juselius, and contributors'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
