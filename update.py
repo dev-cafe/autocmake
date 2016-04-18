@@ -47,16 +47,25 @@ def test_replace():
 
 
 def interpolate(d, d_map):
-    from collections import Mapping
+    from collections import Mapping, Iterable
     for k, v in d.items():
         if isinstance(v, Mapping):
             d[k] = interpolate(d[k], d_map)
+        elif not isinstance(v, str) and isinstance(v, Iterable):
+            l = []
+            for x in v:
+                if isinstance(x, Mapping):
+                    l.append(interpolate(x, d_map))
+                else:
+                    l.append(replace(x, d_map))
+            d[k] = l.copy()
         else:
             d[k] = replace(d[k], d_map)
     return d
 
 
 def test_interpolate():
+    from collections import OrderedDict
     d = {'foo': 'hey',
          'bar': 'ho',
          'one': 'hey %(foo) ho %(bar)',
@@ -68,6 +77,10 @@ def test_interpolate():
                       'two': {'one': 'hey hey ho ho',
                               'two': 'raboof'}}
     assert interpolate(d, d) == d_interpolated
+    d2 = {'modules': [{'fc': [{'source': '%(url_root)fc_optional.cmake'}]}], 'url_root': 'downloaded/downloaded_'}
+    d2_interpolated = {'modules': [{'fc': [{'source': 'downloaded/downloaded_fc_optional.cmake'}]}], 'url_root': 'downloaded/downloaded_'}
+    assert interpolate(d2, d2) == d2_interpolated
+
 
 # ------------------------------------------------------------------------------
 
@@ -89,6 +102,7 @@ def fetch_url(src, dst):
 
 def parse_yaml(file_name):
     import yaml
+    from collections import OrderedDict
 
     def ordered_load(stream, Loader=yaml.Loader, object_pairs_hook=OrderedDict):
         class OrderedLoader(Loader):
