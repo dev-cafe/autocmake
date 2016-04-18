@@ -51,7 +51,7 @@ def interpolate(d, d_map):
     for k, v in d.items():
         if isinstance(v, Mapping):
             d[k] = interpolate(d[k], d_map)
-        elif not isinstance(v, str) and isinstance(v, Iterable):
+        elif isinstance(v, Iterable) and not isinstance(v, str):
             l = []
             for x in v:
                 if isinstance(x, Mapping):
@@ -99,15 +99,14 @@ def fetch_url(src, dst):
 # ------------------------------------------------------------------------------
 
 
-def parse_yaml(file_name):
+def parse_yaml(stream):
     import yaml
 
-    with open(file_name, 'r') as stream:
-        try:
-            config = yaml.load(stream, yaml.SafeLoader)
-        except yaml.YAMLError as exc:
-            print(exc)
-            sys.exit(-1)
+    try:
+        config = yaml.load(stream, yaml.SafeLoader)
+    except yaml.YAMLError as exc:
+        print(exc)
+        sys.exit(-1)
 
     config = interpolate(config, config)
     return config
@@ -154,19 +153,13 @@ def gen_cmake_command(config):
     s.append('    """')
     s.append("    command = []")
 
-    # take care of environment variables
-    for section in config.sections():
-        if config.has_option(section, 'export'):
-            for env in config.get(section, 'export').split('\n'):
-                s.append('    command.append({0})'.format(env))
+    for env in extract_list(config, 'export'):
+        s.append('    command.append({0})'.format(env))
 
     s.append("    command.append(arguments['--cmake-executable'])")
 
-    # take care of cmake definitions
-    for section in config.sections():
-        if config.has_option(section, 'define'):
-            for definition in config.get(section, 'define').split('\n'):
-                s.append('    command.append({0})'.format(definition))
+    for definition in extract_list(config, 'define'):
+        s.append('    command.append({0})'.format(definition))
 
     s.append("    command.append('-DCMAKE_BUILD_TYPE={0}'.format(arguments['--type']))")
     s.append("    command.append('-G \"{0}\"'.format(arguments['--generator']))")
@@ -217,12 +210,11 @@ def gen_setup(config, relative_path, setup_script_name):
     s.append('\nOptions:')
 
     options = []
-    for section in config.sections():
-        if config.has_option(section, 'docopt'):
-            for opt in config.get(section, 'docopt').split('\n'):
-                first = opt.split()[0].strip()
-                rest = ' '.join(opt.split()[1:]).strip()
-                options.append([first, rest])
+
+    for opt in extract_list(config, 'docopt'):
+        first = opt.split()[0].strip()
+        rest = ' '.join(opt.split()[1:]).strip()
+        options.append([first, rest])
 
     options.append(['--type=<TYPE>', 'Set the CMake build type (debug, release, or relwithdeb) [default: release].'])
     options.append(['--generator=<STRING>', 'Set the CMake build system generator [default: Unix Makefiles].'])
@@ -328,81 +320,98 @@ def prepend_or_set(config, section, option, value, defaults):
 # ------------------------------------------------------------------------------
 
 
+def extract_list(config, section):
+    from collections import Iterable
+    l = []
+    if 'modules' in config:
+        for module in config['modules']:
+            for k, v in module.items():
+                for x in v:
+                    if section in x:
+                        if isinstance(x[section], Iterable) and not isinstance(x[section], str):
+                            for y in x[section]:
+                                l.append(y)
+                        else:
+                            l.append(x[section])
+    return l
+
+# ------------------------------------------------------------------------------
+
+
 def fetch_modules(config, relative_path):
     """
     Assemble modules which will
     be included in CMakeLists.txt.
     """
+    from collections import Iterable
 
     download_directory = 'downloaded'
     if not os.path.exists(download_directory):
         os.makedirs(download_directory)
 
-    l = list(filter(lambda x: config.has_option(x, 'source'),
-                    config.sections()))
-    n = len(l)
+    # here we get the list of sources to fetch
+    sources = extract_list(config, 'source')
 
     modules = []
     Module = collections.namedtuple('Module', 'path name')
 
     warnings = []
 
-    if n > 0:  # otherwise division by zero in print_progress_bar
-        i = 0
-        print_progress_bar(text='- assembling modules:', done=0, total=n, width=30)
-        for section in config.sections():
-            if config.has_option(section, 'source'):
-                for src in config.get(section, 'source').split('\n'):
-                    module_name = os.path.basename(src)
-                    if 'http' in src:
-                        path = download_directory
-                        name = 'autocmake_{0}'.format(module_name)
-                        dst = os.path.join(download_directory, 'autocmake_{0}'.format(module_name))
-                        fetch_url(src, dst)
-                        file_name = dst
-                        fetch_dst_directory = download_directory
-                    else:
-                        if os.path.exists(src):
-                            path = os.path.dirname(src)
-                            name = module_name
-                            file_name = src
-                            fetch_dst_directory = path
-                        else:
-                            sys.stderr.write("ERROR: {0} does not exist\n".format(src))
-                            sys.exit(-1)
+    if len(sources) > 0:  # otherwise division by zero in print_progress_bar
+        print_progress_bar(text='- assembling modules:', done=0, total=len(sources), width=30)
+        for i, src in enumerate(sources):
+            module_name = os.path.basename(src)
+            if 'http' in src:
+                path = download_directory
+                name = 'autocmake_{0}'.format(module_name)
+                dst = os.path.join(download_directory, 'autocmake_{0}'.format(module_name))
+                fetch_url(src, dst)
+                file_name = dst
+                fetch_dst_directory = download_directory
+            else:
+                if os.path.exists(src):
+                    path = os.path.dirname(src)
+                    name = module_name
+                    file_name = src
+                    fetch_dst_directory = path
+                else:
+                    sys.stderr.write("ERROR: {0} does not exist\n".format(src))
+                    sys.exit(-1)
 
-                    if config.has_option(section, 'override'):
-                        defaults = ast.literal_eval(config.get(section, 'override'))
-                    else:
-                        defaults = {}
+            # FIXME
+          # if config.has_option(section, 'override'):
+          #     defaults = ast.literal_eval(config.get(section, 'override'))
+          # else:
+          #     defaults = {}
 
-                    # we infer config from the module documentation
-                    with open(file_name, 'r') as f:
-                        parsed_config = parse_cmake_module(f.read(), defaults)
-                        if parsed_config['warning']:
-                            warnings.append('WARNING from {0}: {1}'.format(module_name, parsed_config['warning']))
-                        config = prepend_or_set(config, section, 'docopt', parsed_config['docopt'], defaults)
-                        config = prepend_or_set(config, section, 'define', parsed_config['define'], defaults)
-                        config = prepend_or_set(config, section, 'export', parsed_config['export'], defaults)
-                        if parsed_config['fetch']:
-                            for src in parsed_config['fetch'].split('\n'):
-                                dst = os.path.join(fetch_dst_directory, os.path.basename(src))
-                                fetch_url(src, dst)
+            # FIXME
+            # we infer config from the module documentation
+          # with open(file_name, 'r') as f:
+          #     parsed_config = parse_cmake_module(f.read(), defaults)
+          #     if parsed_config['warning']:
+          #         warnings.append('WARNING from {0}: {1}'.format(module_name, parsed_config['warning']))
+          #     config = prepend_or_set(config, section, 'docopt', parsed_config['docopt'], defaults)
+          #     config = prepend_or_set(config, section, 'define', parsed_config['define'], defaults)
+          #     config = prepend_or_set(config, section, 'export', parsed_config['export'], defaults)
+          #     if parsed_config['fetch']:
+          #         for src in parsed_config['fetch'].split('\n'):
+          #             dst = os.path.join(fetch_dst_directory, os.path.basename(src))
+          #             fetch_url(src, dst)
 
-                    modules.append(Module(path=path, name=name))
-                i += 1
-                print_progress_bar(
-                    text='- assembling modules:',
-                    done=i,
-                    total=n,
-                    width=30
-                )
-            if config.has_option(section, 'fetch'):
-                # when we fetch directly from autocmake.yml
-                # we download into downloaded/
-                for src in config.get(section, 'fetch').split('\n'):
-                    dst = os.path.join(download_directory, os.path.basename(src))
-                    fetch_url(src, dst)
+            modules.append(Module(path=path, name=name))
+            print_progress_bar(
+                text='- assembling modules:',
+                done=(i + 1),
+                total=len(sources),
+                width=30
+            )
+            # FIXME
+          # if config.has_option(section, 'fetch'):
+          #     # when we fetch directly from autocmake.yml
+          #     # we download into downloaded/
+          #     for src in config.get(section, 'fetch').split('\n'):
+          #         dst = os.path.join(download_directory, os.path.basename(src))
+          #         fetch_url(src, dst)
         print('')
 
     if warnings != []:
@@ -438,9 +447,9 @@ def main(argv):
     if argv[1] == '--self':
         # update self
         if not os.path.isfile('autocmake.yml'):
-            print('- fetching example autocmake.yml')  # FIXME
+            print('- fetching example autocmake.yml')
             fetch_url(
-                src='{0}/raw/master/example/autocmake.cfg'.format(AUTOCMAKE_GITHUB_URL),
+                src='{0}/raw/master/example/autocmake.yml'.format(AUTOCMAKE_GITHUB_URL),
                 dst='autocmake.yml'
             )
         if not os.path.isfile('.gitignore'):
@@ -471,7 +480,8 @@ def main(argv):
 
     # read config file
     print('- parsing autocmake.yml')
-    config = parse_yaml('autocmake.yml')
+    with open('autocmake.yml', 'r') as stream:
+        config = parse_yaml(stream)
 
     if 'name' in config:
         project_name = config['name']
@@ -526,7 +536,8 @@ def make_executable(path):
 # ------------------------------------------------------------------------------
 
 
-def parse_cmake_module(s_in, defaults={}):
+def parse_cmake_module(s_in):
+    from collections import Mapping, Iterable
 
     parsed_config = collections.defaultdict(lambda: None)
 
@@ -550,18 +561,15 @@ def parse_cmake_module(s_in, defaults={}):
     autocmake_entry = '\n'.join(s_out).split('autocmake.yml configuration::')[1]
     autocmake_entry = autocmake_entry.replace('\n  ', '\n')
 
-    # FIXME
-    # we prepend a fake section heading so that we can parse it with configparser
-    autocmake_entry = '[foo]\n' + autocmake_entry
-
     buf = StringIO(autocmake_entry)
-    config = ConfigParser(dict_type=collections.OrderedDict)
-    config.readfp(buf)
+    config = parse_yaml(buf)
 
-    for section in config.sections():
-        for s in ['docopt', 'define', 'export', 'fetch', 'warning']:
-            if config.has_option(section, s):
-                parsed_config[s] = config.get(section, s, 0, defaults)
+    for s in ['docopt', 'define', 'export', 'fetch', 'warning']:
+        if s in config:
+            if isinstance(config[s], Iterable) and not isinstance(config[s], str):
+                parsed_config[s] = [x for x in config[s]]
+            else:
+                parsed_config[s] = [config[s]]
 
     return parsed_config
 
@@ -570,16 +578,17 @@ def parse_cmake_module(s_in, defaults={}):
 
 def test_parse_cmake_module():
 
-    s = '''#.rst:
+    s = r'''#.rst:
 #
 # Foo ...
 #
 # autocmake.yml configuration::
 #
-#   docopt: --cxx=<CXX> C++ compiler [default: g++].
-#           --extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: ''].
-#   export: 'CXX={0}'.format(arguments['--cxx'])
-#   define: '-DEXTRA_CXXFLAGS="{0}"'.format(arguments['--extra-cxx-flags'])
+#   docopt:
+#     - "--cxx=<CXX> C++ compiler [default: g++]."
+#     - "--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."
+#   export: "'CXX={0}'.format(arguments['--cxx'])"
+#   define: "'-DEXTRA_CXXFLAGS=\"{0}\"'.format(arguments['--extra-cxx-flags'])"
 
 enable_language(CXX)
 
@@ -588,7 +597,7 @@ if(NOT DEFINED CMAKE_C_COMPILER_ID)
 endif()'''
 
     parsed_config = parse_cmake_module(s)
-    assert parsed_config['docopt'] == "--cxx=<CXX> C++ compiler [default: g++].\n--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."
+    assert parsed_config['docopt'] == ["--cxx=<CXX> C++ compiler [default: g++].", "--extra-cxx-flags=<EXTRA_CXXFLAGS> Extra C++ compiler flags [default: '']."]
 
     s = '''#.rst:
 #
