@@ -28,7 +28,7 @@ else:
             sys.exit(-1)
 
 
-AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake'
+AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/master/'
 
 # ------------------------------------------------------------------------------
 
@@ -455,7 +455,7 @@ def main(argv):
         if not os.path.isfile('autocmake.yml'):
             print('- fetching example autocmake.yml')
             fetch_url(
-                src='{0}/raw/master/example/autocmake.yml'.format(AUTOCMAKE_GITHUB_URL),
+                src='{0}example/autocmake.yml'.format(AUTOCMAKE_GITHUB_URL),
                 dst='autocmake.yml'
             )
         if not os.path.isfile('.gitignore'):
@@ -464,17 +464,17 @@ def main(argv):
                 f.write('*.pyc\n')
         print('- fetching lib/config.py')
         fetch_url(
-            src='{0}/raw/master/lib/config.py'.format(AUTOCMAKE_GITHUB_URL),
+            src='{0}lib/config.py'.format(AUTOCMAKE_GITHUB_URL),
             dst='lib/config.py'
         )
         print('- fetching lib/docopt/docopt.py')
         fetch_url(
-            src='{0}/raw/master/lib/docopt/docopt.py'.format(AUTOCMAKE_GITHUB_URL),
+            src='{0}lib/docopt/docopt.py'.format(AUTOCMAKE_GITHUB_URL),
             dst='lib/docopt/docopt.py'
         )
         print('- fetching update.py')
         fetch_url(
-            src='{0}/raw/master/update.py'.format(AUTOCMAKE_GITHUB_URL),
+            src='{0}update.py'.format(AUTOCMAKE_GITHUB_URL),
             dst='update.py'
         )
         sys.exit(0)
