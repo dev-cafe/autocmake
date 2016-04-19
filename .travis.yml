@@ -43,7 +43,7 @@ install:
     fi
   - virtualenv venv
   - source venv/bin/activate
-  - pip install pep8 pytest
+  - pip install pep8 pytest pyaml
 
 script:
     # pep8 tests
