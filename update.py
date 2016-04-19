@@ -382,25 +382,25 @@ def fetch_modules(config, relative_path):
                     sys.stderr.write("ERROR: {0} does not exist\n".format(src))
                     sys.exit(-1)
 
-            # FIXME
-          # if config.has_option(section, 'override'):
-          #     defaults = ast.literal_eval(config.get(section, 'override'))
-          # else:
-          #     defaults = {}
+# FIXME
+#           if config.has_option(section, 'override'):
+#               defaults = ast.literal_eval(config.get(section, 'override'))
+#           else:
+#               defaults = {}
 
-            # FIXME
-            # we infer config from the module documentation
-          # with open(file_name, 'r') as f:
-          #     parsed_config = parse_cmake_module(f.read(), defaults)
-          #     if parsed_config['warning']:
-          #         warnings.append('WARNING from {0}: {1}'.format(module_name, parsed_config['warning']))
-          #     config = prepend_or_set(config, section, 'docopt', parsed_config['docopt'], defaults)
-          #     config = prepend_or_set(config, section, 'define', parsed_config['define'], defaults)
-          #     config = prepend_or_set(config, section, 'export', parsed_config['export'], defaults)
-          #     if parsed_config['fetch']:
-          #         for src in parsed_config['fetch'].split('\n'):
-          #             dst = os.path.join(fetch_dst_directory, os.path.basename(src))
-          #             fetch_url(src, dst)
+# FIXME
+#           # we infer config from the module documentation
+#           with open(file_name, 'r') as f:
+#               parsed_config = parse_cmake_module(f.read(), defaults)
+#               if parsed_config['warning']:
+#                   warnings.append('WARNING from {0}: {1}'.format(module_name, parsed_config['warning']))
+#               config = prepend_or_set(config, section, 'docopt', parsed_config['docopt'], defaults)
+#               config = prepend_or_set(config, section, 'define', parsed_config['define'], defaults)
+#               config = prepend_or_set(config, section, 'export', parsed_config['export'], defaults)
+#               if parsed_config['fetch']:
+#                   for src in parsed_config['fetch'].split('\n'):
+#                       dst = os.path.join(fetch_dst_directory, os.path.basename(src))
+#                       fetch_url(src, dst)
 
             modules.append(Module(path=path, name=name))
             print_progress_bar(
@@ -409,13 +409,13 @@ def fetch_modules(config, relative_path):
                 total=len(sources),
                 width=30
             )
-            # FIXME
-          # if config.has_option(section, 'fetch'):
-          #     # when we fetch directly from autocmake.yml
-          #     # we download into downloaded/
-          #     for src in config.get(section, 'fetch').split('\n'):
-          #         dst = os.path.join(download_directory, os.path.basename(src))
-          #         fetch_url(src, dst)
+# FIXME
+#           if config.has_option(section, 'fetch'):
+#               # when we fetch directly from autocmake.yml
+#               # we download into downloaded/
+#               for src in config.get(section, 'fetch').split('\n'):
+#                   dst = os.path.join(download_directory, os.path.basename(src))
+#                   fetch_url(src, dst)
         print('')
 
     if warnings != []:
