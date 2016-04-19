@@ -50,7 +50,6 @@ script:
   - pep8 --ignore E501 update.py
   - pep8 --ignore E501,E265 autocmake
 #   # unit tests
-  - py.test -vv update.py
   - py.test -vv autocmake/*
 # - py.test -vv test/test.py
 
