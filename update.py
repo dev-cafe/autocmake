@@ -204,7 +204,7 @@ def gen_setup(config, relative_path, setup_script_name):
 
     s.append("\nsys.path.insert(0, '{0}')".format(relative_path))
 
-    s.append('from autocmake import config')
+    s.append('from autocmake import configure')
     s.append('from autocmake.external import docopt')
 
     s.append('\n\noptions = """')
@@ -245,7 +245,7 @@ def gen_setup(config, relative_path, setup_script_name):
     s.append("    sys.exit(-1)")
     s.append("\n")
     s.append("# use extensions to validate/post-process args")
-    s.append("if config.module_exists('extensions'):")
+    s.append("if configure.module_exists('extensions'):")
     s.append("    import extensions")
     s.append("    arguments = extensions.postprocess_args(sys.argv, arguments)")
     s.append("\n")
@@ -257,7 +257,7 @@ def gen_setup(config, relative_path, setup_script_name):
     s.append("cmake_command = '{0} {1}'.format(gen_cmake_command(options, arguments), root_directory)")
     s.append("\n")
     s.append("# run cmake")
-    s.append("config.configure(root_directory, build_path, cmake_command, arguments['--show'])")
+    s.append("configure.configure(root_directory, build_path, cmake_command, arguments['--show'])")
 
     return s
 
@@ -460,7 +460,7 @@ def main(argv):
             print('- creating .gitignore')
             with open('.gitignore', 'w') as f:
                 f.write('*.pyc\n')
-        for f in ['autocmake/config.py',
+        for f in ['autocmake/configure.py',
                   'autocmake/external/docopt.py',
                   'autocmake/__init__.py',
                   'update.py']:
