@@ -45,11 +45,10 @@ install:
   - source venv/bin/activate
   - pip install pep8 pytest
 
-#script:
-#   # pep8 tests
-# - pep8 --ignore=E501 update.py
-# - pep8 --ignore=E501 test/test.py
-# - pep8 --ignore=E501 lib/config.py
+script:
+    # pep8 tests
+# - pep8 --ignore E501 update.py
+  - pep8 --ignore E501,E265 autocmake
 #   # unit tests
 # - py.test -vv update.py
 # - py.test -vv test/test.py
