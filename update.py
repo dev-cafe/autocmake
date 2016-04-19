@@ -203,11 +203,9 @@ def gen_setup(config, relative_path, setup_script_name):
     s.append('import sys')
 
     s.append("\nsys.path.insert(0, '{0}')".format(relative_path))
-    s.append("sys.path.insert(0, '{0}')".format(os.path.join(relative_path, 'lib')))
-    s.append("sys.path.insert(0, '{0}')".format(os.path.join(relative_path, 'lib', 'docopt')))
 
-    s.append('import config')
-    s.append('import docopt')
+    s.append('from autocmake import config')
+    s.append('from autocmake.external import docopt')
 
     s.append('\n\noptions = """')
     s.append('Usage:')
@@ -445,7 +443,7 @@ def main(argv):
 
     if argv[1] in ['-h', '--help']:
         print('Usage:')
-        print('  python update.py --self         Update this script and fetch or update infrastructure files under lib/.')
+        print('  python update.py --self         Update this script and fetch or update infrastructure files under autocmake/.')
         print('  python update.py <builddir>     (Re)generate CMakeLists.txt and setup script and fetch or update CMake modules.')
         print('  python update.py (-h | --help)  Show this help text.')
         sys.exit(0)
@@ -462,7 +460,10 @@ def main(argv):
             print('- creating .gitignore')
             with open('.gitignore', 'w') as f:
                 f.write('*.pyc\n')
-        for f in ['lib/config.py', 'lib/docopt/docopt.py', 'update.py']:
+        for f in ['autocmake/config.py',
+                  'autocmake/external/docopt.py',
+                  'autocmake/__init__.py',
+                  'update.py']:
             print('- fetching {0}'.format(f))
             fetch_url(
                 src='{0}{1}'.format(AUTOCMAKE_GITHUB_URL, f),
