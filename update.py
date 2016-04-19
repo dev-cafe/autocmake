@@ -362,6 +362,9 @@ def main(argv):
                   'autocmake/external/docopt.py',
                   'autocmake/__init__.py',
                   'autocmake/interpolate.py',
+                  'autocmake/http.py',
+                  'autocmake/parse_rst.py',
+                  'autocmake/parse_yaml.py',
                   'update.py']:
             print('- fetching {0}'.format(f))
             fetch_url(
