@@ -30,7 +30,7 @@ else:
             sys.exit(-1)
 
 
-AUTOCMAKE_GITHUB_URL = 'https://github.com/scisoft/autocmake'
+AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake'
 
 # ------------------------------------------------------------------------------
 

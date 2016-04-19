@@ -12,8 +12,8 @@
 #
 #   docopt: --cblas Find and link to CBLAS [default: False].
 #   define: '-DENABLE_CBLAS=%s' % arguments['--cblas']
-#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/find/find_libraries.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/find/find_include_files.cmake
+#   fetch: https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake
 
 option(ENABLE_CBLAS "Find and link to CBLAS" OFF)
 

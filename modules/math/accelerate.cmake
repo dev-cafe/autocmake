@@ -12,8 +12,8 @@
 #
 #   docopt: --accelerate Find and link to ACCELERATE [default: False].
 #   define: '-DENABLE_ACCELERATE=%s' % arguments['--accelerate']
-#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/find/find_libraries.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/find/find_include_files.cmake
+#   fetch: https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake
 
 option(ENABLE_ACCELERATE "Find and link to ACCELERATE" OFF)
 

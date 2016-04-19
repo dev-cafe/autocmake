@@ -9,7 +9,7 @@
 #
 #   [boost]
 #   override: {'major': 1, 'minor': 59, 'patch': 0, 'components': 'chrono;timer;system'}
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost.cmake
+#   source: https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost.cmake
 #
 # Cross-dependencies between required components are not checked for.
 # For example, Boost.Timer depends on Boost.Chrono and Boost.System thus you
@@ -49,13 +49,13 @@
 #   minor=48
 #   patch=0
 #   components=''
-#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_unpack.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_userconfig.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_configure.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_build.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_install.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_headers.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_cleanup.cmake
+#   fetch: https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost_unpack.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost_userconfig.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost_configure.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost_build.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost_install.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost_headers.cmake
+#          https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost_cleanup.cmake
 #          http://sourceforge.net/projects/boost/files/boost/%(major)s.%(minor)s.%(patch)s/boost_%(major)s_%(minor)s_%(patch)s.zip
 #   docopt: --boost-headers=<BOOST_INCLUDEDIR> Include directories for Boost [default: ''].
 #           --boost-libraries=<BOOST_LIBRARYDIR> Library directories for Boost [default: ''].

@@ -13,38 +13,38 @@ below::
   min_cmake_version: 2.8
 
   [fc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/fc.cmake
 
   [cc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/cc.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/cc.cmake
 
   [cxx]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/cxx.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/cxx.cmake
 
   [flags]
-  source: https://github.com/scisoft/autocmake/raw/master/compilers/GNU.CXX.cmake
-          https://github.com/scisoft/autocmake/raw/master/compilers/Intel.CXX.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/compilers/GNU.CXX.cmake
+          https://github.com/coderefinery/autocmake/raw/master/compilers/Intel.CXX.cmake
 
   [rpath]
   source: custom/rpath.cmake
 
   [definitions]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/definitions.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/definitions.cmake
 
   [coverage]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/code_coverage.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/code_coverage.cmake
 
   [safeguards]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/safeguards.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/safeguards.cmake
 
   [default_build_paths]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/default_build_paths.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/default_build_paths.cmake
 
   [src]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/src.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/src.cmake
 
   [googletest]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/googletest.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/googletest.cmake
 
   [custom]
   source: custom/api.cmake
@@ -71,13 +71,13 @@ The names of the other sections do not matter to Autocmake. You could name them 
   min_cmake_version: 2.8
 
   [one]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/fc.cmake
 
   [two]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/cc.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/cc.cmake
 
   [whatever]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/cxx.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/cxx.cmake
 
 But it would not make much sense. It is better to choose names that are
 meaningful to you.
@@ -163,7 +163,7 @@ The preferred way to extend ``CMakeLists.txt`` is by editing ``autocmake.cfg``
 and using the ``source`` option::
 
   [fc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/modules/fc.cmake
 
 This will download ``fc.cmake`` and include it in ``CMakeLists.txt``.
 
@@ -175,8 +175,8 @@ You can also include local CMake modules, e.g.::
 It is also OK to include several modules at once::
 
   [flags]
-  source: https://github.com/scisoft/autocmake/raw/master/compilers/GNU.CXX.cmake
-          https://github.com/scisoft/autocmake/raw/master/compilers/Intel.CXX.cmake
+  source: https://github.com/coderefinery/autocmake/raw/master/compilers/GNU.CXX.cmake
+          https://github.com/coderefinery/autocmake/raw/master/compilers/Intel.CXX.cmake
 
 The modules will be included in the same order as they appear in ``autocmake.cfg``.
 
@@ -187,7 +187,7 @@ Fetching files without including them in CMakeLists.txt
 Sometimes you want to fetch a file without including it in ``CMakeLists.txt``.
 This can be done with the ``fetch`` option.  This is for instance done by the
 ``git_info.cmake`` module (see
-https://github.com/scisoft/autocmake/blob/master/modules/git_info/git_info.cmake#L10-L11).
+https://github.com/coderefinery/autocmake/blob/master/modules/git_info/git_info.cmake#L10-L11).
 
 If ``fetch`` is invoked in ``autocmake.cfg``, then the fetched file is placed
 under ``downloaded/``.  If ``fetch`` is invoked from within a CMake module
@@ -241,7 +241,7 @@ for many core modules which come with own options once you have sourced them.
 The lines following ``# autocmake.cfg configuration::`` are
 understood by the ``update.py`` script to infer ``autocmake.cfg`` code from the
 documentation. As an example consider
-https://github.com/scisoft/autocmake/blob/master/modules/cc.cmake#L20-L25.
+https://github.com/coderefinery/autocmake/blob/master/modules/cc.cmake#L20-L25.
 Here, ``update.py`` will infer the configurations for ``docopt``, ``export``,
 and ``define``.
 
@@ -251,6 +251,6 @@ Overriding documented configurations
 
 Configurable documented defaults can be achieved using interpolations.  See for
 instance
-https://github.com/scisoft/autocmake/blob/master/modules/boost/boost.cmake#L33-L36.
+https://github.com/coderefinery/autocmake/blob/master/modules/boost/boost.cmake#L33-L36.
 These can be modified within ``autocmake.cfg`` with a dictionary, e.g.:
-https://github.com/scisoft/autocmake/blob/master/test/boost_libs/cmake/autocmake.cfg#L9
+https://github.com/coderefinery/autocmake/blob/master/test/boost_libs/cmake/autocmake.cfg#L9
