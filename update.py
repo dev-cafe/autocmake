@@ -28,7 +28,7 @@ else:
             sys.exit(-1)
 
 
-AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/master/'
+AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/yaml/'
 
 # ------------------------------------------------------------------------------
 
