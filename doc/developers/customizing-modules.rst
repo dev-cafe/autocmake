@@ -38,9 +38,9 @@ Overriding defaults
 -------------------
 
 Some modules use interpolations to set defaults, see for instance
-https://github.com/scisoft/autocmake/blob/master/modules/boost/boost.cmake#L33-L36.
+https://github.com/coderefinery/autocmake/blob/master/modules/boost/boost.cmake#L33-L36.
 These can be modified within ``autocmake.cfg``, e.g.:
-https://github.com/scisoft/autocmake/blob/master/test/boost_libs/cmake/autocmake.cfg#L9
+https://github.com/coderefinery/autocmake/blob/master/test/boost_libs/cmake/autocmake.cfg#L9
 
 
 Create own CMake modules
@@ -54,5 +54,5 @@ Contribute customizations to the "standard library"
 
 If you think that your customization will be useful for other users as well,
 you may consider contributing the changes directly to
-https://github.com/scisoft/autocmake/. We very much encourage such
+https://github.com/coderefinery/autocmake/. We very much encourage such
 contributions. But we also strive for generality and portability.

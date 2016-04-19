@@ -10,4 +10,4 @@
 - Dan Jonsson (idea for configuration file approach)
 - Roberto Di Remigio (design ideas and testing, OS X testing, Boost)
 
-For a list of all the contributions see https://github.com/scisoft/autocmake/contributors.
+For a list of all the contributions see https://github.com/coderefinery/autocmake/contributors.
