@@ -462,21 +462,12 @@ def main(argv):
             print('- creating .gitignore')
             with open('.gitignore', 'w') as f:
                 f.write('*.pyc\n')
-        print('- fetching lib/config.py')
-        fetch_url(
-            src='{0}lib/config.py'.format(AUTOCMAKE_GITHUB_URL),
-            dst='lib/config.py'
-        )
-        print('- fetching lib/docopt/docopt.py')
-        fetch_url(
-            src='{0}lib/docopt/docopt.py'.format(AUTOCMAKE_GITHUB_URL),
-            dst='lib/docopt/docopt.py'
-        )
-        print('- fetching update.py')
-        fetch_url(
-            src='{0}update.py'.format(AUTOCMAKE_GITHUB_URL),
-            dst='update.py'
-        )
+        for f in ['lib/config.py', 'lib/docopt/docopt.py', 'update.py']:
+            print('- fetching {0}'.format(f))
+            fetch_url(
+                src='{0}{1}'.format(AUTOCMAKE_GITHUB_URL, f),
+                dst='{0}'.format(f)
+            )
         sys.exit(0)
 
     project_root = argv[1]
