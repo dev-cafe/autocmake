@@ -50,6 +50,7 @@ def test_replace():
 
 def interpolate(d, d_map):
     from collections import Mapping, Iterable
+    from copy import copy
     for k, v in d.items():
         if isinstance(v, Mapping):
             d[k] = interpolate(d[k], d_map)
@@ -60,7 +61,7 @@ def interpolate(d, d_map):
                     l.append(interpolate(x, d_map))
                 else:
                     l.append(replace(x, d_map))
-            d[k] = l.copy()
+            d[k] = copy(l)
         else:
             d[k] = replace(d[k], d_map)
     return d
