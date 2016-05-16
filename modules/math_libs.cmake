@@ -506,7 +506,7 @@ if (ENABLE_STATIC_LINKING)
         BLAS_TYPE MATCHES SYSTEM_NATIVE OR
         BLAS_TYPE MATCHES OPENBLAS)
         #cc_blas_static with ATLAS on travis-ci needs -lm
-        set(MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread -Wl,--no-whole-archive -lm)
+        set(MATH_LIBS ${MATH_LIBS} -Wl,--whole-archive -lpthread -ldl -Wl,--no-whole-archive -lm)
     endif()
     if (LAPACK_TYPE MATCHES MKL OR
         BLAS_TYPE MATCHES MKL)
