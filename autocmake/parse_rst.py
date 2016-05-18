@@ -126,8 +126,7 @@ def test_parse_cmake_module_override():
 
 enable_language(CXX)'''
 
-    d = {'minor': 4}
-    parsed_config = parse_cmake_module(s, d)
+    parsed_config = parse_cmake_module(s, {'minor': 4})
     assert parsed_config['a'] == ['v1']
     assert parsed_config['b'] == ['v4']
     assert parsed_config['c'] == ['v3']
