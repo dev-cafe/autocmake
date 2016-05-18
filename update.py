@@ -2,11 +2,8 @@
 
 import os
 import sys
-import datetime
 import ast
 import collections
-
-__version__ = 'X.Y.Z'
 
 
 AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/yaml/'
@@ -19,20 +16,6 @@ def print_progress_bar(text, done, total, width):
     n = int(float(width) * float(done) / float(total))
     sys.stdout.write("\r{0} [{1}{2}] ({3}/{4})".format(text, '#' * n, ' ' * (width - n), done, total))
     sys.stdout.flush()
-
-
-def align_options(options):
-    """
-    Indents flags and aligns help texts.
-    """
-    l = 0
-    for opt in options:
-        if len(opt[0]) > l:
-            l = len(opt[0])
-    s = []
-    for opt in options:
-        s.append('  {0}{1}  {2}'.format(opt[0], ' ' * (l - len(opt[0])), opt[1]))
-    return '\n'.join(s)
 
 
 def prepend_or_set(config, section, option, value, defaults):
@@ -48,28 +31,13 @@ def prepend_or_set(config, section, option, value, defaults):
     return config
 
 
-def extract_list(config, section):
-    from collections import Iterable
-    l = []
-    if 'modules' in config:
-        for module in config['modules']:
-            for k, v in module.items():
-                for x in v:
-                    if section in x:
-                        if isinstance(x[section], Iterable) and not isinstance(x[section], str):
-                            for y in x[section]:
-                                l.append(y)
-                        else:
-                            l.append(x[section])
-    return l
-
-
 def fetch_modules(config, relative_path):
     """
     Assemble modules which will
     be included in CMakeLists.txt.
     """
     from collections import Iterable
+    from autocmake.extract import extract_list
 
     download_directory = 'downloaded'
     if not os.path.exists(download_directory):
@@ -148,6 +116,7 @@ def fetch_modules(config, relative_path):
 
 def process_yaml(argv):
     from autocmake.parse_yaml import parse_yaml
+    from autocmake.generate import gen_cmakelists, gen_setup
 
     project_root = argv[1]
     if not os.path.isdir(project_root):
@@ -241,8 +210,10 @@ def main(argv):
             with open('.gitignore', 'w') as f:
                 f.write('*.pyc\n')
         for f in ['autocmake/configure.py',
-                  'autocmake/external/docopt.py',
                   'autocmake/__init__.py',
+                  'autocmake/external/docopt.py',
+                  'autocmake/generate.py',
+                  'autocmake/extract.py',
                   'autocmake/interpolate.py',
                   'autocmake/parse_rst.py',
                   'autocmake/parse_yaml.py',
