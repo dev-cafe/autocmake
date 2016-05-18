@@ -1,5 +1,6 @@
 def replace(s, d):
     from re import findall
+
     if isinstance(s, str):
         for var in findall(r"%\(([A-Za-z0-9_]*)\)", s):
             s = s.replace("%({})".format(var), str(d[var]))
@@ -14,6 +15,7 @@ def test_replace():
 def interpolate(d, d_map):
     from collections import Mapping, Iterable
     from copy import copy
+
     for k, v in d.items():
         if isinstance(v, Mapping):
             d[k] = interpolate(d[k], d_map)
@@ -31,17 +33,22 @@ def interpolate(d, d_map):
 
 
 def test_interpolate():
+
     d = {'foo': 'hey',
          'bar': 'ho',
          'one': 'hey %(foo) ho %(bar)',
          'two': {'one': 'hey %(foo) ho %(bar)',
                  'two': 'raboof'}}
+
     d_interpolated = {'foo': 'hey',
                       'bar': 'ho',
                       'one': 'hey hey ho ho',
                       'two': {'one': 'hey hey ho ho',
                               'two': 'raboof'}}
+
     assert interpolate(d, d) == d_interpolated
+
     d2 = {'modules': [{'fc': [{'source': '%(url_root)fc_optional.cmake'}]}], 'url_root': 'downloaded/downloaded_'}
     d2_interpolated = {'modules': [{'fc': [{'source': 'downloaded/downloaded_fc_optional.cmake'}]}], 'url_root': 'downloaded/downloaded_'}
+
     assert interpolate(d2, d2) == d2_interpolated
