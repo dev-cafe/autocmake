@@ -300,7 +300,7 @@ def fetch_modules(config, relative_path):
     return modules
 
 
-def process_yaml():
+def process_yaml(argv):
     from autocmake.parse_yaml import parse_yaml
 
     project_root = argv[1]
@@ -408,7 +408,7 @@ def main(argv):
             )
         sys.exit(0)
 
-    process_yaml()
+    process_yaml(argv)
 
 
 def make_executable(path):
