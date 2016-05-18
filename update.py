@@ -373,9 +373,13 @@ def main(argv):
 
     if argv[1] in ['-h', '--help']:
         print('Usage:')
-        print('  python update.py --self         Update this script and fetch or update infrastructure files under autocmake/.')
-        print('  python update.py <builddir>     (Re)generate CMakeLists.txt and setup script and fetch or update CMake modules.')
-        print('  python update.py (-h | --help)  Show this help text.')
+        for t, h in [('python update.py --self',
+                      'Update this script and fetch or update infrastructure files under autocmake/.'),
+                     ('python update.py <builddir>',
+                      '(Re)generate CMakeLists.txt and setup script and fetch or update CMake modules.'),
+                     ('python update.py (-h | --help)',
+                      'Show this help text.')]:
+            print('  {0:30} {1}'.format(t, h))
         sys.exit(0)
 
     if argv[1] == '--self':
