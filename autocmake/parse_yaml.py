@@ -18,20 +18,8 @@ def parse_yaml(stream, override={}):
 
 
 def test_parse_yaml():
-    import tempfile
-    import os
-
     text = """foo: bar
 this: that
 var: '%(foo)'"""
 
-    # we save this text to a temporary file
-    file_name = tempfile.mkstemp()[1]
-    with open(file_name, 'w') as f:
-        f.write(text)
-
-    with open(file_name, 'r') as f:
-        assert parse_yaml(f) == {'foo': 'bar', 'this': 'that', 'var': 'bar'}
-
-    # we remove the temporary file
-    os.unlink(file_name)
+    assert parse_yaml(text) == {'foo': 'bar', 'this': 'that', 'var': 'bar'}
