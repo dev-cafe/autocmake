@@ -20,6 +20,12 @@ def parse_yaml(stream, override={}):
 def test_parse_yaml():
     text = """foo: bar
 this: that
-var: '%(foo)'"""
+var: '%(foo)'
+list:
+  - a: '%(foo)'
+  - b: '%(foo)'
+  - c: '%(foo)'"""
 
-    assert parse_yaml(text) == {'foo': 'bar', 'this': 'that', 'var': 'bar'}
+    print(parse_yaml(text))
+    assert parse_yaml(text) == {'foo': 'bar', 'this': 'that', 'var': 'bar',
+                                'list': [{'a': 'bar'}, {'b': 'bar'}, {'c': 'bar'}]}
