@@ -26,6 +26,5 @@ list:
   - b: '%(foo)'
   - c: '%(foo)'"""
 
-    print(parse_yaml(text))
     assert parse_yaml(text) == {'foo': 'bar', 'this': 'that', 'var': 'bar',
                                 'list': [{'a': 'bar'}, {'b': 'bar'}, {'c': 'bar'}]}
