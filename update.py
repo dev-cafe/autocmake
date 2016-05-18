@@ -2,8 +2,6 @@
 
 import os
 import sys
-import ast
-import collections
 
 
 AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/yaml/'
@@ -36,7 +34,7 @@ def fetch_modules(config, relative_path):
     Assemble modules which will
     be included in CMakeLists.txt.
     """
-    from collections import Iterable
+    from collections import Iterable, namedtuple
     from autocmake.extract import extract_list
 
     download_directory = 'downloaded'
@@ -47,7 +45,7 @@ def fetch_modules(config, relative_path):
     sources = extract_list(config, 'source')
 
     modules = []
-    Module = collections.namedtuple('Module', 'path name')
+    Module = namedtuple('Module', 'path name')
 
     warnings = []
 
