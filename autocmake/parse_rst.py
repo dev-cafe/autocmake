@@ -1,4 +1,4 @@
-def parse_cmake_module(s_in, override={}):
+def parse_cmake_module(s_in, overrides={}):
     import sys
     from collections import Mapping, Iterable, defaultdict
     from autocmake.parse_yaml import parse_yaml
@@ -33,7 +33,7 @@ def parse_cmake_module(s_in, override={}):
     autocmake_entry = autocmake_entry.replace('\n  ', '\n')
 
     buf = StringIO(autocmake_entry)
-    config = parse_yaml(buf, override)
+    config = parse_yaml(buf, overrides)
 
     for k, v in config.items():
         if isinstance(v, Iterable) and not isinstance(v, str):
@@ -109,7 +109,7 @@ enable_language(CXX)'''
     assert parsed_config['c'] == ['v3']
 
 
-def test_parse_cmake_module_override():
+def test_parse_cmake_module_overrides():
 
     s = r'''#.rst:
 #

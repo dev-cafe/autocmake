@@ -11,110 +11,99 @@ def print_progress_bar(text, done, total, width):
     """
     Print progress bar.
     """
-    n = int(float(width) * float(done) / float(total))
-    sys.stdout.write("\r{0} [{1}{2}] ({3}/{4})".format(text, '#' * n, ' ' * (width - n), done, total))
-    sys.stdout.flush()
+    if total > 0:
+        n = int(float(width) * float(done) / float(total))
+        sys.stdout.write("\r{0} [{1}{2}] ({3}/{4})".format(text, '#' * n, ' ' * (width - n), done, total))
+        sys.stdout.flush()
 
 
-def prepend_or_set(config, section, option, value, defaults):
-    """
-    If option is already set, then value is prepended.
-    If option is not set, then it is created and set to value.
-    This is used to prepend options with values which come from the module documentation.
-    """
-    if value:
-        if config.has_option(section, option):
-            value += '\n{0}'.format(config.get(section, option, 0, defaults))
-        config.set(section, option, value)
-    return config
+def flat_add(l, x):
+    if isinstance(x, str):
+        l.append(x)
+        return l
+    else:
+        return l + x
 
 
-def fetch_modules(config, relative_path):
+def fetch_modules(config, relative_path, download_directory):
     """
     Assemble modules which will
     be included in CMakeLists.txt.
     """
-    from collections import Iterable, namedtuple
-    from autocmake.extract import extract_list
+    from collections import Iterable, namedtuple, defaultdict
+    from autocmake.extract import extract_list, to_d, to_l
+    from autocmake.parse_rst import parse_cmake_module
 
-    download_directory = 'downloaded'
-    if not os.path.exists(download_directory):
-        os.makedirs(download_directory)
-
-    # here we get the list of sources to fetch
-    sources = extract_list(config, 'source')
+    cleaned_config = defaultdict(lambda: [])
 
     modules = []
     Module = namedtuple('Module', 'path name')
 
-    warnings = []
+    num_sources = len(extract_list(config, 'source'))
 
-    if len(sources) > 0:  # otherwise division by zero in print_progress_bar
-        print_progress_bar(text='- assembling modules:', done=0, total=len(sources), width=30)
-        for i, src in enumerate(sources):
-            module_name = os.path.basename(src)
-            if 'http' in src:
-                path = download_directory
-                name = 'autocmake_{0}'.format(module_name)
-                dst = os.path.join(download_directory, 'autocmake_{0}'.format(module_name))
-                fetch_url(src, dst)
-                file_name = dst
-                fetch_dst_directory = download_directory
-            else:
-                if os.path.exists(src):
-                    path = os.path.dirname(src)
-                    name = module_name
-                    file_name = src
-                    fetch_dst_directory = path
+    print_progress_bar(text='- assembling modules:',
+                       done=0,
+                       total=num_sources,
+                       width=30)
+
+    i = 0
+    for t in config['modules']:
+        for k, v in t.items():
+
+            i += 1
+            d = to_d(v)
+            for _k, _v in to_d(v).items():
+                cleaned_config[_k] = flat_add(cleaned_config[_k], _v)
+
+            # fetch sources and parse them
+            for src in to_l(d['source']):
+
+                # we download the file
+                module_name = os.path.basename(src)
+                if 'http' in src:
+                    path = download_directory
+                    name = 'autocmake_{0}'.format(module_name)
+                    dst = os.path.join(download_directory, 'autocmake_{0}'.format(module_name))
+                    fetch_url(src, dst)
+                    file_name = dst
+                    fetch_dst_directory = download_directory
                 else:
-                    sys.stderr.write("ERROR: {0} does not exist\n".format(src))
-                    sys.exit(-1)
+                    if os.path.exists(src):
+                        path = os.path.dirname(src)
+                        name = module_name
+                        file_name = src
+                        fetch_dst_directory = path
+                    else:
+                        sys.stderr.write("ERROR: {0} does not exist\n".format(src))
+                        sys.exit(-1)
 
-# FIXME
-#           if config.has_option(section, 'override'):
-#               defaults = ast.literal_eval(config.get(section, 'override'))
-#           else:
-#               defaults = {}
+                # we infer config from the module documentation
+                # dictionary d overrides the configuration in the module documentation
+                # this allows to override interpolation inside the module
+                with open(file_name, 'r') as f:
+                    parsed_config = parse_cmake_module(f.read(), d)
+                    for _k2, _v2 in parsed_config.items():
+                        if _k2 not in to_d(v):
+                            # we add to clean_config only if the entry does not exist
+                            # in parent autocmake.yml already
+                            # this allows to override
+                            cleaned_config[_k2] = flat_add(cleaned_config[_k2], _v2)
 
-# FIXME
-#           # we infer config from the module documentation
-#           with open(file_name, 'r') as f:
-#               parsed_config = parse_cmake_module(f.read(), defaults)
-#               if parsed_config['warning']:
-#                   warnings.append('WARNING from {0}: {1}'.format(module_name, parsed_config['warning']))
-#               config = prepend_or_set(config, section, 'docopt', parsed_config['docopt'], defaults)
-#               config = prepend_or_set(config, section, 'define', parsed_config['define'], defaults)
-#               config = prepend_or_set(config, section, 'export', parsed_config['export'], defaults)
-#               if parsed_config['fetch']:
-#                   for src in parsed_config['fetch'].split('\n'):
-#                       dst = os.path.join(fetch_dst_directory, os.path.basename(src))
-#                       fetch_url(src, dst)
+                modules.append(Module(path=path, name=name))
+                print_progress_bar(text='- assembling modules:',
+                                   done=i,
+                                   total=num_sources,
+                                   width=30)
 
-            modules.append(Module(path=path, name=name))
-            print_progress_bar(
-                text='- assembling modules:',
-                done=(i + 1),
-                total=len(sources),
-                width=30
-            )
-# FIXME
-#           if config.has_option(section, 'fetch'):
-#               # when we fetch directly from autocmake.yml
-#               # we download into downloaded/
-#               for src in config.get(section, 'fetch').split('\n'):
-#                   dst = os.path.join(download_directory, os.path.basename(src))
-#                   fetch_url(src, dst)
-        print('')
+    print('')
 
-    if warnings != []:
-        print('- {0}'.format('\n- '.join(warnings)))
-
-    return modules
+    return modules, cleaned_config
 
 
 def process_yaml(argv):
     from autocmake.parse_yaml import parse_yaml
     from autocmake.generate import gen_cmakelists, gen_setup
+    from autocmake.extract import extract_list
 
     project_root = argv[1]
     if not os.path.isdir(project_root):
@@ -149,8 +138,25 @@ def process_yaml(argv):
     # get relative path from setup script to this directory
     relative_path = os.path.relpath(os.path.abspath('.'), project_root)
 
+    download_directory = 'downloaded'
+    if not os.path.exists(download_directory):
+        os.makedirs(download_directory)
+
     # fetch modules from the web or from relative paths
-    modules = fetch_modules(config, relative_path)
+    modules, cleaned_config = fetch_modules(config, relative_path, download_directory)
+
+#   FIXME
+#   for k, v in cleaned_config.items():
+#       print(k, v)
+
+    # fetch files which are not parsed
+    for src in extract_list(config, 'fetch'):
+        dst = os.path.join(download_directory, os.path.basename(src))
+        fetch_url(src, dst)
+
+    # print warnings
+    for warning in extract_list(config, 'warning'):
+        print('- WARNING: {0}'.format(warning))
 
     # create CMakeLists.txt
     print('- generating CMakeLists.txt')

@@ -1,4 +1,4 @@
-def parse_yaml(stream, override={}):
+def parse_yaml(stream, overrides={}):
     import yaml
     import sys
     from autocmake.interpolate import interpolate
@@ -10,8 +10,8 @@ def parse_yaml(stream, override={}):
         sys.exit(-1)
 
     for k in config:
-        if k in override:
-            config[k] = override[k]
+        if k in overrides:
+            config[k] = overrides[k]
 
     config = interpolate(config, config)
     return config
