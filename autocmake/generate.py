@@ -11,12 +11,12 @@ def gen_cmake_command(config):
     s.append('    """')
     s.append("    command = []")
 
-    for env in extract_list(config, 'export'):
+    for env in config['export']:
         s.append('    command.append({0})'.format(env))
 
     s.append("    command.append(arguments['--cmake-executable'])")
 
-    for definition in extract_list(config, 'define'):
+    for definition in config['define']:
         s.append('    command.append({0})'.format(definition))
 
     s.append("    command.append('-DCMAKE_BUILD_TYPE={0}'.format(arguments['--type']))")
@@ -70,7 +70,7 @@ def gen_setup(config, relative_path, setup_script_name):
 
     options = []
 
-    for opt in extract_list(config, 'docopt'):
+    for opt in config['docopt']:
         first = opt.split()[0].strip()
         rest = ' '.join(opt.split()[1:]).strip()
         options.append([first, rest])

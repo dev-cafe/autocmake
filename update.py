@@ -145,17 +145,13 @@ def process_yaml(argv):
     # fetch modules from the web or from relative paths
     modules, cleaned_config = fetch_modules(config, relative_path, download_directory)
 
-#   FIXME
-#   for k, v in cleaned_config.items():
-#       print(k, v)
-
     # fetch files which are not parsed
-    for src in extract_list(config, 'fetch'):
+    for src in cleaned_config['fetch']:
         dst = os.path.join(download_directory, os.path.basename(src))
         fetch_url(src, dst)
 
     # print warnings
-    for warning in extract_list(config, 'warning'):
+    for warning in cleaned_config['warning']:
         print('- WARNING: {0}'.format(warning))
 
     # create CMakeLists.txt
@@ -166,7 +162,7 @@ def process_yaml(argv):
 
     # create setup script
     print('- generating setup script')
-    s = gen_setup(config, relative_path, setup_script_name)
+    s = gen_setup(cleaned_config, relative_path, setup_script_name)
     file_path = os.path.join(project_root, setup_script_name)
     with open(file_path, 'w') as f:
         f.write('{0}\n'.format('\n'.join(s)))
