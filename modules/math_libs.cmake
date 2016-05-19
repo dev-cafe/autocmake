@@ -42,9 +42,9 @@
 #   docopt: --blas=<BLAS> Detect and link BLAS library (auto or off) [default: auto].
 #           --lapack=<LAPACK> Detect and link LAPACK library (auto or off) [default: auto].
 #           --mkl=<MKL> Pass MKL flag to the Intel compiler and linker and skip BLAS/LAPACK detection (sequential, parallel, cluster, or off) [default: off].
-#   define: '-DENABLE_BLAS=%s' % arguments['--blas']
-#           '-DENABLE_LAPACK=%s' % arguments['--lapack']
-#           '-DMKL_FLAG=%s' % arguments['--mkl']
+#   define: '-DENABLE_BLAS={0}'.format(arguments['--blas'])
+#           '-DENABLE_LAPACK={0}'.format(arguments['--lapack'])
+#           '-DMKL_FLAG={0}'.format(arguments['--mkl'])
 #           '-DMATH_LIB_SEARCH_ORDER="MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE"'
 #           '-DBLAS_LANG=Fortran'
 #           '-DLAPACK_LANG=Fortran'

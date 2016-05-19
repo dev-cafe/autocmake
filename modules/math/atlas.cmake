@@ -11,7 +11,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --atlas Find and link to ATLAS [default: False].
-#   define: '-DENABLE_ATLAS=%s' % arguments['--atlas']
+#   define: '-DENABLE_ATLAS={0}'.format(arguments['--atlas'])
 
 option(ENABLE_ATLAS "Find and link to ATLAS" OFF)
 

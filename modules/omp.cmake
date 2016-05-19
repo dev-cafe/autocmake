@@ -16,7 +16,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --omp Enable OpenMP parallelization [default: False].
-#   define: '-DENABLE_OPENMP=%s' % arguments['--omp']
+#   define: '-DENABLE_OPENMP={0}'.format(arguments['--omp'])
 
 option(ENABLE_OPENMP "Enable OpenMP parallelization" OFF)
 

@@ -16,7 +16,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --mpi Enable MPI parallelization [default: False].
-#   define: '-DENABLE_MPI=%s' % arguments['--mpi']
+#   define: '-DENABLE_MPI={0}'.format(arguments['--mpi'])
 
 option(ENABLE_MPI "Enable MPI parallelization" OFF)
 

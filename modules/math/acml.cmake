@@ -11,7 +11,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --acml Find and link to ACML [default: False].
-#   define: '-DENABLE_ACML=%s' % arguments['--acml']
+#   define: '-DENABLE_ACML={0}'.format(arguments['--acml'])
 
 option(ENABLE_ACML "Find and link to ACML" OFF)
 

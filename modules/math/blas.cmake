@@ -11,7 +11,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --blas Find and link to BLAS [default: False].
-#   define: '-DENABLE_BLAS=%s' % arguments['--blas']
+#   define: '-DENABLE_BLAS={0}'.format(arguments['--blas'])
 
 option(ENABLE_BLAS "Find and link to BLAS" OFF)
 

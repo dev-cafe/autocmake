@@ -11,7 +11,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --goto Find and link to GOTO [default: False].
-#   define: '-DENABLE_GOTO=%s' % arguments['--goto']
+#   define: '-DENABLE_GOTO={0}'.format(arguments['--goto'])
 
 option(ENABLE_GOTO "Find and link to GOTO" OFF)
 

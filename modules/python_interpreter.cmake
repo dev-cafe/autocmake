@@ -18,7 +18,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --python=<PYTHON_INTERPRETER> The Python interpreter (development version) to use. [default: ''].
-#   define: '-DPYTHON_INTERPRETER="%s"' % arguments['--python']
+#   define: '-DPYTHON_INTERPRETER="{0}"'.format(arguments['--python'])
 
 if("${PYTHON_INTERPRETER}" STREQUAL "")
     find_package(PythonInterp REQUIRED)

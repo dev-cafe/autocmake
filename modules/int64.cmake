@@ -9,7 +9,7 @@
 # autocmake.cfg configuration::
 #
 #   docopt: --int64 Enable 64bit integers [default: False].
-#   define: '-DENABLE_64BIT_INTEGERS=%s' % arguments['--int64']
+#   define: '-DENABLE_64BIT_INTEGERS={0}'.format(arguments['--int64'])
 
 option(ENABLE_64BIT_INTEGERS "Enable 64-bit integers" OFF)
 
