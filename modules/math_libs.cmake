@@ -50,7 +50,7 @@
 #     - "'-DMATH_LIB_SEARCH_ORDER=\"MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE\"'"
 #     - "'-DBLAS_LANG=Fortran'"
 #     - "'-DLAPACK_LANG=Fortran'"
-#   warning: "This module is deprecated and will be removed in future versions"
+#   warning: "the math_libs.cmake module is deprecated and will be removed in future versions"
 
 #-------------------------------------------------------------------------------
 # ENABLE_STATIC_LINKING
