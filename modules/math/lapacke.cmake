@@ -10,11 +10,12 @@
 #
 # autocmake.yml configuration::
 #
+#   url_root: https://github.com/coderefinery/autocmake/raw/yaml/
 #   docopt: "--lapacke Find and link to LAPACKE [default: False]."
 #   define: "'-DENABLE_LAPACKE={0}'.format(arguments['--lapacke'])"
 #   fetch:
-#     - "https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake"
-#     - "https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake"
+#     - "%(url_root)modules/find/find_libraries.cmake"
+#     - "%(url_root)modules/find/find_include_files.cmake"
 
 option(ENABLE_LAPACKE "Find and link to LAPACKE" OFF)
 
