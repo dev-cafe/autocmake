@@ -50,13 +50,13 @@ def fetch_modules(config, relative_path, download_directory):
     for t in config['modules']:
         for k, v in t.items():
 
-            i += 1
             d = to_d(v)
             for _k, _v in to_d(v).items():
                 cleaned_config[_k] = flat_add(cleaned_config[_k], _v)
 
             # fetch sources and parse them
             for src in to_l(d['source']):
+                i += 1
 
                 # we download the file
                 module_name = os.path.basename(src)
