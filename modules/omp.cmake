@@ -13,10 +13,10 @@
 #   CMAKE_C_FLAGS
 #   CMAKE_CXX_FLAGS
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --omp Enable OpenMP parallelization [default: False].
-#   define: '-DENABLE_OPENMP={0}'.format(arguments['--omp'])
+#   docopt: "--omp Enable OpenMP parallelization [default: False]."
+#   define: "'-DENABLE_OPENMP={0}'.format(arguments['--omp'])"
 
 option(ENABLE_OPENMP "Enable OpenMP parallelization" OFF)
 

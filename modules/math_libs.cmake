@@ -37,18 +37,20 @@
 #   MKL_ROOT
 #   MKLROOT
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --blas=<BLAS> Detect and link BLAS library (auto or off) [default: auto].
-#           --lapack=<LAPACK> Detect and link LAPACK library (auto or off) [default: auto].
-#           --mkl=<MKL> Pass MKL flag to the Intel compiler and linker and skip BLAS/LAPACK detection (sequential, parallel, cluster, or off) [default: off].
-#   define: '-DENABLE_BLAS={0}'.format(arguments['--blas'])
-#           '-DENABLE_LAPACK={0}'.format(arguments['--lapack'])
-#           '-DMKL_FLAG={0}'.format(arguments['--mkl'])
-#           '-DMATH_LIB_SEARCH_ORDER="MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE"'
-#           '-DBLAS_LANG=Fortran'
-#           '-DLAPACK_LANG=Fortran'
-#   warning: 'This module is deprecated and will be removed in future versions'
+#   docopt:
+#     - "--blas=<BLAS> Detect and link BLAS library (auto or off) [default: auto]."
+#     - "--lapack=<LAPACK> Detect and link LAPACK library (auto or off) [default: auto]."
+#     - "--mkl=<MKL> Pass MKL flag to the Intel compiler and linker and skip BLAS/LAPACK detection (sequential, parallel, cluster, or off) [default: off]."
+#   define:
+#     - "'-DENABLE_BLAS={0}'.format(arguments['--blas'])"
+#     - "'-DENABLE_LAPACK={0}'.format(arguments['--lapack'])"
+#     - "'-DMKL_FLAG={0}'.format(arguments['--mkl'])"
+#     - "'-DMATH_LIB_SEARCH_ORDER=\"MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE\"'"
+#     - "'-DBLAS_LANG=Fortran'"
+#     - "'-DLAPACK_LANG=Fortran'"
+#   warning: "This module is deprecated and will be removed in future versions"
 
 #-------------------------------------------------------------------------------
 # ENABLE_STATIC_LINKING
