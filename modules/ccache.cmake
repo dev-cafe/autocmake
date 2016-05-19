@@ -13,7 +13,7 @@
 # autocmake.yml configuration::
 #
 #   docopt: "--ccache=<USE_CCACHE> Toggle use of ccache <ON/OFF> [default: ON]."
-#   define: "'-DUSE_CCACHE=\"{0}\"'.format(arguments['--ccache'])"
+#   define: "'-DUSE_CCACHE={0}'.format(arguments['--ccache'])"
 
 if(USE_CCACHE)
     find_program(CCACHE_FOUND ccache)

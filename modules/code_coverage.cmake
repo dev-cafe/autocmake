@@ -11,7 +11,7 @@
 # autocmake.yml configuration::
 #
 #   docopt: "--coverage Enable code coverage [default: False]."
-#   define: "'-DENABLE_CODE_COVERAGE=\"{0}\"'.format(arguments['--coverage'])"
+#   define: "'-DENABLE_CODE_COVERAGE={0}'.format(arguments['--coverage'])"
 
 option(ENABLE_CODE_COVERAGE "Enable code coverage" OFF)
 
