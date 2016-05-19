@@ -8,10 +8,10 @@
 #   GOTO_LIBRARIES
 #   GOTO_INCLUDE_DIR
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --goto Find and link to GOTO [default: False].
-#   define: '-DENABLE_GOTO={0}'.format(arguments['--goto'])
+#   docopt: "--goto Find and link to GOTO [default: False]."
+#   define: "'-DENABLE_GOTO={0}'.format(arguments['--goto'])"
 
 option(ENABLE_GOTO "Find and link to GOTO" OFF)
 

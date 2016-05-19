@@ -8,10 +8,10 @@
 #   BLAS_LIBRARIES
 #   BLAS_INCLUDE_DIR
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --blas Find and link to BLAS [default: False].
-#   define: '-DENABLE_BLAS={0}'.format(arguments['--blas'])
+#   docopt: "--blas Find and link to BLAS [default: False]."
+#   define: "'-DENABLE_BLAS={0}'.format(arguments['--blas'])"
 
 option(ENABLE_BLAS "Find and link to BLAS" OFF)
 

@@ -8,12 +8,13 @@
 #   ACCELERATE_LIBRARIES - describe me, uncached
 #   ACCELERATE_INCLUDE_DIR - describe me, uncached
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --accelerate Find and link to ACCELERATE [default: False].
-#   define: '-DENABLE_ACCELERATE={0}'.format(arguments['--accelerate'])
-#   fetch: https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake
-#          https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake
+#   docopt: "--accelerate Find and link to ACCELERATE [default: False]."
+#   define: "'-DENABLE_ACCELERATE={0}'.format(arguments['--accelerate'])"
+#   fetch:
+#     - "https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake"
+#     - "https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake"
 
 option(ENABLE_ACCELERATE "Find and link to ACCELERATE" OFF)
 

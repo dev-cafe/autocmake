@@ -8,10 +8,10 @@
 #   LAPACK_LIBRARIES
 #   LAPACK_INCLUDE_DIR
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --lapack Find and link to LAPACK [default: False].
-#   define: '-DENABLE_LAPACK={0}'.format(arguments['--lapack'])
+#   docopt: "--lapack Find and link to LAPACK [default: False]."
+#   define: "'-DENABLE_LAPACK={0}'.format(arguments['--lapack'])"
 
 option(ENABLE_LAPACK "Find and link to LAPACK" OFF)
 

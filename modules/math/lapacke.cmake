@@ -8,12 +8,13 @@
 #   LAPACKE_LIBRARIES - describe me, uncached
 #   LAPACKE_INCLUDE_DIR - describe me, uncached
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --lapacke Find and link to LAPACKE [default: False].
-#   define: '-DENABLE_LAPACKE={0}'.format(arguments['--lapacke'])
-#   fetch: https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake
-#          https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake
+#   docopt: "--lapacke Find and link to LAPACKE [default: False]."
+#   define: "'-DENABLE_LAPACKE={0}'.format(arguments['--lapacke'])"
+#   fetch:
+#     - "https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake"
+#     - "https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake"
 
 option(ENABLE_LAPACKE "Find and link to LAPACKE" OFF)
 
