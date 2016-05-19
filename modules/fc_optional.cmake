@@ -28,8 +28,9 @@
 #
 # autocmake.yml configuration::
 #
+#   foo: "hey ho"
 #   docopt:
-#     - "--fc=<FC> Fortran compiler [default: gfortran]."
+#     - "--fc=<FC> %(foo) compiler [default: gfortran]."
 #     - "--extra-fc-flags=<EXTRA_FCFLAGS> Extra Fortran compiler flags [default: '']."
 #     - "--fc-support=<FC_SUPPORT> Toggle Fortran language support (ON/OFF) [default: ON]."
 #   export: "'FC={0}'.format(arguments['--fc'])"
