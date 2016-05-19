@@ -21,12 +21,13 @@
 #
 #   FCFLAGS
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --fc=<FC> Fortran compiler [default: gfortran].
-#           --extra-fc-flags=<EXTRA_FCFLAGS> Extra Fortran compiler flags [default: ''].
-#   export: 'FC={0}'.format(arguments['--fc'])
-#   define: '-DEXTRA_FCFLAGS="{0}"'.format(arguments['--extra-fc-flags'])
+#   docopt:
+#     - "--fc=<FC> Fortran compiler [default: gfortran]."
+#     - "--extra-fc-flags=<EXTRA_FCFLAGS> Extra Fortran compiler flags [default: '']."
+#   export: "'FC={0}'.format(arguments['--fc'])"
+#   define: "'-DEXTRA_FCFLAGS=\"{0}\"'.format(arguments['--extra-fc-flags'])"
 
 enable_language(Fortran)
 
