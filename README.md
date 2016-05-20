@@ -12,8 +12,8 @@ See http://autocmake.org.
 
 ## Documentation
 
-- [Latest stable code](http://autocmake.readthedocs.io/en/stable-0.x/)
-- [Bleeding edge code](http://autocmake.readthedocs.io/en/latest/)
+- [Latest stable code](http://autocmake.readthedocs.io/en/stable-0.x/) (stable-0.x branch)
+- [Bleeding edge code](http://autocmake.readthedocs.io/en/latest/) (master branch)
 
 
 ## Projects using Autocmake
