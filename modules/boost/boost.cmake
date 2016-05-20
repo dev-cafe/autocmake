@@ -71,7 +71,7 @@
 #     - "'-DBOOST_LIBRARYDIR=\"{0}\"'.format(arguments['--boost-libraries'])"
 #     - "'-DFORCE_CUSTOM_BOOST={0}'.format(arguments['--build-boost'])"
 #     - "'-DBOOST_MINIMUM_REQUIRED=\"%(major).%(minor).%(patch)\"'"
-#     - "'-DBOOST_COMPONENTS_REQUIRED=%(components)'"
+#     - "'-DBOOST_COMPONENTS_REQUIRED=\"%(components)\"'"
 
 # FIXME Maintainer should be able to choose between fail (end-user has to satisfy dependency
 #       on its own) and soft-fail (self-build of Boost)
