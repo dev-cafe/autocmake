@@ -73,7 +73,7 @@ def main():
             if s_out != '':
                 output.append('\n\n%s' % file_name)
                 output.append('-'*len(file_name))
-                output.append('`[Source code] <https://github.com/coderefinery/autocmake/blob/master/modules/%s>`__' % full_file_name)
+                output.append('`[Source code] <https://github.com/coderefinery/autocmake/blob/stable-0.x/modules/%s>`__' % full_file_name)
                 output.append(s_out)
 
     with open(os.path.join(THIS_DIR, 'module-reference.rst'), 'w') as f:

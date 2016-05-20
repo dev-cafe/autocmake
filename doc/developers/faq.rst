@@ -107,7 +107,7 @@ overwritten at some point.  A good standard is to organize your sources under
 can include the latter in ``autocmake.cfg`` using::
 
   [src]
-  source: https://github.com/coderefinery/autocmake/raw/master/modules/src.cmake
+  source: https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/src.cmake
 
 If you really don't like to do it this way, you can describe your sources and
 targets in a custom module in a local file and include it like this::

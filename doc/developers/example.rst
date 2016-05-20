@@ -25,7 +25,7 @@ Now we create ``cmake/`` and fetch ``update.py``::
 
   $ mkdir cmake
   $ cd cmake/
-  $ wget https://raw.githubusercontent.com/coderefinery/autocmake/master/update.py
+  $ wget https://raw.githubusercontent.com/coderefinery/autocmake/stable-0.x/update.py
   $ python update.py --self
 
 Now from top-level our file tree looks like this::
@@ -50,13 +50,13 @@ Now we edit ``cmake/autocmake.cfg`` to look like this::
   min_cmake_version: 2.8
 
   [fc]
-  source: https://github.com/coderefinery/autocmake/raw/master/modules/fc.cmake
+  source: https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/fc.cmake
 
   [cc]
-  source: https://github.com/coderefinery/autocmake/raw/master/modules/cc.cmake
+  source: https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/cc.cmake
 
   [src]
-  source: https://github.com/coderefinery/autocmake/raw/master/modules/src.cmake
+  source: https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/src.cmake
 
 What we have specified here is the project name and that we wish Fortran and C
 support. The ``src.cmake`` module tells CMake to include a ``src/CMakeLists.txt``.

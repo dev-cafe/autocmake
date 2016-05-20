@@ -7,8 +7,8 @@
 #
 # autocmake.cfg configuration::
 #
-#   fetch: https://github.com/coderefinery/autocmake/raw/master/modules/git_info/git_info_sub.cmake
-#          https://github.com/coderefinery/autocmake/raw/master/modules/git_info/git_info.h.in
+#   fetch: https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/git_info/git_info_sub.cmake
+#          https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/git_info/git_info.h.in
 
 # CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
 # see https://public.kitware.com/Bug/print_bug_page.php?bug_id=11675

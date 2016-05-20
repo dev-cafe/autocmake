@@ -12,8 +12,8 @@
 #
 #   docopt: --lapacke Find and link to LAPACKE [default: False].
 #   define: '-DENABLE_LAPACKE=%s' % arguments['--lapacke']
-#   fetch: https://github.com/coderefinery/autocmake/raw/master/modules/find/find_libraries.cmake
-#          https://github.com/coderefinery/autocmake/raw/master/modules/find/find_include_files.cmake
+#   fetch: https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/find/find_libraries.cmake
+#          https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/find/find_include_files.cmake
 
 option(ENABLE_LAPACKE "Find and link to LAPACKE" OFF)
 

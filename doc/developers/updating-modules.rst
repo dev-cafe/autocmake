@@ -21,7 +21,7 @@ rather fetch an older version, for example with the hash ``abcd123``. To
 achieve this, instead of::
 
   [foo]
-  source: https://github.com/coderefinery/autocmake/raw/master/modules/foo.cmake
+  source: https://github.com/coderefinery/autocmake/raw/stable-0.x/modules/foo.cmake
 
 pin the version to ``abcd123`` (you do not need to specify the full Git hash, a unique
 beginning will do)::

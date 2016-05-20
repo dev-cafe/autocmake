@@ -5,7 +5,7 @@ Testing Autocmake
 
 You will need to install `pytest <http://pytest.org/>`__.
 
-Check also the `Travis  <https://github.com/coderefinery/autocmake/blob/master/.travis.yml>`__
+Check also the `Travis  <https://github.com/coderefinery/autocmake/blob/stable-0.x/.travis.yml>`__
 build and test recipe for other requirements.
 
 Your contributions and changes should preserve the test set. You can run locally all tests with::

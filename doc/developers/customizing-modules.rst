@@ -38,9 +38,9 @@ Overriding defaults
 -------------------
 
 Some modules use interpolations to set defaults, see for instance
-https://github.com/coderefinery/autocmake/blob/master/modules/boost/boost.cmake#L33-L36.
+https://github.com/coderefinery/autocmake/blob/stable-0.x/modules/boost/boost.cmake#L33-L36.
 These can be modified within ``autocmake.cfg``, e.g.:
-https://github.com/coderefinery/autocmake/blob/master/test/boost_libs/cmake/autocmake.cfg#L9
+https://github.com/coderefinery/autocmake/blob/stable-0.x/test/boost_libs/cmake/autocmake.cfg#L9
 
 
 Create own CMake modules
