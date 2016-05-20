@@ -15,9 +15,6 @@ skip_on_linux = pytest.mark.skipif('sys.platform == "linux2"', reason="not worki
 skip_always = pytest.mark.skipif('1 == 1', reason="tests are broken")
 
 
-# ------------------------------------------------------------------------------
-
-
 def exe(command):
     """
     Executes command and returns string representations of stdout and stderr captured from the console.
@@ -40,8 +37,6 @@ def exe(command):
         sys.stderr.write(stderr)
 
     return stdout, stderr
-
-# ------------------------------------------------------------------------------
 
 
 def configure_build_and_exe(name, setup_command, launcher=None):
@@ -83,10 +78,7 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 
     assert 'PASSED' in stdout
 
-# ------------------------------------------------------------------------------
 
-
-@skip_always
 def test_extra_cmake_options():
     configure_build_and_exe('extra_cmake_options', 'python setup --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
 
@@ -99,40 +91,33 @@ def test_fc():
     configure_build_and_exe('fc', 'python setup --fc=gfortran')
 
 
-@skip_always
 def test_fc_git_info():
     configure_build_and_exe('fc_git_info', 'python setup --fc=gfortran')
 
 
-@skip_always
 def test_fc_int64():
     configure_build_and_exe('fc_int64', 'python setup --fc=gfortran --int64')
 
 
-@skip_always
 @skip_on_osx
 def test_fc_omp():
     os.environ['OMP_NUM_THREADS'] = '2'
     configure_build_and_exe('fc_omp', 'python setup --omp --fc=gfortran')
 
 
-@skip_always
 def test_fc_blas():
     configure_build_and_exe('fc_blas', 'python setup --fc=gfortran --blas')
 
 
-@skip_always
 def test_fc_lapack():
     configure_build_and_exe('fc_lapack', 'python setup --fc=gfortran --lapack')
 
 
-@skip_always
 @skip_on_osx
 def test_cxx_cblas():
     configure_build_and_exe('cxx_cblas', 'python setup --cxx=g++ --cblas')
 
 
-@skip_always
 @skip_on_linux
 def test_cxx_accelerate():
     configure_build_and_exe('cxx_accelerate', 'python setup --cxx=g++ --accelerate')
