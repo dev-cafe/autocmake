@@ -7,6 +7,14 @@ import sys
 AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/yaml/'
 
 
+def check_for_yaml():
+    try:
+        import yaml
+    except:
+        sys.stderr.write("ERROR: you need to install the pyaml module\n")
+        sys.exit(-1)
+
+
 def print_progress_bar(text, done, total, width):
     """
     Print progress bar.
@@ -270,4 +278,5 @@ def fetch_url(src, dst):
 
 
 if __name__ == '__main__':
+    check_for_yaml()
     main(sys.argv)
