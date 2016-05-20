@@ -1,15 +1,11 @@
-[project]
 name: example
 min_cmake_version: 2.8
-
-[cxx]
-source: ../../../modules/cxx.cmake
-
-[python_interpreter]
-source: ../../../modules/python_interpreter.cmake
-
-[default_build_paths]
-source: ../../../modules/default_build_paths.cmake
-
-[src]
-source: ../../../modules/src.cmake
+modules:
+- cxx:
+  - source: ../../../modules/cxx.cmake
+- python_interpreter:
+  - source: ../../../modules/python_interpreter.cmake
+- default_build_paths:
+  - source: ../../../modules/default_build_paths.cmake
+- src:
+  - source: ../../../modules/src.cmake
