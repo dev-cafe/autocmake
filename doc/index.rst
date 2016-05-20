@@ -1,7 +1,7 @@
 
 
-Autocmake
-=========
+Autocmake (this documentation is outdated, see stable-0.x branch)
+=================================================================
 
 
 General
