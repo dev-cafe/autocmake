@@ -5,7 +5,7 @@
 # Autocmake update time.
 # Note that the build-up commands are not Windows-compatible!
 #
-# Your autocmake.yml should contain::
+# Your autocmake.yml should look like this::
 #
 # - boost:
 #   - major: 1
@@ -61,7 +61,7 @@
 #     - "%(url_root)modules/boost/boost_install.cmake"
 #     - "%(url_root)modules/boost/boost_headers.cmake"
 #     - "%(url_root)modules/boost/boost_cleanup.cmake"
-#     - "http://sourceforge.net/projects/boost/files/boost/%(major)s.%(minor)s.%(patch)s/boost_%(major)s_%(minor)s_%(patch)s.zip"
+#     - "http://sourceforge.net/projects/boost/files/boost/%(major).%(minor).%(patch)/boost_%(major)_%(minor)_%(patch).zip"
 #   docopt:
 #     - "--boost-headers=<BOOST_INCLUDEDIR> Include directories for Boost [default: '']."
 #     - "--boost-libraries=<BOOST_LIBRARYDIR> Library directories for Boost [default: '']."
@@ -70,8 +70,8 @@
 #     - "'-DBOOST_INCLUDEDIR=\"{0}\"'.format(arguments['--boost-headers'])"
 #     - "'-DBOOST_LIBRARYDIR=\"{0}\"'.format(arguments['--boost-libraries'])"
 #     - "'-DFORCE_CUSTOM_BOOST=\"{0}\"'.format(arguments['--build-boost'])"
-#     - "'-DBOOST_MINIMUM_REQUIRED="%(major)s.%(minor)s.%(patch)s"'"
-#     - "'-DBOOST_COMPONENTS_REQUIRED="%(components)s"'"
+#     - "'-DBOOST_MINIMUM_REQUIRED=\"%(major).%(minor).%(patch)\"'"
+#     - "'-DBOOST_COMPONENTS_REQUIRED=\"%(components)\"'"
 
 # FIXME Maintainer should be able to choose between fail (end-user has to satisfy dependency
 #       on its own) and soft-fail (self-build of Boost)
