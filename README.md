@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/coderefinery/autocmake.svg?branch=stable-0.x)](https://travis-ci.org/coderefinery/autocmake/builds)
-[![Documentation Status](https://readthedocs.org/projects/autocmake/badge/?version=latest)](http://autocmake.readthedocs.org)
+[![Documentation Status](https://readthedocs.org/projects/autocmake/badge/?version=stable-0.x)](http://autocmake.readthedocs.org)
 [![License](https://img.shields.io/badge/license-%20BSD--3-blue.svg)](../stable-0.x/LICENSE)
 
 
