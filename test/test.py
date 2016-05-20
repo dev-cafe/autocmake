@@ -51,6 +51,8 @@ def configure_build_and_exe(name, setup_command, launcher=None):
     os.chdir(os.path.join(HERE, name, 'cmake'))
     shutil.copy(os.path.join('..', '..', '..', 'update.py'), 'update.py')
 
+    if os.path.exists('autocmake'):
+        shutil.rmtree('autocmake')
     shutil.copytree(os.path.join('..', '..', '..', 'autocmake'), 'autocmake')
 
     stdout, stderr = exe('python update.py ..')
