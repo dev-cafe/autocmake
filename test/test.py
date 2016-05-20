@@ -89,7 +89,6 @@ def test_extra_cmake_options():
     configure_build_and_exe('extra_cmake_options', 'python setup --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
 
 
-@skip_always
 def test_cxx():
     configure_build_and_exe('cxx', 'python setup --cxx=g++')
 
