@@ -18,7 +18,10 @@ def print_progress_bar(text, done, total, width):
 
 
 def flat_add(l, x):
-    if isinstance(x, str):
+    if isinstance(x, int):
+        l.append(x)
+        return l
+    elif isinstance(x, str):
         l.append(x)
         return l
     else:
