@@ -1,14 +1,36 @@
-language: python
+language: cpp
 sudo: false
-
-python:
-  - 2.7
-  - 3.5
 
 matrix:
   include:
 
     - os: linux
+      python: 2.7
+      compiler: gcc
+      env: SOURCES=ubuntu-toolchain-r-test
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+             # compilers
+            - g++
+            - gfortran
+            - cmake
+              # math libraries
+            - libblas-dev
+            - liblapack-dev
+            - libatlas-base-dev
+              # mpi
+            - openmpi-bin
+            - libopenmpi-dev
+              # python library, development version
+            - libpython2.7
+              # boost
+            - libboost-all-dev
+
+    - os: linux
+      python: 3.5
       compiler: gcc
       env: SOURCES=ubuntu-toolchain-r-test
       addons:
