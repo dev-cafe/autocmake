@@ -11,7 +11,7 @@ def check_for_yaml():
     try:
         import yaml
     except:
-        sys.stderr.write("ERROR: you need to install the pyaml module\n")
+        sys.stderr.write("ERROR: you need to install the pyyaml package\n")
         sys.exit(-1)
 
 
