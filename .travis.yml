@@ -51,7 +51,7 @@ script:
   - pep8 --ignore E501,E265 autocmake
 #   # unit tests
   - py.test -vv autocmake/*
-# - py.test -vv test/test.py
+  - py.test -vv test/test.py
 
 notifications:
   email: false
