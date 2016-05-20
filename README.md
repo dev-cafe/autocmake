@@ -2,9 +2,6 @@
 [![Documentation Status](https://readthedocs.org/projects/autocmake/badge/?version=latest)](http://autocmake.readthedocs.org)
 [![License](https://img.shields.io/badge/license-%20BSD--3-blue.svg)](../master/LICENSE)
 
-
-# Autocmake
-
 ![alt text](https://github.com/coderefinery/autocmake/raw/master/img/autocmake.png "Autocmake")
 
 A CMake plugin composer.
