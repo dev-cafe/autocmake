@@ -5,7 +5,7 @@
 # Autocmake update time.
 # Note that the build-up commands are not Windows-compatible!
 #
-# Your autocmake.cfg should contain::
+# Your autocmake.yml should contain::
 #
 # - boost:
 #   - major: 1
