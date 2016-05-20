@@ -224,6 +224,7 @@ def main(argv):
         for f in ['autocmake/configure.py',
                   'autocmake/__init__.py',
                   'autocmake/external/docopt.py',
+                  'autocmake/external/__init__.py',
                   'autocmake/generate.py',
                   'autocmake/extract.py',
                   'autocmake/interpolate.py',
