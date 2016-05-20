@@ -6,7 +6,7 @@ import datetime
 import ast
 import collections
 
-__version__ = 'X.Y.Z'
+__version__ = '0.5.0'
 
 # we do not use the nicer sys.version_info.major
 # for compatibility with Python < 2.7
