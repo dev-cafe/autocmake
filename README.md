@@ -5,6 +5,8 @@
 
 # Autocmake
 
+![alt text](https://github.com/coderefinery/autocmake/raw/master/img/autocmake.png "Autocmake")
+
 A CMake plugin composer.
 Licensed under [BSD-3](../master/LICENSE).
 See http://autocmake.org.
