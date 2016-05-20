@@ -10,7 +10,13 @@ Licensed under [BSD-3](../master/LICENSE).
 See http://autocmake.org.
 
 
-### Projects using Autocmake
+## Documentation
+
+- [Latest stable code](http://autocmake.readthedocs.io/en/stable-0.x/)
+- [Bleeding edge code](http://autocmake.readthedocs.io/en/latest/)
+
+
+## Projects using Autocmake
 
 - [Numgrid](https://github.com/dftlibs/numgrid/)
 - [XCint](https://github.com/dftlibs/xcint/)
