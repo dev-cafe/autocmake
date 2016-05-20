@@ -69,20 +69,18 @@
 #   define:
 #     - "'-DBOOST_INCLUDEDIR=\"{0}\"'.format(arguments['--boost-headers'])"
 #     - "'-DBOOST_LIBRARYDIR=\"{0}\"'.format(arguments['--boost-libraries'])"
-#     - "'-DFORCE_CUSTOM_BOOST=\"{0}\"'.format(arguments['--build-boost'])"
+#     - "'-DFORCE_CUSTOM_BOOST={0}'.format(arguments['--build-boost'])"
 #     - "'-DBOOST_MINIMUM_REQUIRED=\"%(major).%(minor).%(patch)\"'"
-#     - "'-DBOOST_COMPONENTS_REQUIRED=\"%(components)\"'"
+#     - "'-DBOOST_COMPONENTS_REQUIRED=%(components)'"
 
 # FIXME Maintainer should be able to choose between fail (end-user has to satisfy dependency
 #       on its own) and soft-fail (self-build of Boost)
 # Underscore-separated version number
 string(REGEX REPLACE "\\." "_" BOOSTVER ${BOOST_MINIMUM_REQUIRED})
+
 # Where the Boost .zip archive is located
-# CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
-# see https://public.kitware.com/Bug/print_bug_page.php?bug_id=11675
-# workaround: create CMAKE_CURRENT_LIST_DIR
-get_filename_component(CMAKE_CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
-set(BOOST_ARCHIVE_LOCATION ${CMAKE_CURRENT_LIST_DIR})
+set(BOOST_ARCHIVE_LOCATION ${PROJECT_SOURCE_DIR}/cmake/downloaded)
+
 set(BOOST_ARCHIVE boost_${BOOSTVER}.zip)
 
 # FIXME These are possibly not always good settings
