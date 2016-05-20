@@ -9,7 +9,7 @@ This documentation is refreshed upon each push to the central repository.
 
 The module reference documentation is generated from the module sources using
 ``#.rst:`` tags (compare for instance
-http://autocmake.readthedocs.org/en/latest/module-reference.html#cc-cmake with
+http://autocmake.readthedocs.io/en/latest/module-reference.html#cc-cmake with
 https://github.com/coderefinery/autocmake/blob/master/modules/cc.cmake).
 
 Please note that the lines following ``# autocmake.cfg configuration::`` are
