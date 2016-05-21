@@ -12,7 +12,7 @@
 #   - minor: 59
 #   - patch: 0
 #   - components: "chrono;timer;system"
-#   - source: "https://github.com/coderefinery/autocmake/raw/yaml/modules/boost/boost.cmake"
+#   - source: "https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost.cmake"
 #
 # Cross-dependencies between required components are not checked for.
 # For example, Boost.Timer depends on Boost.Chrono and Boost.System thus you
@@ -48,7 +48,7 @@
 #
 # autocmake.yml configuration::
 #
-#   url_root: https://github.com/coderefinery/autocmake/raw/yaml/
+#   url_root: https://github.com/coderefinery/autocmake/raw/master/
 #   major: 1
 #   minor: 48
 #   patch: 0

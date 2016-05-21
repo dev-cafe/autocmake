@@ -7,7 +7,7 @@
 #
 # autocmake.yml configuration::
 #
-#   url_root: https://github.com/coderefinery/autocmake/raw/yaml/
+#   url_root: https://github.com/coderefinery/autocmake/raw/master/
 #   fetch:
 #     - "%(url_root)modules/git_info/git_info_sub.cmake"
 #     - "%(url_root)modules/git_info/git_info.h.in"

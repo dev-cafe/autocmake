@@ -10,7 +10,7 @@
 #
 # autocmake.yml configuration::
 #
-#   url_root: https://github.com/coderefinery/autocmake/raw/yaml/
+#   url_root: https://github.com/coderefinery/autocmake/raw/master/
 #   docopt: "--lapacke Find and link to LAPACKE [default: False]."
 #   define: "'-DENABLE_LAPACKE={0}'.format(arguments['--lapacke'])"
 #   fetch:

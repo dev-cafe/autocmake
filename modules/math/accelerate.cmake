@@ -10,7 +10,7 @@
 #
 # autocmake.yml configuration::
 #
-#   url_root: https://github.com/coderefinery/autocmake/raw/yaml/
+#   url_root: https://github.com/coderefinery/autocmake/raw/master/
 #   docopt: "--accelerate Find and link to ACCELERATE [default: False]."
 #   define: "'-DENABLE_ACCELERATE={0}'.format(arguments['--accelerate'])"
 #   fetch:

@@ -10,7 +10,7 @@
 #
 # autocmake.yml configuration::
 #
-#   url_root: https://github.com/coderefinery/autocmake/raw/yaml/
+#   url_root: https://github.com/coderefinery/autocmake/raw/master/
 #   docopt: "--cblas Find and link to CBLAS [default: False]."
 #   define: "'-DENABLE_CBLAS={0}'.format(arguments['--cblas'])"
 #   fetch:

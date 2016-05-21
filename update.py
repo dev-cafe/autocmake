@@ -4,7 +4,7 @@ import os
 import sys
 
 
-AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/yaml/'
+AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/master/'
 
 
 def check_for_yaml():
