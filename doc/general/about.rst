@@ -7,9 +7,10 @@ Building libraries and executables from sources can be a complex task. Several
 solutions exist to this problem: GNU Makefiles is the traditional approach.
 Today, CMake is one of the trendier alternatives which can generate Makefiles
 starting from a file called ``CMakeLists.txt``.
+
 Autocmake composes CMake building blocks into a CMake project and generates
 ``CMakeLists.txt`` as well as a setup script, which serves as a front-end to
-``CMakeLists.txt``. All this is done based on a lightweight ``autocmake.cfg``
+``CMakeLists.txt``. All this is done based on a lightweight ``autocmake.yml``
 file::
 
   python update.py --self
@@ -19,14 +20,14 @@ file::
        | and updates the update.py script  |
        |                                   |
        v                           Developer maintaining
-  autocmake.cfg                        Autocmake
+  autocmake.yml                        Autocmake
        |                                   |
        | python update.py ..               |
        |                                   |
        v                                   v
   CMakeLists.txt (and setup front-end)
        |                                   |
-       | python setup                      |
+       | python setup or ./setup           |
        | which invokes CMake               |
        v                             User of the code
   Makefile (or something else)             |
@@ -37,7 +38,7 @@ file::
   Build/install/test targets
 
 Our main motivation to create Autocmake as a CMake framework library and
-CMake module composer was to simplify CMake code transfer between codes. We got
+CMake module composer is to simplify CMake code transfer between codes. We got
 tired of manually diffing and copy-pasting boiler-plate CMake code and watching
 it diverge while maintaining the CMake infrastructure in a growing number of
 scientific projects which typically have very similar requirements:
