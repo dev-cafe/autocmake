@@ -8,9 +8,13 @@ You will need to install `pytest <http://pytest.org/>`__.
 Check also the `Travis  <https://github.com/coderefinery/autocmake/blob/master/.travis.yml>`__
 build and test recipe for other requirements.
 
-Your contributions and changes should preserve the test set. You can run locally all tests with::
+Your contributions and changes should preserve the test set and be PEP8 conform.
+You can run locally all tests with::
 
-  $ py.test test/test.py
+  $ pep8 --ignore E501 update.py
+  $ pep8 --ignore E501,E265 autocmake
+  $ py.test -vv autocmake/*
+  $ py.test -vv test/test.py
 
 You can also select individual tests, for example those with ``fc_blas`` string in the name::
 
