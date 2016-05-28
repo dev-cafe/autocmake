@@ -1,5 +1,5 @@
 
-.. _autocmake_cfg:
+.. _autocmake_yml:
 
 Configuring autocmake.cfg
 =========================

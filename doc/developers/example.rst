@@ -4,7 +4,7 @@ Example Hello World project
 ===========================
 
 This is a brief example for the busy and impatient programmer. For a longer
-tour please see :ref:`autocmake_cfg`.
+tour please see :ref:`autocmake_yml`.
 
 We start with a mixed Fortran-C project with the following sources::
 

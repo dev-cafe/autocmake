@@ -19,41 +19,38 @@ On the MS Windows system, you can use the PowerShell wget-replacement::
 
   $ Invoke-WebRequest https://github.com/coderefinery/autocmake/raw/master/update.py -OutFile update.py
 
-This creates (or updates) the following files (an existing ``autocmake.cfg`` is
+This creates (or updates) the following files (an existing ``autocmake.yml`` is
 not overwritten by the script)::
 
   cmake/
-      autocmake.cfg      # edit this file
+      autocmake.yml      # edit this file
       update.py          # no need to edit
-      lib/
-          config.py      # no need to edit
-          docopt/
-              docopt.py  # no need to edit
+      autocmake/         # no need to edit
+          ...            # no need to edit
 
-Note that all other listed files are overwritten (use version control).
+Note that ``update.py`` and files under ``autocmake/``
+are overwritten (use version control).
 
 
 Generating the CMake infrastructure
 -----------------------------------
 
-Now customize ``autocmake.cfg`` to your needs
-(see :ref:`autocmake_cfg`)
+Now customize ``autocmake.yml`` to your needs
+(see :ref:`autocmake_yml`)
 and then run the ``update.py`` script which
 creates ``CMakeLists.txt`` and a setup script in the target path::
 
   $ python update.py ..
 
-The script also downloads external CMake modules specified in ``autocmake.cfg`` to a directory
+The script also downloads external CMake modules specified in ``autocmake.yml`` to a directory
 called ``downloaded/``::
 
   cmake/
-      autocmake.cfg      # edit this file
+      autocmake.yml      # edit this file
       update.py          # no need to edit
-      lib/
-          config.py      # no need to edit
-          docopt/
-              docopt.py  # no need to edit
-          downloaded/    # contains CMake modules fetched from the web
+      autocmake/         # no need to edit
+          ...            # no need to edit
+      downloaded/        # contains CMake modules fetched from the web
 
 
 Building the project
