@@ -1,0 +1,6 @@
+if(OpenBLAS_FOUND)
+    add_executable(example example.f90)
+    target_link_libraries(example ${OpenBLAS_LIB})
+else()
+    message(FATAL_ERROR "OpenBLAS library not found")
+endif()

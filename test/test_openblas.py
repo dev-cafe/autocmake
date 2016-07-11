@@ -81,4 +81,4 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 
 @skip_on_osx
 def test_fc_openblas():
-    configure_build_and_exe('fc_blas', 'python setup --fc=gfortran --openblas')
+    configure_build_and_exe('fc_openblas', 'python setup --fc=gfortran --openblas')
