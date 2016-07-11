@@ -79,14 +79,6 @@ def configure_build_and_exe(name, setup_command, launcher=None):
     assert 'PASSED' in stdout
 
 
-def test_fc():
-    configure_build_and_exe('fc', 'python setup --fc=gfortran')
-
-
-def test_fc_blas():
-    configure_build_and_exe('fc_blas', 'python setup --fc=gfortran --blas')
-
-
 @skip_on_osx
 def test_fc_openblas():
     configure_build_and_exe('fc_blas', 'python setup --fc=gfortran --openblas')
