@@ -24,5 +24,6 @@ See http://autocmake.org.
 - [Fortran Input Reader](https://github.com/miroi/fortran_input_reader)
 - [PCMSolver](https://github.com/PCMSolver/pcmsolver)
 - GRASP: General-purpose Relativistic Atomic Structure Program
+- [MRChem](https://github.com/MRChemSoft/mrchem)
 
 If you use Autocmake, please link to your project via a pull request.
