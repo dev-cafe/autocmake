@@ -47,8 +47,8 @@ Settings in ``autocmake.yml`` take precedence over
 settings imported by a sourced module.
 
 As an example consider the Boost module which defines and uses
-interpolation variables ``major``, ``minor``, and ``patch``, see
-https://github.com/coderefinery/autocmake/blob/master/modules/boost/boost.cmake#L52-L54.
+interpolation variables ``major``, ``minor``, ``patch``, and ``components``, see
+https://github.com/coderefinery/autocmake/blob/master/modules/boost/boost.cmake#L52-L55.
 
 The recommended way to customize these is in ``autocmake.yml``, e.g.:
 https://github.com/coderefinery/autocmake/blob/master/test/boost_libs/cmake/autocmake.yml#L12-L17.

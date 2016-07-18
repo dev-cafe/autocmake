@@ -20,11 +20,11 @@ Sometimes you may want to avoid using the latest version of a CMake module and
 rather fetch an older version, for example with the hash ``abcd123``. To
 achieve this, instead of::
 
-  [foo]
-  source: https://github.com/coderefinery/autocmake/raw/master/modules/foo.cmake
+  - my_feature:
+    - source: https://github.com/coderefinery/autocmake/raw/master/modules/foo.cmake
 
 pin the version to ``abcd123`` (you do not need to specify the full Git hash, a unique
 beginning will do)::
 
-  [foo]
-  source: https://github.com/coderefinery/autocmake/raw/abcd123/modules/foo.cmake
+  - my_feature:
+    - source: https://github.com/coderefinery/autocmake/raw/abcd123/modules/foo.cmake

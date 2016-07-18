@@ -8,3 +8,6 @@ support Python 3 (we automatically test with 2.7 and 3.5).
 
 The generated setup script runs with Python >= 2.6 (also tested with Python
 3.5).
+
+To generate ``CMakeLists.txt`` and the ``setup`` script, Autocmake
+requires the pyyaml package.

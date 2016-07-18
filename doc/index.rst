@@ -1,7 +1,7 @@
 
 
-Autocmake (this documentation is outdated, see stable-0.x branch)
-=================================================================
+Autocmake
+=========
 
 
 General
@@ -27,6 +27,7 @@ For developers who use Autocmake
    developers/example.rst
    developers/customizing-modules.rst
    developers/updating-modules.rst
+   developers/interpolation.rst
 
 
 For users of projects which use Autocmake

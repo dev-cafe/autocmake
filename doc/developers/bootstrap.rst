@@ -13,6 +13,9 @@ infrastructure files which will be needed to build the project::
   $ mkdir cmake  # does not have to be called "cmake" - take the name you prefer
   $ cd cmake
   $ wget https://github.com/coderefinery/autocmake/raw/master/update.py
+  $ virtualenv venv
+  $ source venv/bin/activate
+  $ pip install pyyaml
   $ python update.py --self
 
 On the MS Windows system, you can use the PowerShell wget-replacement::
