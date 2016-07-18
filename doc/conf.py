@@ -14,7 +14,6 @@
 
 import sys
 import os
-import shlex
 
 sys.path.append(os.path.relpath(os.path.abspath('.')))
 import extract_rst
