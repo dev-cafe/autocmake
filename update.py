@@ -4,6 +4,11 @@ import os
 import sys
 
 
+if sys.version_info[0] == 2 and sys.version_info[1] < 7:
+    sys.stderr.write("ERROR: update.py requires at least Python 2.7\n")
+    sys.exit(-1)
+
+
 AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/master/'
 
 
