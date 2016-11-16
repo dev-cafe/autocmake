@@ -9,12 +9,20 @@
 #
 #   url_root: https://github.com/coderefinery/autocmake/raw/master/
 #   fetch:
-#     - "%(url_root)modules/git_info/git_info_sub.cmake"
 #     - "%(url_root)modules/git_info/git_info.h.in"
 
-# _header_location: where the Git info header file should be generated
-# _header_name: the Git info header name, complete with extension (.h, .hpp, .hxx or whatever)
-function(generate_git_info_header _header_location _header_name)
+function(generate_git_info_header)
+  # _header_location: where the Git info header file should be generated
+  # _header_name: the Git info header name, complete with extension (.h, .hpp, .hxx or whatever)
+  if(${ARGC} EQUAL 2)
+    set(_header_location ${ARGV0})
+    set(_header_name     ${ARGV1})
+  elseif(${ARGC} EQUAL 0)
+    set(_header_location ${PROJECT_BINARY_DIR})
+    set(_header_name git_info.h)
+  else()
+    message(FATAL_ERROR "generate_git_info_header function accepts either two or no arguments")
+  endif()
   find_package(Git)
 
   set(_git_last_commit_hash "unknown")
@@ -65,6 +73,6 @@ function(generate_git_info_header _header_location _header_name)
 
   add_custom_target(
     git_info
-    ALL DEPENDS ${PROJECT_BINARY_DIR}/git_info.h
+    ALL DEPENDS ${_header_location}/${_header_name}
     )
 endfunction()
