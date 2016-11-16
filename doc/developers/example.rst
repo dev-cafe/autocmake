@@ -1,10 +1,10 @@
 
 
-Example Hello World project
+Example hello world project
 ===========================
 
 This is a brief example for the busy and impatient programmer. For a longer
-tour please see :ref:`autocmake_cfg`.
+tour please see :ref:`autocmake_yml`.
 
 We start with a mixed Fortran-C project with the following sources::
 
@@ -23,40 +23,49 @@ there. This is not necessary for Autocmake but it is a generally good practice::
 
 Now we create ``cmake/`` and fetch ``update.py``::
 
-  $ mkdir cmake
-  $ cd cmake/
-  $ wget https://raw.githubusercontent.com/scisoft/autocmake/master/update.py
+  $ mkdir cmake  # does not have to be called "cmake" - take the name you prefer
+  $ cd cmake
+  $ wget https://github.com/coderefinery/autocmake/raw/master/update.py
   $ python update.py --self
 
 Now from top-level our file tree looks like this::
 
   .
   |-- cmake
-  |   |-- autocmake.cfg
-  |   |-- lib
-  |   |   |-- config.py
-  |   |   `-- docopt
-  |   |       `-- docopt.py
+  |   |-- autocmake
+  |   |   |-- __init__.py
+  |   |   |-- configure.py
+  |   |   |-- external
+  |   |   |   |-- __init__.py
+  |   |   |   `-- docopt.py
+  |   |   |-- extract.py
+  |   |   |-- generate.py
+  |   |   |-- interpolate.py
+  |   |   |-- parse_rst.py
+  |   |   `-- parse_yaml.py
+  |   |-- autocmake.yml
   |   `-- update.py
   `-- src
       |-- feature1.F90
       |-- feature2.c
       `-- main.F90
 
-Now we edit ``cmake/autocmake.cfg`` to look like this::
+Now we edit ``cmake/autocmake.yml`` to look like this::
 
-  [project]
   name: hello
+
   min_cmake_version: 2.8
 
-  [fc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/fc.cmake
+  url_root: https://github.com/coderefinery/autocmake/raw/master/
 
-  [cc]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/cc.cmake
-
-  [src]
-  source: https://github.com/scisoft/autocmake/raw/master/modules/src.cmake
+  modules:
+  - compilers:
+    - source:
+      - '%(url_root)modules/fc.cmake'
+      - '%(url_root)modules/cc.cmake'
+  - src_support:
+    - source:
+      - '%(url_root)modules/src.cmake'
 
 What we have specified here is the project name and that we wish Fortran and C
 support. The ``src.cmake`` module tells CMake to include a ``src/CMakeLists.txt``.
@@ -76,20 +85,32 @@ Now we have everything to generate ``CMakeLists.txt`` and a setup script::
   $ cd cmake
   $ python update ..
 
+  - parsing autocmake.yml
+  - assembling modules: [##############################] (3/3)
+  - generating CMakeLists.txt
+  - generating setup script
+
 And this is what we got::
 
   .
   |-- CMakeLists.txt
   |-- cmake
-  |   |-- autocmake.cfg
+  |   |-- autocmake
+  |   |   |-- __init__.py
+  |   |   |-- configure.py
+  |   |   |-- external
+  |   |   |   |-- __init__.py
+  |   |   |   `-- docopt.py
+  |   |   |-- extract.py
+  |   |   |-- generate.py
+  |   |   |-- interpolate.py
+  |   |   |-- parse_rst.py
+  |   |   `-- parse_yaml.py
+  |   |-- autocmake.yml
   |   |-- downloaded
   |   |   |-- autocmake_cc.cmake
   |   |   |-- autocmake_fc.cmake
   |   |   `-- autocmake_src.cmake
-  |   |-- lib
-  |   |   |-- config.py
-  |   |   `-- docopt
-  |   |       `-- docopt.py
   |   `-- update.py
   |-- setup
   `-- src
@@ -100,12 +121,12 @@ And this is what we got::
 
 Now we are ready to build::
 
-  $ python setup --fc=gfortran --cc=gcc
+  $ ./setup --fc=gfortran --cc=gcc
 
-  FC=gfortran CC=gcc cmake -DEXTRA_FCFLAGS="''" -DENABLE_FC_SUPPORT="ON" -DEXTRA_CFLAGS="''" -DCMAKE_BUILD_TYPE=release -G "Unix Makefiles" None /home/user/example
+  FC=gfortran CC=gcc cmake -DEXTRA_FCFLAGS="''" -DEXTRA_CFLAGS="''" -DCMAKE_BUILD_TYPE=release -G "Unix Makefiles" /home/user/hello
 
-  -- The C compiler identification is GNU 4.9.2
-  -- The CXX compiler identification is GNU 4.9.2
+  -- The C compiler identification is GNU 6.1.1
+  -- The CXX compiler identification is GNU 6.1.1
   -- Check for working C compiler: /usr/bin/gcc
   -- Check for working C compiler: /usr/bin/gcc -- works
   -- Detecting C compiler ABI info
@@ -118,7 +139,7 @@ Now we are ready to build::
   -- Detecting CXX compiler ABI info - done
   -- Detecting CXX compile features
   -- Detecting CXX compile features - done
-  -- The Fortran compiler identification is GNU 4.9.2
+  -- The Fortran compiler identification is GNU 6.1.1
   -- Check for working Fortran compiler: /usr/bin/gfortran
   -- Check for working Fortran compiler: /usr/bin/gfortran  -- works
   -- Detecting Fortran compiler ABI info
@@ -127,14 +148,14 @@ Now we are ready to build::
   -- Checking whether /usr/bin/gfortran supports Fortran 90 -- yes
   -- Configuring done
   -- Generating done
-  -- Build files have been written to: /home/user/example/build
+  -- Build files have been written to: /home/user/hello/build
 
      configure step is done
      now you need to compile the sources:
      $ cd build
      $ make
 
-  $ cd build/
+  $ cd build
   $ make
 
   Scanning dependencies of target hello.x

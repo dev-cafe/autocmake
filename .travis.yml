@@ -5,6 +5,7 @@ matrix:
   include:
 
     - os: linux
+      python: 2.7
       compiler: gcc
       env: SOURCES=ubuntu-toolchain-r-test
       addons:
@@ -16,6 +17,30 @@ matrix:
             - g++
             - gfortran
             - cmake
+              # math libraries
+            - libblas-dev
+            - liblapack-dev
+            - libatlas-base-dev
+              # mpi
+            - openmpi-bin
+            - libopenmpi-dev
+              # python library, development version
+            - libpython2.7
+              # boost
+            - libboost-all-dev
+
+    - os: linux
+      python: 3.5
+      compiler: gcc
+      env: SOURCES=ubuntu-toolchain-r-test
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+             # compilers
+            - g++
+            - gfortran
               # math libraries
             - libblas-dev
             - liblapack-dev
@@ -40,20 +65,21 @@ install:
         pip install virtualenv
     elif [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
         pip install --user virtualenv
+        curl https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | tar xvz
+        export PATH=~/cmake-3.5.2-Linux-x86_64/bin:$PATH
+        export LD_LIBARY_PATH=~/cmake-3.5.2-Linux-x86_64/lib:$LD_LIBRARY_PATH
     fi
   - virtualenv venv
   - source venv/bin/activate
-  - pip install pep8 pytest
+  - pip install -r requirements.txt
 
 script:
     # pep8 tests
-  - pep8 --ignore=E501 update.py
-  - pep8 --ignore=E501 test/test.py
-  - pep8 --ignore=E501 lib/config.py
+  - pep8 --ignore E501 update.py
+  - pep8 --ignore E501,E265 autocmake
     # unit tests
-  - py.test -vv update.py
+  - py.test -vv autocmake/*
   - py.test -vv test/test.py
-  - py.test -vv lib/config.py
 
 notifications:
   email: false

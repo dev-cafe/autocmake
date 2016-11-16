@@ -1,0 +1,7 @@
+# CMakeLists.txt and setup script will be generated from this file
+# see: http://autocmake.readthedocs.io/en/latest/developers/configuration.html
+# adapt the following lines and expand
+
+name: myproject
+
+min_cmake_version: 2.8

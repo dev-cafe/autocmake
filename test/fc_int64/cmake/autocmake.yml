@@ -1,0 +1,11 @@
+name: example
+min_cmake_version: 2.8
+modules:
+- fc:
+  - source: ../../../modules/fc.cmake
+- int64:
+  - source: ../../../modules/int64.cmake
+- default_build_paths:
+  - source: ../../../modules/default_build_paths.cmake
+- src:
+  - source: ../../../modules/src.cmake

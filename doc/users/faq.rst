@@ -47,4 +47,9 @@ How can I select CMake options via the setup script?
 
 Like this::
 
-  $ python setup --cmake-options="-DTHIS_OPTION=ON -DTHAT_OPTION=OFF"
+  $ python setup --cmake-options='"-DTHIS_OPTION=ON -DTHAT_OPTION=OFF"'
+
+We use two sets of quotes because the shell swallows one set of them before
+passing the arguments to Python. Yeah that's not nice, but nothing we can do
+about it on the Python side. If you do not use two sets of quotes then the
+setup command may end up incorrectly saved in `build/setup_command`.

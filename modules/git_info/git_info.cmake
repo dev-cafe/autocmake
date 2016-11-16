@@ -65,6 +65,6 @@ function(generate_git_info_header _header_location _header_name)
 
   add_custom_target(
     git_info
-    ALL DEPENDS ${_header_location}/${_header_name}
+    ALL DEPENDS ${PROJECT_BINARY_DIR}/git_info.h
     )
 endfunction()

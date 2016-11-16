@@ -8,10 +8,10 @@
 #   ACML_LIBRARIES
 #   ACML_INCLUDE_DIR
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --acml Find and link to ACML [default: False].
-#   define: '-DENABLE_ACML=%s' % arguments['--acml']
+#   docopt: "--acml Find and link to ACML [default: False]."
+#   define: "'-DENABLE_ACML={0}'.format(arguments['--acml'])"
 
 option(ENABLE_ACML "Find and link to ACML" OFF)
 

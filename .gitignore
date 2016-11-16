@@ -1,3 +1,5 @@
+.cache/
+venv/
 *.pyc
 __pycache__/
 
@@ -5,7 +7,7 @@ __pycache__/
 test/*/CMakeLists.txt
 test/*/build*/
 test/*/cmake/update.py
-test/*/cmake/lib/
+test/*/cmake/autocmake/
 test/*/cmake/downloaded/
 test/*/setup
 

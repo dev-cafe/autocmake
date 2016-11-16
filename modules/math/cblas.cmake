@@ -8,12 +8,14 @@
 #   CBLAS_LIBRARIES - describe me, uncached
 #   CBLAS_INCLUDE_DIR - describe me, uncached
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   docopt: --cblas Find and link to CBLAS [default: False].
-#   define: '-DENABLE_CBLAS=%s' % arguments['--cblas']
-#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/find/find_libraries.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/find/find_include_files.cmake
+#   url_root: https://github.com/coderefinery/autocmake/raw/master/
+#   docopt: "--cblas Find and link to CBLAS [default: False]."
+#   define: "'-DENABLE_CBLAS={0}'.format(arguments['--cblas'])"
+#   fetch:
+#     - "%(url_root)modules/find/find_libraries.cmake"
+#     - "%(url_root)modules/find/find_include_files.cmake"
 
 option(ENABLE_CBLAS "Find and link to CBLAS" OFF)
 

@@ -5,11 +5,14 @@
 # Autocmake update time.
 # Note that the build-up commands are not Windows-compatible!
 #
-# Your autocmake.cfg should look like this::
+# Your autocmake.yml should look like this::
 #
-#   [boost]
-#   override: {'major': 1, 'minor': 59, 'patch': 0, 'components': 'chrono;timer;system'}
-#   source: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost.cmake
+# - boost:
+#   - major: 1
+#   - minor: 59
+#   - patch: 0
+#   - components: "chrono;timer;system"
+#   - source: "https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost.cmake"
 #
 # Cross-dependencies between required components are not checked for.
 # For example, Boost.Timer depends on Boost.Chrono and Boost.System thus you
@@ -43,39 +46,41 @@
 #   MPI_FOUND
 #   BUILD_CUSTOM_BOOST
 #
-# autocmake.cfg configuration::
+# autocmake.yml configuration::
 #
-#   major=1
-#   minor=48
-#   patch=0
-#   components=''
-#   fetch: https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_unpack.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_userconfig.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_configure.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_build.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_install.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_headers.cmake
-#          https://github.com/scisoft/autocmake/raw/master/modules/boost/boost_cleanup.cmake
-#          http://sourceforge.net/projects/boost/files/boost/%(major)s.%(minor)s.%(patch)s/boost_%(major)s_%(minor)s_%(patch)s.zip
-#   docopt: --boost-headers=<BOOST_INCLUDEDIR> Include directories for Boost [default: ''].
-#           --boost-libraries=<BOOST_LIBRARYDIR> Library directories for Boost [default: ''].
-#           --build-boost=<FORCE_CUSTOM_BOOST> Deactivate Boost detection and build on-the-fly <ON/OFF> [default: OFF].
-#   define: '-DBOOST_INCLUDEDIR="{0}"'.format(arguments['--boost-headers'])
-#           '-DBOOST_LIBRARYDIR="{0}"'.format(arguments['--boost-libraries'])
-#           '-DFORCE_CUSTOM_BOOST="{0}"'.format(arguments['--build-boost'])
-#           '-DBOOST_MINIMUM_REQUIRED="%(major)s.%(minor)s.%(patch)s"'
-#           '-DBOOST_COMPONENTS_REQUIRED="%(components)s"'
+#   url_root: https://github.com/coderefinery/autocmake/raw/master/
+#   major: 1
+#   minor: 48
+#   patch: 0
+#   components: ""
+#   fetch:
+#     - "%(url_root)modules/boost/boost_unpack.cmake"
+#     - "%(url_root)modules/boost/boost_userconfig.cmake"
+#     - "%(url_root)modules/boost/boost_configure.cmake"
+#     - "%(url_root)modules/boost/boost_build.cmake"
+#     - "%(url_root)modules/boost/boost_install.cmake"
+#     - "%(url_root)modules/boost/boost_headers.cmake"
+#     - "%(url_root)modules/boost/boost_cleanup.cmake"
+#     - "http://sourceforge.net/projects/boost/files/boost/%(major).%(minor).%(patch)/boost_%(major)_%(minor)_%(patch).zip"
+#   docopt:
+#     - "--boost-headers=<BOOST_INCLUDEDIR> Include directories for Boost [default: '']."
+#     - "--boost-libraries=<BOOST_LIBRARYDIR> Library directories for Boost [default: '']."
+#     - "--build-boost=<FORCE_CUSTOM_BOOST> Deactivate Boost detection and build on-the-fly <ON/OFF> [default: OFF]."
+#   define:
+#     - "'-DBOOST_INCLUDEDIR=\"{0}\"'.format(arguments['--boost-headers'])"
+#     - "'-DBOOST_LIBRARYDIR=\"{0}\"'.format(arguments['--boost-libraries'])"
+#     - "'-DFORCE_CUSTOM_BOOST={0}'.format(arguments['--build-boost'])"
+#     - "'-DBOOST_MINIMUM_REQUIRED=\"%(major).%(minor).%(patch)\"'"
+#     - "'-DBOOST_COMPONENTS_REQUIRED=\"%(components)\"'"
 
 # FIXME Maintainer should be able to choose between fail (end-user has to satisfy dependency
 #       on its own) and soft-fail (self-build of Boost)
 # Underscore-separated version number
 string(REGEX REPLACE "\\." "_" BOOSTVER ${BOOST_MINIMUM_REQUIRED})
+
 # Where the Boost .zip archive is located
-# CMAKE_CURRENT_LIST_DIR is undefined in CMake 2.8.2
-# see https://public.kitware.com/Bug/print_bug_page.php?bug_id=11675
-# workaround: create CMAKE_CURRENT_LIST_DIR
-get_filename_component(CMAKE_CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
-set(BOOST_ARCHIVE_LOCATION ${CMAKE_CURRENT_LIST_DIR})
+set(BOOST_ARCHIVE_LOCATION ${PROJECT_SOURCE_DIR}/cmake/downloaded)
+
 set(BOOST_ARCHIVE boost_${BOOSTVER}.zip)
 
 # FIXME These are possibly not always good settings
