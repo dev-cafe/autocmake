@@ -11,6 +11,8 @@
 #   fetch:
 #     - "%(url_root)modules/git_info/git_info.h.in"
 
+get_filename_component(_current_dir ${CMAKE_CURRENT_LIST_FILE} PATH)
+
 function(generate_git_info_header)
   # _header_location: where the Git info header file should be generated
   # _header_name: the Git info header name, complete with extension (.h, .hpp, .hxx or whatever)
@@ -61,7 +63,7 @@ function(generate_git_info_header)
   endif()
 
   configure_file(
-    ${PROJECT_SOURCE_DIR}/cmake/downloaded/git_info.h.in
+    ${_current_dir}/git_info.h.in
     ${_header_location}/${_header_name}
     @ONLY
     )
