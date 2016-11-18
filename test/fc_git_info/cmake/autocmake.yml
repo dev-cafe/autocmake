@@ -5,7 +5,7 @@ modules:
   - source: ../../../modules/fc.cmake
 - default_build_paths:
   - source: ../../../modules/default_build_paths.cmake
-- src:
-  - source: ../../../modules/src.cmake
 - git_info:
   - source: ../../../modules/git_info/git_info.cmake
+- src:
+  - source: ../../../modules/src.cmake
