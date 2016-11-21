@@ -1,4 +1,24 @@
-# http://stackoverflow.com/a/19578320
+#.rst:
+#
+# Colorize CMake output.
+# Code was found on StackOverflow: http://stackoverflow.com/a/19578320
+#
+# Usage within CMake code
+#   message("This is normal")
+#   message("${Red}This is Red${ColourReset}")
+#   message("${Green}This is Green${ColourReset}")
+#   message("${Yellow}This is Yellow${ColourReset}")
+#   message("${Blue}This is Blue${ColourReset}")
+#   message("${Magenta}This is Magenta${ColourReset}")
+#   message("${Cyan}This is Cyan${ColourReset}")
+#   message("${White}This is White${ColourReset}")
+#   message("${BoldRed}This is BoldRed${ColourReset}")
+#   message("${BoldGreen}This is BoldGreen${ColourReset}")
+#   message("${BoldYellow}This is BoldYellow${ColourReset}")
+#   message("${BoldBlue}This is BoldBlue${ColourReset}")
+#   message("${BoldMagenta}This is BoldMagenta${ColourReset}")
+#   message("${BoldCyan}This is BoldCyan${ColourReset}")
+#   message("${BoldWhite}This is BoldWhite\n\n${ColourReset}")
 
 if(NOT WIN32)
   string(ASCII 27 Esc)
@@ -19,19 +39,3 @@ if(NOT WIN32)
   set(BoldCyan    "${Esc}[1;36m")
   set(BoldWhite   "${Esc}[1;37m")
 endif()
-
-#message("This is normal")
-#message("${Red}This is Red${ColourReset}")
-#message("${Green}This is Green${ColourReset}")
-#message("${Yellow}This is Yellow${ColourReset}")
-#message("${Blue}This is Blue${ColourReset}")
-#message("${Magenta}This is Magenta${ColourReset}")
-#message("${Cyan}This is Cyan${ColourReset}")
-#message("${White}This is White${ColourReset}")
-#message("${BoldRed}This is BoldRed${ColourReset}")
-#message("${BoldGreen}This is BoldGreen${ColourReset}")
-#message("${BoldYellow}This is BoldYellow${ColourReset}")
-#message("${BoldBlue}This is BoldBlue${ColourReset}")
-#message("${BoldMagenta}This is BoldMagenta${ColourReset}")
-#message("${BoldCyan}This is BoldCyan${ColourReset}")
-#message("${BoldWhite}This is BoldWhite\n\n${ColourReset}")
