@@ -4,22 +4,18 @@ Autocmake
 =========
 
 
-General
--------
-
 .. toctree::
    :maxdepth: 2
+   :caption: General
 
    general/about.rst
    general/requirements.rst
    general/help.rst
 
 
-For developers who use Autocmake
---------------------------------
-
 .. toctree::
    :maxdepth: 2
+   :caption: For developers who use Autocmake
 
    developers/faq.rst
    developers/bootstrap.rst
@@ -30,30 +26,24 @@ For developers who use Autocmake
    developers/interpolation.rst
 
 
-For users of projects which use Autocmake
------------------------------------------
-
 .. toctree::
    :maxdepth: 2
+   :caption: For users of projects which use Autocmake
 
    users/faq.rst
 
 
-For developers/contributors to Autocmake
-----------------------------------------
-
 .. toctree::
    :maxdepth: 2
+   :caption: For developers/contributors to Autocmake
 
    contributors/guidelines.rst
    contributors/testing.rst
    contributors/doc.rst
 
 
-Reference
----------
-
 .. toctree::
    :maxdepth: 2
+   :caption: Reference
 
    module-reference.rst
