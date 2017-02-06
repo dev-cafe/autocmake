@@ -25,5 +25,6 @@ See http://autocmake.org.
 - [PCMSolver](https://github.com/PCMSolver/pcmsolver)
 - GRASP: General-purpose Relativistic Atomic Structure Program
 - [MRChem](https://github.com/MRChemSoft/mrchem)
+- [ReSpect](http://rel-qchem.sav.sk)
 
 If you use Autocmake, please link to your project via a pull request.
