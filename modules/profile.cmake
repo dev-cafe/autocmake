@@ -11,7 +11,7 @@
 # autocmake.yml configuration::
 #
 #   docopt: "--profile Enable profiling [default: False]"
-#   define: "'-DENABLE_PROFILING={0}'.format(arguments['--check'])"
+#   define: "'-DENABLE_PROFILING={0}'.format(arguments['--profile'])"
 
 option(ENABLE_PROFILING "Enable profiling" OFF)
 
