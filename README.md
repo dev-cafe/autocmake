@@ -17,8 +17,8 @@ See http://autocmake.org.
 
 ## Projects using Autocmake
 
-- [Numgrid](https://github.com/dftlibs/numgrid/)
-- [XCint](https://github.com/dftlibs/xcint/)
+- [Numgrid](https://github.com/dftlibs/numgrid)
+- [XCint](https://github.com/dftlibs/xcint)
 - [DIRAC](http://diracprogram.org)
 - [mathlib-tester](https://github.com/miroi/mathlibs-tester)
 - [Fortran Input Reader](https://github.com/miroi/fortran_input_reader)
@@ -26,5 +26,6 @@ See http://autocmake.org.
 - GRASP: General-purpose Relativistic Atomic Structure Program
 - [MRChem](https://github.com/MRChemSoft/mrchem)
 - [ReSpect](http://rel-qchem.sav.sk)
+- [Flanders](https://github.com/bast/flanders)
 
 If you use Autocmake, please link to your project via a pull request.
