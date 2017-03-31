@@ -143,7 +143,7 @@ def gen_cmakelists(project_name, min_cmake_version, default_build_type, relative
                               'minsizerel': 'MinSizeRel'}
 
     _build_type = build_type_capitalized[default_build_type]
-    s.append('\n# if CMAKE_BUILD_TYPE undefined, we set it to {0}'.format(_build_type)
+    s.append('\n# if CMAKE_BUILD_TYPE undefined, we set it to {0}'.format(_build_type))
     s.append('if(NOT CMAKE_BUILD_TYPE)')
     s.append('    set(CMAKE_BUILD_TYPE "{0}")'.format(_build_type))
     s.append('endif()')
