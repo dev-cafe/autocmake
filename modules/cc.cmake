@@ -25,8 +25,6 @@
 #   export: "'CC={0}'.format(arguments['--cc'])"
 #   define: "'-DEXTRA_CFLAGS=\"{0}\"'.format(arguments['--extra-cc-flags'])"
 
-enable_language(C)
-
 if(NOT DEFINED CMAKE_C_COMPILER_ID)
     message(FATAL_ERROR "CMAKE_C_COMPILER_ID variable is not defined!")
 endif()

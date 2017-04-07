@@ -1,6 +1,8 @@
 name: example
 min_cmake_version: 2.8
-language: CXX
+language:
+- CXX
+- C
 default_build_type: debug
 modules:
 - cxx:

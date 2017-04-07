@@ -55,12 +55,15 @@ matrix:
     - os: osx
       osx_image: xcode6.4
       compiler: gcc
-      env: SOURCES=homebrew
+      env:
+        - SOURCES=homebrew
+        - HOMEBREW_GCC='homebrew/versions/gcc48'
 
 install:
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-        brew install cmake boost python gcc open-mpi
+        brew install cmake boost python open-mpi
+        brew reinstall ${HOMEBREW_GCC}
         pip install virtualenv
     elif [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
         pip install --user virtualenv
