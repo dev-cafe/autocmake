@@ -43,7 +43,9 @@ if(NOT CMAKE_Fortran_COMPILER_WORKS)
 endif()
 
 if(DEFINED EXTRA_FCFLAGS)
+  if(NOT EXTRA_FCFLAGS STREQUAL "")
     set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${EXTRA_FCFLAGS}")
+  endif()
 endif()
 
 if(DEFINED ENV{FCFLAGS})
