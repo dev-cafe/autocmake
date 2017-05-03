@@ -153,5 +153,5 @@ This file should implement a function with the following signature:
       return arguments
 
 In this function you can do any validation and post-processing you like.
-This function is run after the flags are parsed and before the ``CMake`` command
+This function is run after the flags are parsed and before the CMake command
 is run.
