@@ -516,3 +516,9 @@ if (ENABLE_STATIC_LINKING)
         set(MATH_LIBS ${MATH_LIBS} -ldl)
     endif()
 endif()
+
+if(MATH_LIB_SEARCH_ORDER)
+    # this print is here to avoid warning about MATH_LIB_SEARCH_ORDER which
+    # might be set but never used
+    message(STATUS "MATH_LIB_SEARCH_ORDER set to ${MATH_LIB_SEARCH_ORDER}")
+endif()
