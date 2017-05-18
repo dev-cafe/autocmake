@@ -53,17 +53,16 @@ matrix:
             - libboost-all-dev
 
     - os: osx
-      osx_image: xcode6.4
+      osx_image: xcode7.3
       compiler: gcc
       env:
         - SOURCES=homebrew
-        - HOMEBREW_GCC='homebrew/versions/gcc48'
 
 install:
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
         brew install cmake boost python open-mpi
-        brew reinstall ${HOMEBREW_GCC}
+        brew reinstall gcc
         pip install virtualenv
     elif [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
         pip install --user virtualenv
