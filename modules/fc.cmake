@@ -29,8 +29,6 @@
 #   export: "'FC={0}'.format(arguments['--fc'])"
 #   define: "'-DEXTRA_FCFLAGS=\"{0}\"'.format(arguments['--extra-fc-flags'])"
 
-enable_language(Fortran)
-
 set(CMAKE_Fortran_MODULE_DIRECTORY ${PROJECT_BINARY_DIR}/modules)
 include_directories(${PROJECT_BINARY_DIR}/modules)
 
