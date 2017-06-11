@@ -158,7 +158,8 @@ def process_yaml(argv):
     if 'default_build_type' in config:
         default_build_type = config['default_build_type'].lower()
     else:
-        sys.stderr.write("ERROR: you have to specify default_build_type in autocmake.yml\n")
+        sys.stderr.write("ERROR: you have to specify default_build_type in autocmake.yml\n\n")
+        sys.stderr.write("# for instance like this (debug, release, relwithdebinfo, or minsizerel):\ndefault_build_type: release\n\n")
         sys.exit(-1)
 
     if 'setup_script' in config:
