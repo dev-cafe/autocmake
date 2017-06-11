@@ -144,7 +144,9 @@ def process_yaml(argv):
     if 'language' in config:
         project_language = ' '.join(config['language']) if isinstance(config['language'], list) else config['language']
     else:
-        sys.stderr.write("ERROR: you have to specify the project language(s) in autocmake.yml\n")
+        sys.stderr.write("ERROR: you have to specify the project language(s) in autocmake.yml\n\n")
+        sys.stderr.write("# for instance like this (several languages):\nlanguage:\n  - CXX\n  - Fortran\n\n")
+        sys.stderr.write("# or like this (one language):\nlanguage: Fortran\n\n")
         sys.exit(-1)
 
     if 'min_cmake_version' in config:
