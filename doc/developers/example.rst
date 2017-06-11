@@ -56,6 +56,10 @@ Now we edit ``cmake/autocmake.yml`` to look like this::
 
   min_cmake_version: 2.8
 
+  language:
+    - Fortran
+    - C
+
   url_root: https://github.com/coderefinery/autocmake/raw/master/
 
   modules:

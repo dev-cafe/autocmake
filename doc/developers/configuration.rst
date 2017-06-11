@@ -12,6 +12,11 @@ below::
 
   min_cmake_version: 2.8
 
+  language:
+    - Fortran
+    - C
+    - CXX
+
   url_root: https://github.com/coderefinery/autocmake/raw/master/
 
   modules:
@@ -45,7 +50,7 @@ Name and order of sections
 First we define the project name (here "numgrid"). This section has to be there
 and it has to be called "project" (but it does not have to be on top).
 
-We also have to define ``min_cmake_version``.
+We also have to define ``min_cmake_version`` as well as set the supported language(s).
 
 The definition ``url_root`` is an interpolation (see :ref:`interpolation`) and
 we use it to avoid retyping the same line over and over and to be able to
@@ -69,6 +74,7 @@ As a minimal example we take an ``autocmake.yml`` which only contains::
 
   name: minime
   min_cmake_version: 2.8
+  language: C
 
 If you don't have the ``update.py`` script yet, you need to fetch it from the web::
 
@@ -105,7 +111,7 @@ Excellent. Here is the generated ``CMakeLists.txt``::
   cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
   # project name
-  project(minime)
+  project(minime C)
 
   # do not rebuild if rules (compiler flags) change
   set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
