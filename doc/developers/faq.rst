@@ -67,11 +67,19 @@ The following will add a ``--something`` flag which toggles the CMake variable
 Can I change the name of the setup script?
 ------------------------------------------
 
-Yes you can do that in ``autocmake.yml``. Here we for instance change the name to "configure"::
+Yes you can do that in ``autocmake.yml``. Here we for instance change the name to "configure":
+
+.. code-block:: yaml
+  :emphasize-lines: 4
 
   name: myproject
   min_cmake_version: 2.8
+  default_build_type: release
   setup_script: configure
+  language:
+    - Fortran
+    - C
+    - CXX
 
 
 In CMake I can do feature X - can I do that also with Autocmake?
