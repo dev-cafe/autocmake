@@ -75,7 +75,7 @@ find_package_handle_standard_args(PythonLibs
     PYTHON_EXECUTABLE)
 
 if(NOT PYTHONLIBS_FOUND)
-    message(FATAL_ERROR "Could NOT find PythonLibs")
+    message(FATAL_ERROR "Could NOT find PythonLibs - did you install the python-dev package?")
 endif()
 
 # Hook-up script variables to cache variables
