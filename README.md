@@ -27,5 +27,6 @@ See http://autocmake.org.
 - [MRChem](https://github.com/MRChemSoft/mrchem)
 - [ReSpect](http://rel-qchem.sav.sk)
 - [Flanders](https://github.com/bast/flanders)
+- [GIMIC](https://github.com/qmcurrents/gimic)
 
 If you use Autocmake, please link to your project via a pull request.
