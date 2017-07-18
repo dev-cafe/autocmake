@@ -12,6 +12,8 @@ below::
 
   min_cmake_version: 2.8
 
+  default_build_type: release
+
   language:
     - Fortran
     - C
