@@ -192,14 +192,15 @@ def process_yaml(argv):
     with open(os.path.join(project_root, 'CMakeLists.txt'), 'w') as f:
         f.write('{0}\n'.format('\n'.join(s)))
 
-    # create setup script
-    print('- generating setup script')
-    s = gen_setup(cleaned_config, default_build_type, relative_path, setup_script_name)
-    file_path = os.path.join(project_root, setup_script_name)
-    with open(file_path, 'w') as f:
-        f.write('{0}\n'.format('\n'.join(s)))
-    if sys.platform != 'win32':
-        make_executable(file_path)
+    # create setup script unless it is 'None' or 'none'
+    if setup_script_name.lower() != 'none':
+        print('- generating setup script')
+        s = gen_setup(cleaned_config, default_build_type, relative_path, setup_script_name)
+        file_path = os.path.join(project_root, setup_script_name)
+        with open(file_path, 'w') as f:
+            f.write('{0}\n'.format('\n'.join(s)))
+        if sys.platform != 'win32':
+            make_executable(file_path)
 
 
 def main(argv):

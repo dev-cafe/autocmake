@@ -82,6 +82,12 @@ Yes you can do that in ``autocmake.yml``. Here we for instance change the name t
     - CXX
 
 
+Can I prevent Autocmake from creating any front-end setup script?
+-----------------------------------------------------------------
+
+Yes, with ``setup_script: None``.
+
+
 In CMake I can do feature X - can I do that also with Autocmake?
 ----------------------------------------------------------------
 
