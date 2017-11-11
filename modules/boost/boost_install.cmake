@@ -1,3 +1,6 @@
+# (c) https://github.com/coderefinery/autocmake/blob/master/AUTHORS.md
+# licensed under BSD-3: https://github.com/coderefinery/autocmake/blob/master/LICENSE
+
 # Install Boost
 # This is not Windows-friendly!
 add_custom_command(
