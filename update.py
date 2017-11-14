@@ -11,6 +11,7 @@ if sys.version_info[0] == 2 and sys.version_info[1] < 7:
 
 AUTOCMAKE_GITHUB_URL = 'https://github.com/coderefinery/autocmake/raw/master/'
 
+
 def licensing_info():
     return '''The CMake infrastructure for this project is generated using [Autocmake]
 by Radovan Bast, Roberto Di Remigio, Jonas Juselius and contributors.
