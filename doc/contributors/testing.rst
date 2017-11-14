@@ -11,8 +11,8 @@ build and test recipe for other requirements.
 Your contributions and changes should preserve the test set and be PEP8 conform.
 You can run locally all tests with::
 
-  $ pep8 --ignore E501 update.py
-  $ pep8 --ignore E501,E265 autocmake
+  $ pycodestyle --ignore E501 update.py
+  $ pycodestyle --ignore E501,E265 autocmake
   $ py.test -vv autocmake/*
   $ py.test -vv test/test.py
 
