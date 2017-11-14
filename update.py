@@ -25,7 +25,7 @@ under the terms of the [BSD-3-Clause license], unless otherwise stated.
 def check_for_yaml():
     try:
         import yaml
-    except:
+    except ImportError:
         sys.stderr.write("ERROR: you need to install the pyyaml package\n")
         sys.exit(-1)
 

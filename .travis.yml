@@ -78,7 +78,7 @@ install:
 script:
     # pycodestyle tests
   - pycodestyle --ignore E501 update.py
-  - pycodestyle --ignore E501,E265 autocmake
+  - pycodestyle --ignore E501,E265,E741 autocmake
     # unit tests
   - py.test -vv autocmake/*
   - py.test -vv test/test.py
