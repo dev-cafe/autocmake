@@ -75,7 +75,7 @@ def run_cmake(command, build_path, default_build_path):
         sys.stderr.write(stderr)
 
     # write cmake output to file
-    with open(os.path.join(build_path + 'cmake_output'), 'w') as f:
+    with open(os.path.join(build_path, 'cmake_output'), 'w') as f:
         f.write(stdout)
 
     # change directory and return
