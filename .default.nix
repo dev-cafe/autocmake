@@ -12,9 +12,9 @@ in
     name = "Autocmake";
     buildInputs = [
       ccache
-      clang
       cmake
       doxygen
+      gcc
       gfortran
       liblapack
       openmpi
