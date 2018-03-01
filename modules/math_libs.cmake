@@ -46,6 +46,8 @@
 #     - "--blas=<BLAS> Detect and link BLAS library (auto or off) [default: auto]."
 #     - "--lapack=<LAPACK> Detect and link LAPACK library (auto or off) [default: auto]."
 #     - "--mkl=<MKL> Pass MKL flag to the Intel compiler and linker and skip BLAS/LAPACK detection (sequential, parallel, cluster, or off) [default: off]."
+#     - "--scalapack=<SCALAPACK_LIBRARIES> Link line for ScaLAPACK libraries [default: ]"
+#     - "--blacs=<BLACS_IMPLEMENTATION> Implementation of BLACS for MKL ScaLAPACK (openmpi, intelmpi, sgimpt) [default: openmpi]"
 #   define:
 #     - "'-DENABLE_BLAS={0}'.format(arguments['--blas'])"
 #     - "'-DENABLE_LAPACK={0}'.format(arguments['--lapack'])"
@@ -53,7 +55,18 @@
 #     - "'-DMATH_LIB_SEARCH_ORDER=\"MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE\"'"
 #     - "'-DBLAS_LANG=Fortran'"
 #     - "'-DLAPACK_LANG=Fortran'"
+#     - "'-DSCALAPACK_LIBRARIES=\"{0}\"'.format(arguments['--scalapack'])"
+#     - "'-DBLACS_IMPLEMENTATION=\"{0}\"'.format(arguments['--blacs'])"
 #   warning: "the math_libs.cmake module is deprecated and will be removed in future versions"
+
+option_with_default(ENABLE_BLAS "Enable BLAS autodetection" "auto")
+option_with_default(ENABLE_LAPACK "Enable LAPACK autodetection" "auto")
+option_with_default(MKL_FLAG "MKL flag for the Intel compiler and linker. Skips BLAS/LAPACK autodetection" "off")
+option_with_default(MATH_LIB_SEARCH_ORDER "Search order for autodetection of math libraries" "MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE")
+option_with_default(BLAS_LANG "Linker language for BLAS detection" "Fortran")
+option_with_default(LAPACK_LANG "Linker language for LAPACK detection" "Fortran")
+option_with_default(SCALAPACK_LIBRARIES "Link line for ScaLAPACK libraries" "")
+option_with_default(BLACS_IMPLEMENTATION "Implementation of BLACS for MKL ScaLAPACK" "openmpi")
 
 #-------------------------------------------------------------------------------
 # ENABLE_STATIC_LINKING
@@ -197,7 +210,7 @@ if(${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "x86_64")
     endif()
 endif()
 
-if(ENABLE_SCALAPACK)
+if(ENABLE_SCALAPACK AND NOT SCALAPACK_LIBRARIES)
     set(_scalapack_lib      mkl_scalapack${_lib_suffix})
     if(${BLACS_IMPLEMENTATION} STREQUAL "intelmpi")
         set(_blacs_lib mkl_blacs_intelmpi${_lib_suffix})
@@ -211,6 +224,7 @@ if(ENABLE_SCALAPACK)
 else()
     set(_scalapack_lib)
     set(_blacs_lib)
+    set(BLACS_IMPLEMENTATION)
 endif()
 
 # MKL 10.0.1.014
@@ -432,7 +446,7 @@ foreach(_service BLAS LAPACK)
     endif()
 endforeach()
 
-if(NOT MKL_FLAG STREQUAL "off")
+if(MKL_FLAG AND NOT MKL_FLAG STREQUAL "off")
     set(EXTERNAL_LIBS ${EXTERNAL_LIBS} -mkl=${MKL_FLAG})
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mkl=${MKL_FLAG}")
     message(STATUS "User set explicit MKL flag which is passed to the compiler and linker: -mkl=${MKL_FLAG}")
@@ -495,12 +509,21 @@ foreach(_service BLAS LAPACK)
 endforeach()
 
 # first lapack, then blas as lapack might need blas routine
-set(MATH_LIBS
-    ${MATH_LIBS}
-    ${LAPACK_LIBRARIES}
-    ${BLAS_LIBRARIES}
-    CACHE STRING "Math libraries"
-    )
+if(SCALAPACK_LIBRARIES)
+  list(APPEND MATH_LIBS
+      ${MATH_LIBS}
+      ${SCALAPACK_LIBRARIES}
+      ${LAPACK_LIBRARIES}
+      ${BLAS_LIBRARIES}
+      )
+else()
+  list(APPEND MATH_LIBS
+      ${MATH_LIBS}
+      ${LAPACK_LIBRARIES}
+      ${BLAS_LIBRARIES}
+      )
+endif()
+set(MATH_LIBS ${MATH_LIBS} CACHE STRING "Math libraries")
 
 # further adaptation for the static linking
 if (ENABLE_STATIC_LINKING)
@@ -518,10 +541,4 @@ if (ENABLE_STATIC_LINKING)
         # fix for MKL static linking
         set(MATH_LIBS ${MATH_LIBS} -ldl)
     endif()
-endif()
-
-if(MATH_LIB_SEARCH_ORDER)
-    # this print is here to avoid warning about MATH_LIB_SEARCH_ORDER which
-    # might be set but never used
-    message(STATUS "MATH_LIB_SEARCH_ORDER set to ${MATH_LIB_SEARCH_ORDER}")
 endif()
