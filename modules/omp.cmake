@@ -61,7 +61,7 @@ if(ENABLE_OPENMP)
             set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -mp")
         endif()
         if(CMAKE_Fortran_COMPILER_ID MATCHES XL)
-            set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -qsmp")
+            set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -qsmp=omp")
         endif()
         if(CMAKE_Fortran_COMPILER_ID MATCHES Cray)
             # do nothing in this case
