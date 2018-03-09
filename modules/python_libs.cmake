@@ -84,6 +84,3 @@ endif()
 # Hook-up script variables to cache variables
 set(PYTHON_LIBRARIES ${PYTHON_LIBRARY})
 set(PYTHON_INCLUDE_DIRS ${PYTHON_INCLUDE_DIR})
-
-include_directories(SYSTEM ${PYTHON_INCLUDE_DIRS})
-link_directories(${PYTHON_LIBRARIES})
