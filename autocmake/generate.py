@@ -62,8 +62,8 @@ macro(print_option)
     "${multiValueArgs}"
     ${ARGN}
     )
-  if(NOT DEFINED ${print_option_NAME} OR "${${print_option_VARIABLE}}" STREQUAL "")
-    message(STATUS "Setting (unspecified) option ${print_option_VARIABLE}: ${print_option_DEFAULT}")
+  if(NOT DEFINED ${print_option_NAME} OR "${${print_option_NAME}}" STREQUAL "")
+    message(STATUS "Setting (unspecified) option ${print_option_NAME}: ${print_option_DEFAULT}")
   else()
     message(STATUS "Setting option ${print_option_NAME}: ${print_option_DEFAULT}")
   endif()
@@ -82,7 +82,10 @@ macro(option_with_print)
     "${multiValueArgs}"
     ${ARGN}
     )
-  print_option(${option_with_print_NAME} ${option_with_print_DEFAULT})
+  print_option(
+    NAME ${option_with_print_NAME}
+    DEFAULT ${option_with_print_DEFAULT}
+    )
   option(${option_with_print_NAME} ${option_with_print_MESSAGE} ${option_with_print_DEFAULT})
 endmacro()
 
@@ -102,7 +105,10 @@ macro(option_with_default)
     "${multiValueArgs}"
     ${ARGN}
     )
-  print_option(${option_with_default_NAME} "${option_with_default_DEFAULT}")
+  print_option(
+    NAME ${option_with_default_NAME}
+    DEFAULT "${option_with_default_DEFAULT}"
+    )
   if(NOT DEFINED ${option_with_default_NAME} OR "${${option_with_default_NAME}}" STREQUAL "")
     set(${option_with_default_NAME} "${option_with_default_DEFAULT}" CACHE STRING ${option_with_default_MESSAGE} FORCE)
   endif()
