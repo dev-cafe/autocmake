@@ -59,14 +59,46 @@
 #     - "'-DBLACS_IMPLEMENTATION=\"{0}\"'.format(arguments['--blacs'])"
 #   warning: "the math_libs.cmake module is deprecated and will be removed in future versions"
 
-option_with_default(ENABLE_BLAS "Enable BLAS autodetection" "auto")
-option_with_default(ENABLE_LAPACK "Enable LAPACK autodetection" "auto")
-option_with_default(MKL_FLAG "MKL flag for the Intel compiler and linker. Skips BLAS/LAPACK autodetection" "off")
-option_with_default(MATH_LIB_SEARCH_ORDER "Search order for autodetection of math libraries" "MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE")
-option_with_default(BLAS_LANG "Linker language for BLAS detection" "Fortran")
-option_with_default(LAPACK_LANG "Linker language for LAPACK detection" "Fortran")
-option_with_default(SCALAPACK_LIBRARIES "Link line for ScaLAPACK libraries" "")
-option_with_default(BLACS_IMPLEMENTATION "Implementation of BLACS for MKL ScaLAPACK" "openmpi")
+option_with_default(
+  NAME ENABLE_BLAS
+  MESSAGE "Enable BLAS autodetection"
+  DEFAULT "auto"
+  )
+option_with_default(
+  NAME ENABLE_LAPACK
+  MESSAGE "Enable LAPACK autodetection"
+  DEFAULT "auto"
+  )
+option_with_default(
+  NAME MKL_FLAG
+  MESSAGE "MKL flag for the Intel compiler and linker. Skips BLAS/LAPACK autodetection"
+  DEFAULT "off"
+  )
+option_with_default(
+  NAME MATH_LIB_SEARCH_ORDER
+  MESSAGE "Search order for autodetection of math libraries"
+  DEFAULT "MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE"
+  )
+option_with_default(
+  NAME BLAS_LANG
+  MESSAGE "Linker language for BLAS detection"
+  DEFAULT "Fortran"
+  )
+option_with_default(
+  NAME LAPACK_LANG
+  MESSAGE "Linker language for LAPACK detection"
+  DEFAULT "Fortran"
+  )
+option_with_default(
+  NAME SCALAPACK_LIBRARIES
+  MESSAGE "Link line for ScaLAPACK libraries"
+  DEFAULT ""
+  )
+option_with_default(
+  NAME BLACS_IMPLEMENTATION
+  MESSAGE "Implementation of BLACS for MKL ScaLAPACK"
+  DEFAULT "openmpi"
+  )
 
 #-------------------------------------------------------------------------------
 # ENABLE_STATIC_LINKING
