@@ -10,8 +10,10 @@ import pytest
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-skip_on_osx = pytest.mark.skipif('sys.platform == "darwin"', reason="not working on osx")
-skip_on_linux = pytest.mark.skipif('sys.platform == "linux2"', reason="not working on linux")
+skip_on_osx = pytest.mark.skipif(
+    'sys.platform == "darwin"', reason="not working on osx")
+skip_on_linux = pytest.mark.skipif(
+    'sys.platform == "linux2"', reason="not working on linux")
 skip_always = pytest.mark.skipif('1 == 1', reason="tests are broken")
 
 
@@ -27,10 +29,11 @@ def exe(command):
     communicate() method.
     See https://docs.python.org/2/library/subprocess.html
     """
-    stdout, stderr = subprocess.Popen(shlex.split(command),
-                                      stdout=subprocess.PIPE,
-                                      stderr=subprocess.PIPE,
-                                      universal_newlines=True).communicate()
+    stdout, stderr = subprocess.Popen(
+        shlex.split(command),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True).communicate()
 
     if stderr:
         sys.stderr.write(stdout)
@@ -41,7 +44,8 @@ def exe(command):
 
 def configure_build_and_exe(name, setup_command, launcher=None):
 
-    stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+    stamp = datetime.datetime.fromtimestamp(
+        time.time()).strftime('%Y-%m-%d-%H-%M-%S')
 
     os.chdir(os.path.join(HERE, name, 'cmake'))
     shutil.copy(os.path.join('..', '..', '..', 'update.py'), 'update.py')
@@ -80,7 +84,10 @@ def configure_build_and_exe(name, setup_command, launcher=None):
 
 
 def test_extra_cmake_options():
-    configure_build_and_exe('extra_cmake_options', 'python setup --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"')
+    configure_build_and_exe(
+        'extra_cmake_options',
+        'python setup --cxx=g++ --cmake-options="-DENABLE_SOMETHING=OFF -DENABLE_FOO=ON"'
+    )
 
 
 def test_cxx():
@@ -120,7 +127,8 @@ def test_cxx_cblas():
 
 @skip_on_linux
 def test_cxx_accelerate():
-    configure_build_and_exe('cxx_accelerate', 'python setup --cxx=g++ --accelerate')
+    configure_build_and_exe('cxx_accelerate',
+                            'python setup --cxx=g++ --accelerate')
 
 
 def test_python_interpreter():
@@ -138,7 +146,9 @@ def test_python_libs():
 
 def test_python_libs_custom():
     python_executable = sys.executable
-    configure_build_and_exe('python_libs_custom', 'python setup --cxx=g++ --python={0}'.format(python_executable))
+    configure_build_and_exe(
+        'python_libs_custom',
+        'python setup --cxx=g++ --python={0}'.format(python_executable))
 
 
 def test_boost_header_only():
