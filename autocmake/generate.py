@@ -203,7 +203,7 @@ def gen_cmakelists(project_name, project_language, min_cmake_version, default_bu
     s.append('cmake_minimum_required(VERSION {0} FATAL_ERROR)'.format(min_cmake_version))
 
     s.append('\n# project name')
-    s.append('project({0} {1})'.format(project_name, project_language))
+    s.append('project({0} LANGUAGES {1})'.format(project_name, project_language))
 
     s.append('\n# do not rebuild if rules (compiler flags) change')
     s.append('set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)')
