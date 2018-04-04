@@ -42,6 +42,7 @@ if(ENABLE_OPENMP)
         endif()
     endif()
 
+    # this is only needed for CMake below 3.5
     if(DEFINED CMAKE_Fortran_COMPILER_ID AND NOT DEFINED OpenMP_Fortran_FLAGS)
         # we do this in a pedestrian way because the Fortran support is relatively recent
         if(CMAKE_Fortran_COMPILER_ID MATCHES GNU)
