@@ -42,6 +42,7 @@ if(ENABLE_OPENMP)
         endif()
     endif()
 
+    # this is only needed for CMake below 3.5
     if(DEFINED CMAKE_Fortran_COMPILER_ID AND NOT DEFINED OpenMP_Fortran_FLAGS)
         # we do this in a pedestrian way because the Fortran support is relatively recent
         if(CMAKE_Fortran_COMPILER_ID MATCHES GNU)
@@ -50,8 +51,7 @@ if(ENABLE_OPENMP)
         if(CMAKE_Fortran_COMPILER_ID MATCHES Intel)
             if(WIN32)
                 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Qopenmp")
-            elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "Intel" AND
-                   "${CMAKE_Fortran_COMPILER_VERSION}" VERSION_LESS "15.0.0.20140528")
+            elseif("${CMAKE_Fortran_COMPILER_VERSION}" VERSION_LESS "15.0.0.20140528")
                 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -openmp")
             else()
                 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -qopenmp")
