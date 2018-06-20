@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/coderefinery/autocmake.svg?branch=master)](https://travis-ci.org/coderefinery/autocmake/builds)
+[![Build Status](https://travis-ci.org/dev-cafe/autocmake.svg?branch=master)](https://travis-ci.org/dev-cafe/autocmake/builds)
 [![Documentation Status](https://readthedocs.org/projects/autocmake/badge/?version=latest)](http://autocmake.readthedocs.org)
 [![License](https://img.shields.io/badge/license-%20BSD--3-blue.svg)](../master/LICENSE)
 
-![alt text](https://github.com/coderefinery/autocmake/raw/master/img/autocmake.png "Autocmake")
+![alt text](https://github.com/dev-cafe/autocmake/raw/master/img/autocmake.png "Autocmake")
 
 A CMake plugin composer.
 Licensed under [BSD-3](../master/LICENSE).

@@ -11,4 +11,4 @@
 - Dan Jonsson (idea for configuration file approach which preceded YAML solution)
 
 For a list of all the contributions,
-see https://github.com/coderefinery/autocmake/contributors.
+see https://github.com/dev-cafe/autocmake/contributors.

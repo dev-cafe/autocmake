@@ -1,5 +1,5 @@
-# (c) https://github.com/coderefinery/autocmake/blob/master/AUTHORS.md
-# licensed under BSD-3: https://github.com/coderefinery/autocmake/blob/master/LICENSE
+# (c) https://github.com/dev-cafe/autocmake/blob/master/AUTHORS.md
+# licensed under BSD-3: https://github.com/dev-cafe/autocmake/blob/master/LICENSE
 
 #.rst:
 #
@@ -15,7 +15,7 @@
 #   - minor: 59
 #   - patch: 0
 #   - components: "chrono;timer;system"
-#   - source: "https://github.com/coderefinery/autocmake/raw/master/modules/boost/boost.cmake"
+#   - source: "https://github.com/dev-cafe/autocmake/raw/master/modules/boost/boost.cmake"
 #
 # Cross-dependencies between required components are not checked for.
 # For example, Boost.Timer depends on Boost.Chrono and Boost.System thus you
@@ -51,7 +51,7 @@
 #
 # autocmake.yml configuration::
 #
-#   url_root: https://github.com/coderefinery/autocmake/raw/master/
+#   url_root: https://github.com/dev-cafe/autocmake/raw/master/
 #   major: 1
 #   minor: 48
 #   patch: 0

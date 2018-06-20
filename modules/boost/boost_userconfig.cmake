@@ -1,5 +1,5 @@
-# (c) https://github.com/coderefinery/autocmake/blob/master/AUTHORS.md
-# licensed under BSD-3: https://github.com/coderefinery/autocmake/blob/master/LICENSE
+# (c) https://github.com/dev-cafe/autocmake/blob/master/AUTHORS.md
+# licensed under BSD-3: https://github.com/dev-cafe/autocmake/blob/master/LICENSE
 
 # To get boost to compile MPI we need to append "using mpi ;" to the end of the
 # user-config.jam file. MPI_SENT will be the command we append

@@ -21,10 +21,10 @@ rather fetch an older version, for example with the hash ``abcd123``. To
 achieve this, instead of::
 
   - my_feature:
-    - source: https://github.com/coderefinery/autocmake/raw/master/modules/foo.cmake
+    - source: https://github.com/dev-cafe/autocmake/raw/master/modules/foo.cmake
 
 pin the version to ``abcd123`` (you do not need to specify the full Git hash, a unique
 beginning will do)::
 
   - my_feature:
-    - source: https://github.com/coderefinery/autocmake/raw/abcd123/modules/foo.cmake
+    - source: https://github.com/dev-cafe/autocmake/raw/abcd123/modules/foo.cmake

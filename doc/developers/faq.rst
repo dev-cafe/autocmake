@@ -138,7 +138,7 @@ can include the latter in ``autocmake.yml`` using::
 
   - my_sources:
     - source:
-      - https://github.com/coderefinery/autocmake/raw/master/modules/src.cmake
+      - https://github.com/dev-cafe/autocmake/raw/master/modules/src.cmake
 
 If you really do not like to do it this way, you can describe your sources and
 targets in a custom module in a local file and include it like this::
