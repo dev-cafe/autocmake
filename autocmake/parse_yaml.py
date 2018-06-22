@@ -1,10 +1,12 @@
+import yaml
+import sys
+from autocmake.interpolate import interpolate
+
+
 def parse_yaml(stream, overrides={}):
-    import yaml
-    import sys
-    from autocmake.interpolate import interpolate
 
     try:
-        config = yaml.load(stream, yaml.SafeLoader)
+        config = yaml.safe_load(stream, yaml.SafeLoader)
     except yaml.YAMLError as exc:
         print(exc)
         sys.exit(-1)
