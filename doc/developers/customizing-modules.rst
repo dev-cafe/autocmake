@@ -48,10 +48,10 @@ settings imported by a sourced module.
 
 As an example consider the Boost module which defines and uses
 interpolation variables ``major``, ``minor``, ``patch``, and ``components``, see
-https://github.com/coderefinery/autocmake/blob/master/modules/boost/boost.cmake#L52-L55.
+https://github.com/dev-cafe/autocmake/blob/master/modules/boost/boost.cmake#L52-L55.
 
 The recommended way to customize these is in ``autocmake.yml``, e.g.:
-https://github.com/coderefinery/autocmake/blob/master/test/boost_libs/cmake/autocmake.yml#L12-L17.
+https://github.com/dev-cafe/autocmake/blob/master/test/boost_libs/cmake/autocmake.yml#L12-L17.
 
 
 Create own CMake modules
@@ -65,5 +65,5 @@ Contribute customizations to the "standard library"
 
 If you think that your customization will be useful for other users as well,
 you may consider contributing the changes directly to
-https://github.com/coderefinery/autocmake/. We very much encourage such
+https://github.com/dev-cafe/autocmake/. We very much encourage such
 contributions. But we also strive for generality and portability.

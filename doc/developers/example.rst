@@ -25,7 +25,7 @@ Now we create ``cmake/`` and fetch ``update.py``::
 
   $ mkdir cmake  # does not have to be called "cmake" - take the name you prefer
   $ cd cmake
-  $ wget https://github.com/coderefinery/autocmake/raw/master/update.py
+  $ wget https://github.com/dev-cafe/autocmake/raw/master/update.py
   $ python update.py --self
 
 Now from top-level our file tree looks like this::
@@ -60,7 +60,7 @@ Now we edit ``cmake/autocmake.yml`` to look like this::
     - Fortran
     - C
 
-  url_root: https://github.com/coderefinery/autocmake/raw/master/
+  url_root: https://github.com/dev-cafe/autocmake/raw/master/
 
   modules:
   - compilers:

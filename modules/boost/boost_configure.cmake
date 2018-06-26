@@ -1,5 +1,5 @@
-# (c) https://github.com/coderefinery/autocmake/blob/master/AUTHORS.md
-# licensed under BSD-3: https://github.com/coderefinery/autocmake/blob/master/LICENSE
+# (c) https://github.com/dev-cafe/autocmake/blob/master/AUTHORS.md
+# licensed under BSD-3: https://github.com/dev-cafe/autocmake/blob/master/LICENSE
 
 # Run bootstrap.sh to configure the build. We will install in ${PROJECT_BINARY_DIR}/boost
 # This is not Windows-friendly!

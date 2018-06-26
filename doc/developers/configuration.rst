@@ -19,7 +19,7 @@ below::
     - C
     - CXX
 
-  url_root: https://github.com/coderefinery/autocmake/raw/master/
+  url_root: https://github.com/dev-cafe/autocmake/raw/master/
 
   modules:
   - compilers:
@@ -80,7 +80,7 @@ As a minimal example we take an ``autocmake.yml`` which only contains::
 
 If you don't have the ``update.py`` script yet, you need to fetch it from the web::
 
-  $ wget https://github.com/coderefinery/autocmake/raw/master/update.py
+  $ wget https://github.com/dev-cafe/autocmake/raw/master/update.py
 
 First we make sure that the ``update.py`` script is up-to-date and that it has access
 to all libraries it needs::
@@ -181,7 +181,7 @@ Fetching files without including them in CMakeLists.txt
 Sometimes you want to fetch a file without including it in ``CMakeLists.txt``.
 This can be done with the ``fetch`` option.  This is for instance done by the
 ``git_info.cmake`` module (see
-https://github.com/coderefinery/autocmake/blob/master/modules/git_info/git_info.cmake#L10-L13).
+https://github.com/dev-cafe/autocmake/blob/master/modules/git_info/git_info.cmake#L10-L13).
 
 If ``fetch`` is invoked in ``autocmake.yml``, then the fetched file is placed
 under ``downloaded/``.  If ``fetch`` is invoked from within a CMake module
@@ -235,6 +235,6 @@ for many core modules which come with own options once you have sourced them.
 The lines following ``# autocmake.yml configuration::`` are
 understood by the ``update.py`` script to infer ``autocmake.yml`` code from the
 documentation. As an example consider
-https://github.com/coderefinery/autocmake/blob/master/modules/cc.cmake#L20-L26.
+https://github.com/dev-cafe/autocmake/blob/master/modules/cc.cmake#L20-L26.
 Here, ``update.py`` will infer the configurations for ``docopt``, ``export``,
 and ``define``.

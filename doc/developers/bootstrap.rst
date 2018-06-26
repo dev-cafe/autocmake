@@ -12,7 +12,7 @@ infrastructure files which will be needed to build the project::
 
   $ mkdir cmake  # does not have to be called "cmake" - take the name you prefer
   $ cd cmake
-  $ wget https://github.com/coderefinery/autocmake/raw/master/update.py
+  $ wget https://github.com/dev-cafe/autocmake/raw/master/update.py
   $ virtualenv venv
   $ source venv/bin/activate
   $ pip install pyyaml
@@ -20,7 +20,7 @@ infrastructure files which will be needed to build the project::
 
 On the MS Windows system, you can use the PowerShell wget-replacement::
 
-  $ Invoke-WebRequest https://github.com/coderefinery/autocmake/raw/master/update.py -OutFile update.py
+  $ Invoke-WebRequest https://github.com/dev-cafe/autocmake/raw/master/update.py -OutFile update.py
 
 This creates (or updates) the following files (an existing ``autocmake.yml`` is
 not overwritten by the script)::

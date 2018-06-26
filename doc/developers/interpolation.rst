@@ -8,7 +8,7 @@ In a custom extension to the YAML specification you can define and reuse
 variables like this (observe how we interpolate ``url_root``, ``major``,
 ``minor``, ``patch``, and ``components`` in this example)::
 
-  url_root: https://github.com/coderefinery/autocmake/raw/master/
+  url_root: https://github.com/dev-cafe/autocmake/raw/master/
   major: 1
   minor: 48
   patch: 0

@@ -1,5 +1,5 @@
-# (c) https://github.com/coderefinery/autocmake/blob/master/AUTHORS.md
-# licensed under BSD-3: https://github.com/coderefinery/autocmake/blob/master/LICENSE
+# (c) https://github.com/dev-cafe/autocmake/blob/master/AUTHORS.md
+# licensed under BSD-3: https://github.com/dev-cafe/autocmake/blob/master/LICENSE
 
 #.rst:
 #
@@ -13,7 +13,7 @@
 #
 # autocmake.yml configuration::
 #
-#   url_root: https://github.com/coderefinery/autocmake/raw/master/
+#   url_root: https://github.com/dev-cafe/autocmake/raw/master/
 #   docopt: "--lapacke Find and link to LAPACKE [default: False]."
 #   define: "'-DENABLE_LAPACKE={0}'.format(arguments['--lapacke'])"
 #   fetch:
