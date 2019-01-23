@@ -123,8 +123,6 @@ Excellent. Here is the generated ``CMakeLists.txt``::
       set(CMAKE_BUILD_TYPE "Debug")
   endif()
 
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake/downloaded)
-
 This is the very bare minimum. Every Autocmake project will have at least these
 settings.
 
