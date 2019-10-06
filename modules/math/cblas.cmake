@@ -23,8 +23,8 @@
 option(ENABLE_CBLAS "Find and link to CBLAS" OFF)
 
 if(ENABLE_CBLAS)
-    include(find_libraries)
-    include(find_include_files)
+    include(${CMAKE_CURRENT_LIST_DIR}/../find/find_libraries.cmake)
+    include(${CMAKE_CURRENT_LIST_DIR}/../find/find_include_files.cmake)
 
     set(CBLAS_FOUND FALSE)
     set(CBLAS_LIBRARIES "NOTFOUND")
