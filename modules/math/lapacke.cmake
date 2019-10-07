@@ -23,8 +23,8 @@
 option(ENABLE_LAPACKE "Find and link to LAPACKE" OFF)
 
 if(ENABLE_LAPACKE)
-    include(find_libraries)
-    include(find_include_files)
+    include(${CMAKE_CURRENT_LIST_DIR}/find_libraries.cmake)
+    include(${CMAKE_CURRENT_LIST_DIR}/find_include_files.cmake)
 
     set(LAPACKE_FOUND FALSE)
     set(LAPACKE_LIBRARIES "NOTFOUND")

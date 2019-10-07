@@ -25,8 +25,6 @@ matrix:
             - libopenmpi-dev
               # python library, development version
             - libpython2.7
-              # boost
-            - libboost-all-dev
 
     - os: linux
       python: 3.5
@@ -49,11 +47,9 @@ matrix:
             - libopenmpi-dev
               # python library, development version
             - libpython2.7
-              # boost
-            - libboost-all-dev
 
     - os: osx
-      osx_image: xcode7.3
+      osx_image: xcode11
       compiler: gcc
       env:
         - SOURCES=homebrew
@@ -61,8 +57,7 @@ matrix:
 install:
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-        brew install cmake boost python open-mpi
-        brew reinstall gcc
+        brew update &> /dev/null
         pip install virtualenv
     elif [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
         pip install --user virtualenv
@@ -78,7 +73,7 @@ install:
 script:
     # pycodestyle tests
   - pycodestyle --ignore E501 update.py
-  - pycodestyle --ignore E501,E265,E741 autocmake
+  - pycodestyle --ignore E501,E265,E741 autocmake --exclude autocmake/external/docopt.py
     # unit tests
   - py.test -vv autocmake/*
   - py.test -vv test/test.py

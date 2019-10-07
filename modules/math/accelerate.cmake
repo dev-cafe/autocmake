@@ -23,8 +23,8 @@
 option(ENABLE_ACCELERATE "Find and link to ACCELERATE" OFF)
 
 if(ENABLE_ACCELERATE)
-    include(find_libraries)
-    include(find_include_files)
+    include(${CMAKE_CURRENT_LIST_DIR}/../find/find_libraries.cmake)
+    include(${CMAKE_CURRENT_LIST_DIR}/../find/find_include_files.cmake)
 
     set(ACCELERATE_FOUND FALSE)
     set(ACCELERATE_LIBRARIES "NOTFOUND")
