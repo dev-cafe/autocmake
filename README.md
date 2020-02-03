@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/dev-cafe/autocmake.svg?branch=master)](https://travis-ci.org/dev-cafe/autocmake/builds)
 [![Documentation Status](https://readthedocs.org/projects/autocmake/badge/?version=latest)](http://autocmake.readthedocs.org)
 [![License](https://img.shields.io/badge/license-%20BSD--3-blue.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/36069881.svg)](https://zenodo.org/badge/latestdoi/36069881)
 
 ![alt text](https://github.com/dev-cafe/autocmake/raw/master/img/autocmake.png "Autocmake")
 
