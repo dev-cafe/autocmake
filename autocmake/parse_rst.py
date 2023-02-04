@@ -1,6 +1,7 @@
 def parse_cmake_module(s_in, overrides={}):
     import sys
-    from collections import Mapping, Iterable, defaultdict
+    from collections.abc import Mapping, Iterable
+    from collections import defaultdict
     from autocmake.parse_yaml import parse_yaml
 
     # we do not use the nicer sys.version_info.major

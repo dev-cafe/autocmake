@@ -1,5 +1,5 @@
 def extract_list(config, section):
-    from collections import Iterable
+    from collections.abc import Iterable
     l = []
     if 'modules' in config:
         for module in config['modules']:

@@ -13,7 +13,7 @@ def test_replace():
 
 
 def interpolate(d, d_map):
-    from collections import Mapping, Iterable
+    from collections.abc import Mapping, Iterable
     from copy import copy
 
     for k, v in d.items():
