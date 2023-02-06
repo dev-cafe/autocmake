@@ -1,12 +1,15 @@
 def extract_list(config, section):
     from collections.abc import Iterable
+
     l = []
-    if 'modules' in config:
-        for module in config['modules']:
+    if "modules" in config:
+        for module in config["modules"]:
             for k, v in module.items():
                 for x in v:
                     if section in x:
-                        if isinstance(x[section], Iterable) and not isinstance(x[section], str):
+                        if isinstance(x[section], Iterable) and not isinstance(
+                            x[section], str
+                        ):
                             for y in x[section]:
                                 l.append(y)
                         else:
@@ -26,8 +29,8 @@ def to_d(l):
 
 
 def test_to_d():
-    l = [{'a': 'b'}, {'c': 'd'}]
-    d = {'a': 'b', 'c': 'd'}
+    l = [{"a": "b"}, {"c": "d"}]
+    d = {"a": "b", "c": "d"}
     assert to_d(l) == d
 
 
@@ -42,5 +45,5 @@ def to_l(x):
 
 
 def test_to_l():
-    assert to_l('foo') == ['foo']
-    assert to_l(['foo', 'bar']) == ['foo', 'bar']
+    assert to_l("foo") == ["foo"]
+    assert to_l(["foo", "bar"]) == ["foo", "bar"]
